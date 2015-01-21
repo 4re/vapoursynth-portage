@@ -1,14 +1,14 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
 EAPI=5
 
+inherit git-2 toolchain-funcs
+
 DESCRIPTION="It does a deblocking of the picture, using the deblocking filter of h264"
 HOMEPAGE="https://github.com/HomeOfVapourSynthEvolution/VapourSynth-Deblock"
 EGIT_REPO_URI="https://github.com/HomeOfVapourSynthEvolution/VapourSynth-Deblock.git"
-
-inherit git-2 toolchain-funcs
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -21,13 +21,14 @@ DEPEND="${RDEPEND}
 "
 
 LIBNAME="libdeblock.so"
+INSTALLDIR="/usr/lib/vapoursynth/"
 
-src_compile() {
-	$(tc-getCC) -shared -fPIC ${CFLAGS} ${LDFLAGS} -std=c++11 -o ${LIBNAME} $(pkg-config --cflags vapoursynth) src/Deblock.cpp || die "Build failed"
+src_configure() {
+    ./configure --install="${INSTALLDIR}" --extra-cxxflags="${CFLAGS}" --extra-ldflags="${LDFLAGS}"
 }
 
 src_install() {
-        exeinto /usr/lib/vapoursynth/
+        exeinto ${INSTALLDIR}
         doexe ${LIBNAME}
         dodoc README.md
 }

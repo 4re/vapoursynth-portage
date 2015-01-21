@@ -10,7 +10,7 @@ DESCRIPTION="Meta ebuild to pull in vapoursynth plugins"
 HOMEPAGE="http://www.gentoo.org"
 
 LICENSE="metapackage"
-SLOT=""
+SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 

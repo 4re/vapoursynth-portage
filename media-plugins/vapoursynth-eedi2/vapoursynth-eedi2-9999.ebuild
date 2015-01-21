@@ -1,14 +1,14 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
 EAPI=5
 
+inherit git-2 toolchain-funcs
+
 DESCRIPTION="EEDI2 is an vertical resizer intended for edge-directed interpolation for deinterlacing"
 HOMEPAGE="https://github.com/HomeOfVapourSynthEvolution/VapourSynth-EEDI2"
 EGIT_REPO_URI="https://github.com/HomeOfVapourSynthEvolution/VapourSynth-EEDI2.git"
-
-inherit git-2 toolchain-funcs
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -21,13 +21,15 @@ DEPEND="${RDEPEND}
 "
 
 LIBNAME="libeedi2.so"
+INSTALLDIR="/usr/lib/vapoursynth/"
 
-src_compile() {
-	$(tc-getCC) -shared -fPIC -std=c++11 ${CFLAGS} ${LDFLAGS} -o ${LIBNAME} $(pkg-config --cflags vapoursynth) EEDI2/EEDI2.cpp || die "Build failed"
+src_configure() {
+    chmod +x configure
+    ./configure --install="${INSTALLDIR}" --extra-cxxflags="${CFLAGS}" --extra-ldflags="${LDFLAGS}"
 }
 
 src_install() {
-        exeinto /usr/lib/vapoursynth/
+        exeinto ${INSTALLDIR}
         doexe ${LIBNAME}
         dodoc README.md
 }

@@ -1,14 +1,14 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
 EAPI=5
 
+inherit git-2 toolchain-funcs
+
 DESCRIPTION="AddGrain generates film like grain or other effects (like rain) by adding random noise to a video clip"
 HOMEPAGE="https://github.com/HomeOfVapourSynthEvolution/VapourSynth-AddGrain"
 EGIT_REPO_URI="https://github.com/HomeOfVapourSynthEvolution/VapourSynth-AddGrain.git"
-
-inherit git-2 toolchain-funcs
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -21,13 +21,14 @@ DEPEND="${RDEPEND}
 "
 
 LIBNAME="libaddgrain.so"
+INSTALLDIR="/usr/lib/vapoursynth/"
 
-src_compile() {
-	$(tc-getCC) -shared -fPIC -std=c++11 ${CFLAGS} ${LDFLAGS} -o ${LIBNAME} $(pkg-config --cflags vapoursynth) AddGrain/AddGrain.cpp || die "Build failed"
+src_configure() {
+    ./configure --install="${INSTALLDIR}" --extra-cxxflags="${CFLAGS}" --extra-ldflags="${LDFLAGS}"
 }
 
 src_install() {
-        exeinto /usr/lib/vapoursynth/
+        exeinto ${INSTALLDIR}
         doexe ${LIBNAME}
         dodoc README.md LICENSE
 }

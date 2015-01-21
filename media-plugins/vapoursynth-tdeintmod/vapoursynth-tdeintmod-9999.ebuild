@@ -1,4 +1,4 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -21,22 +21,15 @@ DEPEND="${RDEPEND}
 "
 
 LIBNAME="libtdeintmod.so"
-ECFLAGS="-ffast-math -std=c++11 -Wall -DVS_TARGET_CPU_X86_64 -msse2 -fPIC -fexcess-precision=fast"
-ELDFLAGS="-shared -Wl,-Bsymbolic -fPIC"
-EINCLUDE="-I. -I./include"
+INSTALLDIR="/usr/lib/vapoursynth/"
 
-#src_prepare() {
-#        sed -i 's/..\\include\\//g' source/*.cpp || die "Prepare failed"
-#        sed -i 's/vapoursynth\\//g' include/*.h source/*.cpp || die "Prepare failed"
-#}
-
-src_compile() {
-	$(tc-getCC) ${CFLAGS} ${ECFLAGS} ${EINCLUDE} $(pkg-config --cflags vapoursynth) -c TDeintMod/TDeintMod.cpp -o TDeintMod/TDeintMod.o || die "Build failed"
-	$(tc-getCC) -o ${LIBNAME} ${LDFLAGS} ${ELDFLAGS} TDeintMod/TDeintMod.o -lvapoursynth || die "Linking failed"
+src_configure() {
+    chmod +x configure
+    ./configure --install="${INSTALLDIR}" --extra-cxxflags="${CFLAGS} -mno-avx" --extra-ldflags="${LDFLAGS}"
 }
 
 src_install() {
-        exeinto /usr/lib/vapoursynth/
+        exeinto ${INSTALLDIR}
         doexe ${LIBNAME}
         dodoc README.md LICENSE
 }

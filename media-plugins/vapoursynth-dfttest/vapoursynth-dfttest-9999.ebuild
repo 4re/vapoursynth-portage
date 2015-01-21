@@ -26,7 +26,7 @@ INSTALLDIR="/usr/lib/vapoursynth/"
 
 src_configure() {
     chmod +x configure
-    ./configure --install="/usr/lib/vapoursynth" --extra-cxxflags="${CFLAGS}" --extra-ldflags="${LDFLAGS}"
+    ./configure --install="${INSTALLDIR}" --extra-cxxflags="${CFLAGS}" --extra-ldflags="${LDFLAGS}"
 }
 
 src_install() {
