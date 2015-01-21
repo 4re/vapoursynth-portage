@@ -1,0 +1,11 @@
+--- src/image/resamplefilters.h 2014-11-10 21:54:21.315979132 +0100
++++ src/image/resamplefilters.h.b       2014-11-10 22:05:25.029285550 +0100
+@@ -1,6 +1,8 @@
+ #ifndef RESAMPLEFILTERS_H_INCLUDED
+ #define RESAMPLEFILTERS_H_INCLUDED
+ 
++#include <cstddef>
++
+ namespace vsedit
+ {
+ 
