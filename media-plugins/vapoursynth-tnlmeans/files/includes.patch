@@ -1,0 +1,12 @@
+diff --git a/AlignedMemory.cpp b/AlignedMemory.cpp
+index 472908f..47d5156 100644
+--- a/AlignedMemory.cpp
++++ b/AlignedMemory.cpp
+@@ -18,6 +18,7 @@
+  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+  *****************************************************************************/
+ 
++#include <cstddef>
+ #include <cassert>
+ #include <cstdlib>
+ 
