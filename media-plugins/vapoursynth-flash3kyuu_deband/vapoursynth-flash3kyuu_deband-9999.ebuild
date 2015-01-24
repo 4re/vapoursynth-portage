@@ -3,23 +3,28 @@
 # $Header: Exp $
 
 EAPI=5
+PYTHON_COMPAT=( python3_4 )
+PYTHON_REQ_USE="threads(+)"
 
-EGIT_REPO_URI="https://github.com/SAPikachu/flash3kyuu_deband.git"
-
-inherit waf-utils git-2
+inherit python-any-r1 waf-utils git-2
 
 DESCRIPTION="A deband library and filter for VapourSynth"
 HOMEPAGE="https://github.com/SAPikachu/flash3kyuu_deband"
+EGIT_REPO_URI="https://github.com/SAPikachu/flash3kyuu_deband.git"
 
 LICENSE=""
 KEYWORDS="~amd64 ~x86"
-IUSE="-debug"
+IUSE="+doc"
 SLOT="0"
 
 RDEPEND+="
     media-libs/vapoursynth
 "
-DEPEND="${RDEPEND}
+DEPEND="
+    ${PYTHON_DEPS}
+    ${RDEPEND}
+    doc? ( dev-python/sphinx )
+    virtual/pkgconfig
 "
 
 src_configure() {
@@ -27,15 +32,16 @@ src_configure() {
 }
 
 src_compile() {
-	waf-utils_src_compile || die
+    waf-utils_src_compile || die
+    if use doc; then
+        sphinx-build -b html -d docs/_build/doctrees docs/source/ docs/_build/html
+    fi
 }
 
 src_install() {
-        exeinto /usr/lib/vapoursynth/
-        doexe build/libf3kdb.so
+    exeinto /usr/lib/vapoursynth/
+    doexe build/libf3kdb.so
+    if use doc; then
+        dohtml -r docs/_build/html/*
+    fi
 }
-
-#  * Using waf-utils.eclass without any python-r1 suite eclass is not supported
-#  * and will be banned on 2015-01-24. Please make sure to configure and inherit
-#  * appropriate -r1 eclass. For more information and examples, please see:
-#  *     https://wiki.gentoo.org/wiki/Project:Python/waf-utils_integration
