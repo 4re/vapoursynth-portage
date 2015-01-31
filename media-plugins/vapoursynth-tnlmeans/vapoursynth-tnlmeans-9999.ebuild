@@ -4,7 +4,7 @@
 
 EAPI=5
 
-inherit git-2 flag-o-matic
+inherit git-2
 
 DESCRIPTION="VapourSynth port of TNLMeans"
 HOMEPAGE="https://github.com/VFR-maniac/VS-TNLMeans"
@@ -21,13 +21,8 @@ RDEPEND+="
 DEPEND="${RDEPEND}
 "
 
-src_prepare() {
-    epatch "${FILESDIR}/includes.patch" || die
-}
-
 src_configure() {
     chmod +x configure || die
-    append-flags -fPIC
     ./configure --extra-cxxflags="${CXXFLAGS}" --extra-ldflags="${LDFLAGS}" || die
 }
 
