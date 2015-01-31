@@ -22,7 +22,6 @@ DEPEND="${RDEPEND}
 "
 
 src_configure() {
-    chmod +x configure || die
     ./configure --extra-cxxflags="${CXXFLAGS}" --extra-ldflags="${LDFLAGS}" || die
 }
 
