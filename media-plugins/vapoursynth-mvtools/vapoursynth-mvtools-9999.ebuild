@@ -7,7 +7,7 @@ EAPI=5
 DESCRIPTION="MVTools is a set of filters for motion estimation and compensation"
 HOMEPAGE="https://github.com/dubhater/vapoursynth-mvtools"
 EGIT_REPO_URI="https://github.com/dubhater/vapoursynth-mvtools.git"
-# EGIT_COMMIT="fab575a3a17e36960e30d7b349093bb5f31b00ae"
+# EGIT_COMMIT="022c7712380adef9625d137e77598e701244953d"
 
 inherit git-2 autotools
 
