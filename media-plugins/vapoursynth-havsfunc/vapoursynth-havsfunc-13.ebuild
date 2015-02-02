@@ -11,7 +11,7 @@ inherit python
 
 DESCRIPTION="HolyWu's ported AviSynth scripts for VapourSynth"
 HOMEPAGE="http://forum.doom9.org/showthread.php?t=166582"
-SRC_URI="https://dl.dropbox.com/u/6596386/vapoursynth-plugins/havsfunc-r${PV}.7z"
+SRC_URI="https://dl.dropboxusercontent.com/u/36232595/havsfunc-r${PV}.7z"
 
 LICENSE="GPL-2"
 SLOT="0"
