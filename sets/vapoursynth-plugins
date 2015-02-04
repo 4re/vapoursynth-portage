@@ -13,6 +13,7 @@ media-plugins/vapoursynth-delogo
 media-plugins/vapoursynth-dfttest
 media-plugins/vapoursynth-eedi2
 media-plugins/vapoursynth-ffmpegsource
+media-plugins/vapoursynth-fft3dfilter
 media-plugins/vapoursynth-fieldhint
 media-plugins/vapoursynth-fillborders
 media-plugins/vapoursynth-finesharp
@@ -38,6 +39,7 @@ media-plugins/vapoursynth-tdeintmod
 media-plugins/vapoursynth-templinearapproximate
 media-plugins/vapoursynth-temporalsoften
 media-plugins/vapoursynth-tnlmeans
+media-plugins/vapoursynth-vaguedenoiser
 media-plugins/vapoursynth-vautodeint
 media-plugins/vapoursynth-videoscope
 media-plugins/vapoursynth-vs-maskdetail
