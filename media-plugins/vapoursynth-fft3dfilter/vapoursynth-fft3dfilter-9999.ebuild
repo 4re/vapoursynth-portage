@@ -22,7 +22,7 @@ DEPEND="${RDEPEND}
 "
 
 src_configure() {
-    ./configure --extra-cxxflags="${CXXFLAGS} -L/usr/lib64 -lfftw3f" --extra-ldflags="${LDFLAGS} -L/usr/lib64 -lfftw3f" || die
+    ./configure --extra-cxxflags="${CXXFLAGS}" --extra-ldflags="${LDFLAGS}" || die
 }
 
 src_install() {
