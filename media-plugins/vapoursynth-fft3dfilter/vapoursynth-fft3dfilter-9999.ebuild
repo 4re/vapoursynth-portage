@@ -27,7 +27,7 @@ src_configure() {
 
 src_install() {
 	exeinto /usr/lib/vapoursynth/
-	mv vsfft3dfilter.so.? vsfft3dfilter.so || die
+	mv vsfft3dfilter.so.?? vsfft3dfilter.so || die
 	doexe vsfft3dfilter.so || die
     dodoc LICENSE
 }
