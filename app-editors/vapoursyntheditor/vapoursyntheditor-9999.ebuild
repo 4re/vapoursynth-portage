@@ -41,7 +41,8 @@ src_compile() {
 }
 
 src_install() {
-	dobin   build/bin/vsedit || die
-	doicon  build/bin/vsedit.ico build/bin/vsedit.svg || die
-	dodoc   build/bin/CHANGELOG build/bin/LICENSE build/bin/README || die
+	# This is ugly
+	dobin   build/release-*/vsedit || die
+	doicon  build/release-*/vsedit.ico build/release-*/vsedit.svg || die
+	dodoc   build/release-*/CHANGELOG build/release-*/LICENSE build/release-*/README || die
 }
