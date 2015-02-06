@@ -4,19 +4,19 @@
 
 EAPI=5
 
-inherit git-2
+inherit git-2 eutils
 
 DESCRIPTION="VapourSynth Editor"
 HOMEPAGE="https://bitbucket.org/mystery_keeper/vapoursynth-editor"
 EGIT_REPO_URI="https://bitbucket.org/mystery_keeper/vapoursynth-editor.git"
 
-LICENSE=""
+LICENSE="MIT"
 SLOT="0"
 KEYWORDS=""
 IUSE=""
 
 RDEPEND="
-        media-libs/vapoursynth
+	media-libs/vapoursynth
 	>=dev-qt/qtcore-5.3.0
 	>=dev-qt/qtgui-5.3.0
 "
@@ -32,7 +32,7 @@ src_prepare() {
 
 src_configure() {
 	cd pro
-        /usr/lib64/qt5/bin/qmake || die "Qmake pro"
+		/usr/lib64/qt5/bin/qmake || die "Qmake pro"
 }
 
 src_compile() {
@@ -41,8 +41,7 @@ src_compile() {
 }
 
 src_install() {
-	cd "build/release-64bit-gcc" #FIXME
-	dobin   vsedit
-	doicon  vsedit.ico vsedit.svg
-	dodoc   CHANGELOG LICENSE README
+	dobin   build/bin/vsedit || die
+	doicon  build/bin/vsedit.ico build/bin/vsedit.svg || die
+	dodoc   build/bin/CHANGELOG build/bin/LICENSE build/bin/README || die
 }
