@@ -26,13 +26,11 @@ DEPEND="${RDEPEND}
 
 src_prepare() {
 	rm -fr generated/* || die "Remove unused"
-	cd "${S}"
-	epatch "${FILESDIR}/includes.patch"
 }
 
 src_configure() {
 	cd pro
-		/usr/lib64/qt5/bin/qmake || die "Qmake pro"
+	/usr/lib64/qt5/bin/qmake || die "Qmake pro"
 }
 
 src_compile() {

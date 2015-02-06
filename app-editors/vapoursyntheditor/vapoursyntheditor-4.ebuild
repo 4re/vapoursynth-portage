@@ -31,7 +31,7 @@ src_prepare() {
 
 src_configure() {
 	cd pro
-		/usr/lib64/qt5/bin/qmake || die "Qmake pro"
+	/usr/lib64/qt5/bin/qmake || die "Qmake pro"
 }
 
 src_compile() {
