@@ -26,5 +26,5 @@ emerge @vapoursynth-plugins
 
 This overlay also includes editors and a modified mpv ebuild with vapoursynth support enabled:
 ```
-emerge vapoursyntheditor mpv
+emerge vapoursynth-editor mpv
 ```
