@@ -24,7 +24,7 @@ There is a convenient set that will pull all vapoursynth plugins at once, also, 
 emerge @vapoursynth-plugins
 ```
 
-This overlay also includes editors and a modified mpv ebuild with vapoursynth support enabled:
+This overlay also includes an editor and a modified mpv ebuild with vapoursynth support enabled:
 ```
 emerge vapoursynth-editor mpv
 ```
