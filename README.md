@@ -1,13 +1,24 @@
 # vapoursynth-portage
 Unofficial portage tree with all vapoursynth related ebuilds
 
-Usage
------
-To use this overlay, first clone this git repository to a place of your preference, and then update your ```/etc/portage/make.conf``` to make use of it:
+Install
+-------
+To make use of this overlay, first install layman:
 ```
-PORTDIR_OVERLAY="/path/to/my/overlay/vapoursynth/"
+# emerge app-portage/layman
+```
+Add layman at the end of your ```/etc/portage/make.conf```:
+```
+# echo "source /var/lib/layman/make.conf" >> /etc/portage/make.conf
+```
+Finally update layman's database and add vapoursynth's overlay to your system.
+```
+# layman -L
+# layman -a vapoursynth
 ```
 
+Usage
+-----
 There is a convenient set that will pull all vapoursynth plugins at once, also, you may like to use it to update everything, as most of them are 9999 git revisions only:
 ```
 emerge @vapoursynth-plugins
