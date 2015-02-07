@@ -3,7 +3,7 @@ Unofficial portage tree with all vapoursynth related ebuilds
 
 Install
 -------
-To make use of this overlay, first install layman:
+To make use of this overlay, first install layman (you need git support enabled on this ebuild):
 ```
 # emerge app-portage/layman
 ```
