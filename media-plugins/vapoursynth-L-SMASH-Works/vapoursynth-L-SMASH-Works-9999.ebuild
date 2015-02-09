@@ -9,7 +9,7 @@ inherit git-2
 DESCRIPTION=""
 HOMEPAGE="https://github.com/VFR-maniac/L-SMASH-Works"
 EGIT_REPO_URI="https://github.com/VFR-maniac/L-SMASH-Works.git"
-
+EGIT_COMMIT="fd6528f780db1d632b5f8108ff7e4a716e650882"
 LICENSE=""
 KEYWORDS="~amd64 ~x86"
 IUSE="-debug"
@@ -23,16 +23,16 @@ DEPEND="${RDEPEND}
 
 src_configure() {
 	cd VapourSynth
-	./configure --prefix=/usr --libdir=/usr/lib64 --includedir=/usr/include --extra-cflags="${CFLAGS} -fPIC" --extra-ldflags="${LDFLAGS}" || die
+	./configure --extra-cflags="${CFLAGS} -fPIC" --extra-ldflags="${LDFLAGS}" || die
 }
 
 src_compile() {
 	cd VapourSynth
-	emake || die
+	emake
 }
 
 src_install() {
 	exeinto /usr/lib/vapoursynth/
 	mv VapourSynth/vslsmashsource.so.??? VapourSynth/vslsmashsource.so || die
-	doexe VapourSynth/vslsmashsource.so || die
+	doexe VapourSynth/vslsmashsource.so
 }

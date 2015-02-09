@@ -4,7 +4,9 @@
 
 EAPI=5
 
-inherit autotools
+AUTOTOOLS_AUTORECONF=1
+
+inherit autotools-utils multilib
 
 DESCRIPTION="Scaling, colorspace conversion, and dithering library"
 HOMEPAGE="https://github.com/sekrit-twc/zimg"
@@ -19,7 +21,7 @@ fi
 
 LICENSE="WTFPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS=""
 IUSE="-cli"
 
 RDEPEND+="
@@ -27,16 +29,8 @@ RDEPEND+="
 DEPEND="${RDEPEND}
 "
 
-src_prepare() {
-	./autogen.sh || die
-}
+DOCS=( README.md COPYING )
 
 src_configure() {
-	econf \
-		$( use_enable cli testapp ) || die
-}
-
-src_install() {
-	emake DESTDIR="${D}" install || die
-	dodoc README.md COPYING || die
+	autotools-utils_src_configure $( use_enable cli testapp )
 }

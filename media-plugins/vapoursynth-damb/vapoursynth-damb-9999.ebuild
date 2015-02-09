@@ -4,15 +4,24 @@
 
 EAPI=5
 
-inherit git-2 autotools
+AUTOTOOLS_AUTORECONF=1
+
+inherit autotools-utils multilib
 
 DESCRIPTION="Basic audio support for VapourSynth"
 HOMEPAGE="https://github.com/dubhater/vapoursynth-damb"
-EGIT_REPO_URI="https://github.com/dubhater/vapoursynth-damb.git"
 
-LICENSE="GPL-2"
+if [[ ${PV} == *9999* ]]; then
+	inherit git-r3
+	EGIT_REPO_URI="https://github.com/dubhater/${PN}.git"
+else
+	inherit vcs-snapshot
+	SRC_URI="https://github.com/dubhater/${PN}/archive/v${PV}.tar.gz -> ${PN}-${PV}.tar.gz"
+fi
+
+LICENSE=""
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS=""
 
 RDEPEND+="
 	media-libs/libsndfile
@@ -21,12 +30,8 @@ RDEPEND+="
 DEPEND="${RDEPEND}
 "
 
-src_prepare() {
-	./autogen.sh || die
-}
+DOCS=( readme.rst )
 
-src_install() {
-	exeinto /usr/lib/vapoursynth/
-	dodoc readme.rst
-	doexe .libs/libdamb.so
+src_configure() {
+	autotools-utils_src_configure --libdir="/usr/$(get_libdir)/vapoursynth/"
 }

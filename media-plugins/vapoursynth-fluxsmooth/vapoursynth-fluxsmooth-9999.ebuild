@@ -4,15 +4,26 @@
 
 EAPI=5
 
+AUTOTOOLS_AUTORECONF=1
+
+inherit autotools-utils multilib
+
+AUTOTOOLS_IN_SOURCE_BUILD=1
+
 DESCRIPTION="A filter for smoothing of fluctuations"
 HOMEPAGE="https://github.com/dubhater/vapoursynth-fluxsmooth"
-EGIT_REPO_URI="https://github.com/dubhater/vapoursynth-fluxsmooth.git"
 
-inherit git-2
+if [[ ${PV} == *9999* ]]; then
+	inherit git-r3
+	EGIT_REPO_URI="https://github.com/dubhater/${PN}.git"
+else
+	inherit vcs-snapshot
+	SRC_URI="https://github.com/dubhater/${PN}/archive/v${PV}.tar.gz -> ${PN}-${PV}.tar.gz"
+fi
 
-LICENSE="GPL-2"
+LICENSE=""
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS=""
 
 RDEPEND+="
 	media-libs/vapoursynth
@@ -20,12 +31,13 @@ RDEPEND+="
 DEPEND="${RDEPEND}
 "
 
+DOCS=( readme.rst )
+
 src_prepare() {
-	./autogen.sh
+	epatch "${FILESDIR}/${PN}-stack.patch"
+	autotools-utils_src_prepare
 }
 
-src_install() {
-        exeinto /usr/lib/vapoursynth/
-        doexe .libs/libfluxsmooth.so
-        dodoc readme.rst
+src_configure() {
+	autotools-utils_src_configure --libdir="/usr/$(get_libdir)/vapoursynth/"
 }

@@ -12,7 +12,6 @@ HOMEPAGE="https://bitbucket.org/mystery_keeper/vapoursynth-editor"
 if [[ ${PV} == *9999* ]]; then
 	inherit git-r3
 	EGIT_REPO_URI="https://bitbucket.org/mystery_keeper/${PN}.git"
-	#EGIT_COMMIT="5499b832d35e5159a6554494e1bd1ea300be44b5"
 else
 	inherit vcs-snapshot
 	SRC_URI="https://bitbucket.org/mystery_keeper/${PN}/get/r${PV}.tar.bz2 -> ${PN}-${PV}.tar.bz2"
@@ -25,8 +24,8 @@ IUSE=""
 
 RDEPEND="
 	media-libs/vapoursynth
-	>=dev-qt/qtcore-5.3.0
-	>=dev-qt/qtgui-5.3.0
+	dev-qt/qtcore:5
+	dev-qt/qtgui:5
 "
 DEPEND="${RDEPEND}
 	virtual/pkgconfig
@@ -43,12 +42,12 @@ src_configure() {
 
 src_compile() {
 	cd pro
-	emake || die "Make"
+	emake
 }
 
 src_install() {
 	# This is ugly
-	dobin   build/release-*/vsedit || die
-	doicon  build/release-*/vsedit.ico build/release-*/vsedit.svg || die
-	dodoc   build/release-*/CHANGELOG build/release-*/LICENSE build/release-*/README || die
+	dobin   build/release-*/vsedit
+	doicon  build/release-*/vsedit.ico build/release-*/vsedit.svg
+	dodoc   build/release-*/CHANGELOG build/release-*/LICENSE build/release-*/README
 }

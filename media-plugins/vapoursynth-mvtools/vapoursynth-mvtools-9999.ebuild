@@ -4,29 +4,34 @@
 
 EAPI=5
 
+AUTOTOOLS_AUTORECONF=1
+
+inherit autotools-utils multilib
+
 DESCRIPTION="MVTools is a set of filters for motion estimation and compensation"
 HOMEPAGE="https://github.com/dubhater/vapoursynth-mvtools"
-EGIT_REPO_URI="https://github.com/dubhater/vapoursynth-mvtools.git"
-# EGIT_COMMIT="022c7712380adef9625d137e77598e701244953d"
 
-inherit git-2 autotools
+if [[ ${PV} == *9999* ]]; then
+	inherit git-r3
+	EGIT_REPO_URI="https://github.com/dubhater/${PN}.git"
+else
+	inherit vcs-snapshot
+	SRC_URI="https://github.com/dubhater/${PN}/archive/v${PV}.tar.gz -> ${PN}-${PV}.tar.gz"
+fi
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS=""
 
 RDEPEND+="
 	media-libs/vapoursynth
+	sci-libs/fftw:3.0
 "
 DEPEND="${RDEPEND}
 "
 
-src_prepare() {
-	./autogen.sh || die
-}
+DOCS=( readme.rst )
 
-src_install() {
-	exeinto /usr/lib/vapoursynth/
-	dodoc readme.rst
-	doexe .libs/libmvtools.so
+src_configure() {
+	autotools-utils_src_configure --libdir="/usr/$(get_libdir)/vapoursynth/"
 }

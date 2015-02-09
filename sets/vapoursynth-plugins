@@ -1,4 +1,3 @@
-media-libs/zimg
 media-plugins/vapoursynth-L-SMASH-Works
 media-plugins/vapoursynth-addgrain
 media-plugins/vapoursynth-bifrost
@@ -47,3 +46,5 @@ media-plugins/vapoursynth-vsimagereader
 media-plugins/vapoursynth-vsrawsource
 media-plugins/vapoursynth-wwxd
 media-plugins/vapoursynth-yadifmod
+media-plugins/vapoursynth-zimg
+

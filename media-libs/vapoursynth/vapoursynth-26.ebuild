@@ -16,16 +16,15 @@ HOMEPAGE="http://www.vapoursynth.com/"
 if [[ ${PV} == *9999* ]]; then
 	inherit git-r3
 	EGIT_REPO_URI="https://github.com/${PN}/${PN}.git"
-	#EGIT_COMMIT="1a1d5dca0114dbc8536e74efe193be5549fb009c"
 else
 	inherit vcs-snapshot
 	SRC_URI="https://github.com/${PN}/${PN}/archive/R${PV}.tar.gz -> ${PN}-${PV}.tar.gz"
 fi
 
 LICENSE="LGPL-2.1"
+SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="+doc +plugins +shared +vspipe +x86-asm -debug -static"
-SLOT="0"
 
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
@@ -43,7 +42,7 @@ DEPEND="${RDEPEND}
 "
 
 src_configure() {
-	econf \
+	autotools-utils_src_configure \
 		--enable-core \
 		--enable-python-module \
 		--enable-vsscript \
@@ -52,15 +51,15 @@ src_configure() {
 		$( use_enable static ) \
 		$( use_enable debug ) \
 		$( use_enable x86-asm ) \
-		$( use_enable vspipe ) || die
+		$( use_enable vspipe )
 }
 
 src_compile() {
-	emake || die "emake failed"
-	use doc && (emake -C doc html || die)
+	autotools-utils_src_compile
+	use doc && autotools-utils_src_compile -C ${S}/doc html
 }
 
 src_install() {
-	use doc && (HTML_DOCS=("${S}/doc/_build/html") || die)
-	emake DESTDIR="${D}" install
+	use doc && HTML_DOCS=("${S}/doc/_build/html")
+	autotools-utils_src_install
 }

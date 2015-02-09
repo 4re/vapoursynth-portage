@@ -4,15 +4,22 @@
 
 EAPI=5
 
-inherit git-2 eutils
+inherit multilib
 
 DESCRIPTION="Xvid-like scene change detection for VapourSynth"
 HOMEPAGE="https://github.com/dubhater/vapoursynth-wwxd"
-EGIT_REPO_URI="https://github.com/dubhater/vapoursynth-wwxd.git"
+
+if [[ ${PV} == *9999* ]]; then
+	inherit git-r3
+	EGIT_REPO_URI="https://github.com/dubhater/${PN}.git"
+else
+	inherit vcs-snapshot
+	SRC_URI="https://github.com/dubhater/${PN}/archive/v${PV}.tar.gz -> ${PN}-${PV}.tar.gz"
+fi
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS=""
 
 RDEPEND+="
 	media-libs/vapoursynth
@@ -20,12 +27,14 @@ RDEPEND+="
 DEPEND="${RDEPEND}
 "
 
+LIBNAME="libwwxd.so"
+
 src_compile() {
-	$(tc-getCC) -shared -fPIC ${CFLAGS} ${LDFLAGS} -o libwwxd.so $(pkg-config --cflags vapoursynth) src/wwxd.c src/detection.c || die "Build failed"
+	$(tc-getCC) -shared -fPIC ${CFLAGS} ${LDFLAGS} -o ${LIBNAME} $(pkg-config --cflags vapoursynth) src/wwxd.c src/detection.c || die "Build failed"
 }
 
 src_install() {
-	exeinto /usr/lib/vapoursynth/
-	doexe libwwxd.so
+	exeinto /usr/$(get_libdir)/vapoursynth/
+	doexe ${LIBNAME}
 	dodoc readme
 }

@@ -1,0 +1,19 @@
+diff --git a/src/asm/tcomb.asm b/src/asm/tcomb.asm
+index d2d703e..6809820 100644
+--- a/src/asm/tcomb.asm
++++ b/src/asm/tcomb.asm
+@@ -678,3 +678,13 @@ cglobal horizontalBlur6_sse2, 5, 6, 13, srcp, dstp, stride, width, height, x
+     jnz .yloop
+ 
+     RET
++
++%ifidn __OUTPUT_FORMAT__,elf
++section .note.GNU-stack noalloc noexec nowrite progbits
++%endif
++%ifidn __OUTPUT_FORMAT__,elf32
++section .note.GNU-stack noalloc noexec nowrite progbits
++%endif
++%ifidn __OUTPUT_FORMAT__,elf64
++section .note.GNU-stack noalloc noexec nowrite progbits
++%endif
+\ No newline at end of file

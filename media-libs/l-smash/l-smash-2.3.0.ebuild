@@ -18,9 +18,9 @@ else
 fi
 
 LICENSE="ISC"
+SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="+shared -static -debug"
-SLOT="0"
 
 RDEPEND+="
 	>=virtual/ffmpeg-9
@@ -42,5 +42,5 @@ src_configure() {
 		myconf="${myconf} --enable-debug"
 	fi
 
-	./configure --prefix=/usr --prefix=/usr --libdir=/usr/$(get_libdir) ${myconf} --extra-cflags="${CFLAGS}" --extra-ldflags="${LDFLAGS}" || die
+	./configure --prefix=/usr --libdir=/usr/$(get_libdir) ${myconf} --extra-cflags="${CFLAGS}" --extra-ldflags="${LDFLAGS}" || die
 }

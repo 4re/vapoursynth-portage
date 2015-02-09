@@ -4,15 +4,24 @@
 
 EAPI=5
 
+AUTOTOOLS_AUTORECONF=1
+
+inherit autotools-utils multilib
+
 DESCRIPTION="SSIQ plugin for VapourSynth"
 HOMEPAGE="https://github.com/dubhater/vapoursynth-ssiq"
-EGIT_REPO_URI="https://github.com/dubhater/vapoursynth-ssiq.git"
 
-inherit git-2 autotools
+if [[ ${PV} == *9999* ]]; then
+	inherit git-r3
+	EGIT_REPO_URI="https://github.com/dubhater/${PN}.git"
+else
+	inherit vcs-snapshot
+	SRC_URI="https://github.com/dubhater/${PN}/archive/v${PV}.tar.gz -> ${PN}-${PV}.tar.gz"
+fi
 
-LICENSE="GPL-2"
+LICENSE=""
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS=""
 
 RDEPEND+="
 	media-libs/vapoursynth
@@ -20,21 +29,8 @@ RDEPEND+="
 DEPEND="${RDEPEND}
 "
 
-src_prepare() {
-	./autogen.sh || die
-}
+DOCS=( readme.rst )
 
-#src_configure() {
-#	cd src
-#	./configure --extra-cflags="${CFLAGS}" --extra-ldflags="${LDFLAGS}" || die
-#}
-
-#src_compile() {
-#	cd src
-#	emake || die
-#}
-
-src_install() {
-        exeinto /usr/lib/vapoursynth/
-        doexe .libs/libssiq.so
+src_configure() {
+	autotools-utils_src_configure --libdir="/usr/$(get_libdir)/vapoursynth/"
 }

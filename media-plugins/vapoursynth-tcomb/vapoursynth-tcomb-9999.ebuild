@@ -4,15 +4,26 @@
 
 EAPI=5
 
+AUTOTOOLS_AUTORECONF=1
+
+inherit autotools-utils multilib
+
+AUTOTOOLS_IN_SOURCE_BUILD=1
+
 DESCRIPTION="TComb is a temporal comb filter"
 HOMEPAGE="https://github.com/dubhater/vapoursynth-tcomb"
-EGIT_REPO_URI="https://github.com/dubhater/vapoursynth-tcomb.git"
 
-inherit git-2 autotools
+if [[ ${PV} == *9999* ]]; then
+	inherit git-r3
+	EGIT_REPO_URI="https://github.com/dubhater/${PN}.git"
+else
+	inherit vcs-snapshot
+	SRC_URI="https://github.com/dubhater/${PN}/archive/v${PV}.tar.gz -> ${PN}-${PV}.tar.gz"
+fi
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS=""
 
 RDEPEND+="
 	media-libs/vapoursynth
@@ -20,12 +31,13 @@ RDEPEND+="
 DEPEND="${RDEPEND}
 "
 
+DOCS=( readme.rst gpl2.txt )
+
 src_prepare() {
-	./autogen.sh || die
+	epatch "${FILESDIR}/${PN}-stack.patch"
+	autotools-utils_src_prepare
 }
 
-src_install() {
-        exeinto /usr/lib/vapoursynth/
-	dodoc readme.rst
-        doexe .libs/libtcomb.so
+src_configure() {
+	autotools-utils_src_configure --libdir="/usr/$(get_libdir)/vapoursynth/"
 }

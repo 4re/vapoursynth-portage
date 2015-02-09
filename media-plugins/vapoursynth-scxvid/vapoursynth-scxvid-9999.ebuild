@@ -4,29 +4,34 @@
 
 EAPI=5
 
-inherit git-2 eutils
+AUTOTOOLS_AUTORECONF=1
+
+inherit autotools-utils multilib
 
 DESCRIPTION="Scene change detection plugin for VapourSynth, using XviD"
 HOMEPAGE="https://github.com/dubhater/vapoursynth-scxvid"
-EGIT_REPO_URI="https://github.com/dubhater/vapoursynth-scxvid.git"
 
-LICENSE="GPL-2"
+if [[ ${PV} == *9999* ]]; then
+	inherit git-r3
+	EGIT_REPO_URI="https://github.com/dubhater/${PN}.git"
+else
+	inherit vcs-snapshot
+	SRC_URI="https://github.com/dubhater/${PN}/archive/v${PV}.tar.gz -> ${PN}-${PV}.tar.gz"
+fi
+
+LICENSE=""
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS=""
 
 RDEPEND+="
-    media-libs/vapoursynth
-    media-libs/xvid
+	media-libs/vapoursynth
+	media-libs/xvid
 "
 DEPEND="${RDEPEND}
 "
 
-src_prepare() {
-    ./autogen.sh || die
-}
+DOCS=( readme.rst )
 
-src_install() {
-    exeinto /usr/lib/vapoursynth/
-    dodoc readme.rst
-    doexe .libs/libscxvid.so
+src_configure() {
+	autotools-utils_src_configure --libdir="/usr/$(get_libdir)/vapoursynth/"
 }

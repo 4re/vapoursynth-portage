@@ -4,15 +4,24 @@
 
 EAPI=5
 
+AUTOTOOLS_AUTORECONF=1
+
+inherit autotools-utils multilib
+
 DESCRIPTION="nnedi3 is an intra-field only deinterlacer"
 HOMEPAGE="https://github.com/dubhater/vapoursynth-nnedi3"
-EGIT_REPO_URI="https://github.com/dubhater/vapoursynth-nnedi3.git"
 
-inherit git-2 flag-o-matic
+if [[ ${PV} == *9999* ]]; then
+	inherit git-r3
+	EGIT_REPO_URI="https://github.com/dubhater/${PN}.git"
+else
+	inherit vcs-snapshot
+	SRC_URI="https://github.com/dubhater/${PN}/archive/v${PV}.tar.gz -> ${PN}-${PV}.tar.gz"
+fi
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS=""
 
 RDEPEND+="
 	media-libs/vapoursynth
@@ -20,13 +29,8 @@ RDEPEND+="
 DEPEND="${RDEPEND}
 "
 
-src_prepare() {
-	./autogen.sh
-	append-cflags -fno-strict-aliasing
-}
+DOCS=( readme.rst gpl2.txt )
 
-src_install() {
-	exeinto /usr/lib/vapoursynth/
-	dodoc readme.rst
-	doexe .libs/libnnedi3.so
+src_configure() {
+	autotools-utils_src_configure --libdir="/usr/$(get_libdir)/vapoursynth/"
 }
