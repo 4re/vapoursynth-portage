@@ -19,7 +19,7 @@ fi
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS=""
+KEYWORDS="~amd64 ~x86"
 
 RDEPEND+="
 	media-libs/vapoursynth
@@ -29,7 +29,8 @@ DEPEND="${RDEPEND}
 "
 
 src_configure() {
-	sed -i 's/DEPLIBS="fftw3f"/DEPLIBS="fftw3f_threads"/' configure
+	chmod +x configure || die
+	sed -i 's/DEPLIBS="fftw3f"/DEPLIBS="fftw3f_threads"/' configure || die
 	./configure \
 		--install="${ED}/usr/$(get_libdir)/vapoursynth/" \
 		--extra-cxxflags="${CFLAGS}" --extra-ldflags="${LDFLAGS}" || die "configure failed"
