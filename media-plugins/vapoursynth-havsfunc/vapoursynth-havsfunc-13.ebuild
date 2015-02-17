@@ -4,16 +4,16 @@
 
 EAPI=5
 
-PYTHON_DEPEND="3:3.3"
-RESTRICT_PYTHON_ABIS="2.* 3.[0123]"
+PYTHON_DEPEND="3"
+PYTHON_COMPAT=( python3_4 )
 
-inherit python
+inherit python-utils-r1 python-single-r1 git-r3
 
 DESCRIPTION="HolyWu's ported AviSynth scripts for VapourSynth"
 HOMEPAGE="http://forum.doom9.org/showthread.php?t=166582"
 SRC_URI="https://dl.dropboxusercontent.com/u/36232595/havsfunc-r${PV}.7z"
 
-LICENSE="GPL-2"
+LICENSE=""
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 

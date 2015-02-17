@@ -4,11 +4,18 @@
 
 EAPI=5
 
-inherit eutils toolchain-funcs
+inherit toolchain-funcs multilib
 
 DESCRIPTION="A format-conversion plug-in for the Vapoursynth video processing engine"
 HOMEPAGE="http://forum.doom9.org/showthread.php?t=166504"
-SRC_URI="http://ldesoras.free.fr/src/vs/fmtconv-r${PV}.zip"
+
+if [[ ${PV} == *9999* ]]; then
+	inherit git-r3
+	EGIT_REPO_URI="https://github.com/vapoursynth/fmtconv.git"
+else
+	inherit vcs-snapshot
+	SRC_URI="http://ldesoras.free.fr/src/vs/fmtconv-r${PV}.zip -> ${PN}-${PV}.zip"
+fi
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -21,20 +28,20 @@ RDEPEND+="
 DEPEND="${RDEPEND}
 "
 
-S="/var/tmp/portage/media-plugins/vapoursynth-fmtconv-${PV}/work/src"
+S="${WORKDIR}/src"
 LIBNAME="libfmtconv.so"
 
 src_compile() {
-    $(tc-getCC) \
-        ${CFLAGS} ${LDFLAGS} \
-        -shared -msse2 -fPIC \
-        -o ${LIBNAME} AvstpWrapper.cpp main.cpp fmtc/*.cpp fstb/*.cpp vsutl/*.cpp -I. || die "compile failed"
+	$(tc-getCXX) \
+		${CFLAGS} ${LDFLAGS} \
+		-shared -msse2 -fPIC \
+		-o ${LIBNAME} AvstpWrapper.cpp main.cpp fmtc/*.cpp fstb/*.cpp vsutl/*.cpp -I. || die "compile failed"
 }
 
 src_install() {
-    exeinto /usr/lib/vapoursynth/
-    doexe ${LIBNAME} || die
-    if use doc; then
-        dohtml -r ../doc/* || die
-    fi
+	exeinto /usr/$(get_libdir)/vapoursynth/
+	doexe ${LIBNAME} || die
+	if use doc; then
+		dohtml -r ../doc/* || die
+	fi
 }

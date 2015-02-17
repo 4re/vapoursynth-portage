@@ -4,26 +4,24 @@
 
 EAPI=5
 
-PYTHON_DEPEND="3:3.3"
-RESTRICT_PYTHON_ABIS="2.* 3.[0123]"
+PYTHON_DEPEND="3"
+PYTHON_COMPAT=( python3_4 )
 
-inherit python git-2
+inherit python-utils-r1 python-single-r1 git-r3
 
 DESCRIPTION="A function to use invks/debilinear"
 HOMEPAGE="http://forum.doom9.org/showthread.php?t=171546"
 EGIT_REPO_URI="https://github.com/MonoS/VS-MaskDetail.git"
 
-LICENSE="GPL-2"
+LICENSE=""
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS=""
 
 RDEPEND+="
 	media-libs/vapoursynth
 "
 DEPEND="${RDEPEND}
 "
-
-#S="${WORKDIR}"
 
 src_install(){
 	insinto "$(python_get_sitedir)"

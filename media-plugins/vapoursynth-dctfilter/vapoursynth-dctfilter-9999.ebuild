@@ -4,15 +4,22 @@
 
 EAPI=5
 
-inherit git-2 eutils
+inherit toolchain-funcs multilib
 
 DESCRIPTION="Performs DCT on 8x8 blocks of source clip, applies modification to it, then performs IDCT"
 HOMEPAGE="https://bitbucket.org/mystery_keeper/vapoursynth-dctfilter"
-EGIT_REPO_URI="https://bitbucket.org/mystery_keeper/vapoursynth-dctfilter.git"
 
-LICENSE="GPL-2"
+if [[ ${PV} == *9999* ]]; then
+	inherit git-r3
+	EGIT_REPO_URI="https://bitbucket.org/mystery_keeper/${PN}.git"
+else
+	inherit vcs-snapshot
+	SRC_URI="https://bitbucket.org/mystery_keeper/${PN}/get/r${PV}.tar.bz2 -> ${PN}-${PV}.tar.bz2"
+fi
+
+LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS=""
 
 RDEPEND+="
 	media-libs/vapoursynth
@@ -20,14 +27,26 @@ RDEPEND+="
 DEPEND="${RDEPEND}
 "
 
-USFLAGS="-shared -fPIC"
+src_configure() {
+	# No build system upstream
+	selfcflags="-Wall -fPIC"
+	selfldflags="-shared"
+	libname="libdctfilter.so"
+}
 
 src_compile() {
-	$(tc-getCC) ${CFLAGS} ${LDFLAGS} ${USFLAGS} -o libdctfilter.so -Isrc $(pkg-config --cflags vapoursynth) src/croutines.c src/main.c || die "Build failed"
+	echo "$(tc-getCC) ${selfcflags} ${CFLAGS} -c src/croutines.c -o src/croutines.o"
+	$(tc-getCC) ${selfcflags} ${CFLAGS} -c src/croutines.c -o src/croutines.o || die
+
+	echo "$(tc-getCC) ${selfcflags} ${CFLAGS} -c src/main.c -o src/main.o"
+	$(tc-getCC) ${selfcflags} ${CFLAGS} -c src/main.c -o src/main.o || die
+
+	echo "$(tc-getCC) ${selfldflags} ${LDFLAGS} src/*.o -o ${libname}"
+	$(tc-getCC) ${selfldflags} ${LDFLAGS} src/*.o -o ${libname} || die
 }
 
 src_install() {
-	exeinto /usr/lib/vapoursynth/
-	doexe libdctfilter.so
-	dodoc README
+	exeinto "/usr/$(get_libdir)/vapoursynth/"
+	doexe ${libname}
+	dodoc README LICENSE
 }

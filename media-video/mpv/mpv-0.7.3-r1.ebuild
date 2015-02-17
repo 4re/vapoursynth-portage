@@ -1,17 +1,18 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-video/mpv/mpv-0.6.2.ebuild,v 1.1 2014/11/14 22:46:27 dlan Exp $
+# $Header: /var/cvsroot/gentoo-x86/media-video/mpv/mpv-0.7.3.ebuild,v 1.2 2015/02/04 13:33:19 yngwin Exp $
 
 EAPI=5
-
 EGIT_REPO_URI="https://github.com/mpv-player/mpv.git"
+PYTHON_COMPAT=( python{2_7,3_3,3_4} )
+PYTHON_REQ_USE='threads(+)'
 
-inherit eutils waf-utils pax-utils fdo-mime gnome2-utils
+inherit eutils python-any-r1 waf-utils pax-utils fdo-mime gnome2-utils
 [[ ${PV} == *9999* ]] && inherit git-r3
 
 WAF_V="1.8.1"
 
-DESCRIPTION="Video player based on MPlayer/mplayer2"
+DESCRIPTION="Free, open source, and cross-platform media player (fork of MPlayer/mplayer2)"
 HOMEPAGE="http://mpv.io/"
 SRC_URI="http://ftp.waf.io/pub/release/waf-${WAF_V}"
 [[ ${PV} == *9999* ]] || \
@@ -20,11 +21,12 @@ SRC_URI+=" https://github.com/mpv-player/mpv/archive/v${PV}.tar.gz -> ${P}.tar.g
 LICENSE="GPL-2"
 SLOT="0"
 [[ ${PV} == *9999* ]] || \
-KEYWORDS="~alpha ~amd64 ~arm ~ppc ~ppc64 ~sparc ~x86 ~amd64-linux"
+KEYWORDS="~amd64 ~arm ~x86 ~amd64-linux"
 IUSE="+alsa bluray bs2b cdio +cli -doc-pdf dvb +dvd dvdnav egl +enca encode
-+iconv jack -joystick jpeg ladspa lcms +libass libcaca libguess libmpv lirc lua
-luajit +mpg123 -openal +opengl oss -portaudio postproc pulseaudio pvr samba -sdl
-selinux v4l vaapi +vapoursynth vdpau vf-dlopen wayland +X xinerama +xscreensaver +xv"
++iconv jack -joystick jpeg ladspa lcms +libass libav libcaca libguess libmpv
+lirc lua luajit +mpg123 -openal +opengl oss -portaudio postproc pulseaudio pvr
+samba -sdl selinux v4l vaapi +vapoursynth vdpau vf-dlopen wayland +X xinerama
++xscreensaver +xv"
 
 REQUIRED_USE="
 	|| ( cli libmpv )
@@ -45,10 +47,8 @@ REQUIRED_USE="
 "
 
 RDEPEND="
-	|| (
-		>=media-video/libav-10:=[encode?,threads,vaapi?,vdpau?]
-		>=media-video/ffmpeg-2.1.4:0=[encode?,threads,vaapi?,vdpau?]
-	)
+	libav? ( >=media-video/libav-10:0=[encode?,threads,vaapi?,vdpau?] )
+	!libav? ( >=media-video/ffmpeg-2.1.4:0=[encode?,threads,vaapi?,vdpau?] )
 	sys-libs/zlib
 	X? (
 		x11-libs/libX11
@@ -65,7 +65,7 @@ RDEPEND="
 		xscreensaver? ( x11-libs/libXScrnSaver )
 		xv? ( x11-libs/libXv )
 	)
-	alsa? ( media-libs/alsa-lib )
+	alsa? ( >=media-libs/alsa-lib-1.0.18 )
 	bluray? ( >=media-libs/libbluray-0.3.0 )
 	bs2b? ( media-libs/libbs2b )
 	cdio? (
@@ -97,10 +97,8 @@ RDEPEND="
 	openal? ( >=media-libs/openal-1.13 )
 	portaudio? ( >=media-libs/portaudio-19_pre20111121 )
 	postproc? (
-		|| (
-			>=media-libs/libpostproc-10.20140517
-			>=media-video/ffmpeg-2.1.4:0
-		)
+		libav? ( >=media-libs/libpostproc-10.20140517:0= )
+		!libav? ( >=media-video/ffmpeg-2.1.4:0= )
 	)
 	pulseaudio? ( media-sound/pulseaudio )
 	samba? ( net-fs/samba )
@@ -114,6 +112,7 @@ RDEPEND="
 	)
 "
 DEPEND="${RDEPEND}
+	${PYTHON_DEPS}
 	virtual/pkgconfig
 	>=dev-lang/perl-5.8
 	dev-python/docutils
@@ -137,7 +136,9 @@ pkg_setup() {
 
 	einfo "For additional format support you need to enable the support on your"
 	einfo "libavcodec/libavformat provider:"
-	einfo "    media-video/libav or media-video/ffmpeg"
+	einfo "    media-video/ffmpeg or media-video/libav"
+
+	python-any-r1_pkg_setup
 }
 
 src_unpack() {

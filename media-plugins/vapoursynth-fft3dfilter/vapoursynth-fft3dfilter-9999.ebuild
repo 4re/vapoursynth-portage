@@ -4,7 +4,7 @@
 
 EAPI=5
 
-inherit git-2
+inherit toolchain-funcs multilib
 
 DESCRIPTION="VapourSynth port of FFT3DFilter"
 HOMEPAGE="https://github.com/VFR-maniac/VapourSynth-FFT3DFilter"

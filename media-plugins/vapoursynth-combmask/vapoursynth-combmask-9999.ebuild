@@ -4,15 +4,22 @@
 
 EAPI=5
 
+inherit multilib
+
 DESCRIPTION="CombMask plugin for VapourSynth"
 HOMEPAGE="https://github.com/chikuzen/CombMask"
-EGIT_REPO_URI="https://github.com/chikuzen/CombMask.git"
 
-inherit git-2
+if [[ ${PV} == *9999* ]]; then
+	inherit git-r3
+	EGIT_REPO_URI="https://github.com/chikuzen/CombMask.git"
+else
+	inherit vcs-snapshot
+	SRC_URI="https://github.com/chikuzen/CombMask/archive/r${PV}.tar.gz -> ${PN}-${PV}.tar.gz"
+fi
 
-LICENSE="GPL-2"
+LICENSE="GPL-2.1"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS=""
 
 RDEPEND+="
 	media-libs/vapoursynth
@@ -20,19 +27,16 @@ RDEPEND+="
 DEPEND="${RDEPEND}
 "
 
-src_configure() {
-	cd vapoursynth/src
-	chmod +x configure
-	./configure --install="/usr/lib/vapoursynth" --extra-cflags="${CFLAGS}" --extra-ldflags="${LDFLAGS}" || die
-}
+S="${WORKDIR}/${P}/vapoursynth/src"
 
-src_compile() {
-	cd vapoursynth/src
-	emake || die
+src_configure() {
+	chmod +x configure
+	./configure \
+		--install="${ED}/usr/$(get_libdir)/vapoursynth/" \
+		--extra-cflags="${CFLAGS}" --extra-ldflags="${LDFLAGS}" || die
 }
 
 src_install() {
-        exeinto /usr/lib/vapoursynth/
-        doexe vapoursynth/src/libcombmask.so
-	dodoc vapoursynth/readme.rst
+	emake install
+	dodoc ../readme.rst ../LICENSE.LGPLv2.1
 }

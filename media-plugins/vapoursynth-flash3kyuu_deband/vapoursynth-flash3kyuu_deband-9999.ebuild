@@ -6,16 +6,23 @@ EAPI=5
 PYTHON_COMPAT=( python3_4 )
 PYTHON_REQ_USE="threads(+)"
 
-inherit python-any-r1 waf-utils git-2
+inherit python-any-r1 multilib waf-utils
 
 DESCRIPTION="A deband library and filter for VapourSynth"
 HOMEPAGE="https://github.com/SAPikachu/flash3kyuu_deband"
-EGIT_REPO_URI="https://github.com/SAPikachu/flash3kyuu_deband.git"
+
+if [[ ${PV} == *9999* ]]; then
+	inherit git-r3
+	EGIT_REPO_URI="https://github.com/SAPikachu/flash3kyuu_deband.git"
+else
+	inherit vcs-snapshot
+	SRC_URI="https://github.com/SAPikachu/flash3kyuu_deband/archive/r${PV}.tar.gz -> ${PN}-${PV}.tar.gz"
+fi
 
 LICENSE="GPL-3"
-KEYWORDS="~amd64 ~x86"
-IUSE="+doc"
 SLOT="0"
+KEYWORDS=""
+IUSE="+doc"
 
 RDEPEND+="
 	media-libs/vapoursynth
@@ -27,9 +34,10 @@ DEPEND="
 	virtual/pkgconfig
 "
 
-src_configure() {
-	waf-utils_src_configure || die
-}
+# src_configure() {
+# # 	waf-utils_src_configure --libdir="${ED}/usr/$(get_libdir)/vapoursynth/" || die
+# 	waf-utils_src_configure --destdir="${ED}" || die
+# }
 
 src_compile() {
 	waf-utils_src_compile || die
@@ -39,7 +47,8 @@ src_compile() {
 }
 
 src_install() {
-	exeinto /usr/lib/vapoursynth/
+# 	waf-utils_src_install
+	exeinto /usr/$(get_libdir)/vapoursynth/
 	doexe build/libf3kdb.so
 	if use doc; then
 		dohtml -r docs/_build/html/*

@@ -4,15 +4,22 @@
 
 EAPI=5
 
-inherit git-2 toolchain-funcs
+inherit toolchain-funcs multilib
 
 DESCRIPTION="AddGrain generates film like grain or other effects (like rain) by adding random noise to a video clip"
 HOMEPAGE="https://github.com/HomeOfVapourSynthEvolution/VapourSynth-AddGrain"
-EGIT_REPO_URI="https://github.com/HomeOfVapourSynthEvolution/VapourSynth-AddGrain.git"
+
+if [[ ${PV} == *9999* ]]; then
+	inherit git-r3
+	EGIT_REPO_URI="https://github.com/HomeOfVapourSynthEvolution/${PN}.git"
+else
+	inherit vcs-snapshot
+	SRC_URI="https://github.com/HomeOfVapourSynthEvolution/${PN}/archive/r${PV}.tar.gz -> ${PN}-${PV}.tar.gz"
+fi
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS=""
 
 RDEPEND+="
 	media-libs/vapoursynth
@@ -20,15 +27,15 @@ RDEPEND+="
 DEPEND="${RDEPEND}
 "
 
-LIBNAME="libaddgrain.so"
-INSTALLDIR="/usr/lib/vapoursynth/"
-
 src_configure() {
-    ./configure --install="${INSTALLDIR}" --extra-cxxflags="${CFLAGS}" --extra-ldflags="${LDFLAGS}"
+	sed -i -e "s:CXX=\"g++\":CXX=\"$(tc-getCXX)\":" configure || die
+	sed -i -e "s:LD=\"g++\":LD=\"$(tc-getCXX)\":" configure || die
+	./configure \
+		--install="${ED}/usr/$(get_libdir)/vapoursynth/" \
+		--extra-cxxflags="${CXXFLAGS}" --extra-ldflags="${LDFLAGS}" || die "configure failed"
 }
 
 src_install() {
-        exeinto ${INSTALLDIR}
-        doexe ${LIBNAME}
-        dodoc README.md LICENSE
+	emake install
+	dodoc README.md LICENSE
 }

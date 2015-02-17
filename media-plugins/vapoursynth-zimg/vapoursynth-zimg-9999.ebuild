@@ -11,13 +11,13 @@ HOMEPAGE="https://github.com/sekrit-twc/zimg"
 
 LICENSE="WTFPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS=""
 
 RDEPEND="
+	=media-libs/zimg-${PV}
 	media-libs/vapoursynth
 "
 DEPEND="${RDEPEND}
-	=media-libs/zimg-${PV}
 "
 
 S="${WORKDIR}"

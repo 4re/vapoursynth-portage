@@ -4,6 +4,8 @@
 
 EAPI=5
 
+inherit multilib
+
 DESCRIPTION="A libav/ffmpeg based source library for easy frame accurate access"
 HOMEPAGE="https://github.com/FFMS/ffms2"
 
@@ -12,8 +14,8 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 
 RDEPEND="
-    =media-libs/ffmpegsource-${PV}*
-    media-libs/vapoursynth
+	=media-libs/ffmpegsource-${PV}
+	media-libs/vapoursynth
 "
 DEPEND="${RDEPEND}
 "
@@ -21,5 +23,5 @@ DEPEND="${RDEPEND}
 S="${WORKDIR}"
 
 src_install() {
-    dosym /usr/lib64/libffms2.so.3.0.0 /usr/lib/vapoursynth/libffms2.so || die
+	dosym /usr/$(get_libdir)/libffms2.so.3.0.0 /usr/$(get_libdir)/vapoursynth/libffms2.so || die
 }

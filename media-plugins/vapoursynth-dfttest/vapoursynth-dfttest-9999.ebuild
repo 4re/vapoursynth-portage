@@ -32,7 +32,7 @@ src_configure() {
 	sed -i 's/DEPLIBS="fftw3f"/DEPLIBS="fftw3f_threads"/' configure
 	./configure \
 		--install="${ED}/usr/$(get_libdir)/vapoursynth/" \
-		--extra-cxxflags="${CFLAGS}" --extra-ldflags="${LDFLAGS}" || die "configure failed"
+		--extra-cxxflags="${CXXFLAGS}" --extra-ldflags="${LDFLAGS}" || die "configure failed"
 }
 
 src_install() {

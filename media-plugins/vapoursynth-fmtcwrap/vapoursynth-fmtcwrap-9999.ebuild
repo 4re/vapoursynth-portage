@@ -4,18 +4,15 @@
 
 EAPI=5
 
-inherit git-2 eutils
+inherit toolchain-funcs git-r3 multilib
 
 DESCRIPTION="A convenience wrapper for fmtconv"
 HOMEPAGE="http://forum.doom9.org/showthread.php?t=170633"
 EGIT_REPO_URI="https://gist.github.com/c250a0dfefbfb113e925.git"
 
-LICENSE="GPL-2"
+LICENSE=""
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
-
-#REV=8
-#S="/var/tmp/portage/media-plugins/vapoursynth-fmtconv-${REV}/work/src" #FIXME
+KEYWORDS=""
 
 RDEPEND+="
 	media-libs/vapoursynth
@@ -29,11 +26,12 @@ src_compile() {
 		${CFLAGS} ${LDFLAGS} \
 		-shared -fPIC -std=c99 \
 		-Wall -Wextra -Wno-unused-parameter \
-		-o libfmtcwrap.so fmtcwrap.c $(pkg-config --cflags vapoursynth) || die "compile failed"
+		$(pkg-config --cflags vapoursynth) \
+		-o libfmtcwrap.so fmtcwrap.c || die "compile failed"
 }
 
 src_install() {
-	exeinto /usr/lib/vapoursynth/
+	exeinto /usr/$(get_libdir)/vapoursynth/
 	doexe libfmtcwrap.so
 	dodoc readme.txt
 }

@@ -4,15 +4,22 @@
 
 EAPI=5
 
-inherit git-2 eutils
+inherit toolchain-funcs multilib
 
 DESCRIPTION="A deinterlace / antialiasing plugin for VapourSynth"
 HOMEPAGE="https://github.com/HomeOfVapourSynthEvolution/VapourSynth-SangNomMod"
-EGIT_REPO_URI="https://github.com/HomeOfVapourSynthEvolution/VapourSynth-SangNomMod.git"
 
-LICENSE="GPL-2"
+if [[ ${PV} == *9999* ]]; then
+	inherit git-r3
+	EGIT_REPO_URI="https://github.com/HomeOfVapourSynthEvolution/${PN}.git"
+else
+	inherit vcs-snapshot
+	SRC_URI="https://github.com/HomeOfVapourSynthEvolution/${PN}/archive/v${PV}.tar.gz -> ${PN}-${PV}.tar.gz"
+fi
+
+LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS=""
 
 RDEPEND+="
 	media-libs/vapoursynth
@@ -20,25 +27,16 @@ RDEPEND+="
 DEPEND="${RDEPEND}
 "
 
-#src_prepare() {
-#	chmod +x configure
-#}
-
-#src_configure() {
-#	./configure --install="/usr/lib/vapoursynth/" --gcc --extra-cxxflags=${CFLAGS} --extra-ldflags=${LDFLAGS} --sse
-#}
-
 src_configure() {
-	echo "No configure."
-}
-
-src_compile() {
-#	$(tc-getCC) -shared -fPIC -std=c++11 ${CFLAGS} ${LDFLAGS} -o libyadifmod.so $(pkg-config --cflags vapoursynth) Yadifmod/Yadifmod.cpp || die "Build failed"
-	$(tc-getCC) ${CFLAGS} ${LDFLAGS} -Wall -shared -fPIC -std=c++11 -o libsangnommod.so -I./src $(pkg-config --cflags vapoursynth) -lvapoursynth src/*.cpp || die "Build failed"
+	sed -i -e "s:CXX=\"clang++\":CXX=\"$(tc-getCXX)\":" configure || die
+	sed -i -e "s:LD=\"clang++\":LD=\"$(tc-getCXX)\":" configure || die
+	chmod +x configure
+	./configure \
+		--install="${ED}/usr/$(get_libdir)/vapoursynth/" \
+		--extra-cxxflags="${CXXFLAGS}" --extra-ldflags="${LDFLAGS}" || die "configure failed" 
 }
 
 src_install() {
-	exeinto /usr/lib/vapoursynth/
-	doexe libsangnommod.so
+	emake install
 	dodoc README.md LICENSE
 }

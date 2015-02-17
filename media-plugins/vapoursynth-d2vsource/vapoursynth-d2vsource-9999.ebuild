@@ -4,15 +4,23 @@
 
 EAPI=5
 
+inherit toolchain-funcs multilib
+
 DESCRIPTION="D2V Source plugin for VapourSynth"
 HOMEPAGE="https://github.com/dwbuiten/d2vsource"
 EGIT_REPO_URI="https://github.com/dwbuiten/d2vsource.git"
 
-inherit git-2
+if [[ ${PV} == *9999* ]]; then
+	inherit git-r3
+	EGIT_REPO_URI="https://github.com/dwbuiten/d2vsource.git"
+else
+	inherit vcs-snapshot
+	SRC_URI="https://github.com/dwbuiten/d2vsource/archive/beta${PV}.tar.gz -> ${PN}-${PV}.tar.gz"
+fi
 
-LICENSE="GPL-2"
+LICENSE="GPL-2.1"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS=""
 
 RDEPEND+="
 	media-libs/vapoursynth
@@ -21,11 +29,14 @@ DEPEND="${RDEPEND}
 "
 
 src_configure() {
-	./configure --install="/usr/lib/vapoursynth" --extra-cxxflags="${CFLAGS}" --extra-ldflags="${LDFLAGS}" || die
+	sed -i -e "s:CXX=\"g++\":CXX=\"$(tc-getCXX)\":" configure || die
+	sed -i -e "s:LD=\"g++\":LD=\"$(tc-getCXX)\":" configure || die
+	./configure \
+		--install="${ED}/usr/$(get_libdir)/vapoursynth/" \
+		--extra-cxxflags="${CXXFLAGS}" --extra-ldflags="${LDFLAGS}" || die "configure failed"
 }
 
 src_install() {
-        exeinto /usr/lib/vapoursynth/
-        doexe libd2vsource.so
-	dodoc README
+	emake install
+	dodoc README COPYING
 }

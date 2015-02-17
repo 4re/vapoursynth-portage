@@ -4,15 +4,22 @@
 
 EAPI=5
 
-inherit git-2 eutils
+inherit toolchain-funcs multilib
 
 DESCRIPTION="Bilateral filter for VapourSynth"
 HOMEPAGE="https://github.com/HomeOfVapourSynthEvolution/VapourSynth-Bilateral"
-EGIT_REPO_URI="https://github.com/HomeOfVapourSynthEvolution/VapourSynth-Bilateral.git"
+
+if [[ ${PV} == *9999* ]]; then
+	inherit git-r3
+	EGIT_REPO_URI="https://github.com/HomeOfVapourSynthEvolution/${PN}.git"
+else
+	inherit vcs-snapshot
+	SRC_URI="https://github.com/HomeOfVapourSynthEvolution/${PN}/archive/r${PV}.tar.gz -> ${PN}-${PV}.tar.gz"
+fi
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS=""
 
 RDEPEND+="
 	media-libs/vapoursynth
@@ -20,20 +27,16 @@ RDEPEND+="
 DEPEND="${RDEPEND}
 "
 
-USFLAGS="-Wall -fpermissive -ffast-math -fexcess-precision=fast -shared -fPIC -std=c++11 -D__SSE -mssse3"
-
-
-src_prepare() {
-	sed -i 's/..\\include\\//g' source/*.cpp || die "Prepare failed"
-	sed -i 's/vapoursynth\\//g' include/*.h source/*.cpp || die "Prepare failed"
-}
-
-src_compile() {
-	$(tc-getCC) ${CFLAGS} ${LDFLAGS} ${USFLAGS} -o libbilateral.so -Iinclude $(pkg-config --cflags vapoursynth) -lvapoursynth source/*.cpp || die "Build failed"
+src_configure() {
+	sed -i -e "s:CXX=\"clang++\":CXX=\"$(tc-getCXX)\":" configure || die
+	sed -i -e "s:LD=\"clang++\":LD=\"$(tc-getCXX)\":" configure || die
+	chmod +x configure
+	./configure \
+		--install="${ED}/usr/$(get_libdir)/vapoursynth/" \
+		--extra-cxxflags="${CXXFLAGS}" --extra-ldflags="${LDFLAGS}" || die "configure failed"
 }
 
 src_install() {
-	exeinto /usr/lib/vapoursynth/
-	doexe libbilateral.so
+	emake install
 	dodoc README.md LICENSE
 }
