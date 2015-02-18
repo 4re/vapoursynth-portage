@@ -31,6 +31,7 @@ media-plugins/vapoursynth-l-smash-works ~*
 media-plugins/vapoursynth-msmoosh ~*
 media-plugins/vapoursynth-mvtools ~*
 media-plugins/vapoursynth-nnedi3 ~*
+media-plugins/vapoursynth-reduceflicker ~*
 media-plugins/vapoursynth-removedirt ~*
 media-plugins/vapoursynth-retinex ~*
 media-plugins/vapoursynth-sangnommod ~*
