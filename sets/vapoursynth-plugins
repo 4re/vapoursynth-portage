@@ -1,4 +1,3 @@
-media-plugins/vapoursynth-L-SMASH-Works
 media-plugins/vapoursynth-addgrain
 media-plugins/vapoursynth-bifrost
 media-plugins/vapoursynth-bilateral
@@ -24,6 +23,7 @@ media-plugins/vapoursynth-genericfilters
 media-plugins/vapoursynth-havsfunc
 media-plugins/vapoursynth-histogram
 media-plugins/vapoursynth-it
+media-plugins/vapoursynth-l-smash-works
 media-plugins/vapoursynth-msmoosh
 media-plugins/vapoursynth-mvtools
 media-plugins/vapoursynth-nnedi3

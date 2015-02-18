@@ -28,6 +28,12 @@ RDEPEND+="
 DEPEND="${RDEPEND}
 "
 
+src_prepare() {
+	sed -i -e "s:CXX=\"g++\":CXX=\"$(tc-getCC)\":" configure || die
+	sed -i -e "s:LD=\"g++\":LD=\"$(tc-getCC)\":" configure || die
+	sed -i 's/DEPLIBS="fftw3f"/DEPLIBS="fftw3f_threads"/' configure
+}
+
 src_configure() {
 	chmod +x configure || die
 	sed -i 's/DEPLIBS="fftw3f"/DEPLIBS="fftw3f_threads"/' configure || die

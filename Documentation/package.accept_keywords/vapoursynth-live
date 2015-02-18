@@ -2,7 +2,6 @@
 =media-libs/l-smash-9999 **
 =media-libs/vapoursynth-9999 **
 =media-libs/zimg-9999 **
-=media-plugins/vapoursynth-L-SMASH-Works-9999 **
 =media-plugins/vapoursynth-addgrain-9999 **
 =media-plugins/vapoursynth-bifrost-9999 **
 =media-plugins/vapoursynth-bilateral-9999 **
@@ -28,6 +27,7 @@
 =media-plugins/vapoursynth-havsfunc-9999 **
 =media-plugins/vapoursynth-histogram-9999 **
 =media-plugins/vapoursynth-it-9999 **
+=media-plugins/vapoursynth-l-smash-works-9999 **
 =media-plugins/vapoursynth-msmoosh-9999 **
 =media-plugins/vapoursynth-mvtools-9999 **
 =media-plugins/vapoursynth-nnedi3-9999 **

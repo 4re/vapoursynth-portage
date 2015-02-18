@@ -22,7 +22,7 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 
 RDEPEND+="
-    media-libs/vapoursynth
+	media-libs/vapoursynth
 "
 DEPEND="${RDEPEND}
 "

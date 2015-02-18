@@ -21,7 +21,7 @@ fi
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS=""
+KEYWORDS="~amd64 ~x86"
 
 RDEPEND+="
 	media-libs/vapoursynth
@@ -31,8 +31,12 @@ DEPEND="${RDEPEND}
 
 LIBNAME="libtemplinearapproximate.so"
 
+src_prepare() {
+	epatch "${FILESDIR}/${PN}-includes.patch"
+}
+
 src_compile() {
-	$(tc-getCC) -shared -fPIC ${CFLAGS} ${LDFLAGS} -o ${LIBNAME} $(pkg-config --cflags vapoursynth) src/processplane.c src/main.c || die "Build failed"
+	$(tc-getCC) -std=c11 -shared -fPIC ${CFLAGS} ${LDFLAGS} -o ${LIBNAME} $(pkg-config --cflags vapoursynth) src/processplane.c src/main.c || die "Build failed"
 }
 
 src_install() {

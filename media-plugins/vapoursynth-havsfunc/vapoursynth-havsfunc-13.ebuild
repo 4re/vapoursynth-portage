@@ -4,10 +4,9 @@
 
 EAPI=5
 
-PYTHON_DEPEND="3"
 PYTHON_COMPAT=( python3_4 )
 
-inherit python-utils-r1 python-single-r1 git-r3
+inherit python-utils-r1 python-single-r1
 
 DESCRIPTION="HolyWu's ported AviSynth scripts for VapourSynth"
 HOMEPAGE="http://forum.doom9.org/showthread.php?t=166582"

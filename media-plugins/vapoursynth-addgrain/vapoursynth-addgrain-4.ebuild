@@ -27,9 +27,13 @@ RDEPEND+="
 DEPEND="${RDEPEND}
 "
 
-src_configure() {
+src_prepare() {
 	sed -i -e "s:CXX=\"g++\":CXX=\"$(tc-getCXX)\":" configure || die
 	sed -i -e "s:LD=\"g++\":LD=\"$(tc-getCXX)\":" configure || die
+	chmod +x configure
+}
+
+src_configure() {
 	./configure \
 		--install="${ED}/usr/$(get_libdir)/vapoursynth/" \
 		--extra-cxxflags="${CXXFLAGS}" --extra-ldflags="${LDFLAGS}" || die "configure failed"

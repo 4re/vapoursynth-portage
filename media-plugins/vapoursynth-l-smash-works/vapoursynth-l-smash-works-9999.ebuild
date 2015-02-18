@@ -4,35 +4,38 @@
 
 EAPI=5
 
-inherit git-2
+inherit toolchain-funcs multilib
 
-DESCRIPTION=""
+DESCRIPTION="Works based on L-SMASH project"
 HOMEPAGE="https://github.com/VFR-maniac/L-SMASH-Works"
-EGIT_REPO_URI="https://github.com/VFR-maniac/L-SMASH-Works.git"
-# EGIT_COMMIT="fd6528f780db1d632b5f8108ff7e4a716e650882"
-LICENSE=""
-KEYWORDS="~amd64 ~x86"
+
+if [[ ${PV} == *9999* ]]; then
+	inherit git-r3
+	EGIT_REPO_URI="https://github.com/VFR-maniac/L-SMASH-Works.git"
+else
+	inherit vcs-snapshot
+	SRC_URI="https://github.com/VFR-maniac/L-SMASH-Works/archive/v${PV}.tar.gz -> ${PN}-${PV}.tar.gz"
+fi
+
+LICENSE="GPL-2"
+KEYWORDS=""
 IUSE="-debug"
 SLOT="0"
 
-RDEPEND+="media-libs/l-smash
+RDEPEND+="
+	=media-libs/l-smash-${PV}
 "
 DEPEND="${RDEPEND}
 	virtual/pkgconfig
 "
 
+S="${WORKDIR}/${P}/VapourSynth"
+
+src_prepare() {
+	sed -i -e "s:CC=\"gcc\":CC=\"$(tc-getCC)\":" configure || die
+	sed -i -e "s:LD=\"gcc\":LD=\"$(tc-getCC)\":" configure || die
+}
+
 src_configure() {
-	cd VapourSynth
-	./configure --extra-cflags="${CFLAGS} -fPIC" --extra-ldflags="${LDFLAGS}" || die
-}
-
-src_compile() {
-	cd VapourSynth
-	emake
-}
-
-src_install() {
-	exeinto /usr/lib/vapoursynth/
-	mv VapourSynth/libvslsmashsource.so.??? VapourSynth/libvslsmashsource.so || die
-	doexe VapourSynth/libvslsmashsource.so
+    ./configure --prefix="${ROOT}/usr" --extra-cflags="${CFLAGS}" --extra-ldflags="${LDFLAGS}" || die
 }

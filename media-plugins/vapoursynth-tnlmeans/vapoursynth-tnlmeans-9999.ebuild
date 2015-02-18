@@ -4,14 +4,21 @@
 
 EAPI=5
 
-inherit git-2
+inherit toolchain-funcs multilib
 
 DESCRIPTION="VapourSynth port of TNLMeans"
-HOMEPAGE="https://github.com/VFR-maniac/VS-TNLMeans"
-EGIT_REPO_URI="https://github.com/VFR-maniac/VS-TNLMeans.git"
+HOMEPAGE="https://github.com/VFR-maniac/VapourSynth-TNLMeans"
+
+if [[ ${PV} == *9999* ]]; then
+	inherit git-r3
+	EGIT_REPO_URI="https://github.com/VFR-maniac/${PN}.git"
+else
+	inherit vcs-snapshot
+	SRC_URI="https://github.com/VFR-maniac/${PN}/archive/v${PV}.tar.gz -> ${PN}-${PV}.tar.gz"
+fi
 
 LICENSE="GPL-2"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS=""
 IUSE=""
 SLOT="0"
 
@@ -21,13 +28,11 @@ RDEPEND+="
 DEPEND="${RDEPEND}
 "
 
-src_configure() {
-    ./configure --extra-cxxflags="${CXXFLAGS}" --extra-ldflags="${LDFLAGS}" || die
+src_prepare() {
+	sed -i -e "s:CXX=\"g++\":CXX=\"$(tc-getCC)\":" configure || die
+	sed -i -e "s:LD=\"g++\":LD=\"$(tc-getCC)\":" configure || die
 }
 
-src_install() {
-	exeinto /usr/lib/vapoursynth/
-	mv vstnlmeans.so.?? vstnlmeans.so || die
-	doexe vstnlmeans.so || die
-    dodoc README LICENSE
+src_configure() {
+    ./configure --prefix="${ROOT}/usr" --extra-cxxflags="${CXXFLAGS}" --extra-ldflags="${LDFLAGS}" || die
 }

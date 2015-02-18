@@ -8,6 +8,8 @@ AUTOTOOLS_AUTORECONF=1
 
 inherit autotools-utils multilib
 
+AUTOTOOLS_IN_SOURCE_BUILD=1
+
 DESCRIPTION="nnedi3 is an intra-field only deinterlacer"
 HOMEPAGE="https://github.com/dubhater/vapoursynth-nnedi3"
 

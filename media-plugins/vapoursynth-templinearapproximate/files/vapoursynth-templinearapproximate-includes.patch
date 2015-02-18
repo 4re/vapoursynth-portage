@@ -1,0 +1,22 @@
+From d27ea79800328ee03cb4aa12da23fd05dcfecc4a Mon Sep 17 00:00:00 2001
+From: Mystery Keeper <mystkeeper@gmail.com>
+Date: Thu, 6 Nov 2014 22:14:08 +0300
+Subject: [PATCH] Fix Linux compilation.
+
+---
+ src/processplane.h | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/src/processplane.h b/src/processplane.h
+index 3745ca4..3c735f1 100644
+--- a/src/processplane.h
++++ b/src/processplane.h
+@@ -1,6 +1,7 @@
+ #ifndef PROCESSPLANE_H_INCLUDED
+ #define PROCESSPLANE_H_INCLUDED
+ 
++#include <stddef.h>
+ #include <stdint.h>
+ 
+ double gcToLinear(double a_gc);
+ 
