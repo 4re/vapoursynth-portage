@@ -1,0 +1,23 @@
+--- a/Backend.cpp
++++ b/Backend.cpp
+@@ -24,6 +24,7 @@
+ */
+ 
+ #include <stdio.h>
++#include <stdlib.h>
+ #include <string.h>
+ #include <math.h>
+ 
+@@ -32,9 +33,11 @@
+ 
+ #include "Backend.h"
+ 
++/*
+ inline int round(double x){
+   return (int)(floor(x+0.5));
+ }
++*/
+ 
+ inline bool isInt(double x){
+   return abs(x-round(x))<=0.0001;
+ 
