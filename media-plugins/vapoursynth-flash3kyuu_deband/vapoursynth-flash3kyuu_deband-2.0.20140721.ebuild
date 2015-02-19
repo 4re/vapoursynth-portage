@@ -6,22 +6,16 @@ EAPI=5
 PYTHON_COMPAT=( python3_4 )
 PYTHON_REQ_USE="threads(+)"
 
-inherit python-any-r1 multilib waf-utils
+inherit python-any-r1 multilib waf-utils git-r3
 
 DESCRIPTION="A deband library and filter for VapourSynth"
 HOMEPAGE="https://github.com/SAPikachu/flash3kyuu_deband"
-
-if [[ ${PV} == *9999* ]]; then
-	inherit git-r3
-	EGIT_REPO_URI="https://github.com/SAPikachu/flash3kyuu_deband.git"
-else
-	inherit vcs-snapshot
-	SRC_URI="https://github.com/SAPikachu/flash3kyuu_deband/archive/r${PV}.tar.gz -> ${PN}-${PV}.tar.gz"
-fi
+EGIT_REPO_URI="https://github.com/SAPikachu/flash3kyuu_deband.git"
+EGIT_COMMIT="8ea42928347ac824658375fcb1953235a09e9357"
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS=""
+KEYWORDS="~x86 ~amd64"
 IUSE="+doc"
 
 RDEPEND+="

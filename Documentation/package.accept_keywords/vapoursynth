@@ -38,6 +38,7 @@ media-plugins/vapoursynth-sangnommod ~*
 media-plugins/vapoursynth-scenechange ~*
 media-plugins/vapoursynth-scxvid ~*
 media-plugins/vapoursynth-ssiq ~*
+media-plugins/vapoursynth-tc2cfr ~*
 media-plugins/vapoursynth-tcomb ~*
 media-plugins/vapoursynth-tdeintmod ~*
 media-plugins/vapoursynth-templinearapproximate ~*
