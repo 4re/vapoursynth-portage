@@ -29,9 +29,10 @@ DEPEND="${RDEPEND}
 "
 
 src_prepare() {
-	sed -i -e "s:CXX=\"g++\":CXX=\"$(tc-getCC)\":" configure || die
-	sed -i -e "s:LD=\"g++\":LD=\"$(tc-getCC)\":" configure || die
+	sed -i -e "s:CXX=\"g++\":CXX=\"$(tc-getCC)\":" \
+		-e "s:LD=\"g++\":LD=\"$(tc-getCC)\":" configure || die
 }
+
 
 src_configure() {
 	./configure \
