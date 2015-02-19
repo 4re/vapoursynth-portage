@@ -6,7 +6,7 @@ EAPI=5
 
 AUTOTOOLS_AUTORECONF=1
 
-inherit autotools-utils multilib
+inherit autotools-utils multilib eutils
 
 AUTOTOOLS_IN_SOURCE_BUILD=1
 
