@@ -25,13 +25,13 @@ fi
 LICENSE="LGPL-2.1"
 SLOT="0"
 KEYWORDS=""
-IUSE="+doc +plugins +shared +vspipe +x86-asm -debug -static"
+IUSE="+doc +plugins +imagemagick +shared +vspipe +x86-asm -debug -static"
 
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 RDEPEND+="${PYTHON_DEPS}
 	plugins? ( media-libs/libass )
-	plugins? ( media-gfx/imagemagick )
+	imagemagick? ( media-gfx/imagemagick[-hdri,-q8,-q32,-q64] )
 	plugins? ( app-text/tesseract )
 "
 DEPEND="${RDEPEND}
@@ -48,6 +48,7 @@ src_configure() {
 		--enable-python-module \
 		--enable-vsscript \
 		$( use_enable plugins ) \
+		$( use_enable imagemagick imwri ) \
 		$( use_enable shared ) \
 		$( use_enable static ) \
 		$( use_enable debug ) \
