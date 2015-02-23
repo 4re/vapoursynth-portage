@@ -34,8 +34,7 @@ DEPEND="${RDEPEND}
 DOCS=( readme.rst gpl2.txt )
 
 src_prepare() {
-	mv "src/nnedi3 weights.bin" "src/nnedi3_weights.bin"
-	sed -i 's:nnedi3\\ weights.bin:nnedi3_weights.bin:' Makefile.am || die
+	epatch ${FILESDIR}/${P}-fix_install.patch
 	autotools-utils_src_prepare
 }
 
