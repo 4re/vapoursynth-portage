@@ -20,6 +20,7 @@ fi
 LICENSE="LGPL-2.1"
 SLOT="0"
 KEYWORDS=""
+IUSE="debug"
 
 RDEPEND+="
 	media-libs/vapoursynth
@@ -28,9 +29,14 @@ DEPEND="${RDEPEND}
 "
 
 src_configure() {
-	sed -i -e "s:CC=\"gcc\":CXX=\"$(tc-getCC)\":" configure || die
+	if use debug ; then
+		myconf="${myconf} --enable-debug"
+	fi
+	sed -i 's/STRIP="${CROSS}${STRIP}"/STRIP=""/' configure || die
+	sed -i 's/"$CC" "$LD" "$STRIP"/"$CC" "$LD"/' configure || die
+	sed -i -e "s:CC=\"gcc\":CC=\"$(tc-getCC)\":" configure || die
 	sed -i -e "s:LD=\"gcc\":LD=\"$(tc-getCC)\":" configure || die
-	./configure --extra-cflags="${CFLAGS}" --extra-ldflags="${LDFLAGS}"
+	./configure --extra-cflags="${CFLAGS}" --extra-ldflags="${LDFLAGS}" || die
 }
 
 src_install() {
