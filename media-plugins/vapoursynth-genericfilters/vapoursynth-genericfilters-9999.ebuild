@@ -31,16 +31,17 @@ DEPEND="${RDEPEND}
 S="${WORKDIR}/${P}/src"
 
 src_prepare() {
+	sed -i 's/"$CC" "$LD" "$STRIP"/"$CC" "$LD"/' configure || die
+	sed -i 's/STRIP="${CROSS}${STRIP}"/STRIP=""/' configure || die
 	if use debug ; then
 		myconf="${myconf} --enable-debug"
-		sed -i 's/"$CC" "$LD" "$STRIP"/"$CC" "$LD"/' configure || die
 	fi
 	if use noasm ; then
 		myconf="${myconf} --disable-simd"
 	fi
 	sed -i -e "s:CC=\"gcc\":CC=\"$(tc-getCC)\":" configure || die
 	sed -i -e "s:LD=\"gcc\":LD=\"$(tc-getCC)\":" configure || die
-	chmod +x configure
+	chmod +x configure || die
 }
 
 src_configure() {
