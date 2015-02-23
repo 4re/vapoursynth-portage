@@ -38,7 +38,7 @@ src_prepare() {
 	if use noasm ; then
 		myconf="${myconf} --disable-simd"
 	fi
-	sed -i -e "s:CC=\"gcc\":CXX=\"$(tc-getCC)\":" configure || die
+	sed -i -e "s:CC=\"gcc\":CC=\"$(tc-getCC)\":" configure || die
 	sed -i -e "s:LD=\"gcc\":LD=\"$(tc-getCC)\":" configure || die
 	chmod +x configure
 }
