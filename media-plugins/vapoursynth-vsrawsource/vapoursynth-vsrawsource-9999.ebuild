@@ -36,7 +36,7 @@ src_configure() {
 	sed -i 's/"$CC" "$LD" "$STRIP"/"$CC" "$LD"/' configure || die
 	sed -i -e "s:CC=\"gcc\":CC=\"$(tc-getCC)\":" configure || die
 	sed -i -e "s:LD=\"gcc\":LD=\"$(tc-getCC)\":" configure || die
-	./configure --extra-cflags="${CFLAGS}" --extra-ldflags="${LDFLAGS}" || die
+	./configure ${myconf} --extra-cflags="${CFLAGS}" --extra-ldflags="${LDFLAGS}" || die
 }
 
 src_install() {
