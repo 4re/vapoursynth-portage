@@ -6,7 +6,7 @@ EAPI=5
 
 inherit toolchain-funcs multilib
 
-DESCRIPTION="Port of RemoveDirt to VapourSynth"
+DESCRIPTION="Continuity Fixer port for Vapoursynth, can help repair damaged borders of frames"
 HOMEPAGE="https://github.com/MonoS/VS-ContinuityFixer"
 
 if [[ ${PV} == *9999* ]]; then
