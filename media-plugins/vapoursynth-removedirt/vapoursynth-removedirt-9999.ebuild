@@ -29,11 +29,11 @@ DEPEND="${RDEPEND}
 "
 
 src_compile() {
- 	for i in *.cpp; do
- 		echo -e "\e[1m>>> \e[21 \e[00;32m$(tc-getCXX) ${CXXFLAGS} -DVS_TARGET_CPU_X86=1 -fpermissive -shared -fPIC -I. $i -c -o $i.o\e[00m"
- 		$(tc-getCXX) ${CXXFLAGS} -DVS_TARGET_CPU_X86=1 -fpermissive -shared -fPIC -I. $i -c -o $i.o || die
- 	done
- 	echo -e "\e[1m>>> \e[21 \e[00;32m$(tc-getCXX) ${LDFLAGS} -shared -o libremovedirt.so *.o\e[00m"
+	for i in *.cpp; do
+		echo -e "\e[1m>>> \e[21 \e[00;32m$(tc-getCXX) ${CXXFLAGS} -DVS_TARGET_CPU_X86=1 -fpermissive -shared -fPIC -I. $i -c -o $i.o\e[00m"
+		$(tc-getCXX) ${CXXFLAGS} -DVS_TARGET_CPU_X86=1 -fpermissive -shared -fPIC -I. $i -c -o $i.o || die
+	done
+	echo -e "\e[1m>>> \e[21 \e[00;32m$(tc-getCXX) ${LDFLAGS} -shared -o libremovedirt.so *.o\e[00m"
 	$(tc-getCXX) ${LDFLAGS} -shared -o libremovedirt.so *.o || die
 }
 

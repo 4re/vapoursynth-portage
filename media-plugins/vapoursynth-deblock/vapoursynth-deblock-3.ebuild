@@ -42,5 +42,5 @@ src_compile() {
 src_install() {
 	exeinto "/usr/$(get_libdir)/vapoursynth/"
 	doexe ${libname}
-	dodoc README.md LICENSE
+	dodoc README.md
 }

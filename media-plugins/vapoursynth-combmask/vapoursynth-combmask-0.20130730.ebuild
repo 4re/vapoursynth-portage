@@ -11,7 +11,7 @@ HOMEPAGE="https://github.com/chikuzen/CombMask"
 EGIT_REPO_URI="https://github.com/chikuzen/CombMask.git"
 EGIT_COMMIT="2ec6679270d0136ec285d7cfc79c7c02af88caa1"
 
-LICENSE="GPL-2.1"
+LICENSE="LGPL-2.1"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 

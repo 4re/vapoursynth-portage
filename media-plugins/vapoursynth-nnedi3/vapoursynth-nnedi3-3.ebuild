@@ -34,7 +34,7 @@ DEPEND="${RDEPEND}
 DOCS=( readme.rst gpl2.txt )
 
 src_prepare() {
-	epatch ${FILESDIR}/${P}-fix_install.patch
+	epatch "${FILESDIR}/${P}-fix_install.patch"
 	autotools-utils_src_prepare
 }
 

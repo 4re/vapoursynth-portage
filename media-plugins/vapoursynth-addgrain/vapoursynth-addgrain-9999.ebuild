@@ -6,7 +6,7 @@ EAPI=5
 
 inherit toolchain-funcs multilib
 
-DESCRIPTION="AddGrain generates film like grain or other effects (like rain) by adding random noise to a video clip"
+DESCRIPTION="AddGrain generates film like grain or other effects (like rain) by adding random noise to the video"
 HOMEPAGE="https://github.com/HomeOfVapourSynthEvolution/VapourSynth-AddGrain"
 
 if [[ ${PV} == *9999* ]]; then
@@ -42,5 +42,5 @@ src_configure() {
 
 src_install() {
 	emake install
-	dodoc README.md LICENSE
+	dodoc README.md
 }

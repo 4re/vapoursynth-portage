@@ -18,7 +18,7 @@ else
 	SRC_URI="https://github.com/dwbuiten/d2vsource/archive/beta${PV}.tar.gz -> ${PN}-${PV}.tar.gz"
 fi
 
-LICENSE="GPL-2.1"
+LICENSE="LGPL-2.1"
 SLOT="0"
 KEYWORDS=""
 
@@ -38,5 +38,5 @@ src_configure() {
 
 src_install() {
 	emake install
-	dodoc README COPYING
+	dodoc README
 }

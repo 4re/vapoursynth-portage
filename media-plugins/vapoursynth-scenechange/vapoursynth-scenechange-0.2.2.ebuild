@@ -31,7 +31,6 @@ src_compile(){
 	$(tc-getCC) ${CFLAGS} ${EXTRAFLAGS} ${LDFLAGS} -o ${LIBNAMETS} $(pkg-config --cflags vapoursynth) src/temporalsoften.c || die "Build for temporalsoften2 failed"
 }
 
-
 src_install(){
 	insinto "$(python_get_sitedir)"
 	doins temporalsoften2.py

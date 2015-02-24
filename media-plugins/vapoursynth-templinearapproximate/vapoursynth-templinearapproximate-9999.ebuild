@@ -40,5 +40,5 @@ src_install() {
 	doins MCDenoise.py
 	exeinto /usr/$(get_libdir)/vapoursynth/
 	doexe ${LIBNAME}
-	dodoc TempLinearApproximate-readme.txt LICENSE
+	dodoc TempLinearApproximate-readme.txt
 }

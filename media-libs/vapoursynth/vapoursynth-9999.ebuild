@@ -58,7 +58,7 @@ src_configure() {
 
 src_compile() {
 	autotools-utils_src_compile
-	use doc && autotools-utils_src_compile -C ${S}/doc html
+	use doc && autotools-utils_src_compile -C "${S}/doc" html
 }
 
 src_install() {

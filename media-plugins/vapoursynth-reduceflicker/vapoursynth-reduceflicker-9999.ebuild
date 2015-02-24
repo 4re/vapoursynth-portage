@@ -24,7 +24,7 @@ IUSE=""
 SLOT="0"
 
 RDEPEND+="
-    media-libs/vapoursynth
+	media-libs/vapoursynth
 "
 DEPEND="${RDEPEND}
 "
@@ -35,5 +35,5 @@ src_prepare() {
 }
 
 src_configure() {
-    ./configure --prefix="${ROOT}/usr" --extra-cxxflags="${CXXFLAGS}" --extra-ldflags="${LDFLAGS}" || die
+	./configure --prefix="${ROOT}/usr" --extra-cxxflags="${CXXFLAGS}" --extra-ldflags="${LDFLAGS}" || die
 }

@@ -90,7 +90,7 @@ RDEPEND="
 	libguess? ( >=app-i18n/libguess-1.0 )
 	lirc? ( app-misc/lirc )
 	lua? (
-		!luajit? ( >=dev-lang/lua-5.1 )
+		!luajit? ( dev-lang/lua:0 )
 		luajit? ( dev-lang/luajit:2 )
 	)
 	mpg123? ( >=media-sound/mpg123-1.14.0 )

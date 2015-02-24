@@ -37,5 +37,5 @@ src_prepare() {
 }
 
 src_configure() {
-    ./configure --prefix="${ROOT}/usr" --extra-cflags="${CFLAGS}" --extra-ldflags="${LDFLAGS}" || die
+	./configure --prefix="${ROOT}/usr" --extra-cflags="${CFLAGS}" --extra-ldflags="${LDFLAGS}" || die
 }

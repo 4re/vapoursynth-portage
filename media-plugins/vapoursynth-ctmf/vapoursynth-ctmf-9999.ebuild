@@ -38,5 +38,5 @@ src_configure() {
 
 src_install() {
 	emake install
-	dodoc README.md LICENSE
+	dodoc README.md
 }

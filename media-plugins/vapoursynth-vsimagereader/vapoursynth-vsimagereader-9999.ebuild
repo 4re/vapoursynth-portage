@@ -23,7 +23,7 @@ KEYWORDS=""
 
 RDEPEND+="
 	media-libs/vapoursynth
-	>=media-libs/libpng-1.5
+	media-libs/libpng:0
 	media-libs/libjpeg-turbo
 	sys-libs/zlib
 "

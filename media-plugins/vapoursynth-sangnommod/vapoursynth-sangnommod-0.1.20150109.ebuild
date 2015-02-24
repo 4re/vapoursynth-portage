@@ -28,10 +28,10 @@ src_configure() {
 	chmod +x configure
 	./configure \
 		--install="${ED}/usr/$(get_libdir)/vapoursynth/" \
-		--extra-cxxflags="${CXXFLAGS}" --extra-ldflags="${LDFLAGS}" || die "configure failed" 
+		--extra-cxxflags="${CXXFLAGS}" --extra-ldflags="${LDFLAGS}" || die "configure failed"
 }
 
 src_install() {
 	emake install
-	dodoc README.md LICENSE
+	dodoc README.md
 }

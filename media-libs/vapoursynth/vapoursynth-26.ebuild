@@ -23,7 +23,7 @@ fi
 
 LICENSE="LGPL-2.1"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="~amd64 ~arm ~x86"
 IUSE="+doc +plugins +imagemagick +shared +vspipe +x86-asm -debug -static"
 
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
@@ -34,10 +34,11 @@ RDEPEND+="${PYTHON_DEPS}
 	plugins? ( app-text/tesseract )
 "
 DEPEND="${RDEPEND}
+	x86? ( dev-lang/yasm )
+	amd64? ( dev-lang/yasm )
 	doc? ( dev-python/sphinx[${PYTHON_USEDEP}] )
 	virtual/ffmpeg
 	virtual/pkgconfig
-	dev-lang/yasm
 	dev-python/cython
 "
 
@@ -57,7 +58,7 @@ src_configure() {
 
 src_compile() {
 	autotools-utils_src_compile
-	use doc && autotools-utils_src_compile -C ${S}/doc html
+	use doc && autotools-utils_src_compile -C "${S}/doc" html
 }
 
 src_install() {

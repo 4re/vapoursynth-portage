@@ -33,7 +33,6 @@ src_prepare() {
 		-e "s:LD=\"g++\":LD=\"$(tc-getCC)\":" configure || die
 }
 
-
 src_configure() {
 	./configure \
 		--install="${ED}/usr/$(get_libdir)/vapoursynth/" \
@@ -42,5 +41,5 @@ src_configure() {
 
 src_install() {
 	emake install
-	dodoc README.md LICENSE
+	dodoc README.md
 }

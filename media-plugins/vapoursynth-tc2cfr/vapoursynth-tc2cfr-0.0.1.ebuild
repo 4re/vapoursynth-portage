@@ -6,7 +6,7 @@ EAPI=5
 
 inherit toolchain-funcs multilib eutils
 
-DESCRIPTION="Plugin that can read a timecode file and convert a given video clip in to one with constant framerate"
+DESCRIPTION="Plugin that can read a timecode file and convert a given video clip into one with constant framerate"
 HOMEPAGE="https://github.com/gnaggnoyil/tc2cfr"
 
 if [[ ${PV} == *9999* ]]; then
@@ -53,6 +53,6 @@ src_install() {
 	exeinto /usr/$(get_libdir)/vapoursynth/
 	doexe ${LIBNAME} || die
 	if use doc; then
-		dodoc README.md LICENSE.BSD2c || die
+		dodoc README.md.BSD2c || die
 	fi
 }
