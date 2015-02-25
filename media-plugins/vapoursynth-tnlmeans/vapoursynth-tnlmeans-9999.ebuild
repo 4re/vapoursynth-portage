@@ -17,7 +17,7 @@ else
 	SRC_URI="https://github.com/VFR-maniac/${PN}/archive/v${PV}.tar.gz -> ${PN}-${PV}.tar.gz"
 fi
 
-LICENSE="GPL-2"
+LICENSE="LGPL-2.1"
 KEYWORDS=""
 IUSE=""
 SLOT="0"
