@@ -34,9 +34,10 @@ src_prepare() {
 }
 
 src_configure() {
+	# We need -mno-avx here to fix compilation
 	./configure \
 		--install="${ED}/usr/$(get_libdir)/vapoursynth/" \
-		--extra-cxxflags="${CXXFLAGS}" --extra-ldflags="${LDFLAGS}" || die "configure failed"
+		--extra-cxxflags="${CXXFLAGS} -mno-avx" --extra-ldflags="${LDFLAGS}" || die "configure failed"
 }
 
 src_install() {
