@@ -53,6 +53,6 @@ src_install() {
 	exeinto /usr/$(get_libdir)/vapoursynth/
 	doexe ${LIBNAME} || die
 	if use doc; then
-		dodoc README.md.BSD2c || die
+		dodoc README.md || die
 	fi
 }
