@@ -25,8 +25,8 @@ SLOT="0"
 [[ ${PV} == *9999* ]] || \
 KEYWORDS="~alpha ~amd64 ~arm ~ppc ~ppc64 ~sparc ~x86 ~amd64-linux"
 IUSE="+alsa bluray bs2b cdio +cli -doc-pdf dvb +dvd dvdnav egl +enca encode
-+iconv jack -joystick jpeg ladspa lcms +libass libav libcaca libguess libmpv
-lirc lua luajit +mpg123 -openal +opengl oss pulseaudio pvr samba -sdl selinux
++iconv jack jpeg ladspa lcms +libass libav libcaca libguess libmpv
+lua luajit -openal +opengl oss pulseaudio pvr samba -sdl selinux
 v4l vaapi +vapoursynth vdpau vf-dlopen wayland +X xinerama +xscreensaver +xv"
 
 REQUIRED_USE="
@@ -89,12 +89,10 @@ RDEPEND="
 	)
 	libcaca? ( >=media-libs/libcaca-0.99_beta18 )
 	libguess? ( >=app-i18n/libguess-1.0 )
-	lirc? ( app-misc/lirc )
 	lua? (
 		!luajit? ( dev-lang/lua:0 )
 		luajit? ( dev-lang/luajit:2 )
 	)
-	mpg123? ( >=media-sound/mpg123-1.14.0 )
 	openal? ( >=media-libs/openal-1.13 )
 	pulseaudio? ( media-sound/pulseaudio )
 	samba? ( net-fs/samba )
@@ -174,14 +172,11 @@ src_configure() {
 		$(use_enable libass)
 		$(use_enable libass libass-osd)
 		$(use_enable encode encoding)
-		$(use_enable joystick)
-		$(use_enable lirc)
 		$(use_enable bluray libbluray)
 		$(use_enable dvd dvdread)
 		$(use_enable dvdnav)
 		$(use_enable cdio cdda)
 		$(use_enable enca)
-		$(use_enable mpg123)
 		$(use_enable ladspa)
 		$(use_enable bs2b libbs2b)
 		$(use_enable lcms lcms2)
