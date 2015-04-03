@@ -15,7 +15,11 @@ SRC_URI="http://ftp.waf.io/pub/release/waf-${WAF_V}"
 DOCS=( README.md etc/example.conf etc/input.conf )
 
 if [[ ${PV} == *9999* ]]; then
-	EGIT_REPO_URI="https://github.com/mpv-player/mpv.git"
+	if use mpvhq; then
+		EGIT_REPO_URI="https://github.com/haasn/mpvhq.git"
+	else
+		EGIT_REPO_URI="https://github.com/mpv-player/mpv.git"
+	fi
 	inherit git-r3
 	KEYWORDS=""
 else
@@ -29,7 +33,7 @@ LICENSE="GPL-2+ BSD ISC"
 SLOT="0"
 IUSE="+alsa bluray bs2b cdio +cli doc-pdf dvb +dvd dvdnav egl +enca encode
 +iconv jack jpeg ladspa lcms +libass libav libcaca libguess libmpv lua luajit
-openal +opengl oss pulseaudio pvr rubberband samba sdl selinux v4l vaapi
+mpvhq openal +opengl oss pulseaudio pvr rubberband samba sdl selinux v4l vaapi
 +vapoursynth vdpau vf-dlopen wayland +X xinerama +xscreensaver xv"
 
 REQUIRED_USE="

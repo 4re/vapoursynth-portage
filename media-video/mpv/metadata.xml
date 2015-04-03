@@ -21,6 +21,7 @@
 	<flag name="lua">Enable Lua scripting, OSC (On Screen Controller) GUI and <pkg>net-misc/youtube-dl</pkg> hook-script</flag>
 	<flag name="luajit">Use <pkg>dev-lang/luajit</pkg> instead of <pkg>dev-lang/lua</pkg></flag>
 	<flag name="mpg123">Enable support for mp3 decoding via <pkg>media-sound/mpg123</pkg> instead of relying on ffmpeg support</flag>
+	<flag name="mpvhq">Use https://github.com/haasn/mpvhq git repository instead of the official one, use at your own risk</flag>
 	<flag name="postproc">Enable image post-processing via libpostproc</flag>
 	<flag name="pvr">Enable Video4Linux2 MPEG PVR</flag>
 	<flag name="sdl">Enable <pkg>media-libs/libsdl2</pkg> based video and audio outputs</flag>
