@@ -31,11 +31,24 @@ DEPEND="${RDEPEND}
 S="${WORKDIR}/src"
 LIBNAME="libfmtconv.so"
 
+src_prepare() {
+	rm -fr VapourSynth.h || die
+	SOURCEFILES=$(echo AvstpWrapper.cpp; echo main.cpp; ls fmtc/*.cpp; ls fmtcl/*.cpp; ls fstb/*.cpp; ls vsutl/*.cpp)
+}
+
 src_compile() {
-	$(tc-getCXX) \
-		${CFLAGS} ${LDFLAGS} \
-		-shared -msse2 -fPIC \
-		-o ${LIBNAME} AvstpWrapper.cpp main.cpp fmtc/*.cpp fstb/*.cpp vsutl/*.cpp -I. || die "compile failed"
+	for i in ${SOURCEFILES}; do
+		if [[ ${i,,} == *"avx.cpp" ]] || [[ ${i,,} == *"avx2.cpp" ]]; then
+			EXTRAFLAGS="-mavx2"
+		else
+			EXTRAFLAGS="-msse2"
+		fi
+		echo -e "\e[1m>>> \e[21 \e[00;32m$(tc-getCXX) ${CFLAGS} ${EXTRAFLAGS} -fPIC -std=c++11 -I. $(pkg-config --cflags vapoursynth) ${i} -c -o ${i%.*}.o\e[00m"
+		$(tc-getCXX) ${CFLAGS} ${EXTRAFLAGS} -fPIC -std=c++11 -I. $(pkg-config --cflags vapoursynth) ${i} -c -o ${i%.*}.o || die "compile failed"
+	done
+
+	echo -e "\e[1m>>> \e[21 \e[00;32m$(tc-getCXX) ${CFLAGS} ${LDFLAGS} -shared -fPIC -o ${LIBNAME} *.o */*.o\e[00m"
+	$(tc-getCXX) ${CFLAGS} ${LDFLAGS} -shared -fPIC -o ${LIBNAME} *.o */*.o || die "linking failed"
 }
 
 src_install() {
