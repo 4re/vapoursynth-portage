@@ -21,7 +21,7 @@ fi
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS=""
+KEYWORDS="~amd64 ~x86"
 IUSE="+doc"
 
 RDEPEND+="
@@ -30,7 +30,7 @@ RDEPEND+="
 DEPEND="${RDEPEND}
 "
 
-S="${WORKDIR}/${P}/build/unix"
+S="${WORKDIR}/build/unix"
 
 DOCS=( ../../doc/colorspace-subsampling.png ../../doc/fmtconv.html ../../doc/vapourdoc.css )
 
