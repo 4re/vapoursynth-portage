@@ -25,7 +25,7 @@ fi
 LICENSE="LGPL-2.1"
 SLOT="0"
 KEYWORDS=""
-IUSE="+doc +plugins +imagemagick +shared +vspipe +x86-asm -debug -static"
+IUSE="+doc +plugins +imagemagick +shared +vspipe +x86-asm -debug -guard -static"
 
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
@@ -52,6 +52,7 @@ src_configure() {
 		$( use_enable shared ) \
 		$( use_enable static ) \
 		$( use_enable debug ) \
+		$( use_enable guard guard-pattern ) \
 		$( use_enable x86-asm ) \
 		$( use_enable vspipe )
 }
