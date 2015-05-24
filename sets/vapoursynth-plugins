@@ -2,6 +2,7 @@ media-plugins/vapoursynth-addgrain
 media-plugins/vapoursynth-adjust
 media-plugins/vapoursynth-bifrost
 media-plugins/vapoursynth-bilateral
+media-plugins/vapoursynth-bm3d
 media-plugins/vapoursynth-combmask
 media-plugins/vapoursynth-continuityfixer
 media-plugins/vapoursynth-ctmf
