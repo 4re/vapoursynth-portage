@@ -6,8 +6,8 @@ EAPI=5
 
 inherit toolchain-funcs multilib
 
-DESCRIPTION="Bilateral filter for VapourSynth"
-HOMEPAGE="https://github.com/HomeOfVapourSynthEvolution/VapourSynth-Bilateral"
+DESCRIPTION="BM3D denoising filter for VapourSynth"
+HOMEPAGE="https://github.com/HomeOfVapourSynthEvolution/VapourSynth-BM3D"
 
 if [[ ${PV} == *9999* ]]; then
 	inherit git-r3
