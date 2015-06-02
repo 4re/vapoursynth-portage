@@ -34,6 +34,12 @@ S="${WORKDIR}/${P}/build/unix"
 
 DOCS=( ../../doc/colorspace-subsampling.png ../../doc/fmtconv.html ../../doc/vapourdoc.css )
 
+src_prepare() {
+	epatch "${FILESDIR}/${P}-fixmake.patch"
+	autotools-utils_src_prepare
+}
+
+
 src_configure() {
 	autotools-utils_src_configure --libdir="/usr/$(get_libdir)/vapoursynth/"
 }
