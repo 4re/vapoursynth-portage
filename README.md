@@ -19,11 +19,15 @@ Finally update layman's database and add vapoursynth's overlay to your system.
 
 Usage
 -----
-There is a convenient set that will pull all vapoursynth plugins at once, also, you may like to use it to update everything, as most of them are 9999 git revisions only:
+There is a convenient set that will pull all vapoursynth plugins:
 ```
 emerge @vapoursynth-plugins
 ```
-
+In case you are using the live versions, you may want to utilize ```smart-live-rebuild``` to update the ebuilds as needed:
+```
+# emerge app-portage/smart-live-rebuild
+# smart-live-rebuild
+```
 This overlay also includes an editor and a modified mpv ebuild with vapoursynth support enabled:
 ```
 emerge vapoursynth-editor mpv
