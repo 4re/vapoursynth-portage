@@ -30,5 +30,5 @@ In case you are using the live versions, you may want to utilize ```smart-live-r
 ```
 This overlay also includes an editor and a modified mpv ebuild with vapoursynth support enabled:
 ```
-# emerge vapoursynth-editor mpv
+# emerge app-editors/vapoursynth-editor media-video/mpv
 ```
