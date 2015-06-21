@@ -21,7 +21,7 @@ Usage
 -----
 There is a convenient set that will pull all vapoursynth plugins:
 ```
-emerge @vapoursynth-plugins
+# emerge @vapoursynth-plugins
 ```
 In case you are using the live versions, you may want to utilize ```smart-live-rebuild``` to update the ebuilds as needed:
 ```
@@ -30,5 +30,5 @@ In case you are using the live versions, you may want to utilize ```smart-live-r
 ```
 This overlay also includes an editor and a modified mpv ebuild with vapoursynth support enabled:
 ```
-emerge vapoursynth-editor mpv
+# emerge vapoursynth-editor mpv
 ```
