@@ -1,4 +1,5 @@
 app-editors/vapoursynth-editor ~*
+app-editors/wobbly ~*
 media-libs/l-smash ~*
 media-libs/vapoursynth ~*
 media-libs/zimg ~*
