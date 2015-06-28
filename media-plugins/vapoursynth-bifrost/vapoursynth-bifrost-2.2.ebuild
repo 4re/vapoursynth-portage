@@ -19,7 +19,7 @@ else
 	SRC_URI="https://github.com/dubhater/${PN}/archive/v${PV}.tar.gz -> ${PN}-${PV}.tar.gz"
 fi
 
-LICENSE=""
+LICENSE="WTFPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 
