@@ -28,8 +28,8 @@ DEPEND="${RDEPEND}
 "
 
 src_configure() {
-	sed -i -e "s:CXX=\"clang++\":CXX=\"$(tc-getCXX)\":" configure || die
-	sed -i -e "s:LD=\"clang++\":LD=\"$(tc-getCXX)\":" configure || die
+	sed -i -e "s:CXX=\"g++\":CXX=\"$(tc-getCXX)\":" configure || die
+	sed -i -e "s:LD=\"g++\":LD=\"$(tc-getCXX)\":" configure || die
 	chmod +x configure
 	./configure \
 		--install="${ED}/usr/$(get_libdir)/vapoursynth/" \
