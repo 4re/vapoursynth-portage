@@ -16,7 +16,7 @@ if [[ ${PV} == *9999* ]]; then
 	EGIT_REPO_URI="https://github.com/EleonoreMizo/fmtconv.git"
 else
 	inherit vcs-snapshot
-	SRC_URI="http://ldesoras.free.fr/src/vs/fmtconv-r${PV}.zip -> ${PN}-${PV}.zip"
+	SRC_URI="https://github.com/EleonoreMizo/fmtconv/archive/r${PV}.tar.gz -> ${PN}-${PV}.tar.gz"
 fi
 
 LICENSE="GPL-2"
