@@ -26,6 +26,7 @@ media-plugins/vapoursynth-genericfilters
 media-plugins/vapoursynth-havsfunc
 media-plugins/vapoursynth-histogram
 media-plugins/vapoursynth-it
+media-plugins/vapoursynth-knlmeanscl
 media-plugins/vapoursynth-l-smash-works
 media-plugins/vapoursynth-msmoosh
 media-plugins/vapoursynth-mvtools
