@@ -19,7 +19,7 @@ fi
 
 LICENSE="LGPL-3"
 SLOT="0"
-KEYWORDS=""
+KEYWORDS="~x86 ~amd64"
 CARDS=( nvidia )
 IUSE="${CARDS[@]/#/video_cards_}"
 
