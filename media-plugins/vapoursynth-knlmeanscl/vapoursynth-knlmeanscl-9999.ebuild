@@ -20,11 +20,13 @@ fi
 LICENSE="LGPL-3"
 SLOT="0"
 KEYWORDS="amd64"
+CARDS=( nvidia )
+IUSE="${CARDS[@]/#/video_cards_}"
 
 RDEPEND+="
 	media-libs/vapoursynth
 	virtual/opencl
-	x11-drivers/nvidia-drivers[uvm]
+	video_cards_nvidia? ( x11-drivers/nvidia-drivers[uvm] )
 "
 DEPEND="${RDEPEND}
 "
