@@ -4,7 +4,7 @@
 
 EAPI=5
 
-inherit toolchain-funcs multilib
+inherit toolchain-funcs multilib eutils
 
 DESCRIPTION="BM3D denoising filter for VapourSynth"
 HOMEPAGE="https://github.com/HomeOfVapourSynthEvolution/VapourSynth-BM3D"
@@ -19,7 +19,7 @@ fi
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="-*"
+KEYWORDS="~x86 ~amd64"
 IUSE="-debug"
 
 RDEPEND+="
@@ -27,6 +27,10 @@ RDEPEND+="
 "
 DEPEND="${RDEPEND}
 "
+
+src_prepare() {
+	epatch "${FILESDIR}/${P}-20150626.patch"
+}
 
 src_configure() {
 	sed -i -e "s:CXX=\"g++\":CXX=\"$(tc-getCXX)\":" configure || die

@@ -1,0 +1,175 @@
+diff --git a/README.md b/README.md
+index 2febb34..f8e9038 100644
+--- a/README.md
++++ b/README.md
+@@ -32,6 +32,8 @@ sub sampling: when chroma is processed, no sub-sampling is supported, only YUV44
+ 
+ - For V-BM3D, the filtered output is always OPP for RGB input, and you should manually call bm3d.OPP2RGB afterwards.
+ 
++- For V-BM3D, if specific plane is not processed (sigma is 0), then the result of that plane will be garbage, thus you should manually use std.ShufflePlanes to merge them. For the same reason, you should always convert RGB input to OPP first if you want to keep those unprocessed planes.
++
+ ## Usage
+ 
+ ### Helper Functions
+@@ -206,15 +208,15 @@ For the backward frames and forward frames, it applies predictive-search block-m
+ 
+ The obtained block-wise estimates are also aggregated into multiple frames.
+ 
+-However, since the estimates are returned into multiple frames, I have to divide it into 2 functions: bm3d.VBasic or bm3d.VFinal as the first stage and bm3d.VAggregate as the second stage.
++However, since the estimates are returned into multiple frames, I have to divide it into 2 functions: bm3d.VBasic or bm3d.VFinal as the first stage and bm3d.VAggregate as the second stage. The output clip of bm3d.VBasic and bm3d.VFinal is an intermediate processed buffer. It is of 32 bit float format, and (radius * 2 + 1) * 2 times the height of input.
+ 
+ *Always call bm3d.VAggregate after bm3d.VBasic or bm3d.VFinal.*
+ 
+-For RGB color family input, the output clip is of opponent color space in YUV color family. You should manually call bm3d.OPP2RGB after bm3d.VAggregate if you want to convert it back to RGB color space.
++Due to the float format and multiple times height of the output clip, as well as the multiple frames requested by each function, those frame cache leads to very high memory consumption of this V-BM3D implementation.
+ 
+-The output clip is an intermediate processed buffer. It is of 32 bit float format, and (radius * 2 + 1) * 2 times the height of input.
++*For RGB color family input, the output clip is of opponent color space in YUV color family. You should manually call bm3d.OPP2RGB after bm3d.VAggregate if you want to convert it back to RGB color space.*
+ 
+-Due to the float format and multiple times height of the output clip, as well as the multiple frames requested by each function, those frame cache leads to very high memory consumption of this V-BM3D implementation.
++*If specific plane is not processed (sigma is 0), then the result of that plane will be garbage, thus you should manually use std.ShufflePlanes to merge them. For the same reason, you should always convert RGB input to OPP first if you want to keep those unprocessed planes. Becanse the implementaion of V-BM3D is divided into 2 functions, it's not very convenient and efficient to pass through the unprocessed planes.*
+ 
+ #### basic estimate of V-BM3D denoising filter
+ 
+@@ -364,7 +366,39 @@ flt = core.bm3d.VFinal(src, ref, radius=1, matrix=100).bm3d.VAggregate(radius=1)
+ flt = core.bm3d.OPP2RGB(flt)
+ ```
+ 
+-- use bm3d.Basic instead of bm3d.VBasic, faster, less memory consumption
++- if chroma is not processed, merge them into the result with std.ShufflePlanes
++
++```python
++src = core.bm3d.RGB2OPP(src)
++ref = core.bm3d.VBasic(src, sigma=[10,0,0], radius=1, matrix=100).bm3d.VAggregate(radius=1)
++flt = core.bm3d.VFinal(src, ref, sigma=[10,0,0], radius=1, matrix=100).bm3d.VAggregate(radius=1)
++flt = core.std.ShufflePlanes([flt,src,src], [0,1,2], vs.YUV)
++flt = core.bm3d.OPP2RGB(flt)
++```
++
++- it's better to filter on GRAY color famliy if chroma is not processed, much less memory consumption
++
++```python
++src = core.bm3d.RGB2OPP(src)
++srcGray = core.std.ShufflePlanes(src, 0, vs.GRAY)
++ref = core.bm3d.VBasic(srcGray, sigma=[10,0,0], radius=1, matrix=100).bm3d.VAggregate(radius=1)
++flt = core.bm3d.VFinal(srcGray, ref, sigma=[10,0,0], radius=1, matrix=100).bm3d.VAggregate(radius=1)
++flt = core.std.ShufflePlanes([flt,src,src], [0,1,2], vs.YUV)
++flt = core.bm3d.OPP2RGB(flt)
++```
++
++- if luma is not processed, since block-matching is based on luma of clip "ref", also merge it into basic estimate with std.ShufflePlanes
++
++```python
++src = core.bm3d.RGB2OPP(src)
++ref = core.bm3d.VBasic(src, sigma=[0,10,10], radius=1, matrix=100).bm3d.VAggregate(radius=1)
++ref = core.std.ShufflePlanes([src,ref,ref], [0,1,2], vs.YUV)
++flt = core.bm3d.VFinal(src, ref, sigma=[0,10,10], radius=1, matrix=100).bm3d.VAggregate(radius=1)
++flt = core.std.ShufflePlanes([src,flt,flt], [0,1,2], vs.YUV)
++flt = core.bm3d.OPP2RGB(flt)
++```
++
++- alternatively, use bm3d.Basic instead of bm3d.VBasic, faster, less memory consumption
+ 
+ ```python
+ src = core.bm3d.RGB2OPP(src)
+diff --git a/configure b/configure
+index be11b4c..4fdb590 100755
+--- a/configure
++++ b/configure
+@@ -89,7 +89,7 @@ LIBNAME=""
+ 
+ CXXFLAGS="-std=c++11 -Wall -Wno-unused-local-typedefs -I. -I$SRCDIR/include"
+ LDFLAGS=""
+-SOFLAGS="-shared -Wl,-Bsymbolic"
++SOFLAGS="-shared"
+ DEPLIBS="fftw3f"
+ 
+ TARGET="-msse2"
+@@ -134,16 +134,13 @@ for opt; do
+         --target=*)
+             TARGET="-m$optarg"
+             ;;
+-        --disable-simd)
+-            SIMD=""
+-            ;;
+         *)
+             error_exit "unknown option $opt"
+             ;;
+     esac
+ done
+ 
+-CXXFLAGS="$CXXFLAGS $XCXXFLAGS $TARGET $SIMD"
++CXXFLAGS="$CXXFLAGS $XCXXFLAGS $TARGET"
+ LDFLAGS="$LDFLAGS $XLDFLAGS"
+ 
+ CXX="${CROSS}${CXX}"
+@@ -165,12 +162,10 @@ case "$TARGET_OS" in
+         ;;
+     *darwin*)
+         LIBNAME="libbm3d.dylib"
+-        DEPLIBS="$DEPLIBS vapoursynth"
+         SOFLAGS="$SOFLAGS -dynamiclib -Wl,-undefined,suppress -Wl,-read_only_relocs,suppress -Wl,-flat_namespace"
+         ;;
+     *linux*|*bsd*)
+         LIBNAME="libbm3d.so"
+-        DEPLIBS="$DEPLIBS vapoursynth"
+         CXXFLAGS="$CXXFLAGS -fPIC"
+         SOFLAGS="$SOFLAGS -Wl,-soname,$LIBNAME -fPIC"
+         ;;
+diff --git a/include/Block.h b/include/Block.h
+index c081858..43f9b0e 100644
+--- a/include/Block.h
++++ b/include/Block.h
+@@ -59,7 +59,7 @@ private:
+     PCType Height_ = 0;
+     PCType Width_ = 0;
+     PCType PixelCount_ = 0;
+-    PosType pos_ = { 0, 0 };
++    PosType pos_;
+     pointer Data_ = nullptr;
+ 
+ public:
+@@ -114,7 +114,7 @@ public:
+     // Constructor from plane pointer and PosType
+     template < typename _St1 >
+     Block(const _St1 *src, PCType src_stride, PCType _Height, PCType _Width, const PosType &pos)
+-        : Block(_Height, _Width, pos, false)
++        : Block(_Height, _Width, pos, false, 0)
+     {
+         From(src, src_stride);
+     }
+@@ -126,7 +126,7 @@ public:
+ 
+     // Copy constructor
+     Block(const _Myt &src)
+-        : Block(src.Height_, src.Width_, src.pos_, false)
++        : Block(src.Height_, src.Width_, src.pos_, false, 0)
+     {
+         memcpy(Data_, src.Data_, sizeof(value_type) * size());
+     }
+diff --git a/include/Helper.h b/include/Helper.h
+index 6665f3d..84236c0 100644
+--- a/include/Helper.h
++++ b/include/Helper.h
+@@ -349,7 +349,7 @@ _Ty _RoundDiv(_Ty dividend, _Ty divisor, const std::true_type &)
+ template < typename _Ty >
+ _Ty RoundDiv(_Ty dividend, _Ty divisor)
+ {
+-    return _RoundDiv(dividend, divisor, _IsFloat<_Ty>);
++    return _RoundDiv(dividend, divisor, _IsFloat<_Ty>());
+ }
+ 
+ 
+diff --git a/include/VBM3D_Base.h b/include/VBM3D_Base.h
+index 23cbf87..71529e6 100644
+--- a/include/VBM3D_Base.h
++++ b/include/VBM3D_Base.h
+@@ -270,7 +270,7 @@ public:
+     }
+ 
+ protected:
+-    virtual void NewFormat()
++    virtual void NewFormat() override
+     {
+         dfi = NewFormat(d, fi, core, vsapi);
+     }
