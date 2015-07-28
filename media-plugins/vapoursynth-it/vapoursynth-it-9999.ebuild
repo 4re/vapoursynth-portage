@@ -4,7 +4,7 @@
 
 EAPI=5
 
-inherit git-2 eutils
+inherit eutils
 
 DESCRIPTION="Inverse Telecine plugin for VapourSynth"
 HOMEPAGE="https://github.com/HomeOfVapourSynthEvolution/VapourSynth-IT"
