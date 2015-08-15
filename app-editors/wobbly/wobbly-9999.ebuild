@@ -20,7 +20,7 @@ else
 	SRC_URI="https://github.com/dubhater/${PN}/archive/R${PV}.tar.gz -> ${PN}-${PV}.tar.gz"
 fi
 
-LICENSE=""
+LICENSE="ISC"
 SLOT="0"
 KEYWORDS=""
 IUSE=""
