@@ -30,7 +30,7 @@ DEPEND="${RDEPEND}
 LIBNAME="libwwxd.so"
 
 src_compile() {
-	$(tc-getCC) -shared -fPIC ${CFLAGS} ${LDFLAGS} -o ${LIBNAME} $(pkg-config --cflags vapoursynth) src/wwxd.c src/detection.c || die "Build failed"
+	$(tc-getCC) -std=c99 -shared -fPIC ${CFLAGS} ${LDFLAGS} -o ${LIBNAME} $(pkg-config --cflags vapoursynth) src/wwxd.c src/detection.c || die "Build failed"
 }
 
 src_install() {
