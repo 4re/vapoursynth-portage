@@ -19,21 +19,9 @@ KEYWORDS="~amd64 ~x86"
 
 RDEPEND+="
 	media-libs/vapoursynth
-	media-plugins/vapoursynth-addgrain
-	media-plugins/vapoursynth-bilateral
-	media-plugins/vapoursynth-ctmf
-	media-plugins/vapoursynth-dctfilter
-	media-plugins/vapoursynth-deblock
-	media-plugins/vapoursynth-dfttest
-	media-plugins/vapoursynth-eedi2
-	media-plugins/vapoursynth-fft3dfilter
+	media-plugins/vapoursynth-bm3d
 	media-plugins/vapoursynth-fmtconv
-	media-plugins/vapoursynth-genericfilters
-	media-plugins/vapoursynth-mvtools
-	media-plugins/vapoursynth-nnedi3
-	media-plugins/vapoursynth-sangnommod
-	media-plugins/vapoursynth-scenechange
-	media-plugins/vapoursynth-temporalsoften
+	media-plugins/vapoursynth-zimg
 "
 DEPEND="${RDEPEND}
 "
