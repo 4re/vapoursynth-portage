@@ -29,7 +29,7 @@ DEPEND="${RDEPEND}
 
 src_configure() {
 	# No build system upstream
-	selfcflags="-std=c99 -Wall -fPIC"
+	selfcflags="-Wall -fPIC"
 	selfldflags="-shared"
 	libname="libdctfilter.so"
 }
