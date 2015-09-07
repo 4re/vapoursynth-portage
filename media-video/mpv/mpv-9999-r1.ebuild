@@ -7,7 +7,7 @@ PYTHON_COMPAT=( python{2_7,3_3,3_4} )
 PYTHON_REQ_USE='threads(+)'
 inherit eutils python-any-r1 waf-utils pax-utils fdo-mime gnome2-utils
 
-WAF_V="1.8.4"
+WAF_V="1.8.12"
 
 DESCRIPTION="Media player based on MPlayer and mplayer2"
 HOMEPAGE="http://mpv.io/"
@@ -31,8 +31,8 @@ fi
 # See Copyright in source tarball and bug #506946. Waf is BSD, libmpv is ISC.
 LICENSE="GPL-2+ BSD ISC"
 SLOT="0"
-IUSE="+alsa bluray bs2b cdio +cli doc-pdf dvb +dvd dvdnav egl +enca encode
-+iconv jack jpeg ladspa lcms +libass libav libcaca libguess libmpv lua luajit
+IUSE="+alsa bluray cdio +cli doc-pdf dvb +dvd dvdnav egl +enca encode
++iconv jack jpeg lcms +libass libav libcaca libguess libmpv lua luajit
 mpvhq openal +opengl oss pulseaudio pvr rubberband samba sdl selinux v4l vaapi
 +vapoursynth vdpau vf-dlopen wayland +X xinerama +xscreensaver xv"
 
@@ -75,7 +75,6 @@ RDEPEND="
 	)
 	alsa? ( >=media-libs/alsa-lib-1.0.18 )
 	bluray? ( >=media-libs/libbluray-0.3.0 )
-	bs2b? ( media-libs/libbs2b )
 	cdio? (
 		dev-libs/libcdio
 		dev-libs/libcdio-paranoia
@@ -89,7 +88,6 @@ RDEPEND="
 	iconv? ( virtual/libiconv )
 	jack? ( media-sound/jack-audio-connection-kit )
 	jpeg? ( virtual/jpeg:0 )
-	ladspa? ( media-libs/ladspa-sdk )
 	libass? (
 		>=media-libs/libass-0.12.1:=[enca?,fontconfig]
 		virtual/ttf-fonts
@@ -182,9 +180,7 @@ src_configure() {
 		$(use_enable dvdnav)
 		$(use_enable cdio cdda)
 		$(use_enable enca)
-		$(use_enable ladspa)
 		$(use_enable rubberband)
-		$(use_enable bs2b libbs2b)
 		$(use_enable lcms lcms2)
 		$(use_enable vapoursynth)
 		--disable-vapoursynth-lazy
