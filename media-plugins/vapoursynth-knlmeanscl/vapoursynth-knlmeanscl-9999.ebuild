@@ -4,7 +4,7 @@
 
 EAPI=5
 
-inherit toolchain-funcs multilib
+inherit toolchain-funcs multilib eutils
 
 DESCRIPTION="An optimized pixelwise OpenCL implementation of the Non-local means denoising algorithm"
 HOMEPAGE="https://github.com/Khanattila/KNLMeansCL"
@@ -24,6 +24,7 @@ CARDS=( nvidia )
 IUSE="${CARDS[@]/#/video_cards_}"
 
 RDEPEND+="
+	sys-devel/gcc[openmp]
 	media-libs/vapoursynth
 	virtual/opencl
 	video_cards_nvidia? ( x11-drivers/nvidia-drivers[uvm] )
@@ -31,8 +32,16 @@ RDEPEND+="
 DEPEND="${RDEPEND}
 "
 
+pkg_setup()
+{
+	if ! tc-has-openmp ; then
+		eerror "KNLMeansCL needs a compiler with openmp support to correctly work." && die
+	fi
+}
+
 src_prepare() {
 	chmod +x configure
+	epatch "${FILESDIR}/${PN}-openmp.patch"
 }
 
 src_configure() {
@@ -47,13 +56,5 @@ src_configure() {
 src_install() {
 	emake install
 	dodoc README.md
-}
-
-pkg_postinst() {
-	elog "KNLMeansCL can't deal with locales who don't use period as their decimal sign."
-	elog "If that's your case you need to launch the app executing vapoursynth"
-	elog "with the C locale."
-	elog ""
-	elog "$ LANG=C vsedit scritp.py"
 }
 

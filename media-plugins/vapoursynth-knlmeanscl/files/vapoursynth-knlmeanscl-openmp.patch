@@ -1,0 +1,22 @@
+From 55856c4f9951368877d0a0025873cc8536f54030 Mon Sep 17 00:00:00 2001
+From: 4re <surukko@gmail.com>
+Date: Mon, 7 Sep 2015 13:10:12 +0200
+Subject: [PATCH] Add missing openmp linking flag
+
+---
+ configure | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/configure b/configure
+index ef16993..ca5dd9b 100755
+--- a/configure
++++ b/configure
+@@ -89,7 +89,7 @@ DEBUG=""
+ LIBNAME=""
+
+ CXXFLAGS="-std=c++11 -Wall -Wno-unused-local-typedefs -fopenmp -I. -I/shared -I$SRCDIR/include"
+-LDFLAGS=""
++LDFLAGS="-fopenmp"
+ SOFLAGS="-shared"
+ DEPLIBS="OpenCL"
+ TARGET=""
