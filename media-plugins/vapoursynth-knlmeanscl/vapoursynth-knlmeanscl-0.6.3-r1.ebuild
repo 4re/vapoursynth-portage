@@ -42,6 +42,7 @@ pkg_setup()
 src_prepare() {
 	chmod +x configure
 	epatch "${FILESDIR}/${PN}-openmp.patch"
+	epatch "${FILESDIR}/${PN}-20150908.patch"
 }
 
 src_configure() {
