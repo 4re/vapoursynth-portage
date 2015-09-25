@@ -16,7 +16,6 @@ HOMEPAGE="http://www.vapoursynth.com/"
 if [[ ${PV} == *9999* ]]; then
 	inherit git-r3
 	EGIT_REPO_URI="https://github.com/${PN}/${PN}.git"
-# 	EGIT_COMMIT=""
 else
 	inherit vcs-snapshot
 	SRC_URI="https://github.com/${PN}/${PN}/archive/R${PV}.tar.gz -> ${PN}-${PV}.tar.gz"
@@ -24,7 +23,7 @@ fi
 
 LICENSE="LGPL-2.1"
 SLOT="0"
-KEYWORDS=""
+KEYWORDS="~amd64 ~arm ~x86"
 IUSE="+doc +assvapour +eedi3 +imagemagick +morpho +ocr +removegrain +vinverse +vivtc +shared +vspipe +x86-asm -debug -guard -static"
 
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
