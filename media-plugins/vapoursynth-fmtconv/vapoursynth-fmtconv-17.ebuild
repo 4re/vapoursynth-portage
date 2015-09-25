@@ -32,8 +32,11 @@ DEPEND="${RDEPEND}
 
 S="${WORKDIR}/${P}/build/unix"
 
-DOCS=( ../../doc/colorspace-subsampling.png ../../doc/fmtconv.html ../../doc/vapourdoc.css )
-
 src_configure() {
 	autotools-utils_src_configure --libdir="/usr/$(get_libdir)/vapoursynth/"
+}
+
+src_install() {
+	use doc && HTML_DOCS=("${WORKDIR}/${P}/doc/")
+	autotools-utils_src_install
 }
