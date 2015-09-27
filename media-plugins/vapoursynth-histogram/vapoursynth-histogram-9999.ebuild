@@ -29,7 +29,7 @@ RDEPEND+="
 DEPEND="${RDEPEND}
 "
 
-DOCS=( README )
+DOCS=( readme.rst )
 
 src_configure() {
 	autotools-utils_src_configure --libdir="/usr/$(get_libdir)/vapoursynth/"
