@@ -22,7 +22,7 @@ fi
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS=""
-IUSE="+doc"
+IUSE="doc"
 
 RDEPEND+="
 	media-libs/vapoursynth

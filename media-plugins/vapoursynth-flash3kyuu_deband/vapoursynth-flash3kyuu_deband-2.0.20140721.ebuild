@@ -16,7 +16,7 @@ EGIT_COMMIT="8ea42928347ac824658375fcb1953235a09e9357"
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~x86 ~amd64"
-IUSE="+doc"
+IUSE="doc"
 
 RDEPEND+="
 	media-libs/vapoursynth

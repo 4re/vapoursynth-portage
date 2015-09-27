@@ -24,7 +24,7 @@ fi
 LICENSE="LGPL-2.1"
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~x86"
-IUSE="+doc +plugins +imagemagick +shared +vspipe +x86-asm -debug -static"
+IUSE="doc +plugins +imagemagick +shared +vspipe +x86-asm -debug -static"
 
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 

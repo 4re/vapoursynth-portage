@@ -20,7 +20,7 @@ fi
 LICENSE="BSD-2"
 SLOT="0"
 KEYWORDS=""
-IUSE="+doc"
+IUSE="doc"
 
 RDEPEND+="
 	media-libs/vapoursynth

@@ -25,7 +25,7 @@ fi
 LICENSE="LGPL-2.1"
 SLOT="0"
 KEYWORDS=""
-IUSE="+doc +assvapour +eedi3 +imagemagick +morpho +ocr +removegrain +vinverse +vivtc +shared +vspipe +x86-asm -debug -guard -static"
+IUSE="doc +assvapour +eedi3 +imagemagick +morpho +ocr +removegrain +vinverse +vivtc +shared +vspipe +x86-asm -debug -guard -static"
 
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
