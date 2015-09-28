@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+<maintainer>
+	<email>vapoursynth@overlay</email>
+</maintainer>
+<use>
+	<flag name="assvapour">Enable SSA/ASS subtitles plugin using <pkg>media-libs/libass</pkg></flag>
+	<flag name="debug">Enable compilation options required for debugging</flag>
+	<flag name="doc">Install project documentation</flag>
+	<flag name="eedi3">Enable slow edge directed interpolation filterplugin</flag>
+	<flag name="guard">Adds 32 bytes on the left and the right sides of each frame, fills them with a certain value, and checks their integrity after each filter. It can be used to detect buggy filters that write a little outside the frame</flag>
+	<flag name="imagemagick">Enable Image Reader/Writer plugin using <pkg>media-gfx/imagemagick</pkg></flag>
+	<flag name="morpho">Enable simple morphological filters plugin</flag>
+    <flag name="ocr">Enable video frames Optical Character Recognition plugin using <pkg>app-text/tesseract</pkg></flag>
+	<flag name="removegrain">Enable Remove Grain plugin</flag>
+	<flag name="shared">Build shared libraries</flag>
+	<flag name="static">Build static libraries</flag>
+	<flag name="vinverse">Enable residual combing removal plugin</flag>
+	<flag name="vivtc">Enable Inverse Telecine and Decimation plugin</flag>
+	<flag name="vspipe">Enable support for piping output</flag>
+	<flag name="x86-asm">Enable assembler code for x86 CPUs</flag>
+</use>
+</pkgmetadata>
