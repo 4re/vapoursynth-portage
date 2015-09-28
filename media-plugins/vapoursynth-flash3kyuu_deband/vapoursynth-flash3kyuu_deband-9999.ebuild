@@ -25,7 +25,7 @@ KEYWORDS=""
 IUSE="doc"
 
 RDEPEND+="
-	media-libs/vapoursynth
+	media-libs/vapoursynth[${PYTHON_USEDEP}]
 "
 DEPEND="
 	${PYTHON_DEPS}
