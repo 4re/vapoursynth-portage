@@ -5,6 +5,7 @@ media-libs/vapoursynth ~*
 media-libs/zimg ~*
 media-plugins/vapoursynth-addgrain ~*
 media-plugins/vapoursynth-adjust ~*
+media-plugins/vapoursynth-awarpsharp2 ~*
 media-plugins/vapoursynth-bifrost ~*
 media-plugins/vapoursynth-bilateral ~*
 media-plugins/vapoursynth-bm3d ~*
