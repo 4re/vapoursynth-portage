@@ -12,6 +12,7 @@ HOMEPAGE="https://github.com/Khanattila/KNLMeansCL"
 if [[ ${PV} == *9999* ]]; then
 	inherit git-r3
 	EGIT_REPO_URI="https://github.com/Khanattila/KNLMeansCL.git"
+# 	EGIT_COMMIT=""
 else
 	inherit vcs-snapshot
 	SRC_URI="https://github.com/Khanattila/KNLMeansCL/archive/v${PV}.tar.gz -> ${PN}-${PV}.tar.gz"
@@ -24,6 +25,7 @@ CARDS=( nvidia )
 IUSE="${CARDS[@]/#/video_cards_}"
 
 RDEPEND+="
+	app-eselect/eselect-opencl
 	media-libs/vapoursynth
 	virtual/opencl
 	video_cards_nvidia? ( x11-drivers/nvidia-drivers[uvm] )
@@ -31,6 +33,13 @@ RDEPEND+="
 DEPEND="${RDEPEND}
 "
 
+
+pkg_setup() {
+	if use video_cards_nvidia; then
+		OPENCLOLD=$(eselect opencl show)
+		eselect opencl set mesa
+	fi
+}
 
 src_prepare() {
 	chmod +x configure
@@ -43,6 +52,12 @@ src_configure() {
 	./configure \
 		--install="${ED}/usr/$(get_libdir)/vapoursynth/" \
 		--extra-cxxflags="${CXXFLAGS}" --extra-ldflags="${LDFLAGS}" || die "configure failed"
+}
+
+pkg_postinst() {
+	if use video_cards_nvidia; then
+		eselect opencl set ${OPENCLOLD}
+	fi
 }
 
 src_install() {
