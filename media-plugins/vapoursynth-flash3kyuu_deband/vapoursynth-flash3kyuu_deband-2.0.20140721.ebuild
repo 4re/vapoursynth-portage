@@ -3,7 +3,7 @@
 # $Id$
 
 EAPI=5
-PYTHON_COMPAT=( python3_{4,5} )
+PYTHON_COMPAT=( python3_4 )
 PYTHON_REQ_USE="threads(+)"
 
 inherit python-any-r1 multilib waf-utils git-r3
