@@ -32,7 +32,7 @@ REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 RDEPEND+="${PYTHON_DEPS}
 	assvapour? ( media-libs/libass )
-	imagemagick? ( media-gfx/imagemagick[-hdri,-q8,-q32,-q64] )
+	imagemagick? ( media-gfx/imagemagick[-q8,-q32,-q64] )
 	ocr? ( app-text/tesseract )
 "
 DEPEND="${RDEPEND}
