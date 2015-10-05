@@ -4,7 +4,7 @@
 
 EAPI=5
 
-PYTHON_COMPAT=( python3_4 )
+PYTHON_COMPAT=( python3_{4,5} )
 
 inherit python-utils-r1 python-single-r1 git-r3
 
