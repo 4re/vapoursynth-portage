@@ -25,7 +25,6 @@ CARDS=( nvidia )
 IUSE="${CARDS[@]/#/video_cards_}"
 
 RDEPEND+="
-	app-eselect/eselect-opencl
 	media-libs/vapoursynth
 	virtual/opencl
 	video_cards_nvidia? ( x11-drivers/nvidia-drivers[uvm] )
@@ -35,9 +34,12 @@ DEPEND="${RDEPEND}
 
 
 pkg_setup() {
-	if use video_cards_nvidia; then
-		OPENCLOLD=$(eselect opencl show)
-		eselect opencl set mesa
+	OPENCLOLD=$(eselect opencl show)
+	if use video_cards_nvidia && [[ "${OPENCLOLD}" != "mesa" ]]; then
+		elog "This packages will switch your current opencl working implementation,"
+		elog "try to emerge this package individually if the build happens to fail."
+		elog ""
+		eselect opencl set mesa  || die "eselect can't find mesa opencl implementation."
 	fi
 }
 
