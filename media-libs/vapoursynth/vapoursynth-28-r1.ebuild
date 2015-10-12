@@ -43,6 +43,11 @@ DEPEND="${RDEPEND}
 	dev-python/cython
 "
 
+src_prepare() {
+	epatch "${FILESDIR}/${P}-hdri.patch"
+	autotools-utils_src_prepare
+}
+
 src_configure() {
 	autotools-utils_src_configure \
 		--enable-core \
