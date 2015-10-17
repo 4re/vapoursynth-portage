@@ -24,7 +24,6 @@ CARDS=( nvidia )
 IUSE="${CARDS[@]/#/video_cards_}"
 
 RDEPEND+="
-	sys-devel/gcc[openmp]
 	media-libs/vapoursynth
 	virtual/opencl
 	video_cards_nvidia? ( x11-drivers/nvidia-drivers[uvm] )
@@ -32,17 +31,19 @@ RDEPEND+="
 DEPEND="${RDEPEND}
 "
 
-pkg_setup()
-{
-	if ! tc-has-openmp ; then
-		eerror "KNLMeansCL needs a compiler with openmp support to correctly work." && die
+pkg_setup() {
+	if use video_cards_nvidia; then
+		elog "This packages will switch your current opencl working implementation,"
+		elog "try to emerge this package individually if the build happens to fail."
+		ewarn "If this package fails to build you will be left with mesa as your opencl"
+		ewarn "active implementation, switch back to nvidia with:"
+		ewarn "# eselect opencl set nvidia"
+		eselect opencl set mesa  || die "eselect can't find mesa opencl implementation."
 	fi
 }
 
 src_prepare() {
 	chmod +x configure
-	epatch "${FILESDIR}/${PN}-openmp.patch"
-	epatch "${FILESDIR}/${PN}-20150908.patch"
 }
 
 src_configure() {
@@ -52,6 +53,12 @@ src_configure() {
 	./configure \
 		--install="${ED}/usr/$(get_libdir)/vapoursynth/" \
 		--extra-cxxflags="${CXXFLAGS}" --extra-ldflags="${LDFLAGS}" || die "configure failed"
+}
+
+pkg_postinst() {
+	if use video_cards_nvidia; then
+		eselect opencl set nvidia
+	fi
 }
 
 src_install() {

@@ -32,13 +32,13 @@ RDEPEND+="
 DEPEND="${RDEPEND}
 "
 
-
 pkg_setup() {
-	OPENCLOLD=$(eselect opencl show)
-	if use video_cards_nvidia && [[ "${OPENCLOLD}" != "mesa" ]]; then
+	if use video_cards_nvidia; then
 		elog "This packages will switch your current opencl working implementation,"
 		elog "try to emerge this package individually if the build happens to fail."
-		elog ""
+		ewarn "If this package fails to build you will be left with mesa as your opencl"
+		ewarn "active implementation, switch back to nvidia with:"
+		ewarn "# eselect opencl set nvidia"
 		eselect opencl set mesa  || die "eselect can't find mesa opencl implementation."
 	fi
 }
@@ -58,7 +58,7 @@ src_configure() {
 
 pkg_postinst() {
 	if use video_cards_nvidia; then
-		eselect opencl set ${OPENCLOLD}
+		eselect opencl set nvidia
 	fi
 }
 
@@ -66,4 +66,3 @@ src_install() {
 	emake install
 	dodoc README.md
 }
-
