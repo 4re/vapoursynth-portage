@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-video/mpv/mpv-9999.ebuild,v 1.69 2015/03/28 01:53:34 yngwin Exp $
+# $Id$
 
 EAPI=5
 PYTHON_COMPAT=( python{2_7,3_3,3_4} )
@@ -15,11 +15,7 @@ SRC_URI="http://ftp.waf.io/pub/release/waf-${WAF_V}"
 DOCS=( README.md etc/example.conf etc/input.conf )
 
 if [[ ${PV} == *9999* ]]; then
-	if use mpvhq; then
-		EGIT_REPO_URI="https://github.com/haasn/mpvhq.git"
-	else
-		EGIT_REPO_URI="https://github.com/mpv-player/mpv.git"
-	fi
+	EGIT_REPO_URI="https://github.com/mpv-player/mpv.git"
 	inherit git-r3
 	KEYWORDS=""
 else
@@ -31,14 +27,13 @@ fi
 # See Copyright in source tarball and bug #506946. Waf is BSD, libmpv is ISC.
 LICENSE="GPL-2+ BSD ISC"
 SLOT="0"
-IUSE="+alsa bluray cdio +cli doc-pdf dvb +dvd dvdnav egl +enca encode
-+iconv jack jpeg lcms +libass libav libcaca libguess libmpv lua luajit
-mpvhq openal +opengl oss pulseaudio pvr rubberband samba sdl selinux v4l vaapi
+IUSE="+alsa bluray cdio +cli doc-pdf drm dvb +dvd egl +enca encode +iconv
+jack jpeg lcms +libass libav libcaca libguess libmpv lua luajit openal
++opengl oss pulseaudio pvr raspberry-pi rubberband samba sdl selinux v4l vaapi
 +vapoursynth vdpau vf-dlopen wayland +X xinerama +xscreensaver xv"
 
 REQUIRED_USE="
 	|| ( cli libmpv )
-	dvdnav? ( dvd )
 	egl? ( opengl X )
 	enca? ( iconv )
 	lcms? ( opengl )
@@ -67,7 +62,7 @@ RDEPEND="
 			egl? ( media-libs/mesa[egl] )
 		)
 		lcms? ( >=media-libs/lcms-2.6:2 )
-		vaapi? ( >=x11-libs/libva-0.34.0[X(+),opengl?] )
+		vaapi? ( >=x11-libs/libva-0.34.0[X(+)] )
 		vdpau? ( >=x11-libs/libvdpau-0.2 )
 		xinerama? ( x11-libs/libXinerama )
 		xscreensaver? ( x11-libs/libXScrnSaver )
@@ -79,23 +74,24 @@ RDEPEND="
 		dev-libs/libcdio
 		dev-libs/libcdio-paranoia
 	)
+	drm? ( x11-libs/libdrm )
 	dvb? ( virtual/linuxtv-dvb-headers )
 	dvd? (
 		>=media-libs/libdvdread-4.1.3
-		dvdnav? ( >=media-libs/libdvdnav-4.2.0 )
+		>=media-libs/libdvdnav-4.2.0
 	)
 	enca? ( app-i18n/enca )
 	iconv? ( virtual/libiconv )
 	jack? ( media-sound/jack-audio-connection-kit )
 	jpeg? ( virtual/jpeg:0 )
 	libass? (
-		>=media-libs/libass-0.12.1:=[enca?,fontconfig]
+		>=media-libs/libass-0.12.1:=[enca(-)?,fontconfig]
 		virtual/ttf-fonts
 	)
 	libcaca? ( >=media-libs/libcaca-0.99_beta18 )
 	libguess? ( >=app-i18n/libguess-1.0 )
 	lua? (
-		!luajit? ( >=dev-lang/lua-5.1:= )
+		!luajit? ( || ( =dev-lang/lua-5.1*:= =dev-lang/lua-5.2*:= ) )
 		luajit? ( dev-lang/luajit:2 )
 	)
 	openal? ( >=media-libs/openal-1.13 )
@@ -129,14 +125,23 @@ RDEPEND+="
 
 pkg_setup() {
 	if ! use libass; then
-		ewarn "You've disabled the libass flag. No OSD or subtitles will be displayed."
+		ewarn "You have disabled the libass flag. No OSD or subtitles will be displayed."
+	fi
+
+	if use openal; then
+		ewarn "You have enabled the openal audio output which is a fallback"
+		ewarn "and disabled by upstream."
+	fi
+
+	if use sdl; then
+		ewarn "You have enabled the sdl video and audio outputs which are fallbacks"
+		ewarn "and disabled by upstream."
 	fi
 
 	if use libav; then
 		einfo "You have enabled media-video/libav instead of media-video/ffmpeg."
 		einfo "Upstream recommends media-video/ffmpeg, as some functionality is not"
-		einfo "provided by media-video/libav. For more information see:"
-		einfo "    https://github.com/mpv-player/mpv/wiki/FFmpeg-versus-Libav"
+		einfo "provided by media-video/libav."
 	fi
 
 	einfo "For additional format support you need to enable the support on your"
@@ -177,7 +182,7 @@ src_configure() {
 		$(use_enable encode encoding)
 		$(use_enable bluray libbluray)
 		$(use_enable dvd dvdread)
-		$(use_enable dvdnav)
+		$(use_enable dvd dvdnav)
 		$(use_enable cdio cdda)
 		$(use_enable enca)
 		$(use_enable rubberband)
@@ -213,14 +218,14 @@ src_configure() {
 		$(use_enable vdpau)
 		$(usex vdpau "$(use_enable opengl vdpau-gl-x11)" '--disable-vdpau-gl-x11')
 		$(use_enable vaapi)
-		$(use_enable vaapi vaapi-vpp)
 		$(usex vaapi "$(use_enable opengl vaapi-glx)" '--disable-vaapi-glx')
 		$(use_enable libcaca caca)
+		$(use_enable drm)
 		$(use_enable jpeg)
+		$(use_enable raspberry-pi rpi)
 
 		# hwaccels
 		$(use_enable vaapi vaapi-hwaccel)
-		$(use_enable vdpau vdpau-hwaccel)
 
 		# tv features
 		$(use_enable v4l tv)
