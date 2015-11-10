@@ -6,10 +6,10 @@ EAPI=5
 
 AUTOTOOLS_AUTORECONF=1
 
-PYTHON_COMPAT=( python3_4 )
+PYTHON_COMPAT=( python3_{4,5} )
 PYTHON_REQ_USE="threads(+)"
 
-inherit autotools-utils python-r1
+inherit autotools-utils python-single-r1
 
 DESCRIPTION="VapourSynth is an library for video manipulation."
 HOMEPAGE="http://www.vapoursynth.com/"
