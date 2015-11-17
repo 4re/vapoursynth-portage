@@ -1,0 +1,23 @@
+From 940da580a95e3a47a36bb376a8acaefddae38fc5 Mon Sep 17 00:00:00 2001
+From: cantabile <cantabile.desu@gmail.com>
+Date: Tue, 17 Nov 2015 14:30:53 +0200
+Subject: [PATCH] VDecimate: better check for missing frame durations
+
+Fixes division by zero when some input frame durations are 0/1.
+---
+ src/filters/vivtc/vivtc.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/filters/vivtc/vivtc.c b/src/filters/vivtc/vivtc.c
+index 1e9fb9e..98b15c2 100644
+--- a/src/filters/vivtc/vivtc.c
++++ b/src/filters/vivtc/vivtc.c
+@@ -1185,7 +1185,7 @@ static void calculateNewDurations(const FrameDuration *oldDurations, FrameDurati
+     int i;
+ 
+     for (i = 0; i < cycle; i++)
+-        if (oldDurations[i].den == 0) {
++        if (oldDurations[i].den == 0 || oldDurations[i].num == 0) {
+             missingDurations = 1;
+             break;
+         }

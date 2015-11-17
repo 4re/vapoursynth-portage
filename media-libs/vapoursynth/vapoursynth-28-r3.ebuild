@@ -31,7 +31,7 @@ REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 RDEPEND+="${PYTHON_DEPS}
 	assvapour? ( media-libs/libass )
-	imagemagick? ( media-gfx/imagemagick[-hdri,-q8,-q32,-q64] )
+	imagemagick? ( media-gfx/imagemagick[-q8,-q32,-q64] )
 	ocr? ( app-text/tesseract )
 "
 DEPEND="${RDEPEND}
@@ -42,6 +42,13 @@ DEPEND="${RDEPEND}
 	virtual/pkgconfig
 	dev-python/cython
 "
+
+src_prepare() {
+	epatch "${FILESDIR}/${P}-hdri.patch"
+	epatch "${FILESDIR}/${P}-c98.patch"
+	epatch "${FILESDIR}/${P}-vdecimate-duration.patch"
+	autotools-utils_src_prepare
+}
 
 src_configure() {
 	autotools-utils_src_configure \
