@@ -20,7 +20,8 @@ fi
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS=""
-IUSE="-debug"
+IUSE="-debug cpu_flags_x86_sse2 cpu_flags_x86_sse4_1"
+REQUIRED_USE="|| ( cpu_flags_x86_sse2 cpu_flags_x86_sse4_1 )"
 
 RDEPEND+="
 	media-libs/vapoursynth
@@ -34,6 +35,12 @@ src_configure() {
 
 	if use debug; then
 		myflags="--enable-debug"
+	fi
+
+	if use cpu_flags_x86_sse4_1; then
+		myflags="${myflags} --target=sse4.1"
+	elif use cpu_flags_x86_sse2; then
+		myflags="${myflags} --target=sse2"
 	fi
 
 	./configure \
