@@ -19,6 +19,7 @@ KEYWORDS="~amd64 ~x86"
 RDEPEND+="
 	media-libs/vapoursynth[${PYTHON_USEDEP}]
 	media-plugins/vapoursynth-addgrain
+	media-plugins/vapoursynth-awarpsharp2
 	media-plugins/vapoursynth-bilateral
 	media-plugins/vapoursynth-ctmf
 	media-plugins/vapoursynth-dctfilter
