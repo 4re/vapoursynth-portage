@@ -11,7 +11,7 @@ inherit python-utils-r1 python-single-r1 git-r3
 DESCRIPTION="mawen1250's VapourSynth functions"
 HOMEPAGE="http://forum.doom9.org/showthread.php?p=1737309"
 EGIT_REPO_URI="https://github.com/HomeOfVapourSynthEvolution/mvsfunc.git"
-EGIT_COMMIT="cbd41b5e1480fa655e800bea90aafcad9669b3a1"
+EGIT_COMMIT="1e20b50eac7a96e15f8bbb4cb2fecbf6e64192af"
 
 LICENSE=""
 SLOT="0"
