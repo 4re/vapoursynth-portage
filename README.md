@@ -47,5 +47,5 @@ Troubleshooting
 ---------------
 If you want to use python-3.5 you may need to add this to your `/etc/portage/package.use/use`:
 ```
-*/*::vapoursynth  python_single_target_python3_5
+*/*::vapoursynth python_single_target_python3_5
 ```
