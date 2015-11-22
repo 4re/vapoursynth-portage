@@ -40,7 +40,7 @@ In case you are using the live versions, you may want to utilize ```smart-live-r
 ```
 This overlay also includes an editor and a modified mpv ebuild with vapoursynth support enabled:
 ```
-# emerge app-editors/vapoursynth-editor media-video/mpv
+# emerge app-editors/vapoursynth-editor::vapoursynth media-video/mpv::vapoursynth
 ```
 
 Troubleshooting
