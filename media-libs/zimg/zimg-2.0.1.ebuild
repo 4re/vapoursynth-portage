@@ -6,7 +6,7 @@ EAPI=5
 
 AUTOTOOLS_AUTORECONF=1
 
-inherit autotools-utils
+inherit autotools-multilib
 
 DESCRIPTION="Scaling, colorspace conversion, and dithering library"
 HOMEPAGE="https://github.com/sekrit-twc/zimg"
@@ -17,24 +17,21 @@ if [[ ${PV} == *9999* ]]; then
 else
 	inherit vcs-snapshot
 	SRC_URI="https://github.com/sekrit-twc/${PN}/archive/release-${PV}.tar.gz -> ${PN}-${PV}.tar.gz"
+	KEYWORDS="~amd64 ~x86"
 fi
 
 LICENSE="WTFPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
-IUSE="-cli -debug"
+IUSE="static-libs cpu_flags_x86_sse -cli -debug"
 
-RDEPEND+="
-"
-DEPEND="${RDEPEND}
-"
+RDEPEND+=""
+DEPEND="${RDEPEND}"
 
 DOCS=( README.md COPYING )
 
 src_configure() {
-	local myeconfargs=(
-			$(use_enable debug)
-			$(use_enable cli testapp)
-	)
-	autotools-utils_src_configure
+	autotools-multilib_src_configure \
+		$(use_enable cpu_flags_x86_sse x86simd) \
+		$(use_enable debug) \
+		$(use_enable cli testapp)
 }
