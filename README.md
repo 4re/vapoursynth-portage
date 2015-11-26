@@ -23,6 +23,10 @@ There is a convenient set that will pull all vapoursynth plugins:
 ```
 # emerge @vapoursynth-plugins
 ```
+Or if you just want some plugins but not all of them:
+```
+# VAPOURSYNTH_PLUGINS="mvtools fmtconv" emerge vapoursynth-plugins-meta
+```
 If you are on stable use the provided file to keyword everything:
 ```
 # cd /etc/portage/package.accept_keywords
