@@ -42,7 +42,7 @@ REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 RDEPEND+="${PYTHON_DEPS}
 	vapoursynth_plugins_assvapour? ( media-libs/libass )
-	vapoursynth_plugins_imagemagick? ( media-gfx/imagemagick[-q8,-q32,-q64] )
+	vapoursynth_plugins_imagemagick? ( media-gfx/imagemagick[-q8,-q64] )
 	media-libs/zimg
 	vapoursynth_plugins_ocr? ( app-text/tesseract )
 "
