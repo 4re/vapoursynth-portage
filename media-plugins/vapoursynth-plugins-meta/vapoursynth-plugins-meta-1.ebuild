@@ -71,7 +71,6 @@ IUSE="
 	vapoursynth_plugins_vsrawsource
 	vapoursynth_plugins_wwxd
 	vapoursynth_plugins_yadifmod
-	vapoursynth_plugins_zimg
 "
 
 RDEPEND+=""
@@ -136,5 +135,4 @@ DEPEND="${RDEPEND}
 	vapoursynth_plugins_vsrawsource? ( media-plugins/vapoursynth-vsrawsource )
 	vapoursynth_plugins_wwxd? ( media-plugins/vapoursynth-wwxd )
 	vapoursynth_plugins_yadifmod? ( media-plugins/vapoursynth-yadifmod )
-	vapoursynth_plugins_zimg? ( media-plugins/vapoursynth-zimg )
 "
