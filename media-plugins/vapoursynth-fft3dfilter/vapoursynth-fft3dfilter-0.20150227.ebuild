@@ -19,6 +19,7 @@ SLOT="0"
 
 RDEPEND+="
 	media-libs/vapoursynth
+	sci-libs/fftw:3.0[threads]
 "
 DEPEND="${RDEPEND}
 "
