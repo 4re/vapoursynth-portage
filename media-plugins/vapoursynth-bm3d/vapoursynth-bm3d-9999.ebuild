@@ -25,6 +25,7 @@ REQUIRED_USE="|| ( cpu_flags_x86_sse2 cpu_flags_x86_sse4_1 )"
 
 RDEPEND+="
 	media-libs/vapoursynth
+	sci-libs/fftw:3.0
 "
 DEPEND="${RDEPEND}
 "
