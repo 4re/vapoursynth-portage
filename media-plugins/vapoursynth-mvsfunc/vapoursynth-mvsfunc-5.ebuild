@@ -21,7 +21,6 @@ RDEPEND+="
 	media-libs/vapoursynth[${PYTHON_USEDEP}]
 	media-plugins/vapoursynth-bm3d
 	media-plugins/vapoursynth-fmtconv
-	media-plugins/vapoursynth-zimg
 "
 DEPEND="${RDEPEND}
 "
