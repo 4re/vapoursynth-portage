@@ -29,7 +29,7 @@ LICENSE="GPL-2+ BSD ISC"
 SLOT="0"
 IUSE="+alsa bluray cdio +cli doc-pdf drm dvb +dvd egl +enca encode +iconv
 jack jpeg lcms +libass libav libcaca libguess libmpv lua luajit openal
-+opengl oss pulseaudio pvr raspberry-pi rubberband samba sdl selinux v4l vaapi
++opengl oss pulseaudio raspberry-pi rubberband samba sdl selinux v4l vaapi
 +vapoursynth vdpau vf-dlopen wayland +X xinerama +xscreensaver xv"
 
 REQUIRED_USE="
@@ -40,7 +40,6 @@ REQUIRED_USE="
 	libguess? ( iconv )
 	luajit? ( lua )
 	opengl? ( || ( wayland X ) )
-	pvr? ( v4l )
 	vaapi? ( X )
 	vdpau? ( X )
 	wayland? ( opengl )
@@ -231,7 +230,6 @@ src_configure() {
 		$(use_enable v4l tv)
 		$(use_enable v4l tv-v4l2)
 		$(use_enable v4l libv4l2)
-		$(use_enable pvr)
 		$(use_enable dvb dvbin)
 	)
 	waf-utils_src_configure "${mywafargs[@]}"
