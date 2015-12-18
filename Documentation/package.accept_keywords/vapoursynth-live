@@ -31,6 +31,7 @@
 =media-plugins/vapoursynth-genericfilters-9999 **
 =media-plugins/vapoursynth-havsfunc-9999 **
 =media-plugins/vapoursynth-histogram-9999 **
+=media-plugins/vapoursynth-inpaint-9999 **
 =media-plugins/vapoursynth-it-9999 **
 =media-plugins/vapoursynth-knlmeanscl-9999 **
 =media-plugins/vapoursynth-l-smash-works-9999 **
@@ -61,6 +62,7 @@
 =media-plugins/vapoursynth-vs-maskdetail-9999 **
 =media-plugins/vapoursynth-vsimagereader-9999 **
 =media-plugins/vapoursynth-vsrawsource-9999 **
+=media-plugins/vapoursynth-vstaambk-9999 **
 =media-plugins/vapoursynth-wwxd-9999 **
 =media-plugins/vapoursynth-yadifmod-9999 **
 =media-video/mpv-9999 **

@@ -39,6 +39,7 @@ IUSE="
 	vapoursynth_plugins_genericfilters
 	vapoursynth_plugins_havsfunc
 	vapoursynth_plugins_histogram
+	vapoursynth_plugins_inpaint
 	vapoursynth_plugins_it
 	vapoursynth_plugins_knlmeanscl
 	vapoursynth_plugins_works
@@ -104,6 +105,7 @@ DEPEND="${RDEPEND}
 	vapoursynth_plugins_genericfilters? ( media-plugins/vapoursynth-genericfilters )
 	vapoursynth_plugins_havsfunc? ( media-plugins/vapoursynth-havsfunc )
 	vapoursynth_plugins_histogram? ( media-plugins/vapoursynth-histogram )
+	vapoursynth_plugins_inpaint? (media-plugins/vapoursynth-inpaint )
 	vapoursynth_plugins_it? ( media-plugins/vapoursynth-it )
 	vapoursynth_plugins_knlmeanscl? ( media-plugins/vapoursynth-knlmeanscl )
 	vapoursynth_plugins_works? ( media-plugins/vapoursynth-l-smash-works )
