@@ -14,14 +14,15 @@ HOMEPAGE="https://github.com/SAPikachu/flash3kyuu_deband"
 if [[ ${PV} == *9999* ]]; then
 	inherit git-r3
 	EGIT_REPO_URI="https://github.com/SAPikachu/flash3kyuu_deband.git"
+	KEYWORDS=""
 else
 	inherit vcs-snapshot
 	SRC_URI="https://github.com/SAPikachu/flash3kyuu_deband/archive/r${PV}.tar.gz -> ${PN}-${PV}.tar.gz"
+	KEYWORDS="~x86 ~amd64"
 fi
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS=""
 IUSE="doc"
 
 RDEPEND+="
@@ -42,7 +43,6 @@ src_compile() {
 }
 
 src_install() {
-# 	waf-utils_src_install
 	exeinto /usr/$(get_libdir)/vapoursynth/
 	doexe build/libf3kdb.so
 	if use doc; then

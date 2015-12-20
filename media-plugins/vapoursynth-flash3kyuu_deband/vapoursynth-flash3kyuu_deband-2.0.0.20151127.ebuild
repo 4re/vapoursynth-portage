@@ -11,7 +11,7 @@ inherit python-any-r1 multilib waf-utils git-r3
 DESCRIPTION="A deband library and filter for VapourSynth"
 HOMEPAGE="https://github.com/SAPikachu/flash3kyuu_deband"
 EGIT_REPO_URI="https://github.com/SAPikachu/flash3kyuu_deband.git"
-EGIT_COMMIT="8ea42928347ac824658375fcb1953235a09e9357"
+EGIT_COMMIT="9f3042e0a1d8e816164644174d3e80795078322a"
 
 LICENSE="GPL-3"
 SLOT="0"
@@ -36,7 +36,6 @@ src_compile() {
 }
 
 src_install() {
-# 	waf-utils_src_install
 	exeinto /usr/$(get_libdir)/vapoursynth/
 	doexe build/libf3kdb.so
 	if use doc; then
