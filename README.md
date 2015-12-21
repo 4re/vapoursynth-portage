@@ -19,6 +19,10 @@ Finally update layman's database and add vapoursynth's overlay to your system.
 
 Usage
 -----
+First of all to activate default vapoursynth plugins:
+```
+# echo 'VAPOURSYNTH_PLUGINS="assvapour eedi3 imagemagick morpho ocr removegrain vinverse vivtc"' >> /etc/portage/make.conf
+```
 There is a convenient set that will pull all vapoursynth plugins:
 ```
 # emerge @vapoursynth-plugins
