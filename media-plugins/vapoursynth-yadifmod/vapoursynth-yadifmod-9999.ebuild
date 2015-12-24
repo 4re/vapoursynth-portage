@@ -12,14 +12,15 @@ HOMEPAGE="https://github.com/HomeOfVapourSynthEvolution/VapourSynth-Yadifmod"
 if [[ ${PV} == *9999* ]]; then
 	inherit git-r3
 	EGIT_REPO_URI="https://github.com/HomeOfVapourSynthEvolution/${PN}.git"
+	KEYWORDS=""
 else
 	inherit vcs-snapshot
 	SRC_URI="https://github.com/HomeOfVapourSynthEvolution/${PN}/archive/r${PV}.tar.gz -> ${PN}-${PV}.tar.gz"
+	KEYWORDS="~amd64 ~x86"
 fi
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS=""
 
 RDEPEND+="
 	media-libs/vapoursynth
@@ -30,10 +31,11 @@ DEPEND="${RDEPEND}
 src_configure() {
 	sed -i -e "s:CXX=\"g++\":CXX=\"$(tc-getCXX)\":" configure || die
 	sed -i -e "s:LD=\"g++\":LD=\"$(tc-getCXX)\":" configure || die
-	# We need -mno-avx here to fix compilation
+	chmod +x configure
+	# We need -mno-xop here to fix compilation on AMD
 	./configure \
 		--install="${ED}/usr/$(get_libdir)/vapoursynth/" \
-		--extra-cxxflags="${CXXFLAGS} -mno-avx" --extra-ldflags="${LDFLAGS}" || die "configure failed"
+		--extra-cxxflags="${CXXFLAGS} -mno-xop" --extra-ldflags="${LDFLAGS}" || die "configure failed"
 }
 
 src_install() {
