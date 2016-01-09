@@ -14,7 +14,7 @@ SRC_URI="https://dl.dropboxusercontent.com/u/36232595/havsfunc-r${PV}.7z"
 
 LICENSE=""
 SLOT="0"
-KEYWORDS="-*"
+KEYWORDS="~amd64 ~x86"
 
 RDEPEND+="
 	media-libs/vapoursynth[${PYTHON_USEDEP}]
