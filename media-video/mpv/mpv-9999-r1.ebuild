@@ -12,7 +12,7 @@ WAF_V="1.8.12"
 DESCRIPTION="Media player based on MPlayer and mplayer2"
 HOMEPAGE="http://mpv.io/"
 SRC_URI="http://ftp.waf.io/pub/release/waf-${WAF_V}"
-DOCS=( README.md etc/example.conf etc/input.conf )
+DOCS=( README.md etc/mpv.conf etc/input.conf )
 
 if [[ ${PV} == *9999* ]]; then
 	EGIT_REPO_URI="https://github.com/mpv-player/mpv.git"
