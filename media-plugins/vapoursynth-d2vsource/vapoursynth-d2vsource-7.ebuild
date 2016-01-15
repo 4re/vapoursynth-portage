@@ -13,17 +13,19 @@ EGIT_REPO_URI="https://github.com/dwbuiten/d2vsource.git"
 if [[ ${PV} == *9999* ]]; then
 	inherit git-r3
 	EGIT_REPO_URI="https://github.com/dwbuiten/d2vsource.git"
+	KEYWORDS=""
 else
 	inherit vcs-snapshot
 	SRC_URI="https://github.com/dwbuiten/d2vsource/archive/beta${PV}.tar.gz -> ${PN}-${PV}.tar.gz"
+	KEYWORDS="~amd64 ~x86"
 fi
 
 LICENSE="LGPL-2.1"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
 
 RDEPEND+="
 	media-libs/vapoursynth
+	>=virtual/ffmpeg-9
 "
 DEPEND="${RDEPEND}
 "
