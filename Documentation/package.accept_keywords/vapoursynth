@@ -1,5 +1,4 @@
 app-editors/vapoursynth-editor ~*
-app-editors/wobbly ~*
 media-libs/l-smash ~*
 media-libs/vapoursynth ~*
 media-libs/zimg ~*
@@ -39,6 +38,7 @@ media-plugins/vapoursynth-msmoosh ~*
 media-plugins/vapoursynth-mvsfunc ~*
 media-plugins/vapoursynth-mvtools ~*
 media-plugins/vapoursynth-nnedi3 ~*
+media-plugins/vapoursynth-plugins-meta ~*
 media-plugins/vapoursynth-reduceflicker ~*
 media-plugins/vapoursynth-removedirt ~*
 media-plugins/vapoursynth-retinex ~*
@@ -65,4 +65,6 @@ media-plugins/vapoursynth-vsrawsource ~*
 media-plugins/vapoursynth-vstaambk ~*
 media-plugins/vapoursynth-wwxd ~*
 media-plugins/vapoursynth-yadifmod ~*
+media-video/d2vwitch ~*
 media-video/mpv ~*
+media-video/wobbly ~*

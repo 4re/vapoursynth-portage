@@ -1,5 +1,4 @@
 =app-editors/vapoursynth-editor-9999 **
-=app-editors/wobbly-9999 **
 =media-libs/l-smash-9999 **
 =media-libs/vapoursynth-9999 **
 =media-libs/zimg-9999 **
@@ -39,6 +38,7 @@
 =media-plugins/vapoursynth-mvsfunc-9999 **
 =media-plugins/vapoursynth-mvtools-9999 **
 =media-plugins/vapoursynth-nnedi3-9999 **
+=media-plugins/vapoursynth-plugins-meta-9999 **
 =media-plugins/vapoursynth-reduceflicker-9999 **
 =media-plugins/vapoursynth-removedirt-9999 **
 =media-plugins/vapoursynth-retinex-9999 **
@@ -65,4 +65,6 @@
 =media-plugins/vapoursynth-vstaambk-9999 **
 =media-plugins/vapoursynth-wwxd-9999 **
 =media-plugins/vapoursynth-yadifmod-9999 **
+=media-video/d2vwitch-9999 **
 =media-video/mpv-9999 **
+=media-video/wobbly-9999 **
