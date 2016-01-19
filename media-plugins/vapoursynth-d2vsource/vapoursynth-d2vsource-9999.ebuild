@@ -4,11 +4,12 @@
 
 EAPI=5
 
-inherit toolchain-funcs multilib
+AUTOTOOLS_AUTORECONF=1
+
+inherit autotools-utils multilib
 
 DESCRIPTION="D2V Source plugin for VapourSynth"
 HOMEPAGE="https://github.com/dwbuiten/d2vsource"
-EGIT_REPO_URI="https://github.com/dwbuiten/d2vsource.git"
 
 if [[ ${PV} == *9999* ]]; then
 	inherit git-r3
@@ -30,15 +31,8 @@ RDEPEND+="
 DEPEND="${RDEPEND}
 "
 
-src_configure() {
-	sed -i -e "s:CXX=\"g++\":CXX=\"$(tc-getCXX)\":" configure || die
-	sed -i -e "s:LD=\"g++\":LD=\"$(tc-getCXX)\":" configure || die
-	./configure \
-		--install="${ED}/usr/$(get_libdir)/vapoursynth/" \
-		--extra-cxxflags="${CXXFLAGS}" --extra-ldflags="${LDFLAGS}" || die "configure failed"
-}
+DOCS=( README )
 
-src_install() {
-	emake install
-	dodoc README
+src_configure() {
+	autotools-utils_src_configure --libdir="/usr/$(get_libdir)/vapoursynth/"
 }
