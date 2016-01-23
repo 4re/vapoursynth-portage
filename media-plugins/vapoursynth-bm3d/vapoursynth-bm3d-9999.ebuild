@@ -1,4 +1,4 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
@@ -12,14 +12,15 @@ HOMEPAGE="https://github.com/HomeOfVapourSynthEvolution/VapourSynth-BM3D"
 if [[ ${PV} == *9999* ]]; then
 	inherit git-r3
 	EGIT_REPO_URI="https://github.com/HomeOfVapourSynthEvolution/${PN}.git"
+	KEYWORDS=""
 else
 	inherit vcs-snapshot
 	SRC_URI="https://github.com/HomeOfVapourSynthEvolution/${PN}/archive/r${PV}.tar.gz -> ${PN}-${PV}.tar.gz"
+	KEYWORDS="~x86 ~amd64"
 fi
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS=""
 IUSE="-debug cpu_flags_x86_sse2 cpu_flags_x86_sse4_1"
 REQUIRED_USE="|| ( cpu_flags_x86_sse2 cpu_flags_x86_sse4_1 )"
 
