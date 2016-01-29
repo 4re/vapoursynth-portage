@@ -14,15 +14,15 @@ HOMEPAGE="https://github.com/dubhater/Wobbly"
 if [[ ${PV} == *9999* ]]; then
 	inherit git-r3
 	EGIT_REPO_URI="https://github.com/dubhater/${PN}.git"
-# 	EGIT_COMMIT=""
+	KEYWORDS=""
 else
 	inherit vcs-snapshot
 	SRC_URI="https://github.com/dubhater/${PN}/archive/v${PV}.tar.gz -> ${PN}-${PV}.tar.gz"
+	KEYWORDS="~x86 ~amd64"
 fi
 
 LICENSE="ISC"
 SLOT="0"
-KEYWORDS="~x86 ~amd64"
 IUSE=""
 
 RDEPEND+="
