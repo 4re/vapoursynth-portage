@@ -1,4 +1,4 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
@@ -10,11 +10,19 @@ inherit python-utils-r1 python-single-r1
 
 DESCRIPTION="HolyWu's ported AviSynth scripts for VapourSynth"
 HOMEPAGE="http://forum.doom9.org/showthread.php?t=166582"
-SRC_URI="https://dl.dropboxusercontent.com/u/36232595/havsfunc-r${PV}.7z"
+
+if [[ ${PV} == *9999* ]]; then
+	inherit git-r3
+	EGIT_REPO_URI="https://github.com/HomeOfVapourSynthEvolution/havsfunc.git"
+	KEYWORDS=""
+else
+	inherit vcs-snapshot
+	SRC_URI="https://github.com/HomeOfVapourSynthEvolution/havsfunc/archive/r${PV}.tar.gz -> ${PN}-${PV}.tar.gz"
+	KEYWORDS="~amd64 ~x86"
+fi
 
 LICENSE=""
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
 
 RDEPEND+="
 	media-libs/vapoursynth[${PYTHON_USEDEP}]
@@ -35,11 +43,7 @@ RDEPEND+="
 	media-plugins/vapoursynth-scenechange
 	media-plugins/vapoursynth-temporalsoften
 "
-DEPEND="${RDEPEND}
-	app-arch/p7zip
-"
-
-S="${WORKDIR}"
+DEPEND="${RDEPEND}"
 
 src_install(){
 	insinto "$(python_get_sitedir)"
