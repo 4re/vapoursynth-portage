@@ -1,4 +1,4 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
@@ -12,15 +12,15 @@ HOMEPAGE="https://github.com/Khanattila/KNLMeansCL"
 if [[ ${PV} == *9999* ]]; then
 	inherit git-r3
 	EGIT_REPO_URI="https://github.com/Khanattila/KNLMeansCL.git"
-# 	EGIT_COMMIT=""
+	KEYWORDS=""
 else
 	inherit vcs-snapshot
 	SRC_URI="https://github.com/Khanattila/KNLMeansCL/archive/v${PV}.tar.gz -> ${PN}-${PV}.tar.gz"
+	KEYWORDS="~x86 ~amd64"
 fi
 
 LICENSE="LGPL-3"
 SLOT="0"
-KEYWORDS=""
 CARDS=( nvidia )
 IUSE="${CARDS[@]/#/video_cards_}"
 
@@ -64,5 +64,5 @@ pkg_postinst() {
 
 src_install() {
 	emake install
-	dodoc README.md
+	dodoc DOC.md
 }
