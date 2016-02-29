@@ -1,4 +1,4 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
@@ -11,7 +11,7 @@ inherit python-utils-r1 python-single-r1 git-r3
 DESCRIPTION="A ported AA-script from Avisynth"
 HOMEPAGE="https://github.com/HomeOfVapourSynthEvolution/vsTAAmbk"
 EGIT_REPO_URI="https://github.com/HomeOfVapourSynthEvolution/vsTAAmbk.git"
-EGIT_COMMIT="c768f8257ab6959c859d7b297953a31ba233de88"
+EGIT_COMMIT="ddcd6fe985cdcc1b0039a27f9008430817fe89ef"
 
 LICENSE=""
 SLOT="0"
