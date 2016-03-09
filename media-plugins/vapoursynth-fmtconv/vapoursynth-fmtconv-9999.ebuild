@@ -1,4 +1,4 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
@@ -14,14 +14,15 @@ HOMEPAGE="http://forum.doom9.org/showthread.php?t=166504"
 if [[ ${PV} == *9999* ]]; then
 	inherit git-r3
 	EGIT_REPO_URI="https://github.com/EleonoreMizo/fmtconv.git"
+	KEYWORDS=""
 else
 	inherit vcs-snapshot
 	SRC_URI="https://github.com/EleonoreMizo/fmtconv/archive/r${PV}.tar.gz -> ${PN}-${PV}.tar.gz"
+	KEYWORDS="~amd64 ~x86"
 fi
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS=""
 IUSE="doc"
 
 RDEPEND+="
