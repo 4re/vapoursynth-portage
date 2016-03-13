@@ -32,10 +32,10 @@ src_configure() {
 	sed -i -e "s:CXX=\"g++\":CXX=\"$(tc-getCXX)\":" configure || die
 	sed -i -e "s:LD=\"g++\":LD=\"$(tc-getCXX)\":" configure || die
 	chmod +x configure
-		# We need -mno-xop here to fix compilation on AMD
+		# We need -mno-avx here to fix compilation on AMD
 	./configure \
 		--install="${ED}/usr/$(get_libdir)/vapoursynth/" \
-		--extra-cxxflags="${CXXFLAGS} -mno-xop" --extra-ldflags="${LDFLAGS}" || die "configure failed"
+		--extra-cxxflags="${CXXFLAGS} -mno-avx" --extra-ldflags="${LDFLAGS}" || die "configure failed"
 }
 
 src_install() {
