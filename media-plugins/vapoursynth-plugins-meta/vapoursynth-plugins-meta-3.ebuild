@@ -1,4 +1,4 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
@@ -105,7 +105,7 @@ DEPEND="${RDEPEND}
 	vapoursynth_plugins_genericfilters? ( media-plugins/vapoursynth-genericfilters )
 	vapoursynth_plugins_havsfunc? ( media-plugins/vapoursynth-havsfunc )
 	vapoursynth_plugins_histogram? ( media-plugins/vapoursynth-histogram )
-	vapoursynth_plugins_inpaint? (media-plugins/vapoursynth-inpaint )
+	vapoursynth_plugins_inpaint? ( media-plugins/vapoursynth-inpaint )
 	vapoursynth_plugins_it? ( media-plugins/vapoursynth-it )
 	vapoursynth_plugins_knlmeanscl? ( media-plugins/vapoursynth-knlmeanscl )
 	vapoursynth_plugins_works? ( media-plugins/vapoursynth-l-smash-works )
