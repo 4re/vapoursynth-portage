@@ -136,7 +136,7 @@ DEPEND="${RDEPEND}
 	vapoursynth_plugins_maskdetail? ( media-plugins/vapoursynth-vs-maskdetail )
 	vapoursynth_plugins_vsimagereader? ( media-plugins/vapoursynth-vsimagereader )
 	vapoursynth_plugins_vsrawsource? ( media-plugins/vapoursynth-vsrawsource )
-	vapoursynth_plugins_vstaambk? ( vapoursynth-vstaambk )
+	vapoursynth_plugins_vstaambk? ( media-plugins/vapoursynth-vstaambk )
 	vapoursynth_plugins_wwxd? ( media-plugins/vapoursynth-wwxd )
 	vapoursynth_plugins_yadifmod? ( media-plugins/vapoursynth-yadifmod )
 "
