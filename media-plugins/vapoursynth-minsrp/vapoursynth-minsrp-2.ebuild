@@ -6,14 +6,20 @@ EAPI=5
 
 AUTOTOOLS_AUTORECONF=1
 
-inherit autotools-utils git-r3
+inherit autotools-utils
 
 DESCRIPTION="simple blurring/sharpening filter for vaporsynth"
 HOMEPAGE="http://forum.doom9.org/showthread.php?t=173328"
 
-EGIT_REPO_URI="https://github.com/IFeelBloated/minsrp.git"
-EGIT_COMMIT="8d0ee6ef7006bb554cc33f0fc9e0f42e2d18fc8d"
-KEYWORDS="~amd64 ~x86"
+if [[ ${PV} == *9999* ]]; then
+	inherit git-r3
+	EGIT_REPO_URI="https://github.com/IFeelBloated/minsrp.git"
+	KEYWORDS=""
+else
+	inherit vcs-snapshot
+	SRC_URI="https://github.com/IFeelBloated/minsrp/archive/r${PV}.tar.gz -> ${PN}-${PV}.tar.gz"
+	KEYWORDS="~amd64 ~x86"
+fi
 
 LICENSE=""
 SLOT="0"
