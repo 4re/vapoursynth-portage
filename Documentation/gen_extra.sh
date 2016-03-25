@@ -20,6 +20,8 @@ done
 
 for category in ${set_cat}; do
 	for package in $( ls -1 "${root}/${category}" ); do
-		echo "${category}/${package}" >> ${setsfile}
+		if [ "${package}" != "vapoursynth-plugins-meta" ]; then
+			echo "${category}/${package}" >> ${setsfile}
+        fi
 	done
 done

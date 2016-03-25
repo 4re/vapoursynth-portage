@@ -42,7 +42,8 @@ IUSE="
 	vapoursynth_plugins_inpaint
 	vapoursynth_plugins_it
 	vapoursynth_plugins_knlmeanscl
-	vapoursynth_plugins_works
+	vapoursynth_plugins_l-smash-works
+	vapoursynth_plugins_minsrp
 	vapoursynth_plugins_msmoosh
 	vapoursynth_plugins_mvsfunc
 	vapoursynth_plugins_mvtools
@@ -67,7 +68,7 @@ IUSE="
 	vapoursynth_plugins_vcmove
 	vapoursynth_plugins_vctrans
 	vapoursynth_plugins_videoscope
-	vapoursynth_plugins_maskdetail
+	vapoursynth_plugins_vs-maskdetail
 	vapoursynth_plugins_vsimagereader
 	vapoursynth_plugins_vsrawsource
 	vapoursynth_plugins_vstaambk
@@ -108,7 +109,8 @@ DEPEND="${RDEPEND}
 	vapoursynth_plugins_inpaint? ( media-plugins/vapoursynth-inpaint )
 	vapoursynth_plugins_it? ( media-plugins/vapoursynth-it )
 	vapoursynth_plugins_knlmeanscl? ( media-plugins/vapoursynth-knlmeanscl )
-	vapoursynth_plugins_works? ( media-plugins/vapoursynth-l-smash-works )
+	vapoursynth_plugins_l-smash-works? ( media-plugins/vapoursynth-l-smash-works )
+	vapoursynth_plugins_minsrp? ( media-plugins/vapoursynth-minsrp )
 	vapoursynth_plugins_msmoosh? ( media-plugins/vapoursynth-msmoosh )
 	vapoursynth_plugins_mvsfunc? ( media-plugins/vapoursynth-mvsfunc )
 	vapoursynth_plugins_mvtools? ( media-plugins/vapoursynth-mvtools )
@@ -133,7 +135,7 @@ DEPEND="${RDEPEND}
 	vapoursynth_plugins_vcmove? ( media-plugins/vapoursynth-vcmove )
 	vapoursynth_plugins_vctrans? ( media-plugins/vapoursynth-vctrans )
 	vapoursynth_plugins_videoscope? ( media-plugins/vapoursynth-videoscope )
-	vapoursynth_plugins_maskdetail? ( media-plugins/vapoursynth-vs-maskdetail )
+	vapoursynth_plugins_vs-maskdetail? ( media-plugins/vapoursynth-vs-maskdetail )
 	vapoursynth_plugins_vsimagereader? ( media-plugins/vapoursynth-vsimagereader )
 	vapoursynth_plugins_vsrawsource? ( media-plugins/vapoursynth-vsrawsource )
 	vapoursynth_plugins_vstaambk? ( media-plugins/vapoursynth-vstaambk )
