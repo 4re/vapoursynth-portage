@@ -35,6 +35,7 @@ media-plugins/vapoursynth-msmoosh
 media-plugins/vapoursynth-mvsfunc
 media-plugins/vapoursynth-mvtools
 media-plugins/vapoursynth-nnedi3
+media-plugins/vapoursynth-plugins-meta
 media-plugins/vapoursynth-reduceflicker
 media-plugins/vapoursynth-removedirt
 media-plugins/vapoursynth-retinex
