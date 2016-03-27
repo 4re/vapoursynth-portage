@@ -216,7 +216,7 @@ src_configure() {
 		$(use_enable jpeg)
 		--disable-android
 		$(use_enable raspberry-pi rpi)
-		$(use_enable opengl desktop-gl)
+		$(use_enable opengl standard-gl)
 
 		# HWaccels
 		# Automagic Video Toolbox HW acceleration. See Gentoo bug 577332.
