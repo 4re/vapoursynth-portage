@@ -1,0 +1,33 @@
+From ce01b8fe74b3894f6b87c42ec87681171ce6faba Mon Sep 17 00:00:00 2001
+From: Skylar Moore <nickgray0@gmail.com>
+Date: Sat, 2 Apr 2016 09:05:57 -0700
+Subject: [PATCH] switched to c++11 kind of mem alignment
+
+---
+ src/Kernel.hpp | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/src/Kernel.hpp b/src/Kernel.hpp
+index b66cb67..73ebf24 100644
+--- a/src/Kernel.hpp
++++ b/src/Kernel.hpp
+@@ -24,8 +24,8 @@ static volatile uint64_t _ptr_sucker = 0xFFFFFFFFFFFFFFFF;
+ static long val = 0;
+ 
+ template<typename T>
+-static inline T _abs(T val) {
+-	return (val > 0) ? val : -val;
++static inline T _abs(T num) {
++	return (num > 0) ? num : -num;
+ }
+ 
+ static inline void _clamp(int bits) {
+@@ -101,7 +101,7 @@ static void _median_3x3(T *dstp, int x) {
+ template<typename T>
+ static void _process_plane_3x3(const T *srcp, int src_stride, T *dstp, int dst_stride, int h, int w, bool gauss) {
+ 	void(*_func)(T *, int) = nullptr;
+-	_declspec(align(16)) static T a[9];
++	alignas(16) static T a[9];
+ 	_ptr_sucker = reinterpret_cast<uint64_t>(a);
+ 	if (gauss)
+ 		_func = _gauss_3x3;
