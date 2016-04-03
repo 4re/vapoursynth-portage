@@ -33,6 +33,9 @@ DEPEND="${RDEPEND}
 
 DOCS=( readme.rst )
 
+PATCHES=( "${FILESDIR}/${P}-nochroma.patch" )
+
+
 src_configure() {
 	autotools-utils_src_configure --libdir="/usr/$(get_libdir)/vapoursynth/"
 }
