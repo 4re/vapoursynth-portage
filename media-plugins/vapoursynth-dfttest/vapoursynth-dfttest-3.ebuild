@@ -1,10 +1,10 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
 EAPI=5
 
-inherit toolchain-funcs multilib
+inherit toolchain-funcs multilib flag-o-matic
 
 DESCRIPTION="2D/3D frequency domain denoiser"
 HOMEPAGE="https://github.com/HomeOfVapourSynthEvolution/VapourSynth-DFTTest"
@@ -35,10 +35,22 @@ src_prepare() {
 }
 
 src_configure() {
-	# We need -mno-avx here to fix compilation on AMD
+	# We need -mno-avx / -mno-xop here to fix compilation on AMD
+	if [[ $(uname -a) =~ .*AuthenticAMD.* ]]; then
+		if [[ $(tc-getCXX) != "clang++" ]]; then
+			if [[ $(gcc-major-version) != "5" ]]; then
+				ewarn "AMD cpu detected, dissabling avx optimizations due to a bug in the code."
+				append-cxxflags -mno-avx
+			else
+				ewarn "AMD cpu detected, dissabling xop optimizations due to a bug in the code."
+				append-cxxflags -mno-xop
+			fi
+		fi
+	fi
+
 	./configure \
 		--install="${ED}/usr/$(get_libdir)/vapoursynth/" \
-		--extra-cxxflags="${CXXFLAGS} -mno-avx" --extra-ldflags="${LDFLAGS}" || die "configure failed"
+		--extra-cxxflags="${CXXFLAGS}" --extra-ldflags="${LDFLAGS}" || die "configure failed"
 }
 
 src_install() {

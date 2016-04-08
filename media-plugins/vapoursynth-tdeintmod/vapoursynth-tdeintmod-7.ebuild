@@ -4,7 +4,7 @@
 
 EAPI=5
 
-inherit toolchain-funcs multilib
+inherit toolchain-funcs multilib flag-o-matic
 
 DESCRIPTION="VapourSynth port of TDeint and TMM"
 HOMEPAGE="https://github.com/HomeOfVapourSynthEvolution/VapourSynth-TDeintMod"
@@ -32,7 +32,20 @@ src_configure() {
 	sed -i -e "s:CXX=\"g++\":CXX=\"$(tc-getCXX)\":" configure || die
 	sed -i -e "s:LD=\"g++\":LD=\"$(tc-getCXX)\":" configure || die
 	chmod +x configure
-		# We need -mno-avx here to fix compilation on AMD
+
+	# We need -mno-avx / -mno-xop here to fix compilation on AMD
+	if [[ $(uname -a) =~ .*AuthenticAMD.* ]]; then
+		if [[ $(tc-getCXX) != "clang++" ]]; then
+			if [[ $(gcc-major-version) != "5" ]]; then
+				ewarn "AMD cpu detected, dissabling avx optimizations due to a bug in the code."
+				append-cxxflags -mno-avx
+			else
+				ewarn "AMD cpu detected, dissabling xop optimizations due to a bug in the code."
+				append-cxxflags -mno-xop
+			fi
+		fi
+	fi
+
 	./configure \
 		--install="${ED}/usr/$(get_libdir)/vapoursynth/" \
 		--extra-cxxflags="${CXXFLAGS} -mno-avx" --extra-ldflags="${LDFLAGS}" || die "configure failed"
