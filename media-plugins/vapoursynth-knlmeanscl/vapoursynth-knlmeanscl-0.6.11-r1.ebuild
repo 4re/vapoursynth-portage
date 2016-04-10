@@ -1,4 +1,4 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
@@ -12,36 +12,27 @@ HOMEPAGE="https://github.com/Khanattila/KNLMeansCL"
 if [[ ${PV} == *9999* ]]; then
 	inherit git-r3
 	EGIT_REPO_URI="https://github.com/Khanattila/KNLMeansCL.git"
-	KEYWORDS=""
 else
 	inherit vcs-snapshot
 	SRC_URI="https://github.com/Khanattila/KNLMeansCL/archive/v${PV}.tar.gz -> ${PN}-${PV}.tar.gz"
-	KEYWORDS="~x86 ~amd64"
 fi
 
 LICENSE="LGPL-3"
 SLOT="0"
+KEYWORDS="~x86 ~amd64"
 CARDS=( nvidia )
 IUSE="${CARDS[@]/#/video_cards_}"
 
 RDEPEND+="
 	media-libs/vapoursynth
 	virtual/opencl
-	video_cards_nvidia? ( x11-drivers/nvidia-drivers[uvm] )
+	video_cards_nvidia? (
+		x11-drivers/nvidia-drivers[uvm]
+		media-libs/mesa[opencl] )
 "
 DEPEND="${RDEPEND}
 "
 
-pkg_setup() {
-	if use video_cards_nvidia; then
-		elog "This packages will switch your current opencl working implementation,"
-		elog "try to emerge this package individually if the build happens to fail."
-		ewarn "If this package fails to build you will be left with mesa as your opencl"
-		ewarn "active implementation, switch back to nvidia with:"
-		ewarn "# eselect opencl set nvidia"
-		eselect opencl set mesa  || die "eselect can't find mesa opencl implementation."
-	fi
-}
 
 src_prepare() {
 	chmod +x configure
@@ -56,13 +47,7 @@ src_configure() {
 		--extra-cxxflags="${CXXFLAGS}" --extra-ldflags="${LDFLAGS}" || die "configure failed"
 }
 
-pkg_postinst() {
-	if use video_cards_nvidia; then
-		eselect opencl set nvidia
-	fi
-}
-
 src_install() {
 	emake install
-	dodoc DOC.md
+	dodoc README.md
 }

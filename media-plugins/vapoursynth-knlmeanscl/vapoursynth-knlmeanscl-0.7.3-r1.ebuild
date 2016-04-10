@@ -26,7 +26,9 @@ IUSE="${CARDS[@]/#/video_cards_}"
 RDEPEND+="
 	media-libs/vapoursynth
 	virtual/opencl
-	video_cards_nvidia? ( x11-drivers/nvidia-drivers[uvm] )
+	video_cards_nvidia? (
+		x11-drivers/nvidia-drivers[uvm]
+		media-libs/mesa[opencl] )
 "
 DEPEND="${RDEPEND}
 "
