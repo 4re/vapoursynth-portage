@@ -25,6 +25,7 @@ IUSE="
 	vapoursynth_plugins_dctfilter
 	vapoursynth_plugins_deblock
 	vapoursynth_plugins_delogo
+	vapoursynth_plugins_depan
 	vapoursynth_plugins_dfttest
 	vapoursynth_plugins_eedi2
 	vapoursynth_plugins_ffmpegsource
@@ -49,6 +50,7 @@ IUSE="
 	vapoursynth_plugins_mvtools
 	vapoursynth_plugins_mvtools-sf
 	vapoursynth_plugins_nnedi3
+	vapoursynth_plugins_oyster
 	vapoursynth_plugins_reduceflicker
 	vapoursynth_plugins_removedirt
 	vapoursynth_plugins_retinex
@@ -93,6 +95,7 @@ DEPEND="${RDEPEND}
 	vapoursynth_plugins_dctfilter? ( media-plugins/vapoursynth-dctfilter )
 	vapoursynth_plugins_deblock? ( media-plugins/vapoursynth-deblock )
 	vapoursynth_plugins_delogo? ( media-plugins/vapoursynth-delogo )
+	vapoursynth_plugins_depan? ( media-plugins/vapoursynth-depan )
 	vapoursynth_plugins_dfttest? ( media-plugins/vapoursynth-dfttest )
 	vapoursynth_plugins_eedi2? ( media-plugins/vapoursynth-eedi2 )
 	vapoursynth_plugins_ffmpegsource? ( media-plugins/vapoursynth-ffmpegsource )
@@ -117,6 +120,7 @@ DEPEND="${RDEPEND}
 	vapoursynth_plugins_mvtools? ( media-plugins/vapoursynth-mvtools )
 	vapoursynth_plugins_mvtools-sf? ( media-plugins/vapoursynth-mvtools-sf )
 	vapoursynth_plugins_nnedi3? ( media-plugins/vapoursynth-nnedi3 )
+	vapoursynth_plugins_oyster? ( media-plugins/vapoursynth-oyster )
 	vapoursynth_plugins_reduceflicker? ( media-plugins/vapoursynth-reduceflicker )
 	vapoursynth_plugins_removedirt? ( media-plugins/vapoursynth-removedirt )
 	vapoursynth_plugins_retinex? ( media-plugins/vapoursynth-retinex )
