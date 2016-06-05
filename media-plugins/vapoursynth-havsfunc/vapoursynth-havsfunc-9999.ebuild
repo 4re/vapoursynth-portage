@@ -27,6 +27,7 @@ SLOT="0"
 RDEPEND+="
 	media-libs/vapoursynth[${PYTHON_USEDEP}]
 	media-plugins/vapoursynth-addgrain
+	media-plugins/vapoursynth-adjust
 	media-plugins/vapoursynth-awarpsharp2
 	media-plugins/vapoursynth-bilateral
 	media-plugins/vapoursynth-ctmf
@@ -38,6 +39,7 @@ RDEPEND+="
 	media-plugins/vapoursynth-fft3dfilter
 	media-plugins/vapoursynth-fmtconv
 	media-plugins/vapoursynth-genericfilters
+	media-plugins/vapoursynth-mvsfunc
 	media-plugins/vapoursynth-mvtools
 	media-plugins/vapoursynth-nnedi3
 	media-plugins/vapoursynth-sangnommod
