@@ -29,7 +29,7 @@ DOCS+=( README.md )
 LICENSE="GPL-2+ BSD ISC"
 SLOT="0"
 IUSE="aqua +alsa archive bluray cdda +cli coreaudio doc drm dvb +dvd +egl +enca
-	encode gbm gpl3 +iconv jack jpeg lcms +libass libav libcaca libguess libmpv lua
+	encode gbm +iconv jack jpeg lcms +libass libav libcaca libguess libmpv lua
 	luajit openal +opengl oss pulseaudio raspberry-pi rubberband samba -sdl
 	selinux test uchardet v4l vaapi +vapoursynth vdpau vf-dlopen wayland +X xinerama
 	+xscreensaver +xv zsh-completion"
@@ -138,8 +138,6 @@ src_configure() {
 	local mywafargs=(
 		--confdir="${EPREFIX}"/etc/${PN}
 		--docdir="${EPREFIX}"/usr/share/doc/${PF}
-
-		$(use_enable gpl3)		# Unclear license info. See Gentoo bug 571728.
 
 		$(usex cli '' '--disable-cplayer')
 		$(use_enable libmpv libmpv-shared)
