@@ -75,6 +75,7 @@ IUSE="
 	vapoursynth_plugins_vsimagereader
 	vapoursynth_plugins_vsrawsource
 	vapoursynth_plugins_vstaambk
+	vapoursynth_plugins_w3fdif
 	vapoursynth_plugins_wwxd
 	vapoursynth_plugins_yadifmod
 "
@@ -145,6 +146,7 @@ DEPEND="${RDEPEND}
 	vapoursynth_plugins_vsimagereader? ( media-plugins/vapoursynth-vsimagereader )
 	vapoursynth_plugins_vsrawsource? ( media-plugins/vapoursynth-vsrawsource )
 	vapoursynth_plugins_vstaambk? ( media-plugins/vapoursynth-vstaambk )
+	vapoursynth_plugins_w3fdif? ( media-plugins/vapoursynth-w3fdif )
 	vapoursynth_plugins_wwxd? ( media-plugins/vapoursynth-wwxd )
 	vapoursynth_plugins_yadifmod? ( media-plugins/vapoursynth-yadifmod )
 "
