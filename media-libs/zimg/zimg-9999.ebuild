@@ -8,6 +8,8 @@ AUTOTOOLS_AUTORECONF=1
 
 inherit autotools-multilib
 
+AUTOTOOLS_IN_SOURCE_BUILD=1
+
 DESCRIPTION="Scaling, colorspace conversion, and dithering library"
 HOMEPAGE="https://github.com/sekrit-twc/zimg"
 
@@ -32,5 +34,8 @@ DOCS=( README.md COPYING )
 src_configure() {
 	autotools-multilib_src_configure \
 		$(use_enable cpu_flags_x86_sse x86simd) \
-		$(use_enable debug)
+		$(use_enable debug) \
+		--disable-testapp \
+		--disable-example \
+		--disable-unit-test
 }
