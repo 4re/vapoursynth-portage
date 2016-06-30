@@ -1,0 +1,41 @@
+From 1593df089919fe2e3c969e7236478086c3224ae0 Mon Sep 17 00:00:00 2001
+From: Are_ <surukko@gmail.com>
+Date: Sat, 25 Jun 2016 20:45:38 +0200
+Subject: [PATCH] Fix autotools compilation
+
+Also upgrade compiler language used to c++14
+---
+ Makefile.am  | 5 ++---
+ configure.ac | 2 +-
+ 2 files changed, 3 insertions(+), 4 deletions(-)
+
+diff --git a/Makefile.am b/Makefile.am
+index 51e2253..dbcf782 100644
+--- a/Makefile.am
++++ b/Makefile.am
+@@ -1,4 +1,4 @@
+-AM_CXXFLAGS = -O2 -std=c++11 -msse2 -mfpmath=sse $(STACKREALIGN) -Wall -Wextra -Wno-unused-parameter -Wshadow
++AM_CXXFLAGS = -O2 -std=c++14 -msse2 -mfpmath=sse $(STACKREALIGN) -Wall -Wextra -Wno-unused-parameter -Wshadow
+ 
+ AM_CPPFLAGS = $(VapourSynth_CFLAGS) $(FFTW3_CFLAGS)
+ 
+@@ -27,8 +27,7 @@ libmvtoolssf_la_SOURCES =	src/DCT.cpp \
+ 						src/MVSCDetection.cpp \
+ 						src/MVSuper.cpp \
+ 						src/Overlap.cpp \
+-						src/PlaneOfBlocks.cpp \
+-						src/SimpleResize.cpp
++						src/PlaneOfBlocks.cpp
+ 
+ libmvtoolssf_la_LDFLAGS = -no-undefined -avoid-version $(PLUGINLDFLAGS)
+ 
+diff --git a/configure.ac b/configure.ac
+index 77f6ebc..ac83d5c 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -1,4 +1,4 @@
+-AC_INIT([MVToolsSF], [1], [https://github.com/IFeelBloated/vapoursynth-mvtools-sf], [MVToolsSF], [https://github.com/IFeelBloated/vapoursynth-mvtools-sf])
++AC_INIT([MVToolsSF], [3], [https://github.com/IFeelBloated/vapoursynth-mvtools-sf], [MVToolsSF], [https://github.com/IFeelBloated/vapoursynth-mvtools-sf])
+ 
+ : ${CXXFLAGS=""}
+ 
