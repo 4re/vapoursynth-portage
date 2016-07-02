@@ -1,0 +1,11 @@
+diff --git a/Makefile.am b/Makefile.am
+index b6405ab..3806ad4 100644
+--- a/Makefile.am
++++ b/Makefile.am
+@@ -1,5 +1,5 @@
+ warning_flags = -Wall -Wextra -Wshadow
+-common_cflags = -O2 $(MFLAGS) $(warning_flags)
++common_cflags = -O2 $(warning_flags)
+ AM_CFLAGS = -std=c99 $(common_cflags)
+ AM_CXXFLAGS = -std=c++11 $(common_cflags)
+ 
