@@ -46,6 +46,7 @@ media-plugins/vapoursynth-sangnommod
 media-plugins/vapoursynth-scenechange
 media-plugins/vapoursynth-scxvid
 media-plugins/vapoursynth-ssiq
+media-plugins/vapoursynth-surfaceblur
 media-plugins/vapoursynth-tc2cfr
 media-plugins/vapoursynth-tcanny
 media-plugins/vapoursynth-tcomb
