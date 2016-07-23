@@ -1,4 +1,4 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
@@ -9,9 +9,14 @@ inherit multilib
 DESCRIPTION="A libav/ffmpeg based source library for easy frame accurate access"
 HOMEPAGE="https://github.com/FFMS/ffms2"
 
+if [[ ${PV} == *9999* ]]; then
+	KEYWORDS=""
+else
+	KEYWORDS="~amd64 ~x86"
+fi
+
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
 
 RDEPEND="
 	=media-libs/ffmpegsource-${PV}
@@ -23,5 +28,5 @@ DEPEND="${RDEPEND}
 S="${WORKDIR}"
 
 src_install() {
-	dosym /usr/$(get_libdir)/libffms2.so.3.0.0 /usr/$(get_libdir)/vapoursynth/libffms2.so || die
+	dosym /usr/$(get_libdir)/libffms2.so.4.0.0 /usr/$(get_libdir)/vapoursynth/libffms2.so || die
 }
