@@ -21,7 +21,7 @@ else
 	KEYWORDS="~amd64 ~x86"
 fi
 
-LICENSE="ISC"
+LICENSE="ISC LGPL-2.1"
 SLOT="0"
 IUSE=""
 
@@ -29,4 +29,6 @@ RDEPEND+="
 	>=virtual/ffmpeg-9
 "
 DEPEND="${RDEPEND}
+	dev-qt/qtwidgets
+	media-libs/vapoursynth
 "
