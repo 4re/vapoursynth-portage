@@ -59,6 +59,7 @@ IUSE="
 	vapoursynth_plugins_scenechange
 	vapoursynth_plugins_scxvid
 	vapoursynth_plugins_ssiq
+	vapoursynth_plugins_subtitle
 	vapoursynth_plugins_surfaceblur
 	vapoursynth_plugins_tc2cfr
 	vapoursynth_plugins_tcanny
@@ -132,6 +133,7 @@ DEPEND="${RDEPEND}
 	vapoursynth_plugins_scenechange? ( media-plugins/vapoursynth-scenechange )
 	vapoursynth_plugins_scxvid? ( media-plugins/vapoursynth-scxvid )
 	vapoursynth_plugins_ssiq? ( media-plugins/vapoursynth-ssiq )
+	vapoursynth_plugins_subtitle? ( media-plugins/vapoursynth-subtitle )
 	vapoursynth_plugins_surfaceblur? ( media-plugins/vapoursynth-surfaceblur )
 	vapoursynth_plugins_tc2cfr? ( media-plugins/vapoursynth-tc2cfr )
 	vapoursynth_plugins_tcanny? ( media-plugins/vapoursynth-tcanny )
