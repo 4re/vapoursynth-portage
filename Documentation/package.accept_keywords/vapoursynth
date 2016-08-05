@@ -47,6 +47,7 @@ media-plugins/vapoursynth-plugins-meta ~*
 media-plugins/vapoursynth-reduceflicker ~*
 media-plugins/vapoursynth-removedirt ~*
 media-plugins/vapoursynth-retinex ~*
+media-plugins/vapoursynth-sangnom ~*
 media-plugins/vapoursynth-sangnommod ~*
 media-plugins/vapoursynth-scenechange ~*
 media-plugins/vapoursynth-scxvid ~*
@@ -66,8 +67,8 @@ media-plugins/vapoursynth-vcmod ~*
 media-plugins/vapoursynth-vcmove ~*
 media-plugins/vapoursynth-vctrans ~*
 media-plugins/vapoursynth-videoscope ~*
-media-plugins/vapoursynth-vs-maskdetail ~*
 media-plugins/vapoursynth-vsimagereader ~*
+media-plugins/vapoursynth-vs-maskdetail ~*
 media-plugins/vapoursynth-vsrawsource ~*
 media-plugins/vapoursynth-vstaambk ~*
 media-plugins/vapoursynth-w3fdif ~*
