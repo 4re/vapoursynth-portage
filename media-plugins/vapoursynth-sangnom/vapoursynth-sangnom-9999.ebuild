@@ -22,7 +22,6 @@ SLOT="0"
 IUSE="doc cpu_flags_x86_sse2"
 
 RDEPEND+="
-	!media-plugins/vapoursynth-sangnommod
 	media-libs/vapoursynth
 "
 DEPEND="${RDEPEND}
