@@ -19,8 +19,7 @@ fi
 
 LICENSE="MIT"
 SLOT="0"
-IUSE="doc cpu_flags_x86_sse4_1"
-REQUIRED_USE="cpu_flags_x86_sse4_1"
+IUSE="doc cpu_flags_x86_sse2"
 
 RDEPEND+="
 	!media-plugins/vapoursynth-sangnommod
@@ -30,13 +29,16 @@ DEPEND="${RDEPEND}
 "
 
 src_configure() {
-	cflags="-Wall -fPIC -shared -std=c++11 -msse4.1"
+	commonflags="-Wall -fPIC -shared -std=c++11"
+	if use cpu_flags_x86_sse2; then
+		commonflags+=" -msse2 -DVS_TARGET_CPU_X86=1"
+	fi
 	libname="libsangnom.so"
 }
 
 src_compile() {
-	echo "$(tc-getCC) ${cflags} ${CFLAGS} $(pkg-config --cflags vapoursynth) sangnom_c.cpp -o ${libname}"
-	$(tc-getCC) ${cflags} ${CFLAGS} $(pkg-config --cflags vapoursynth) sangnom_c.cpp -o ${libname} || die
+	echo "$(tc-getCC) ${commonflags} ${CFLAGS} $(pkg-config --cflags vapoursynth) sangnom_c.cpp -o ${libname}"
+	$(tc-getCC) ${commonflags} ${CFLAGS} $(pkg-config --cflags vapoursynth) sangnom_c.cpp -o ${libname} || die
 }
 
 src_install() {
