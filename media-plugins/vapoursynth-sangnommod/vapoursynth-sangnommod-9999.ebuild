@@ -22,6 +22,7 @@ SLOT="0"
 KEYWORDS=""
 
 RDEPEND+="
+	!media-plugins/vapoursynth-sangnom
 	media-libs/vapoursynth
 "
 DEPEND="${RDEPEND}

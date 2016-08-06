@@ -23,6 +23,7 @@ IUSE="doc cpu_flags_x86_sse4_1"
 REQUIRED_USE="cpu_flags_x86_sse4_1"
 
 RDEPEND+="
+	!media-plugins/vapoursynth-sangnommod
 	media-libs/vapoursynth
 "
 DEPEND="${RDEPEND}
