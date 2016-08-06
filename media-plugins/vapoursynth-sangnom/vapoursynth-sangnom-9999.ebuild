@@ -34,8 +34,8 @@ src_configure() {
 }
 
 src_compile() {
-	echo "$(tc-getCC) ${cflags} ${CFLAGS} $(pkg-config --cflags vapoursynth) -c sangnom_c.cpp -o ${libname}"
-	$(tc-getCC) ${cflags} ${CFLAGS} $(pkg-config --cflags vapoursynth) -c sangnom_c.cpp -o ${libname} || die
+	echo "$(tc-getCC) ${cflags} ${CFLAGS} $(pkg-config --cflags vapoursynth) sangnom_c.cpp -o ${libname}"
+	$(tc-getCC) ${cflags} ${CFLAGS} $(pkg-config --cflags vapoursynth) sangnom_c.cpp -o ${libname} || die
 }
 
 src_install() {
