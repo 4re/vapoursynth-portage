@@ -16,6 +16,7 @@ media-plugins/vapoursynth-d2vsource ~*
 media-plugins/vapoursynth-damb ~*
 media-plugins/vapoursynth-dctfilter ~*
 media-plugins/vapoursynth-deblock ~*
+media-plugins/vapoursynth-degrainmedian ~*
 media-plugins/vapoursynth-delogo ~*
 media-plugins/vapoursynth-depan ~*
 media-plugins/vapoursynth-dfttest ~*
