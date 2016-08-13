@@ -19,7 +19,7 @@ fi
 
 LICENSE="MIT"
 SLOT="0"
-IUSE="doc cpu_flags_x86_sse2"
+IUSE=""
 
 RDEPEND+="
 	media-libs/vapoursynth
@@ -27,21 +27,12 @@ RDEPEND+="
 DEPEND="${RDEPEND}
 "
 
+src_prepare() {
+	eapply_user
+	fperms +x autogen.sh
+	./autogen.sh
+}
+
 src_configure() {
-	commonflags="-Wall -fPIC -shared -std=c++11"
-	if use cpu_flags_x86_sse2; then
-		commonflags+=" -msse2 -DVS_TARGET_CPU_X86=1"
-	fi
-	libname="libsangnom.so"
-}
-
-src_compile() {
-	echo "$(tc-getCC) ${commonflags} ${CFLAGS} $(pkg-config --cflags vapoursynth) sangnom_c.cpp -o ${libname}"
-	$(tc-getCC) ${commonflags} ${CFLAGS} $(pkg-config --cflags vapoursynth) sangnom_c.cpp -o ${libname} || die
-}
-
-src_install() {
-	use doc && DOCS=( "${WORKDIR}/${P}/README.md" ) && einstalldocs
-	exeinto "/usr/$(get_libdir)/vapoursynth/"
-	doexe ${libname}
+	econf --libdir="/usr/$(get_libdir)/vapoursynth/"
 }
