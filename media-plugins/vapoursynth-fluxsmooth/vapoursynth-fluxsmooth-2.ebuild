@@ -1,4 +1,4 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
@@ -33,11 +33,6 @@ DEPEND="${RDEPEND}
 "
 
 DOCS=( readme.rst )
-
-src_prepare() {
-	epatch "${FILESDIR}/${PN}-stack.patch"
-	autotools-utils_src_prepare
-}
 
 src_configure() {
 	autotools-utils_src_configure --libdir="/usr/$(get_libdir)/vapoursynth/"
