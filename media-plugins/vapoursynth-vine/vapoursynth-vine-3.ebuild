@@ -25,6 +25,7 @@ RDEPEND+="
 	media-plugins/vapoursynth-tcanny
 	media-plugins/vapoursynth-knlmeanscl
 	media-plugins/vapoursynth-fmtconv
+	media-plugins/vapoursynth-nnedi3
 "
 DEPEND="${RDEPEND}"
 
