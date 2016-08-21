@@ -16,14 +16,15 @@ HOMEPAGE="https://github.com/dubhater/vapoursynth-fluxsmooth"
 if [[ ${PV} == *9999* ]]; then
 	inherit git-r3
 	EGIT_REPO_URI="https://github.com/dubhater/${PN}.git"
+	KEYWORDS=""
 else
 	inherit vcs-snapshot
 	SRC_URI="https://github.com/dubhater/${PN}/archive/v${PV}.tar.gz -> ${PN}-${PV}.tar.gz"
+	KEYWORDS="~amd64 ~x86"
 fi
 
 LICENSE=""
 SLOT="0"
-KEYWORDS=""
 
 RDEPEND+="
 	media-libs/vapoursynth
