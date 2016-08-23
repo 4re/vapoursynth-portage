@@ -1,4 +1,4 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
@@ -27,7 +27,7 @@ fi
 LICENSE="LGPL-2.1 OFL-1.1"
 SLOT="0"
 VSPLUGINS="
-	vapoursynth_plugins_assvapour
+	vapoursynth_plugins_subtext
 	vapoursynth_plugins_eedi3
 	vapoursynth_plugins_imagemagick
 	vapoursynth_plugins_morpho
@@ -36,12 +36,15 @@ VSPLUGINS="
 	vapoursynth_plugins_vinverse
 	vapoursynth_plugins_vivtc
 "
-IUSE="cpu_flags_x86_sse doc +vspipe -debug -guard +shared -static ${VSPLUGINS}"
+IUSE="cpu_flags_x86_sse2 doc +vspipe -debug -guard +shared -static ${VSPLUGINS}"
 
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 RDEPEND+="${PYTHON_DEPS}
-	vapoursynth_plugins_assvapour? ( media-libs/libass )
+	vapoursynth_plugins_subtext? (
+		media-libs/libass
+		virtual/ffmpeg
+	)
 	vapoursynth_plugins_imagemagick? ( media-gfx/imagemagick[-q8,-q64] )
 	media-libs/zimg
 	vapoursynth_plugins_ocr? ( app-text/tesseract )
@@ -62,7 +65,7 @@ src_configure() {
 		--enable-core \
 		--enable-python-module \
 		--enable-vsscript \
-		$( use_enable vapoursynth_plugins_assvapour assvapour ) \
+		$( use_enable vapoursynth_plugins_subtext subtext ) \
 		$( use_enable vapoursynth_plugins_eedi3 eedi3 ) \
 		$( use_enable vapoursynth_plugins_imagemagick imwri ) \
 		$( use_enable vapoursynth_plugins_morpho morpho ) \
@@ -70,7 +73,7 @@ src_configure() {
 		$( use_enable vapoursynth_plugins_removegrain removegrain ) \
 		$( use_enable vapoursynth_plugins_vinverse vinverse ) \
 		$( use_enable vapoursynth_plugins_vivtc vivtc ) \
-		$( use_enable cpu_flags_x86_sse x86-asm ) \
+		$( use_enable cpu_flags_x86_sse2 x86-asm ) \
 		$( use_enable shared ) \
 		$( use_enable static ) \
 		$( use_enable debug ) \
