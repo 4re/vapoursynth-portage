@@ -2,9 +2,9 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-EAPI=5
+EAPI=6
 
-inherit toolchain-funcs multilib
+inherit toolchain-funcs
 
 DESCRIPTION="Builds an edge map using canny edge detection"
 HOMEPAGE="https://github.com/HomeOfVapourSynthEvolution/VapourSynth-TCanny"
@@ -28,16 +28,11 @@ RDEPEND+="
 DEPEND="${RDEPEND}
 "
 
-src_configure() {
-	sed -i -e "s:CXX=\"g++\":CXX=\"$(tc-getCXX)\":" configure || die
-	sed -i -e "s:LD=\"g++\":LD=\"$(tc-getCXX)\":" configure || die
-	chmod +x configure
-	./configure \
-		--install="${ED}/usr/$(get_libdir)/vapoursynth/" \
-		--extra-cxxflags="${CXXFLAGS}" --extra-ldflags="${LDFLAGS}" || die "configure failed"
+src_prepare() {
+	eapply_user
+	./autogen.sh
 }
 
-src_install() {
-	emake install
-	dodoc README.md
+src_configure() {
+	econf --libdir="/usr/$(get_libdir)/vapoursynth/"
 }
