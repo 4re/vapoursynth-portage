@@ -63,3 +63,8 @@ pkg_postinst() {
 		eselect opencl set nvidia
 	fi
 }
+
+src_install() {
+	exeinto "/usr/$(get_libdir)/vapoursynth/"
+	doexe libknlmeanscl.so
+}
