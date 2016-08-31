@@ -63,8 +63,3 @@ pkg_postinst() {
 		eselect opencl set nvidia
 	fi
 }
-
-src_install() {
-	emake install
-	dodoc DOC.md
-}
