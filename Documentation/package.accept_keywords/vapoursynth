@@ -45,6 +45,7 @@ media-plugins/vapoursynth-mvtools-sf ~*
 media-plugins/vapoursynth-nnedi3 ~*
 media-plugins/vapoursynth-oyster ~*
 media-plugins/vapoursynth-plugins-meta ~*
+media-plugins/vapoursynth-plum ~*
 media-plugins/vapoursynth-reduceflicker ~*
 media-plugins/vapoursynth-removedirt ~*
 media-plugins/vapoursynth-retinex ~*
