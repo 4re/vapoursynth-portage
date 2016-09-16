@@ -10,7 +10,7 @@ AUTOTOOLS_AUTORECONF=1
 inherit autotools-utils multilib python
 
 DESCRIPTION="MVTools is a set of filters for motion estimation and compensation"
-HOMEPAGE="https://github.com/IFeelBloated/vapoursynth-mvtools"
+HOMEPAGE="https://github.com/IFeelBloated/vapoursynth-mvtools-sf"
 
 if [[ ${PV} == *9999* ]]; then
 	inherit git-r3
