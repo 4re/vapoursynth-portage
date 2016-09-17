@@ -21,7 +21,7 @@ Usage
 -----
 First of all to activate default vapoursynth plugins:
 ```
-# echo 'VAPOURSYNTH_PLUGINS="assvapour eedi3 imagemagick morpho ocr removegrain vinverse vivtc"' >> /etc/portage/make.conf
+# echo 'VAPOURSYNTH_PLUGINS="subtext eedi3 imagemagick morpho ocr removegrain vinverse vivtc"' >> /etc/portage/make.conf
 ```
 There is a convenient set that will pull all vapoursynth plugins:
 ```
