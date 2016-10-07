@@ -11,11 +11,11 @@ inherit python-utils-r1 python-single-r1 git-r3
 DESCRIPTION="A ported AA-script from Avisynth"
 HOMEPAGE="https://github.com/HomeOfVapourSynthEvolution/vsTAAmbk"
 EGIT_REPO_URI="https://github.com/HomeOfVapourSynthEvolution/vsTAAmbk.git"
-# EGIT_COMMIT=""
+EGIT_COMMIT="ddcd6fe985cdcc1b0039a27f9008430817fe89ef"
 
 LICENSE=""
 SLOT="0"
-KEYWORDS=""
+KEYWORDS="~amd64 ~x86"
 
 RDEPEND+="
 	media-libs/vapoursynth[${PYTHON_USEDEP},vapoursynth_plugins_removegrain]
@@ -31,6 +31,10 @@ RDEPEND+="
 "
 DEPEND="${RDEPEND}"
 
+
+src_prepare(){ 
+	epatch "${FILESDIR}/${P}-sangnom.patch"
+}
 
 src_install(){
 	insinto "$(python_get_sitedir)"
