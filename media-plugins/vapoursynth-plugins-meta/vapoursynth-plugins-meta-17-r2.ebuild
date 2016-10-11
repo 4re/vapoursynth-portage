@@ -38,7 +38,6 @@ IUSE="
 	vapoursynth_plugins_flash3kyuu_deband
 	vapoursynth_plugins_fluxsmooth
 	vapoursynth_plugins_fmtconv
-	vapoursynth_plugins_fmtcwrap
 	vapoursynth_plugins_genericfilters
 	vapoursynth_plugins_havsfunc
 	vapoursynth_plugins_histogram
@@ -116,7 +115,6 @@ DEPEND="${RDEPEND}
 	vapoursynth_plugins_flash3kyuu_deband? ( media-plugins/vapoursynth-flash3kyuu_deband )
 	vapoursynth_plugins_fluxsmooth? ( media-plugins/vapoursynth-fluxsmooth )
 	vapoursynth_plugins_fmtconv? ( media-plugins/vapoursynth-fmtconv )
-	vapoursynth_plugins_fmtcwrap? ( media-plugins/vapoursynth-fmtcwrap )
 	vapoursynth_plugins_genericfilters? ( media-plugins/vapoursynth-genericfilters )
 	vapoursynth_plugins_havsfunc? ( media-plugins/vapoursynth-havsfunc )
 	vapoursynth_plugins_histogram? ( media-plugins/vapoursynth-histogram )

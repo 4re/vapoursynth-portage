@@ -25,7 +25,6 @@ media-plugins/vapoursynth-finesharp
 media-plugins/vapoursynth-flash3kyuu_deband
 media-plugins/vapoursynth-fluxsmooth
 media-plugins/vapoursynth-fmtconv
-media-plugins/vapoursynth-fmtcwrap
 media-plugins/vapoursynth-genericfilters
 media-plugins/vapoursynth-havsfunc
 media-plugins/vapoursynth-histogram
