@@ -23,18 +23,13 @@ RDEPEND+="
 	media-plugins/vapoursynth-fmtconv
 	media-plugins/vapoursynth-genericfilters
 	media-plugins/vapoursynth-havsfunc
-	media-plugins/vapoursynth-msmoosh
+	media-plugins/vapoursynth-mvsfunc
 	media-plugins/vapoursynth-mvtools
 	media-plugins/vapoursynth-nnedi3
 	media-plugins/vapoursynth-sangnom
-	media-plugins/vapoursynth-temporalsoften
 "
 DEPEND="${RDEPEND}"
 
-
-src_prepare(){ 
-	epatch "${FILESDIR}/${P}-sangnom.patch"
-}
 
 src_install(){
 	insinto "$(python_get_sitedir)"
