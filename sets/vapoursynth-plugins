@@ -33,6 +33,7 @@ media-plugins/vapoursynth-it
 media-plugins/vapoursynth-knlmeanscl
 media-plugins/vapoursynth-l-smash-works
 media-plugins/vapoursynth-minsrp
+media-plugins/vapoursynth-miscfilters
 media-plugins/vapoursynth-msmoosh
 media-plugins/vapoursynth-mvsfunc
 media-plugins/vapoursynth-mvtools
@@ -64,8 +65,8 @@ media-plugins/vapoursynth-vcmove
 media-plugins/vapoursynth-vctrans
 media-plugins/vapoursynth-videoscope
 media-plugins/vapoursynth-vine
-media-plugins/vapoursynth-vsimagereader
 media-plugins/vapoursynth-vs-maskdetail
+media-plugins/vapoursynth-vsimagereader
 media-plugins/vapoursynth-vsrawsource
 media-plugins/vapoursynth-vstaambk
 media-plugins/vapoursynth-w3fdif
