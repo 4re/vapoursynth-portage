@@ -1,4 +1,4 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
@@ -12,9 +12,11 @@ HOMEPAGE="https://bitbucket.org/mystery_keeper/vapoursynth-dctfilter"
 if [[ ${PV} == *9999* ]]; then
 	inherit git-r3
 	EGIT_REPO_URI="https://bitbucket.org/mystery_keeper/${PN}.git"
+	KEYWORDS=""
 else
 	inherit vcs-snapshot
 	SRC_URI="https://bitbucket.org/mystery_keeper/${PN}/get/r${PV}.tar.bz2 -> ${PN}-${PV}.tar.bz2"
+	KEYWORDS="~x86 ~amd64"
 fi
 
 LICENSE="MIT"
