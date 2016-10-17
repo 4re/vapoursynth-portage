@@ -49,6 +49,5 @@ RDEPEND+="
 DEPEND="${RDEPEND}"
 
 src_install(){
-	insinto "$(python_get_sitedir)"
-	doins havsfunc.py
+	python_domodule havsfunc.py
 }

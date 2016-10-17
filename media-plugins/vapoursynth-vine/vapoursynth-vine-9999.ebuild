@@ -38,6 +38,5 @@ DOCS=( "README.md" )
 
 src_install(){
 	use doc && dodoc ${DOCS}
-	insinto "$(python_get_sitedir)"
-	doins Vine.py
+	python_domodule Vine.py
 }

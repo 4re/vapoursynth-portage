@@ -36,6 +36,5 @@ DOCS=( "README.md" )
 
 src_install(){
 	use doc && dodoc ${DOCS}
-	insinto "$(python_get_sitedir)"
-	doins Plum.py
+	python_domodule Plum.py
 }

@@ -36,8 +36,7 @@ src_compile() {
 }
 
 src_install() {
-	insinto "$(python_get_sitedir)"
-	doins MCDenoise.py
+	python_domodule MCDenoise.py
 	exeinto /usr/$(get_libdir)/vapoursynth/
 	doexe ${LIBNAME}
 	dodoc TempLinearApproximate-readme.txt

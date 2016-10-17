@@ -38,8 +38,7 @@ src_compile(){
 }
 
 src_install(){
-	insinto "$(python_get_sitedir)"
-	doins  VAutoDeint.py
+	python_domodule VAutoDeint.py
 	exeinto /usr/$(get_libdir)/vapoursynth/
 	doexe ${LIBNAME}
 	dodoc README

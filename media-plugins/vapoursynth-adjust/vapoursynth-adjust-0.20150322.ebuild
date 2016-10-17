@@ -24,7 +24,6 @@ DEPEND="${RDEPEND}
 "
 
 src_install(){
-	insinto "$(python_get_sitedir)"
-	doins adjust.py
+	python_domodule adjust.py
 	dodoc readme.rst
 }

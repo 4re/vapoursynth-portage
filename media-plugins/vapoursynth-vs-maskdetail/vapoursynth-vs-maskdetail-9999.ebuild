@@ -23,6 +23,5 @@ DEPEND="${RDEPEND}
 "
 
 src_install(){
-	insinto "$(python_get_sitedir)"
-	doins MaskDetail.py
+	python_domodule MaskDetail.py
 }

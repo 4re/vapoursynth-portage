@@ -32,8 +32,7 @@ src_compile(){
 }
 
 src_install(){
-	insinto "$(python_get_sitedir)"
-	doins temporalsoften2.py
+	python_domodule temporalsoften2.py
 	exeinto /usr/lib/vapoursynth/
 	doexe ${LIBNAMESC} ${LIBNAMETS}
 	dodoc readme_temporalsoften.txt readme.txt

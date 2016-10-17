@@ -26,6 +26,5 @@ DEPEND="${RDEPEND}
 S="${WORKDIR}/${P}"
 
 src_install(){
-	insinto "$(python_get_sitedir)"
-	doins finesharp.py
+	python_domodule finesharp.py
 }

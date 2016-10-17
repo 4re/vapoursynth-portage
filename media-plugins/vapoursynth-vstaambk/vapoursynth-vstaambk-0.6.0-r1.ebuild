@@ -37,6 +37,5 @@ src_prepare(){
 }
 
 src_install(){
-	insinto "$(python_get_sitedir)"
-	doins vsTAAmbk.py
+	python_domodule vsTAAmbk.py
 }

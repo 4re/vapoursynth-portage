@@ -35,6 +35,5 @@ DEPEND="${RDEPEND}
 S="${WORKDIR}/${P}"
 
 src_install(){
-	insinto "$(python_get_sitedir)"
-	doins mvsfunc.py
+	python_domodule mvsfunc.py
 }
