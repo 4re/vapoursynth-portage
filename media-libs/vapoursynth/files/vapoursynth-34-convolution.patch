@@ -1,0 +1,64 @@
+From 2e0652d90d980b07319c80cf98223f59717427b6 Mon Sep 17 00:00:00 2001
+From: myrsloik <fredrik.mellbin@gmail.com>
+Date: Sat, 15 Oct 2016 19:57:22 +0200
+Subject: [PATCH] Fix upper left weight unpacking typo for 3x3 convolution
+ intrinsics
+
+---
+ ChangeLog                   |  5 ++++-
+ src/core/genericfilters.cpp | 16 +++++++++-------
+ 2 files changed, 13 insertions(+), 8 deletions(-)
+
+diff --git a/ChangeLog b/ChangeLog
+index c915d7a..3773103 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,10 +1,13 @@
++r35:
++fixed 8bit 3x3 convolution where the upper left pixel wouldn't be taken into account correctly on x86
++
+ r34:
+ avfs can now output the same high bitdepth formats for avisynth+ as for vapoursynth
+ it's now possible to skip installing the visual studio runtimes in the installer to reduce online dependency of installer (installation may not work until manually installed, obviously)
+ temporalsoften plugin is no longer included in the windows installer, it has been replaced by the misc plugin containing various functions useful for avisynth compatibility
+ the default max memory usage is now 4GB on 64bit systems
+ fixed several unpacking issues in avisource introduced in the previous version
+-added warning if there are any nodes or frames still in use when the core is free
++added warning if there are any nodes or frames still in use when the core is freed
+ improved avfs prefetch logic for vpy
+ added premultiplied blending mode to maskedmerge
+ added premultiply filter to premultiply a clip with alpha
+diff --git a/src/core/genericfilters.cpp b/src/core/genericfilters.cpp
+index bea8f4b..e5b3129 100644
+--- a/src/core/genericfilters.cpp
++++ b/src/core/genericfilters.cpp
+@@ -309,7 +309,7 @@ X86_MAXMINOP(Min, ReducePlus, min, LimitMaxOp)
+ X86_MAXMINOP(Min, ReduceHorizontal, min, LimitMaxOp)
+ X86_MAXMINOP(Min, ReduceVertical, min, LimitMaxOp)
+ 
+-static FORCE_INLINE __m128i _mm_packus_epi32_sse2(__m128i v1, __m128i v2) {
++static FORCE_INLINE __m128i _mm_packus_epi32_sse2(__m128i &v1, __m128i &v2) {
+     __m128i ones = _mm_cmpeq_epi8(_mm_setzero_si128(), _mm_setzero_si128());
+     __m128i subMask32 = _mm_srli_epi32(_mm_slli_epi32(ones, 31), 16);
+     __m128i addMask16 = _mm_slli_epi16(ones, 15);
+@@ -350,12 +350,14 @@ struct Convolution3x3 {
+ 
+     static FORCE_INLINE __m128i process8(__m128i &t1, __m128i &t2, __m128i &t3, __m128i &m1, __m128i &m2, __m128i &m3, __m128i &b1, __m128i &b2, __m128i &b3, const FrameData &opts) {
+         __m128 absMask = _mm_castsi128_ps(!opts.saturate ? _mm_srli_epi32(_mm_cmpeq_epi8(_mm_setzero_si128(), _mm_setzero_si128()), 1) : _mm_cmpeq_epi8(_mm_setzero_si128(), _mm_setzero_si128()));
+-
+-        __m128i acc1 = _mm_madd_epi16(_mm_unpacklo_epi16(_mm_unpacklo_epi8(t1, _mm_setzero_si128()), _mm_setzero_si128()), _mm_unpacklo_epi16(_mm_set1_epi16(opts.matrix[0]), _mm_setzero_si128()));
+-        __m128i acc2 = _mm_madd_epi16(_mm_unpackhi_epi16(_mm_unpackhi_epi8(t1, _mm_setzero_si128()), _mm_setzero_si128()), _mm_unpackhi_epi16(_mm_set1_epi16(opts.matrix[0]), _mm_setzero_si128()));
+-        __m128i acc3 = _mm_madd_epi16(_mm_unpacklo_epi16(_mm_unpacklo_epi8(t1, _mm_setzero_si128()), _mm_setzero_si128()), _mm_unpacklo_epi16(_mm_set1_epi16(opts.matrix[0]), _mm_setzero_si128()));
+-        __m128i acc4 = _mm_madd_epi16(_mm_unpackhi_epi16(_mm_unpackhi_epi8(t1, _mm_setzero_si128()), _mm_setzero_si128()), _mm_unpackhi_epi16(_mm_set1_epi16(opts.matrix[0]), _mm_setzero_si128()));
+-
++        
++        __m128i t1lo = _mm_unpacklo_epi8(t1, _mm_setzero_si128());
++        __m128i t1hi = _mm_unpackhi_epi8(t1, _mm_setzero_si128());
++        __m128i acc1 = _mm_madd_epi16(_mm_unpacklo_epi16(t1lo, _mm_setzero_si128()), _mm_unpacklo_epi16(_mm_set1_epi16(opts.matrix[0]), _mm_setzero_si128()));
++        __m128i acc2 = _mm_madd_epi16(_mm_unpackhi_epi16(t1lo, _mm_setzero_si128()), _mm_unpackhi_epi16(_mm_set1_epi16(opts.matrix[0]), _mm_setzero_si128()));
++        __m128i acc3 = _mm_madd_epi16(_mm_unpacklo_epi16(t1hi, _mm_setzero_si128()), _mm_unpacklo_epi16(_mm_set1_epi16(opts.matrix[0]), _mm_setzero_si128()));
++        __m128i acc4 = _mm_madd_epi16(_mm_unpackhi_epi16(t1hi, _mm_setzero_si128()), _mm_unpackhi_epi16(_mm_set1_epi16(opts.matrix[0]), _mm_setzero_si128()));
++        
+         CONV_REDUCE_REG8(t2, t3, 1, 2);
+         CONV_REDUCE_REG8(m1, m2, 3, 4);
+         CONV_REDUCE_REG8(m3, b1, 5, 6);

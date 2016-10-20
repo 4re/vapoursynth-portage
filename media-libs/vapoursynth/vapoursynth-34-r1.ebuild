@@ -46,7 +46,7 @@ RDEPEND+="${PYTHON_DEPS}
 		virtual/ffmpeg
 	)
 	vapoursynth_plugins_imagemagick? ( media-gfx/imagemagick[-q8,-q64] )
-	media-libs/zimg
+	>=media-libs/zimg-2.3
 	vapoursynth_plugins_ocr? ( app-text/tesseract )
 "
 DEPEND="${RDEPEND}
@@ -59,6 +59,8 @@ DEPEND="${RDEPEND}
 
 # bug with MAKEOPTS="-j1"
 AUTOTOOLS_IN_SOURCE_BUILD=1
+
+PATCHES=( "${FILESDIR}/${P}-convolution.patch" )
 
 src_configure() {
 	autotools-utils_src_configure \
