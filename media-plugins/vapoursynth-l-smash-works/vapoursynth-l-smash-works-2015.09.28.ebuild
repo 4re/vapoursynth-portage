@@ -1,10 +1,10 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-EAPI=5
+EAPI=6
 
-inherit toolchain-funcs multilib git-r3
+inherit git-r3
 
 DESCRIPTION="Works based on L-SMASH project"
 HOMEPAGE="https://github.com/VFR-maniac/L-SMASH-Works"
@@ -21,12 +21,14 @@ RDEPEND+="
 	media-libs/l-smash
 "
 DEPEND="${RDEPEND}
+	media-video/ffmpeg
 	virtual/pkgconfig
 "
 
 S="${WORKDIR}/${P}/VapourSynth"
 
 src_prepare() {
+	eapply_user
 	sed -i -e "s:CC=\"gcc\":CC=\"$(tc-getCC)\":" configure || die
 	sed -i -e "s:LD=\"gcc\":LD=\"$(tc-getCC)\":" configure || die
 }

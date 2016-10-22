@@ -1,31 +1,27 @@
 # Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
-
+ 
 EAPI=6
+
+inherit git-r3
 
 DESCRIPTION="Works based on L-SMASH project"
 HOMEPAGE="https://github.com/VFR-maniac/L-SMASH-Works"
 
-if [[ ${PV} == *9999* ]]; then
-	inherit git-r3
-	EGIT_REPO_URI="https://github.com/VFR-maniac/L-SMASH-Works.git"
-	KEYWORDS=""
-else
-	inherit vcs-snapshot
-	SRC_URI="https://github.com/VFR-maniac/L-SMASH-Works/archive/v${PV}.tar.gz -> ${PN}-${PV}.tar.gz"
-	KEYWORDS="~x86 ~amd64"
-fi
+EGIT_REPO_URI="https://github.com/VFR-maniac/L-SMASH-Works.git"
+EGIT_COMMIT="dfea5072734e9b9022c53412229be0a0675f45f4"
 
 LICENSE="GPL-2"
+KEYWORDS="~x86 ~amd64"
 IUSE="-debug"
 SLOT="0"
 
 RDEPEND+="
-	=media-libs/l-smash-${PV}
+	media-libs/l-smash
 "
 DEPEND="${RDEPEND}
-	>=media-video/ffmpeg-3.0.0
+	media-video/ffmpeg
 	virtual/pkgconfig
 "
 
