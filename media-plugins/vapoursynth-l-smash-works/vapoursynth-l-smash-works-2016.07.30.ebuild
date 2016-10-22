@@ -18,10 +18,10 @@ IUSE="-debug"
 SLOT="0"
 
 RDEPEND+="
+	media-video/ffmpeg
 	media-libs/l-smash
 "
 DEPEND="${RDEPEND}
-	media-video/ffmpeg
 	virtual/pkgconfig
 "
 
