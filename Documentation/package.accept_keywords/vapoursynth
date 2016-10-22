@@ -1,7 +1,6 @@
 app-editors/vapoursynth-editor ~*
 media-libs/l-smash ~*
 media-libs/vapoursynth ~*
-media-libs/zimg ~*
 media-plugins/vapoursynth-addgrain ~*
 media-plugins/vapoursynth-adjust ~*
 media-plugins/vapoursynth-awarpsharp2 ~*
