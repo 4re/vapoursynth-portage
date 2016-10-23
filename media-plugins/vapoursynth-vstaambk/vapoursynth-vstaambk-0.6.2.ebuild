@@ -11,7 +11,7 @@ inherit python-utils-r1 python-single-r1 git-r3
 DESCRIPTION="A ported AA-script from Avisynth"
 HOMEPAGE="https://github.com/HomeOfVapourSynthEvolution/vsTAAmbk"
 EGIT_REPO_URI="https://github.com/HomeOfVapourSynthEvolution/vsTAAmbk.git"
-EGIT_COMMIT="209d8e80a1d4ec960ca32af2665a2a235bdab491"
+EGIT_COMMIT="3466f842de67ac98e6646beb7233f2a87617e439"
 
 LICENSE=""
 SLOT="0"
@@ -21,7 +21,6 @@ RDEPEND+="
 	media-libs/vapoursynth[${PYTHON_USEDEP},vapoursynth_plugins_removegrain]
 	media-plugins/vapoursynth-eedi2
 	media-plugins/vapoursynth-fmtconv
-	media-plugins/vapoursynth-genericfilters
 	media-plugins/vapoursynth-havsfunc
 	media-plugins/vapoursynth-mvsfunc
 	media-plugins/vapoursynth-mvtools

@@ -21,7 +21,6 @@ RDEPEND+="
 	media-libs/vapoursynth[${PYTHON_USEDEP},vapoursynth_plugins_removegrain]
 	media-plugins/vapoursynth-eedi2
 	media-plugins/vapoursynth-fmtconv
-	media-plugins/vapoursynth-genericfilters
 	media-plugins/vapoursynth-havsfunc
 	media-plugins/vapoursynth-mvsfunc
 	media-plugins/vapoursynth-mvtools
