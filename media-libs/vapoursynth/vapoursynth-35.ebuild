@@ -60,8 +60,6 @@ DEPEND="${RDEPEND}
 # bug with MAKEOPTS="-j1"
 AUTOTOOLS_IN_SOURCE_BUILD=1
 
-PATCHES=( "${FILESDIR}/${P}-convolution.patch" )
-
 src_configure() {
 	autotools-utils_src_configure \
 		--enable-core \
