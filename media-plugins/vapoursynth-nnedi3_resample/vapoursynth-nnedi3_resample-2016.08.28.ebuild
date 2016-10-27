@@ -6,21 +6,15 @@ EAPI=5
 
 PYTHON_COMPAT=( python3_{4,5} )
 
-inherit python-utils-r1 python-single-r1
+inherit python-utils-r1 python-single-r1 git-r3
 
 DESCRIPTION="A function for scaling, color space conversion, etc."
 HOMEPAGE="https://github.com/mawen1250/VapourSynth-script"
 
-if [[ ${PV} == *9999* ]]; then
-	inherit git-r3
-	EGIT_REPO_URI="https://github.com/mawen1250/VapourSynth-script.git"
-	KEYWORDS=""
-else
-	inherit vcs-snapshot
-	SRC_URI="https://github.com/mawen1250/VapourSynth-script/archive/${PV}.tar.gz -> ${PN}-${PV}.tar.gz"
-	KEYWORDS="~amd64 ~x86"
-fi
+EGIT_REPO_URI="https://github.com/mawen1250/VapourSynth-script.git"
+EGIT_COMMIT="0f4c0a7b0732be3f5f03f91f0c69ac447d19c0a8"
 
+KEYWORDS="~amd64 ~x86"
 LICENSE=""
 SLOT="0"
 
