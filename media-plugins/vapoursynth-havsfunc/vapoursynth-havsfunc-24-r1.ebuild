@@ -42,6 +42,7 @@ RDEPEND+="
 	media-plugins/vapoursynth-mvsfunc
 	media-plugins/vapoursynth-mvtools
 	media-plugins/vapoursynth-nnedi3
+	media-plugins/vapoursynth-nnedi3_resample
 	media-plugins/vapoursynth-sangnom
 	media-plugins/vapoursynth-scenechange
 	media-plugins/vapoursynth-temporalsoften
