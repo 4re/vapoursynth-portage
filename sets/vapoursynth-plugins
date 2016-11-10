@@ -39,6 +39,7 @@ media-plugins/vapoursynth-mvsfunc
 media-plugins/vapoursynth-mvtools
 media-plugins/vapoursynth-mvtools-sf
 media-plugins/vapoursynth-nnedi3
+media-plugins/vapoursynth-nnedi3_resample
 media-plugins/vapoursynth-oyster
 media-plugins/vapoursynth-plum
 media-plugins/vapoursynth-qrcodesource
@@ -70,5 +71,6 @@ media-plugins/vapoursynth-vsimagereader
 media-plugins/vapoursynth-vsrawsource
 media-plugins/vapoursynth-vstaambk
 media-plugins/vapoursynth-w3fdif
+media-plugins/vapoursynth-waifu2x-w2xc
 media-plugins/vapoursynth-wwxd
 media-plugins/vapoursynth-yadifmod
