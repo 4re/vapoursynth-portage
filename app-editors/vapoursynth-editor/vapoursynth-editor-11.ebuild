@@ -15,7 +15,7 @@ if [[ ${PV} == *9999* ]]; then
 	KEYWORDS=""
 else
 	inherit vcs-snapshot
-	SRC_URI="https://bitbucket.org/mystery_keeper/${PN}/get/r⑨.tar.bz2 -> ${PN}-${PV}.tar.bz2"
+	SRC_URI="https://bitbucket.org/mystery_keeper/${PN}/get/r${PV}.tar.bz2 -> ${PN}-${PV}.tar.bz2"
 	KEYWORDS="~amd64 ~x86"
 fi
 
