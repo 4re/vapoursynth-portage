@@ -36,9 +36,12 @@ RDEPEND+="
 	media-plugins/vapoursynth-depan
 	media-plugins/vapoursynth-dfttest
 	media-plugins/vapoursynth-eedi2
+	media-plugins/vapoursynth-flash3kyuu_deband
+	media-plugins/vapoursynth-fluxsmooth
 	media-plugins/vapoursynth-fft3dfilter
 	media-plugins/vapoursynth-fmtconv
 	media-plugins/vapoursynth-genericfilters
+	media-plugins/vapoursynth-knlmeanscl
 	media-plugins/vapoursynth-mvsfunc
 	media-plugins/vapoursynth-mvtools
 	media-plugins/vapoursynth-nnedi3
