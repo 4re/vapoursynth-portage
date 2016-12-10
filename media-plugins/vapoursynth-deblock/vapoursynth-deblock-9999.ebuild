@@ -28,9 +28,16 @@ RDEPEND+="
 	media-libs/vapoursynth
 "
 DEPEND="${RDEPEND}
+	|| ( >=sys-devel/gcc-5.1.0 sys-devel/clang )
 "
 
 DOCS=( "README.md" )
+
+pkg_pretend() {
+	if tc-is-gcc && [[ $(gcc-major-version) -lt 5 ]]; then
+		die "The active compiler needs to be gcc 5.x or clang"
+	fi
+}
 
 src_configure() {
 	autotools-utils_src_configure --libdir="/usr/$(get_libdir)/vapoursynth/"

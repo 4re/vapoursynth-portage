@@ -4,9 +4,7 @@
 
 EAPI=5
 
-AUTOTOOLS_AUTORECONF=1
-
-inherit autotools-utils multilib
+inherit toolchain-funcs multilib
 
 DESCRIPTION="It does a deblocking of the picture, using the deblocking filter of h264"
 HOMEPAGE="https://github.com/HomeOfVapourSynthEvolution/VapourSynth-Deblock"
@@ -14,31 +12,34 @@ HOMEPAGE="https://github.com/HomeOfVapourSynthEvolution/VapourSynth-Deblock"
 if [[ ${PV} == *9999* ]]; then
 	inherit git-r3
 	EGIT_REPO_URI="https://github.com/HomeOfVapourSynthEvolution/${PN}.git"
-	KEYWORDS=""
 else
 	inherit vcs-snapshot
 	SRC_URI="https://github.com/HomeOfVapourSynthEvolution/${PN}/archive/r${PV}.tar.gz -> ${PN}-${PV}.tar.gz"
-	KEYWORDS="~amd64 ~x86"
 fi
 
 LICENSE="GPL-2"
 SLOT="0"
+KEYWORDS="~amd64 ~x86"
 
 RDEPEND+="
 	media-libs/vapoursynth
 "
 DEPEND="${RDEPEND}
-	|| ( >=sys-devel/gcc-5.1.0 sys-devel/clang )
 "
 
-DOCS=( "README.md" )
-
-pkg_pretend() {
-	if tc-is-gcc && [[ $(gcc-major-version) -lt 5 ]]; then
-		die "The active compiler needs to be gcc 5.x or clang"
-	fi
+src_configure() {
+	selfcxxflags="-Wall -fPIC -std=c++11"
+	selfldflags="-shared"
+	libname="libdeblock.so"
 }
 
-src_configure() {
-	autotools-utils_src_configure --libdir="/usr/$(get_libdir)/vapoursynth/"
+src_compile() {
+	echo "$(tc-getCXX) ${selfcxxflags} ${CXXFLAGS} ${selfldflags} ${LDFLAGS} -c src/*.cpp -o ${libname}"
+	$(tc-getCXX) ${selfcxxflags} ${CXXFLAGS} ${selfldflags} ${LDFLAGS} src/*.cpp -o ${libname} || die
+}
+
+src_install() {
+	exeinto "/usr/$(get_libdir)/vapoursynth/"
+	doexe ${libname}
+	dodoc README.md
 }
