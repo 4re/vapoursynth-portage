@@ -2,11 +2,11 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-EAPI=5
+EAPI=6
 
-inherit toolchain-funcs multilib
+inherit toolchain-funcs
 
-DESCRIPTION="Performs DCT on 8x8 blocks of source clip, applies modification to it, then performs IDCT"
+DESCRIPTION="Performs DCT on 8x8 blocks, applies modification to it, then performs IDCT"
 HOMEPAGE="https://bitbucket.org/mystery_keeper/vapoursynth-dctfilter"
 
 if [[ ${PV} == *9999* ]]; then
@@ -21,7 +21,6 @@ fi
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS=""
 
 RDEPEND+="
 	media-libs/vapoursynth
