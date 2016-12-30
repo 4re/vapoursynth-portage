@@ -26,6 +26,7 @@ media-plugins/vapoursynth-fft3dfilter ~*
 media-plugins/vapoursynth-fieldhint ~*
 media-plugins/vapoursynth-fillborders ~*
 media-plugins/vapoursynth-finesharp ~*
+media-plugins/vapoursynth-fix-telecined-fades ~*
 media-plugins/vapoursynth-flash3kyuu_deband ~*
 media-plugins/vapoursynth-fluxsmooth ~*
 media-plugins/vapoursynth-fmtconv ~*
