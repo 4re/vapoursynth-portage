@@ -1,0 +1,12 @@
+diff --git a/Source.cpp b/Source.cpp
+index 20e9cc4..9e2f8f7 100644
+--- a/Source.cpp
++++ b/Source.cpp
+@@ -3,6 +3,7 @@
+ #include <cmath>
+ #include <algorithm>
+ #include <malloc.h>
++#include <cstring>
+ 
+ struct FixFadesData final {
+ 	const VSAPI *vsapi = nullptr;

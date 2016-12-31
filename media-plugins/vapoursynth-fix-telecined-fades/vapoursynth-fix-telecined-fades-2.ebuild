@@ -34,6 +34,7 @@ COMMON_FLAGS="-Wall -std=c++14 -shared -fPIC"
 
 src_prepare(){
 	rm VSHelper.h VapourSynth.h
+	eapply "${FILESDIR}/${P}-include.patch"
 	eapply_user
 }
 
