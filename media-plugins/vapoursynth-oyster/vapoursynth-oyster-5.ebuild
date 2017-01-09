@@ -12,7 +12,7 @@ DESCRIPTION="A top class de-noising filter against compression artifacts"
 HOMEPAGE="https://github.com/IFeelBloated/Oyster"
 
 EGIT_REPO_URI="https://github.com/IFeelBloated/Oyster.git"
-EGIT_COMMIT="8fc1d8bb5c91c497660677f66c3847d098c93c03"
+EGIT_COMMIT="3ee4fa8a978f1011632639bf7e5b9ec99264d3be"
 
 KEYWORDS="~amd64 ~x86"
 
