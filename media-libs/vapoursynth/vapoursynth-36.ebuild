@@ -49,6 +49,7 @@ RDEPEND+="${PYTHON_DEPS}
 	vapoursynth_plugins_imagemagick? ( media-gfx/imagemagick[-q8,-q64] )
 	>=media-libs/zimg-2.3
 	vapoursynth_plugins_ocr? ( app-text/tesseract )
+	vapoursynth_plugins_miscfilters? ( !media-plugins/vapoursynth-miscfilters )
 "
 DEPEND="${RDEPEND}
 	amd64? ( dev-lang/yasm )
