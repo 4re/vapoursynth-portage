@@ -5,19 +5,20 @@
 	<email>vapoursynth@overlay</email>
 </maintainer>
 <use>
-	<flag name="vapoursynth_plugins_subtext">Enable SSA/ASS subtitles plugin using <pkg>media-libs/libass</pkg></flag>
 	<flag name="debug">Enable compilation options required for debugging</flag>
 	<flag name="doc">Install project documentation</flag>
-	<flag name="vapoursynth_plugins_eedi3">Enable slow edge directed interpolation filterplugin</flag>
 	<flag name="guard">Adds 32 bytes on the left and the right sides of each frame, fills them with a certain value, and checks their integrity after each filter. It can be used to detect buggy filters that write a little outside the frame</flag>
+	<flag name="vapoursynth_plugins_eedi3">Enable slow edge directed interpolation filterplugin</flag>
 	<flag name="vapoursynth_plugins_imagemagick">Enable Image Reader/Writer plugin using <pkg>media-gfx/imagemagick</pkg></flag>
+	<flag name="vapoursynth_plugins_miscfilters">Enable miscfilters plugin</flag>
 	<flag name="vapoursynth_plugins_morpho">Enable simple morphological filters plugin</flag>
 	<flag name="vapoursynth_plugins_ocr">Enable video frames Optical Character Recognition plugin using <pkg>app-text/tesseract</pkg></flag>
 	<flag name="vapoursynth_plugins_removegrain">Enable Remove Grain plugin</flag>
-	<flag name="shared">Build shared libraries</flag>
-	<flag name="static">Build static libraries</flag>
+	<flag name="vapoursynth_plugins_subtext">Enable SSA/ASS subtitles plugin using <pkg>media-libs/libass</pkg></flag>
 	<flag name="vapoursynth_plugins_vinverse">Enable residual combing removal plugin</flag>
 	<flag name="vapoursynth_plugins_vivtc">Enable Inverse Telecine and Decimation plugin</flag>
+    <flag name="shared">Build shared libraries</flag>
+	<flag name="static">Build static libraries</flag>
 	<flag name="vspipe">Enable support for piping output</flag>
 </use>
 </pkgmetadata>

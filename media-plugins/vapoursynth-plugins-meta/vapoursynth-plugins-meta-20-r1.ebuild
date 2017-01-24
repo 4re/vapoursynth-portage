@@ -35,6 +35,7 @@ IUSE="
 	vapoursynth_plugins_fieldhint
 	vapoursynth_plugins_fillborders
 	vapoursynth_plugins_finesharp
+	vapoursynth_plugins_fix-telecined-fades
 	vapoursynth_plugins_flash3kyuu_deband
 	vapoursynth_plugins_fluxsmooth
 	vapoursynth_plugins_fmtconv
@@ -51,6 +52,7 @@ IUSE="
 	vapoursynth_plugins_mvtools
 	vapoursynth_plugins_mvtools-sf
 	vapoursynth_plugins_nnedi3
+	vapoursynth_plugins_nnedi3_resample
 	vapoursynth_plugins_oyster
 	vapoursynth_plugins_plum
 	vapoursynth_plugins_qrcodesource
@@ -77,11 +79,12 @@ IUSE="
 	vapoursynth_plugins_vctrans
 	vapoursynth_plugins_videoscope
 	vapoursynth_plugins_vine
-	vapoursynth_plugins_vsimagereader
 	vapoursynth_plugins_vs-maskdetail
+	vapoursynth_plugins_vsimagereader
 	vapoursynth_plugins_vsrawsource
 	vapoursynth_plugins_vstaambk
 	vapoursynth_plugins_w3fdif
+	vapoursynth_plugins_waifu2x-w2xc
 	vapoursynth_plugins_wwxd
 	vapoursynth_plugins_yadifmod
 "
@@ -112,6 +115,7 @@ DEPEND="${RDEPEND}
 	vapoursynth_plugins_fieldhint? ( media-plugins/vapoursynth-fieldhint )
 	vapoursynth_plugins_fillborders? ( media-plugins/vapoursynth-fillborders )
 	vapoursynth_plugins_finesharp? ( media-plugins/vapoursynth-finesharp )
+	vapoursynth_plugins_fix-telecined-fades? ( media-plugins/vapoursynth-fix-telecined-fades )
 	vapoursynth_plugins_flash3kyuu_deband? ( media-plugins/vapoursynth-flash3kyuu_deband )
 	vapoursynth_plugins_fluxsmooth? ( media-plugins/vapoursynth-fluxsmooth )
 	vapoursynth_plugins_fmtconv? ( media-plugins/vapoursynth-fmtconv )
@@ -128,6 +132,7 @@ DEPEND="${RDEPEND}
 	vapoursynth_plugins_mvtools? ( media-plugins/vapoursynth-mvtools )
 	vapoursynth_plugins_mvtools-sf? ( media-plugins/vapoursynth-mvtools-sf )
 	vapoursynth_plugins_nnedi3? ( media-plugins/vapoursynth-nnedi3 )
+	vapoursynth_plugins_nnedi3_resample? ( media-plugins/vapoursynth-nnedi3_resample )
 	vapoursynth_plugins_oyster? ( media-plugins/vapoursynth-oyster )
 	vapoursynth_plugins_plum? ( media-plugins/vapoursynth-plum )
 	vapoursynth_plugins_qrcodesource? ( media-plugins/vapoursynth-qrcodesource )
@@ -154,11 +159,12 @@ DEPEND="${RDEPEND}
 	vapoursynth_plugins_vctrans? ( media-plugins/vapoursynth-vctrans )
 	vapoursynth_plugins_videoscope? ( media-plugins/vapoursynth-videoscope )
 	vapoursynth_plugins_vine? ( media-plugins/vapoursynth-vine )
-	vapoursynth_plugins_vsimagereader? ( media-plugins/vapoursynth-vsimagereader )
 	vapoursynth_plugins_vs-maskdetail? ( media-plugins/vapoursynth-vs-maskdetail )
+	vapoursynth_plugins_vsimagereader? ( media-plugins/vapoursynth-vsimagereader )
 	vapoursynth_plugins_vsrawsource? ( media-plugins/vapoursynth-vsrawsource )
 	vapoursynth_plugins_vstaambk? ( media-plugins/vapoursynth-vstaambk )
 	vapoursynth_plugins_w3fdif? ( media-plugins/vapoursynth-w3fdif )
+	vapoursynth_plugins_waifu2x-w2xc? ( media-plugins/vapoursynth-waifu2x-w2xc )
 	vapoursynth_plugins_wwxd? ( media-plugins/vapoursynth-wwxd )
 	vapoursynth_plugins_yadifmod? ( media-plugins/vapoursynth-yadifmod )
 "

@@ -30,6 +30,7 @@ VSPLUGINS="
 	vapoursynth_plugins_subtext
 	vapoursynth_plugins_eedi3
 	vapoursynth_plugins_imagemagick
+	vapoursynth_plugins_miscfilters
 	vapoursynth_plugins_morpho
 	vapoursynth_plugins_ocr
 	vapoursynth_plugins_removegrain
@@ -51,7 +52,7 @@ RDEPEND+="${PYTHON_DEPS}
 "
 DEPEND="${RDEPEND}
 	amd64? ( dev-lang/yasm )
-	dev-python/cython
+	>=dev-python/cython-0.24.1
 	doc? ( dev-python/sphinx[${PYTHON_USEDEP}] )
 	virtual/pkgconfig
 	x86? ( dev-lang/yasm )
@@ -65,12 +66,13 @@ src_configure() {
 		--enable-core \
 		--enable-python-module \
 		--enable-vsscript \
-		$( use_enable vapoursynth_plugins_subtext subtext ) \
 		$( use_enable vapoursynth_plugins_eedi3 eedi3 ) \
 		$( use_enable vapoursynth_plugins_imagemagick imwri ) \
+		$( use_enable vapoursynth_plugins_miscfilters miscfilters ) \
 		$( use_enable vapoursynth_plugins_morpho morpho ) \
 		$( use_enable vapoursynth_plugins_ocr ocr ) \
 		$( use_enable vapoursynth_plugins_removegrain removegrain ) \
+		$( use_enable vapoursynth_plugins_subtext subtext ) \
 		$( use_enable vapoursynth_plugins_vinverse vinverse ) \
 		$( use_enable vapoursynth_plugins_vivtc vivtc ) \
 		$( use_enable cpu_flags_x86_sse2 x86-asm ) \
