@@ -6,7 +6,7 @@ EAPI=5
 
 inherit toolchain-funcs multilib eutils
 
-MY_PV="1.0.0-beta.2"
+MY_PV="1.0.0-beta.3"
 
 DESCRIPTION="An optimized pixelwise OpenCL implementation of the Non-local means denoising algorithm"
 HOMEPAGE="https://github.com/Khanattila/KNLMeansCL"
