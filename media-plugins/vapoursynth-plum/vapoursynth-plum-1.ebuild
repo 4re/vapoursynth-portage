@@ -1,4 +1,4 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
@@ -12,7 +12,7 @@ DESCRIPTION="A sharpening/blind deconvolution suite with certain advanced featur
 HOMEPAGE="https://github.com/IFeelBloated/Plum"
 
 EGIT_REPO_URI="https://github.com/IFeelBloated/Plum.git"
-EGIT_COMMIT="9602bec0872651dc7a3579b45a25cb0065c00d66"
+EGIT_COMMIT="df679b552284b5d190dd721a5214bf7b90f09c93"
 
 KEYWORDS="~amd64 ~x86"
 
