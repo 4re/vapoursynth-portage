@@ -1,4 +1,4 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
@@ -12,7 +12,7 @@ DESCRIPTION="A collection of a non-local error based de-halo filter and a set of
 HOMEPAGE="https://github.com/IFeelBloated/Vine"
 
 EGIT_REPO_URI="https://github.com/IFeelBloated/Vine.git"
-EGIT_COMMIT="f4d02fc3e748187e9b3f4d0b39bd0233b6101eb0"
+EGIT_COMMIT="fe54a9df7812ea8a81bea0f3d565777be7ec77ed"
 
 KEYWORDS="~amd64 ~x86"
 

@@ -1,4 +1,4 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
@@ -6,7 +6,7 @@ EAPI=5
 
 PYTHON_COMPAT=( python3_{4,5} )
 
-inherit python-utils-r1 python-single-r1 git-r3
+inherit python-utils-r1 python-single-r1
 
 DESCRIPTION="A collection of a non-local error based de-halo filter and a set of morphological filters"
 HOMEPAGE="https://github.com/IFeelBloated/Vine"
