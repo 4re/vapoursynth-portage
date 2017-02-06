@@ -1,4 +1,4 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017    Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
@@ -12,7 +12,7 @@ DESCRIPTION="A top class de-noising filter against compression artifacts"
 HOMEPAGE="https://github.com/IFeelBloated/Oyster"
 
 EGIT_REPO_URI="https://github.com/IFeelBloated/Oyster.git"
-EGIT_COMMIT="3ee4fa8a978f1011632639bf7e5b9ec99264d3be"
+EGIT_COMMIT="1daff941757c4a426b94b0edc210c1d178a0c01d"
 
 KEYWORDS="~amd64 ~x86"
 
