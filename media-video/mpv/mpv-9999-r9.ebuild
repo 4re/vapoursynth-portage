@@ -1,4 +1,4 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
@@ -28,19 +28,23 @@ DOCS+=( README.md )
 # See Copyright in sources and Gentoo bug 506946. Waf is BSD, libmpv is ISC.
 LICENSE="GPL-2+ BSD ISC"
 SLOT="0"
-IUSE="aqua +alsa archive bluray cdda +cli coreaudio doc drm dvb dvd +egl
-	encode gbm +iconv jack jpeg lcms +libass libav libcaca libmpv +lua
-	luajit openal +opengl oss pulseaudio raspberry-pi rubberband samba -sdl
-	selinux test tools +uchardet v4l vaapi +vapoursynth vdpau vf-dlopen wayland +X
-	xinerama +xscreensaver +xv zsh-completion"
+IUSE="+alsa aqua archive bluray cdda +cli coreaudio cplugins cuda doc drm dvb
+	dvd +egl encode gbm +iconv jack jpeg lcms +libass libav libcaca libmpv +lua
+	luajit openal +opengl oss pulseaudio raspberry-pi rubberband samba sdl
+	selinux test tools +uchardet v4l vaapi +vapoursynth
+        vdpau vf-dlopen wayland +X xinerama +xscreensaver +xv zsh-completion"
+IUSE+=" cpu_flags_x86_sse4_1"
 
 REQUIRED_USE="
 	|| ( cli libmpv )
 	aqua? ( opengl )
+	cuda? ( !libav || ( opengl egl ) )
 	egl? ( || ( gbm X wayland ) )
 	gbm? ( drm egl )
 	lcms? ( || ( opengl egl ) )
 	luajit? ( lua )
+	opengl? ( || ( aqua X !cli? ( libmpv ) ) )
+	test? ( || ( opengl egl ) )
 	tools? ( cli )
 	uchardet? ( iconv )
 	v4l? ( || ( alsa oss ) )
@@ -54,15 +58,15 @@ REQUIRED_USE="
 "
 
 COMMON_DEPEND="
-	!libav? ( >=media-video/ffmpeg-3.2.2:=[encode?,threads,vaapi?,vdpau?] )
-	libav? ( >=media-video/libav-12:=[encode?,threads,vaapi?,vdpau?] )
+	!libav? ( >=media-video/ffmpeg-3.2.2:0=[encode?,threads,vaapi?,vdpau?] )
+	libav? ( >=media-video/libav-12:0=[encode?,threads,vaapi?,vdpau?] )
 	sys-libs/zlib
 	alsa? ( >=media-libs/alsa-lib-1.0.18 )
 	archive? ( >=app-arch/libarchive-3.0.0:= )
 	bluray? ( >=media-libs/libbluray-0.3.0 )
 	cdda? ( dev-libs/libcdio-paranoia )
+	cuda? ( >=media-video/ffmpeg-3.3:0 )
 	drm? ( x11-libs/libdrm )
-	dvb? ( virtual/linuxtv-dvb-headers )
 	dvd? (
 		>=media-libs/libdvdnav-4.2.0
 		>=media-libs/libdvdread-4.1.0
@@ -70,7 +74,7 @@ COMMON_DEPEND="
 	egl? ( media-libs/mesa[egl,gbm(-)?,wayland(-)?] )
 	iconv? (
 		virtual/libiconv
-		uchardet? ( dev-libs/uchardet )
+		uchardet? ( app-i18n/uchardet )
 	)
 	jack? ( virtual/jack )
 	jpeg? ( virtual/jpeg:0 )
@@ -85,11 +89,11 @@ COMMON_DEPEND="
 		luajit? ( dev-lang/luajit:2 )
 	)
 	openal? ( >=media-libs/openal-1.13 )
-	opengl? ( !aqua? ( virtual/opengl ) )
+	opengl? ( X? ( virtual/opengl ) )
 	pulseaudio? ( media-sound/pulseaudio )
 	raspberry-pi? (
 		>=media-libs/raspberrypi-userland-0_pre20160305-r1
-		media-libs/mesa[egl,gles2]
+		virtual/opengl
 	)
 	rubberband? ( >=media-libs/rubberband-1.8.0 )
 	samba? ( net-fs/samba[smbclient(+)] )
@@ -97,6 +101,7 @@ COMMON_DEPEND="
 	v4l? ( media-libs/libv4l )
 	vaapi? ( >=x11-libs/libva-1.4.0[drm?,X?,wayland?] )
 	vapoursynth? ( media-libs/vapoursynth )
+	vdpau? ( >=x11-libs/libvdpau-0.2 )
 	wayland? (
 		>=dev-libs/wayland-1.6.0
 		>=x11-libs/libxkbcommon-0.3.0
@@ -106,7 +111,6 @@ COMMON_DEPEND="
 		x11-libs/libXext
 		>=x11-libs/libXrandr-1.2.0
 		opengl? ( x11-libs/libXdamage )
-		vdpau? ( >=x11-libs/libvdpau-0.2 )
 		xinerama? ( x11-libs/libXinerama )
 		xscreensaver? ( x11-libs/libXScrnSaver )
 		xv? ( x11-libs/libXv )
@@ -114,22 +118,37 @@ COMMON_DEPEND="
 "
 DEPEND="${COMMON_DEPEND}
 	${PYTHON_DEPS}
-	dev-lang/perl
 	dev-python/docutils
 	virtual/pkgconfig
 	doc? ( dev-python/rst2pdf )
+	dvb? ( virtual/linuxtv-dvb-headers )
 	test? ( >=dev-util/cmocka-1.0.0 )
+	v4l? ( virtual/os-headers )
+	zsh-completion? ( dev-lang/perl )
 "
 RDEPEND="${COMMON_DEPEND}
+	cuda? ( x11-drivers/nvidia-drivers[X] )
 	selinux? ( sec-policy/selinux-mplayer )
 	tools? ( ${PYTHON_DEPS} )
 "
 
-PATCHES=( "${FILESDIR}/${PN}-0.19.0-make-ffmpeg-version-check-non-fatal.patch" )
+PATCHES=(
+	"${FILESDIR}/${PN}-0.19.0-make-ffmpeg-version-check-non-fatal.patch"
+	"${FILESDIR}/${PN}-0.23.0-make-libavdevice-check-accept-libav.patch"
+)
 
 mpv_check_compiler() {
-	if [[ ${MERGE_TYPE} != "binary" ]] && use vaapi && use egl && ! tc-has-tls; then
-		die "Your compiler lacks C++11 TLS support. Use GCC>=4.8.0 or Clang>=3.3."
+	if [[ ${MERGE_TYPE} != "binary" ]]; then
+		if tc-is-gcc && ( [[ $(gcc-major-version) -lt 4 ]] || \
+			( [[ $(gcc-major-version) -eq 4 ]] && [[ $(gcc-minor-version) -lt 5 ]] ) ); then
+			die "${PN} requires GCC>=4.5."
+		fi
+		if ( use opengl || use egl ) && ! tc-has-tls; then
+			die "Your compiler lacks C++11 TLS support. Use GCC>=4.8 or Clang>=3.3."
+		fi
+		if use vaapi && use cpu_flags_x86_sse4_1 && ! tc-is-gcc; then
+			die "${PN} requires GCC for SSE4.1 intrinsics."
+		fi
 	fi
 }
 
@@ -149,6 +168,14 @@ src_prepare() {
 }
 
 src_configure() {
+	tc-export CC PKG_CONFIG AR
+
+	if tc-is-cross-compiler && use raspberry-pi; then
+		export EXTRA_PKG_CONFIG_LIBDIR="${SYSROOT%/}${EPREFIX}/opt/vc/lib/pkgconfig"
+		# Drop next line when Gentoo bug 607344 is fixed or if you fixed it locally.
+		die "${PN} can't be cross built with raspberry-pi USE enabled. See Gentoo bug 607344."
+	fi
+
 	local mywafargs=(
 		--confdir="${EPREFIX}/etc/${PN}"
 		--docdir="${EPREFIX}/usr/share/doc/${PF}"
@@ -165,6 +192,7 @@ src_configure() {
 		--enable-html-build
 
 		$(use_enable doc pdf-build)
+		$(use_enable cplugins)
 		$(use_enable vf-dlopen vf-dlopen-filters)
 		$(use_enable zsh-completion zsh-comp)
 		$(use_enable test)
@@ -194,6 +222,7 @@ src_configure() {
 		--disable-sdl1
 		$(use_enable oss oss-audio)
 		--disable-rsound		# Only available in overlays.
+		--disable-sndio			# Only available in overlays.
 		$(use_enable pulseaudio pulse)
 		$(use_enable jack)
 		$(use_enable openal)
@@ -227,6 +256,7 @@ src_configure() {
 		$(use_enable jpeg)
 		--disable-android
 		$(use_enable raspberry-pi rpi)
+		$(usex opengl "$(use_enable !aqua standard-gl)" '--disable-standard-gl')
 		--disable-ios-gl
 		$(usex libmpv "$(use_enable opengl plain-gl)" '--disable-plain-gl')
 		--disable-mali-fbdev	# Only available in overlays.
@@ -234,8 +264,8 @@ src_configure() {
 		# HWaccels:
 		# Automagic Video Toolbox HW acceleration. See Gentoo bug 577332.
 		$(use_enable vaapi vaapi-hwaccel)
-		# Automagic VDPAU HW acceleration. See Gentoo bug 558870.
-		--disable-cuda			# No support in ffmpeg. See Gentoo bug 595450.
+		$(use_enable vdpau vdpau-hwaccel)
+		$(use_enable cuda cuda-hwaccel)
 
 		# TV features:
 		$(use_enable v4l tv)
@@ -289,23 +319,30 @@ pkg_preinst() {
 }
 
 pkg_postinst() {
-	local rv softvol_0_18_1=0
+	local rv softvol_0_18_1=0 osc_0_21_0=0
+
 	for rv in ${REPLACING_VERSIONS}; do
-		version_compare ${rv} 0.18.1-r1
+		version_compare ${rv} 0.18.1
 		[[ $? -eq 1 ]] && softvol_0_18_1=1
+		version_compare ${rv} 0.21.0
+		[[ $? -eq 1 ]] && osc_0_21_0=1
 	done
 
 	if [[ ${softvol_0_18_1} -eq 1 ]]; then
-		elog "Starting from version 0.18.1 the software volume control is"
-		elog "enabled by default, see:"
-		elog "https://github.com/mpv-player/mpv/blob/v0.18.1/DOCS/interface-changes.rst"
-		elog "https://github.com/mpv-player/mpv/issues/3322"
-		elog
+		elog "Since version 0.18.1 the software volume control is always enabled."
 		elog "This means that volume controls don't change the system volume,"
 		elog "e.g. per-application volume with PulseAudio."
-		elog "If you want to restore the old behaviour, please refer to"
+		elog "If you want to restore the previous behaviour, please refer to"
 		elog
-		elog "https://bugs.gentoo.org/show_bug.cgi?id=588492#c7"
+		elog "https://wiki.gentoo.org/wiki/Mpv#Volume_in_0.18.1"
+		elog
+	fi
+
+	if [[ ${osc_0_21_0} -eq 1 ]]; then
+		elog "In version 0.21.0 the default OSC layout was changed."
+		elog "If you want to restore the previous layout, please refer to"
+		elog
+		elog "https://wiki.gentoo.org/wiki/Mpv#OSC_in_0.21.0"
 		elog
 	fi
 
