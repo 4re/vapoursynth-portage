@@ -29,7 +29,7 @@ DEPEND="${RDEPEND}
 "
 
 LIBNAME="libftf.so"
-COMMON_FLAGS="-Wall -std=c++14 -shared -fPIC"
+COMMON_FLAGS="-Wall -std=c++14 -fPIC"
 
 
 src_prepare(){
@@ -38,8 +38,9 @@ src_prepare(){
 }
 
 src_compile(){
-	echo "$(tc-getCC) ${CXXFLAGS} ${COMMON_FLAGS} $(pkg-config --cflags vapoursynth) ${LDFLAGS} -o ${LIBNAME} Source.cpp"
-	$(tc-getCC) ${CXXFLAGS} ${COMMON_FLAGS} $(pkg-config --cflags vapoursynth) ${LDFLAGS} -o ${LIBNAME} Source.cpp || die "Build failed"
+	$(tc-getCC) ${CXXFLAGS} ${COMMON_FLAGS} $(pkg-config --cflags vapoursynth) -c -o Source.o Source.cpp || die "Building failed"
+	$(tc-getCC) ${CXXFLAGS} -mfma ${COMMON_FLAGS} $(pkg-config --cflags vapoursynth) -c -o Source_AVX_FMA.o Source_AVX_FMA.cpp || die "Building failed"
+	$(tc-getCC) ${CXXFLAGS} -shared ${COMMON_FLAGS} $(pkg-config --cflags vapoursynth) ${LDFLAGS} -o ${LIBNAME} Source.o Source_AVX_FMA.o || die "Linking failed"
 }
 
 src_install(){
