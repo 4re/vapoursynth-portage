@@ -12,7 +12,7 @@ DESCRIPTION="A collection of a non-local error based de-halo filter and a set of
 HOMEPAGE="https://github.com/IFeelBloated/Vine"
 
 EGIT_REPO_URI="https://github.com/IFeelBloated/Vine.git"
-EGIT_COMMIT="fe54a9df7812ea8a81bea0f3d565777be7ec77ed"
+EGIT_COMMIT="e4031ef5ea9ffb36b3559943ca5a554422086d15"
 
 KEYWORDS="~amd64 ~x86"
 
