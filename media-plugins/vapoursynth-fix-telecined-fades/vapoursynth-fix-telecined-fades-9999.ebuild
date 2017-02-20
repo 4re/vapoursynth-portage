@@ -1,10 +1,8 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
 EAPI=6
-
-inherit toolchain-funcs
 
 DESCRIPTION="Fix Telecined Fades"
 HOMEPAGE="https://github.com/IFeelBloated/Fix-Telecined-Fades"
@@ -26,24 +24,30 @@ RDEPEND+="
 	media-libs/vapoursynth
 "
 DEPEND="${RDEPEND}
+	>=dev-util/meson-0.28.0
+	virtual/pkgconfig
 "
-
-LIBNAME="libftf.so"
-COMMON_FLAGS="-Wall -std=c++14 -fPIC"
-
 
 src_prepare(){
 	rm VSHelper.h VapourSynth.h
+	mkdir build
 	eapply_user
 }
 
+src_configure(){
+	cd build
+	meson \
+		--prefix="${EPREFIX}/usr" \
+		--buildtype=plain \
+		.. || die
+}
+
 src_compile(){
-	$(tc-getCC) ${CXXFLAGS} ${COMMON_FLAGS} $(pkg-config --cflags vapoursynth) -c -o Source.o Source.cpp || die "Building failed"
-	$(tc-getCC) ${CXXFLAGS} -mfma ${COMMON_FLAGS} $(pkg-config --cflags vapoursynth) -c -o Source_AVX_FMA.o Source_AVX_FMA.cpp || die "Building failed"
-	$(tc-getCC) ${CXXFLAGS} -shared ${COMMON_FLAGS} $(pkg-config --cflags vapoursynth) ${LDFLAGS} -o ${LIBNAME} Source.o Source_AVX_FMA.o || die "Linking failed"
+	cd build
+	ninja -v
 }
 
 src_install(){
-	exeinto /usr/$(get_libdir)/vapoursynth/
-	doexe ${LIBNAME}
+	cd build
+	DESTDIR="${D}" ninja install
 }
