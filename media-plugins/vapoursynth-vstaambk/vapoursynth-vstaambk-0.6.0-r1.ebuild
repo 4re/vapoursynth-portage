@@ -4,7 +4,7 @@
 
 EAPI=5
 
-PYTHON_COMPAT=( python3_{4,5} )
+PYTHON_COMPAT=( python3_{4,5,6} )
 
 inherit python-utils-r1 python-single-r1 git-r3
 
@@ -32,7 +32,7 @@ RDEPEND+="
 DEPEND="${RDEPEND}"
 
 
-src_prepare(){ 
+src_prepare(){
 	epatch "${FILESDIR}/${P}-sangnom.patch"
 }
 

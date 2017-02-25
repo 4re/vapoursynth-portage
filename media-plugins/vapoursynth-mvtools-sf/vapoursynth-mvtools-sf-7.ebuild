@@ -4,7 +4,7 @@
 
 EAPI=5
 
-PYTHON_COMPAT=( python3_{4,5} )
+PYTHON_COMPAT=( python3_{4,5,6} )
 AUTOTOOLS_AUTORECONF=1
 
 inherit autotools-utils multilib python-utils-r1 python-single-r1
@@ -39,6 +39,6 @@ src_configure() {
 }
 
 src_install() {
-	autotools-utils_src_install 
+	autotools-utils_src_install
 	python_domodule src/mvmulti.py
 }
