@@ -1,4 +1,4 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
@@ -41,7 +41,7 @@ RDEPEND+="
 	media-plugins/vapoursynth-fft3dfilter
 	media-plugins/vapoursynth-fmtconv
 	media-plugins/vapoursynth-genericfilters
-	media-plugins/vapoursynth-knlmeanscl
+	<media-plugins/vapoursynth-knlmeanscl-1.0.0
 	media-plugins/vapoursynth-mvsfunc
 	media-plugins/vapoursynth-mvtools
 	media-plugins/vapoursynth-nnedi3
