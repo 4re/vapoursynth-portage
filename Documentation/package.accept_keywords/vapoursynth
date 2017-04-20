@@ -4,6 +4,7 @@ media-libs/vapoursynth ~*
 media-libs/waifu2x-converter-cpp ~*
 media-plugins/vapoursynth-addgrain ~*
 media-plugins/vapoursynth-adjust ~*
+media-plugins/vapoursynth-autocrop ~*
 media-plugins/vapoursynth-awarpsharp2 ~*
 media-plugins/vapoursynth-bifrost ~*
 media-plugins/vapoursynth-bilateral ~*
@@ -71,8 +72,8 @@ media-plugins/vapoursynth-vcmove ~*
 media-plugins/vapoursynth-vctrans ~*
 media-plugins/vapoursynth-videoscope ~*
 media-plugins/vapoursynth-vine ~*
-media-plugins/vapoursynth-vs-maskdetail ~*
 media-plugins/vapoursynth-vsimagereader ~*
+media-plugins/vapoursynth-vs-maskdetail ~*
 media-plugins/vapoursynth-vsrawsource ~*
 media-plugins/vapoursynth-vstaambk ~*
 media-plugins/vapoursynth-w3fdif ~*
