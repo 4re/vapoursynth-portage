@@ -5,7 +5,7 @@ meta_ebuild_cat="media-plugins"
 meta_ebuild_name="vapoursynth-plugins-meta"
 meta_ebuild_iuse="$(mktemp)"
 meta_ebuild_dep="$(mktemp)"
-meta_ebuild_path="../${meta_ebuild_cat}/${meta_ebuild_name}/"
+meta_ebuild_path="${root}/${meta_ebuild_cat}/${meta_ebuild_name}/"
 
 version_increase() {
     MAX=0
@@ -65,7 +65,7 @@ done
 
 new_ebuild_full_path="${meta_ebuild_path}${meta_ebuild_name}-$(version_increase).ebuild"
 
-mheader >> $new_ebuild_full_path
+mheader > $new_ebuild_full_path
 cat "${meta_ebuild_iuse}" >> $new_ebuild_full_path
 mbody >> $new_ebuild_full_path
 cat "${meta_ebuild_dep}" >> $new_ebuild_full_path
