@@ -1,9 +1,26 @@
 #!/bin/bash
 
 root="../"
-meta_cat="media-plugins"
+meta_ebuild_cat="media-plugins"
+meta_ebuild_name="vapoursynth-plugins-meta"
 meta_ebuild_iuse="$(mktemp)"
 meta_ebuild_dep="$(mktemp)"
+meta_ebuild_path="../${meta_ebuild_cat}/${meta_ebuild_name}/"
+
+version_increase() {
+    MAX=0
+
+    for i in $(ls -1 ${meta_ebuild_path}*ebuild); do
+        i=${i##*vapoursynth-plugins-meta-}
+        i=${i%%-r*}
+        i=${i%%.ebuild*}
+        (( $i > $MAX )) && MAX=$i
+    done
+
+    let ++MAX
+
+    echo $MAX
+}
 
 mheader() {
 cat << EOF
@@ -37,7 +54,7 @@ cat << EOF
 EOF
 }
 
-for category in ${meta_cat}; do
+for category in ${meta_ebuild_cat}; do
 	for package in $( ls -1 "${root}/${category}" ); do
 		if [ "${package}" != "vapoursynth-plugins-meta" ]; then
 			echo -e "\tvapoursynth_plugins_${package#vapoursynth-}"  >> ${meta_ebuild_iuse}
@@ -46,8 +63,10 @@ for category in ${meta_cat}; do
 	done
 done
 
-mheader
-cat "${meta_ebuild_iuse}"
-mbody
-cat "${meta_ebuild_dep}"
-mtail
+new_ebuild_full_path="${meta_ebuild_path}${meta_ebuild_name}-$(version_increase).ebuild"
+
+mheader >> $new_ebuild_full_path
+cat "${meta_ebuild_iuse}" >> $new_ebuild_full_path
+mbody >> $new_ebuild_full_path
+cat "${meta_ebuild_dep}" >> $new_ebuild_full_path
+mtail >> $new_ebuild_full_path
