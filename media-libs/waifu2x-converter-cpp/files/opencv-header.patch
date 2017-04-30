@@ -1,0 +1,21 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index c2823d3..d12754a 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -14,6 +14,7 @@ if (${OPENCV_PKG_FOUND})
+   set(CMAKE_REQUIRED_INCLUDES ${OPENCV_PKG_INCLUDE_DIRS})
+   include_directories(${OPENCV_PKG_INCLUDE_DIRS})
+   link_directories(${OPENCV_PKG_LIBRARY_DIRS})
++  set(HAVE_OPENCV true)
+ else()
+   set(OPENCV_PREFIX "/usr"
+     CACHE FILEPATH "OpenCV 2.x path")
+@@ -22,7 +23,7 @@ else()
+   link_directories(${OPENCV_PREFIX}/lib)
+ endif()
+ 
+-check_include_file_cxx("opencv2/opencv.hpp" HAVE_OPENCV)
++# check_include_file_cxx("opencv2/opencv.hpp" HAVE_OPENCV)
+ find_library(IMGCODECS_LIBRARY NAMES opencv_imgcodecs opencv_highgui
+   HINTS ${OPENCV_PKG_INCLUDE_DIRS} ${OPENCV_PREFIX}/lib)
+ 
