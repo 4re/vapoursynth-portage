@@ -49,3 +49,8 @@ src_configure() {
 
 	cmake-utils_src_configure
 }
+
+pkg_postinst() {
+	elog "Be aware that to use this package as a standalone app you"
+	elog "need to set the use flag \"models\"."
+}
