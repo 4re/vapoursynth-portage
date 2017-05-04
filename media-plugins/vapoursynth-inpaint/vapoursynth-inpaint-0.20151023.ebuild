@@ -1,9 +1,9 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=5
+EAPI=6
 
-inherit toolchain-funcs multilib git-r3
+inherit toolchain-funcs git-r3
 
 DESCRIPTION="VapourSynth plugin for image inpaintin"
 HOMEPAGE="https://github.com/invisiblearts/VapourSynth-Inpaint"
@@ -23,7 +23,8 @@ DEPEND="${RDEPEND}
 "
 
 src_prepare() {
-	epatch "${FILESDIR}/${PN}-fix-include.patch"
+	eapply_user
+	eapply "${FILESDIR}/${PN}-fix-include.patch"
 }
 
 src_configure() {
