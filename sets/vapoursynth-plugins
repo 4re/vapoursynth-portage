@@ -16,6 +16,7 @@ media-plugins/vapoursynth-deblock
 media-plugins/vapoursynth-degrainmedian
 media-plugins/vapoursynth-delogo
 media-plugins/vapoursynth-depan
+media-plugins/vapoursynth-descale
 media-plugins/vapoursynth-dfttest
 media-plugins/vapoursynth-eedi2
 media-plugins/vapoursynth-ffmpegsource
