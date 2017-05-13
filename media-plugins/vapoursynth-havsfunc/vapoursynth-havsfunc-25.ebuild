@@ -22,6 +22,7 @@ fi
 
 LICENSE=""
 SLOT="0"
+IUSE="+fftw opencl"
 
 RDEPEND+="
 	media-libs/vapoursynth[${PYTHON_USEDEP}]
@@ -32,17 +33,17 @@ RDEPEND+="
 	media-plugins/vapoursynth-ctmf
 	media-plugins/vapoursynth-dctfilter
 	media-plugins/vapoursynth-deblock
-	media-plugins/vapoursynth-depan
-	media-plugins/vapoursynth-dfttest
+	fftw? ( media-plugins/vapoursynth-depan )
+	fftw? ( media-plugins/vapoursynth-dfttest )
 	media-plugins/vapoursynth-eedi2
 	media-plugins/vapoursynth-flash3kyuu_deband
 	media-plugins/vapoursynth-fluxsmooth
-	media-plugins/vapoursynth-fft3dfilter
+	fftw? ( media-plugins/vapoursynth-fft3dfilter )
 	media-plugins/vapoursynth-fmtconv
 	media-plugins/vapoursynth-genericfilters
-	>=media-plugins/vapoursynth-knlmeanscl-1.0.2
+	opencl? ( >=media-plugins/vapoursynth-knlmeanscl-1.0.2 )
 	media-plugins/vapoursynth-mvsfunc
-	media-plugins/vapoursynth-mvtools
+	fftw? ( media-plugins/vapoursynth-mvtools )
 	media-plugins/vapoursynth-nnedi3
 	media-plugins/vapoursynth-nnedi3_resample
 	media-plugins/vapoursynth-sangnom
