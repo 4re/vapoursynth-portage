@@ -1,4 +1,4 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=5
@@ -9,7 +9,7 @@ inherit python-utils-r1 python-single-r1 toolchain-funcs multilib
 
 DESCRIPTION="A scene change detection plugin for VapourSynth plus temporalsoften2 that makes use of it"
 HOMEPAGE="http://forum.doom9.org/showthread.php?t=166769"
-SRC_URI="https://dl.dropboxusercontent.com/u/36232595/${PN}-${PV}.tar.bz2"
+SRC_URI="https://www.dropbox.com/s/ga3r71xgh76f16r/${P}.tar.bz2"
 
 LICENSE="LGPL-2.1"
 SLOT="0"

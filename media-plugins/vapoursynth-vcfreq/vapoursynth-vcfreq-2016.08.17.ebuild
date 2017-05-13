@@ -1,4 +1,4 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -12,7 +12,7 @@ if [[ ${PV} == *9999* ]]; then
 	inherit git-r3
 	EGIT_REPO_URI=""
 else
-	SRC_URI="https://dl.dropboxusercontent.com/u/36232595/vapoursynth/${P}.tar.gz"
+	SRC_URI="https://www.dropbox.com/s/fyid7xne75zs9kl/${P}.tar.bz2"
 fi
 
 LICENSE="GPL-3"
