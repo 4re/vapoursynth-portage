@@ -1,7 +1,7 @@
 # Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=5
+EAPI=6
 
 PYTHON_COMPAT=( python3_{4,5,6} )
 
@@ -41,7 +41,7 @@ RDEPEND+="
 	fftw? ( media-plugins/vapoursynth-fft3dfilter )
 	media-plugins/vapoursynth-fmtconv
 	media-plugins/vapoursynth-genericfilters
-	opencl? ( <media-plugins/vapoursynth-knlmeanscl-1.0.0 )
+	opencl? ( >=media-plugins/vapoursynth-knlmeanscl-1.0.2 )
 	media-plugins/vapoursynth-mvsfunc
 	fftw? ( media-plugins/vapoursynth-mvtools )
 	media-plugins/vapoursynth-nnedi3
