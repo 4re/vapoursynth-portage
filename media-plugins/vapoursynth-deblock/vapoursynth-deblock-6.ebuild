@@ -1,11 +1,9 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=5
+EAPI=6
 
-AUTOTOOLS_AUTORECONF=1
-
-inherit autotools-utils multilib
+inherit multilib
 
 DESCRIPTION="It does a deblocking of the picture, using the deblocking filter of h264"
 HOMEPAGE="https://github.com/HomeOfVapourSynthEvolution/VapourSynth-Deblock"
@@ -34,10 +32,15 @@ DOCS=( "README.md" )
 
 pkg_pretend() {
 	if tc-is-gcc && [[ $(gcc-major-version) -lt 5 ]]; then
-		die "The active compiler needs to be gcc 5.x or clang"
+		die "The active compiler needs to be >=gcc-5.x or clang"
 	fi
 }
 
+src_prepare() {
+	eapply_user
+	./autogen.sh
+}
+
 src_configure() {
-	autotools-utils_src_configure --libdir="/usr/$(get_libdir)/vapoursynth/"
+	econf --libdir="/usr/$(get_libdir)/vapoursynth/"
 }
