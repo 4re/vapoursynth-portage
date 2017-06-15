@@ -25,7 +25,7 @@ SLOT="0"
 IUSE="+fftw opencl"
 
 RDEPEND+="
-	media-libs/vapoursynth[${PYTHON_USEDEP}]
+	media-libs/vapoursynth[${PYTHON_USEDEP},vapoursynth_plugins_miscfilters]
 	media-plugins/vapoursynth-addgrain
 	media-plugins/vapoursynth-adjust
 	media-plugins/vapoursynth-awarpsharp2
@@ -40,15 +40,12 @@ RDEPEND+="
 	media-plugins/vapoursynth-fluxsmooth
 	fftw? ( media-plugins/vapoursynth-fft3dfilter )
 	media-plugins/vapoursynth-fmtconv
-	media-plugins/vapoursynth-genericfilters
 	opencl? ( >=media-plugins/vapoursynth-knlmeanscl-1.0.2 )
 	media-plugins/vapoursynth-mvsfunc
 	fftw? ( media-plugins/vapoursynth-mvtools )
 	media-plugins/vapoursynth-nnedi3
 	media-plugins/vapoursynth-nnedi3_resample
 	media-plugins/vapoursynth-sangnom
-	media-plugins/vapoursynth-scenechange
-	media-plugins/vapoursynth-temporalsoften
 "
 DEPEND="${RDEPEND}"
 
