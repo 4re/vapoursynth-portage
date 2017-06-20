@@ -33,6 +33,11 @@ DEPEND="${RDEPEND}
 
 DOCS=( README.md )
 
+src_prepare() {
+	epatch "${FILESDIR}/${P}-autotools.patch"
+	autotools-utils_src_prepare
+}
+
 src_configure() {
 	autotools-utils_src_configure --libdir="/usr/$(get_libdir)/vapoursynth/"
 }
