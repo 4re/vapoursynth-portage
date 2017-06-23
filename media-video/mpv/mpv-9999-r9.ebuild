@@ -30,7 +30,7 @@ SLOT="0"
 IUSE="+alsa aqua archive bluray cdda +cli coreaudio cplugins cuda doc drm dvb
 	dvd +egl encode gbm +iconv jack jpeg lcms +libass libav libcaca libmpv +lua
 	luajit openal +opengl oss pulseaudio raspberry-pi rubberband samba sdl
-	selinux test tools +uchardet v4l vaapi +vapoursynth vdpau vf-dlopen wayland
+	selinux test tools +uchardet v4l vaapi +vapoursynth vdpau wayland
 	+X +xv zsh-completion"
 IUSE+=" cpu_flags_x86_sse4_1"
 
@@ -191,7 +191,6 @@ src_configure() {
 
 		$(use_enable doc pdf-build)
 		$(use_enable cplugins)
-		$(use_enable vf-dlopen vf-dlopen-filters)
 		$(use_enable zsh-completion zsh-comp)
 		$(use_enable test)
 
