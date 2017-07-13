@@ -53,7 +53,10 @@ RDEPEND+="${PYTHON_DEPS}
 DEPEND="${RDEPEND}
 	amd64? ( dev-lang/yasm )
 	>=dev-python/cython-0.24.1
-	doc? ( dev-python/sphinx[${PYTHON_USEDEP}] )
+	doc? (
+		dev-python/sphinx[${PYTHON_USEDEP}]
+		dev-python/sphinxcontrib-websupport[${PYTHON_USEDEP}]
+	)
 	virtual/pkgconfig
 	x86? ( dev-lang/yasm )
 "
