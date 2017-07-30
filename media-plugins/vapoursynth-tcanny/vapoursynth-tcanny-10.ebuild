@@ -1,9 +1,9 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=5
+EAPI=6
 
-inherit toolchain-funcs multilib
+inherit toolchain-funcs
 
 DESCRIPTION="Builds an edge map using canny edge detection"
 HOMEPAGE="https://github.com/HomeOfVapourSynthEvolution/VapourSynth-TCanny"
@@ -20,23 +20,23 @@ fi
 
 LICENSE="GPL-2"
 SLOT="0"
+IUSE="opencl"
 
 RDEPEND+="
 	media-libs/vapoursynth
+	opencl? (
+		dev-libs/boost
+		virtual/opencl
+		)
 "
 DEPEND="${RDEPEND}
 "
 
-src_configure() {
-	sed -i -e "s:CXX=\"g++\":CXX=\"$(tc-getCXX)\":" configure || die
-	sed -i -e "s:LD=\"g++\":LD=\"$(tc-getCXX)\":" configure || die
-	chmod +x configure
-	./configure \
-		--install="${ED}/usr/$(get_libdir)/vapoursynth/" \
-		--extra-cxxflags="${CXXFLAGS}" --extra-ldflags="${LDFLAGS}" || die "configure failed"
+src_prepare() {
+	eapply_user
+	./autogen.sh
 }
 
-src_install() {
-	emake install
-	dodoc README.md
+src_configure() {
+	econf $(use_enable opencl) --libdir="/usr/$(get_libdir)/vapoursynth/"
 }

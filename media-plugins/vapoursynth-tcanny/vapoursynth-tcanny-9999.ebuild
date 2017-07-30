@@ -1,4 +1,4 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -20,9 +20,14 @@ fi
 
 LICENSE="GPL-2"
 SLOT="0"
+IUSE="opencl"
 
 RDEPEND+="
 	media-libs/vapoursynth
+	opencl? (
+		dev-libs/boost
+		virtual/opencl
+		)
 "
 DEPEND="${RDEPEND}
 "
@@ -33,5 +38,5 @@ src_prepare() {
 }
 
 src_configure() {
-	econf --libdir="/usr/$(get_libdir)/vapoursynth/"
+	econf $(use_enable opencl) --libdir="/usr/$(get_libdir)/vapoursynth/"
 }
