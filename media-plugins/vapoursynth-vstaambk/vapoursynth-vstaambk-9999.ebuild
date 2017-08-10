@@ -1,7 +1,7 @@
 # Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=5
+EAPI=6
 
 PYTHON_COMPAT=( python3_{4,5,6} )
 
@@ -15,9 +15,11 @@ EGIT_REPO_URI="https://github.com/HomeOfVapourSynthEvolution/vsTAAmbk.git"
 LICENSE=""
 SLOT="0"
 KEYWORDS=""
+IUSE="opencl"
 
 RDEPEND+="
-	media-libs/vapoursynth[${PYTHON_USEDEP},vapoursynth_plugins_removegrain]
+	media-libs/vapoursynth[${PYTHON_USEDEP},vapoursynth_plugins_removegrain,vapoursynth_plugins_miscfilters]
+	media-plugins/vapoursynth-awarpsharp2
 	media-plugins/vapoursynth-eedi2
 	media-plugins/vapoursynth-fmtconv
 	media-plugins/vapoursynth-havsfunc
@@ -25,6 +27,8 @@ RDEPEND+="
 	media-plugins/vapoursynth-mvtools
 	media-plugins/vapoursynth-nnedi3
 	media-plugins/vapoursynth-sangnom
+	opencl? ( media-plugins/vapoursynth-tcanny[opencl] )
+	!opencl? ( media-plugins/vapoursynth-tcanny )
 "
 DEPEND="${RDEPEND}"
 
