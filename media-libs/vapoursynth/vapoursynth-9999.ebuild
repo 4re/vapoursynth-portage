@@ -51,14 +51,14 @@ RDEPEND+="${PYTHON_DEPS}
 	vapoursynth_plugins_miscfilters? ( !media-plugins/vapoursynth-miscfilters )
 "
 DEPEND="${RDEPEND}
-	amd64? ( dev-lang/yasm )
+	amd64? ( dev-lang/nasm )
 	>=dev-python/cython-0.24.1
 	doc? (
 		dev-python/sphinx[${PYTHON_USEDEP}]
 		dev-python/sphinxcontrib-websupport[${PYTHON_USEDEP}]
 	)
 	virtual/pkgconfig
-	x86? ( dev-lang/yasm )
+	x86? ( dev-lang/nasm )
 "
 
 # bug with MAKEOPTS="-j1"
