@@ -10,7 +10,7 @@ inherit python-utils-r1 python-single-r1 git-r3
 DESCRIPTION="A ported AA-script from Avisynth"
 HOMEPAGE="https://github.com/HomeOfVapourSynthEvolution/vsTAAmbk"
 EGIT_REPO_URI="https://github.com/HomeOfVapourSynthEvolution/vsTAAmbk.git"
-EGIT_COMMIT="fed331745e1fae24a4e32e3e6fa928f96576a972"
+EGIT_COMMIT="f5bbfa31f528ad82617a86c932e1cf39eaf4c645"
 
 LICENSE=""
 SLOT="0"
