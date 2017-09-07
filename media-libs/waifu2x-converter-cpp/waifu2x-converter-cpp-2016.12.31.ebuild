@@ -6,10 +6,10 @@ EAPI=5
 inherit cmake-utils git-r3
 
 DESCRIPTION="Image Super-Resolution for anime-style-art using Deep Convolutional Neural Networks implementation in c++ using opencv"
-HOMEPAGE="https://github.com/tanakamura/waifu2x-converter-cpp"
+HOMEPAGE="https://github.com/DeadSix27/waifu2x-converter-cpp"
 
-EGIT_REPO_URI="https://github.com/tanakamura/${PN}.git"
-EGIT_COMMIT="f89dd6191bc71f2ae81adbdb9e4c34cc2aaed917"
+EGIT_REPO_URI="https://github.com/DeadSix27/${PN}.git"
+EGIT_COMMIT="8f5c942dee76758aded9ab2dc6b60405e862ec5e"
 
 LICENSE="MIT BSD BSD-2"
 SLOT="0"
