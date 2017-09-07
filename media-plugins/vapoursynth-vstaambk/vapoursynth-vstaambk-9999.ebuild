@@ -27,11 +27,16 @@ RDEPEND+="
 	media-plugins/vapoursynth-mvtools
 	media-plugins/vapoursynth-nnedi3
 	media-plugins/vapoursynth-sangnom
-	opencl? ( media-plugins/vapoursynth-tcanny[opencl] )
-	!opencl? ( media-plugins/vapoursynth-tcanny )
+	opencl? (
+		media-plugins/vapoursynth-tcanny[opencl]
+		media-plugins/vapoursynth-eedi3[opencl]
+		)
+	!opencl? (
+		media-plugins/vapoursynth-tcanny
+		media-plugins/vapoursynth-eedi3
+		)
 "
 DEPEND="${RDEPEND}"
-
 
 src_install(){
 	python_domodule vsTAAmbk.py

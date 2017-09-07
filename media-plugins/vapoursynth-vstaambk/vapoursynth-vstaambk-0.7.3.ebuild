@@ -10,7 +10,7 @@ inherit python-utils-r1 python-single-r1 git-r3
 DESCRIPTION="A ported AA-script from Avisynth"
 HOMEPAGE="https://github.com/HomeOfVapourSynthEvolution/vsTAAmbk"
 EGIT_REPO_URI="https://github.com/HomeOfVapourSynthEvolution/vsTAAmbk.git"
-EGIT_COMMIT="4372fe1343a3a88ac4fbc5f6cc8c0e217e1d6ad3"
+EGIT_COMMIT="fed331745e1fae24a4e32e3e6fa928f96576a972"
 
 LICENSE=""
 SLOT="0"
@@ -27,11 +27,16 @@ RDEPEND+="
 	media-plugins/vapoursynth-mvtools
 	media-plugins/vapoursynth-nnedi3
 	media-plugins/vapoursynth-sangnom
-	opencl? ( media-plugins/vapoursynth-tcanny[opencl] )
-	!opencl? ( media-plugins/vapoursynth-tcanny )
+	opencl? (
+		media-plugins/vapoursynth-tcanny[opencl]
+		media-plugins/vapoursynth-eedi3[opencl]
+		)
+	!opencl? (
+		media-plugins/vapoursynth-tcanny
+		media-plugins/vapoursynth-eedi3
+		)
 "
 DEPEND="${RDEPEND}"
-
 
 src_install(){
 	python_domodule vsTAAmbk.py
