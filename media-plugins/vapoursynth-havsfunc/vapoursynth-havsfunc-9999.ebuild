@@ -40,6 +40,7 @@ RDEPEND+="
 	media-plugins/vapoursynth-fluxsmooth
 	fftw? ( media-plugins/vapoursynth-fft3dfilter )
 	media-plugins/vapoursynth-fmtconv
+	media-plugins/vapoursynth-hqdn3d
 	opencl? ( >=media-plugins/vapoursynth-knlmeanscl-1.0.2 )
 	media-plugins/vapoursynth-mvsfunc
 	fftw? ( media-plugins/vapoursynth-mvtools )
