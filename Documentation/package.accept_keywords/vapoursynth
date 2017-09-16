@@ -48,6 +48,7 @@ media-plugins/vapoursynth-mvsfunc ~*
 media-plugins/vapoursynth-mvtools ~*
 media-plugins/vapoursynth-mvtools-sf ~*
 media-plugins/vapoursynth-nnedi3 ~*
+media-plugins/vapoursynth-nnedi3cl ~*
 media-plugins/vapoursynth-nnedi3_resample ~*
 media-plugins/vapoursynth-oyster ~*
 media-plugins/vapoursynth-plugins-meta ~*

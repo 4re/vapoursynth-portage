@@ -12,7 +12,9 @@ KEYWORDS="*"
 IUSE="
 	vapoursynth_plugins_addgrain
 	vapoursynth_plugins_adjust
+	vapoursynth_plugins_autocrop
 	vapoursynth_plugins_awarpsharp2
+	vapoursynth_plugins_beziercurve
 	vapoursynth_plugins_bifrost
 	vapoursynth_plugins_bilateral
 	vapoursynth_plugins_bm3d
@@ -27,8 +29,10 @@ IUSE="
 	vapoursynth_plugins_degrainmedian
 	vapoursynth_plugins_delogo
 	vapoursynth_plugins_depan
+	vapoursynth_plugins_descale
 	vapoursynth_plugins_dfttest
 	vapoursynth_plugins_eedi2
+	vapoursynth_plugins_eedi3
 	vapoursynth_plugins_ffmpegsource
 	vapoursynth_plugins_fft3dfilter
 	vapoursynth_plugins_fieldhint
@@ -41,6 +45,7 @@ IUSE="
 	vapoursynth_plugins_genericfilters
 	vapoursynth_plugins_havsfunc
 	vapoursynth_plugins_histogram
+	vapoursynth_plugins_hqdn3d
 	vapoursynth_plugins_inpaint
 	vapoursynth_plugins_it
 	vapoursynth_plugins_knlmeanscl
@@ -51,11 +56,13 @@ IUSE="
 	vapoursynth_plugins_mvtools
 	vapoursynth_plugins_mvtools-sf
 	vapoursynth_plugins_nnedi3
+	vapoursynth_plugins_nnedi3cl
 	vapoursynth_plugins_nnedi3_resample
 	vapoursynth_plugins_oyster
 	vapoursynth_plugins_plum
 	vapoursynth_plugins_qrcodesource
 	vapoursynth_plugins_reduceflicker
+	vapoursynth_plugins_remapframes
 	vapoursynth_plugins_removedirt
 	vapoursynth_plugins_retinex
 	vapoursynth_plugins_sangnom
@@ -76,10 +83,11 @@ IUSE="
 	vapoursynth_plugins_vcmod
 	vapoursynth_plugins_vcmove
 	vapoursynth_plugins_vctrans
+	vapoursynth_plugins_vfrtocrf
 	vapoursynth_plugins_videoscope
 	vapoursynth_plugins_vine
-	vapoursynth_plugins_vs-maskdetail
 	vapoursynth_plugins_vsimagereader
+	vapoursynth_plugins_vs-maskdetail
 	vapoursynth_plugins_vsrawsource
 	vapoursynth_plugins_vstaambk
 	vapoursynth_plugins_w3fdif
@@ -92,7 +100,9 @@ RDEPEND+=""
 DEPEND="${RDEPEND}
 	vapoursynth_plugins_addgrain? ( media-plugins/vapoursynth-addgrain )
 	vapoursynth_plugins_adjust? ( media-plugins/vapoursynth-adjust )
+	vapoursynth_plugins_autocrop? ( media-plugins/vapoursynth-autocrop )
 	vapoursynth_plugins_awarpsharp2? ( media-plugins/vapoursynth-awarpsharp2 )
+	vapoursynth_plugins_beziercurve? ( media-plugins/vapoursynth-beziercurve )
 	vapoursynth_plugins_bifrost? ( media-plugins/vapoursynth-bifrost )
 	vapoursynth_plugins_bilateral? ( media-plugins/vapoursynth-bilateral )
 	vapoursynth_plugins_bm3d? ( media-plugins/vapoursynth-bm3d )
@@ -107,8 +117,10 @@ DEPEND="${RDEPEND}
 	vapoursynth_plugins_degrainmedian? ( media-plugins/vapoursynth-degrainmedian )
 	vapoursynth_plugins_delogo? ( media-plugins/vapoursynth-delogo )
 	vapoursynth_plugins_depan? ( media-plugins/vapoursynth-depan )
+	vapoursynth_plugins_descale? ( media-plugins/vapoursynth-descale )
 	vapoursynth_plugins_dfttest? ( media-plugins/vapoursynth-dfttest )
 	vapoursynth_plugins_eedi2? ( media-plugins/vapoursynth-eedi2 )
+	vapoursynth_plugins_eedi3? ( media-plugins/vapoursynth-eedi3 )
 	vapoursynth_plugins_ffmpegsource? ( media-plugins/vapoursynth-ffmpegsource )
 	vapoursynth_plugins_fft3dfilter? ( media-plugins/vapoursynth-fft3dfilter )
 	vapoursynth_plugins_fieldhint? ( media-plugins/vapoursynth-fieldhint )
@@ -121,6 +133,7 @@ DEPEND="${RDEPEND}
 	vapoursynth_plugins_genericfilters? ( media-plugins/vapoursynth-genericfilters )
 	vapoursynth_plugins_havsfunc? ( media-plugins/vapoursynth-havsfunc )
 	vapoursynth_plugins_histogram? ( media-plugins/vapoursynth-histogram )
+	vapoursynth_plugins_hqdn3d? ( media-plugins/vapoursynth-hqdn3d )
 	vapoursynth_plugins_inpaint? ( media-plugins/vapoursynth-inpaint )
 	vapoursynth_plugins_it? ( media-plugins/vapoursynth-it )
 	vapoursynth_plugins_knlmeanscl? ( media-plugins/vapoursynth-knlmeanscl )
@@ -131,11 +144,13 @@ DEPEND="${RDEPEND}
 	vapoursynth_plugins_mvtools? ( media-plugins/vapoursynth-mvtools )
 	vapoursynth_plugins_mvtools-sf? ( media-plugins/vapoursynth-mvtools-sf )
 	vapoursynth_plugins_nnedi3? ( media-plugins/vapoursynth-nnedi3 )
+	vapoursynth_plugins_nnedi3cl? ( media-plugins/vapoursynth-nnedi3cl )
 	vapoursynth_plugins_nnedi3_resample? ( media-plugins/vapoursynth-nnedi3_resample )
 	vapoursynth_plugins_oyster? ( media-plugins/vapoursynth-oyster )
 	vapoursynth_plugins_plum? ( media-plugins/vapoursynth-plum )
 	vapoursynth_plugins_qrcodesource? ( media-plugins/vapoursynth-qrcodesource )
 	vapoursynth_plugins_reduceflicker? ( media-plugins/vapoursynth-reduceflicker )
+	vapoursynth_plugins_remapframes? ( media-plugins/vapoursynth-remapframes )
 	vapoursynth_plugins_removedirt? ( media-plugins/vapoursynth-removedirt )
 	vapoursynth_plugins_retinex? ( media-plugins/vapoursynth-retinex )
 	vapoursynth_plugins_sangnom? ( media-plugins/vapoursynth-sangnom )
@@ -156,10 +171,11 @@ DEPEND="${RDEPEND}
 	vapoursynth_plugins_vcmod? ( media-plugins/vapoursynth-vcmod )
 	vapoursynth_plugins_vcmove? ( media-plugins/vapoursynth-vcmove )
 	vapoursynth_plugins_vctrans? ( media-plugins/vapoursynth-vctrans )
+	vapoursynth_plugins_vfrtocrf? ( media-plugins/vapoursynth-vfrtocrf )
 	vapoursynth_plugins_videoscope? ( media-plugins/vapoursynth-videoscope )
 	vapoursynth_plugins_vine? ( media-plugins/vapoursynth-vine )
-	vapoursynth_plugins_vs-maskdetail? ( media-plugins/vapoursynth-vs-maskdetail )
 	vapoursynth_plugins_vsimagereader? ( media-plugins/vapoursynth-vsimagereader )
+	vapoursynth_plugins_vs-maskdetail? ( media-plugins/vapoursynth-vs-maskdetail )
 	vapoursynth_plugins_vsrawsource? ( media-plugins/vapoursynth-vsrawsource )
 	vapoursynth_plugins_vstaambk? ( media-plugins/vapoursynth-vstaambk )
 	vapoursynth_plugins_w3fdif? ( media-plugins/vapoursynth-w3fdif )
