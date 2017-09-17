@@ -46,7 +46,7 @@ RDEPEND+="${PYTHON_DEPS}
 		virtual/ffmpeg
 	)
 	vapoursynth_plugins_imagemagick? ( >=media-gfx/imagemagick-7.0.0.0[cxx,-q8(-),-q64(-)] )
-	>=media-libs/zimg-2.4
+	>=media-libs/zimg-2.6
 	vapoursynth_plugins_ocr? ( app-text/tesseract )
 	vapoursynth_plugins_miscfilters? ( !media-plugins/vapoursynth-miscfilters )
 "
