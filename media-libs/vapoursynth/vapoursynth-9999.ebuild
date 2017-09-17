@@ -1,4 +1,4 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=5
@@ -58,7 +58,7 @@ DEPEND="${RDEPEND}
 		dev-python/sphinxcontrib-websupport[${PYTHON_USEDEP}]
 	)
 	virtual/pkgconfig
-	x86? ( dev-lang/nasm )
+	x86? ( >=dev-lang/nasm-2.13.01 )
 "
 
 # bug with MAKEOPTS="-j1"
