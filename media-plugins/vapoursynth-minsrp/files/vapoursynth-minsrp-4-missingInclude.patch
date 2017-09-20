@@ -1,0 +1,21 @@
+From f90c5a78f4c9f4f91d089b5a7a6368e32b98fb08 Mon Sep 17 00:00:00 2001
+From: Skylar Moore <nickgray0@gmail.com>
+Date: Sat, 21 May 2016 00:36:49 -0700
+Subject: [PATCH] Update Kernel.hpp
+
+---
+ src/Kernel.hpp | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/src/Kernel.hpp b/src/Kernel.hpp
+index 73ebf24..a05ab28 100644
+--- a/src/Kernel.hpp
++++ b/src/Kernel.hpp
+@@ -16,6 +16,7 @@
+ #define _SECURE_SCL 0
+ 
+ #include <algorithm>
++#include <cmath>
+ #include "VapourSynth.h"
+ #include "VSHelper.h"
+ using namespace std;
