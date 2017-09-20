@@ -7,11 +7,11 @@ DESCRIPTION="VapourSynth port of FFT3DFilter"
 HOMEPAGE="https://github.com/VFR-maniac/VapourSynth-FFT3DFilter"
 
 if [[ ${PV} == *9999* ]]; then
-	inherit git-r3
+	inherit git-r3 toolchain-funcs
 	EGIT_REPO_URI="https://github.com/VFR-maniac/${PN}.git"
 	KEYWORDS=""
 else
-	inherit vcs-snapshot
+	inherit vcs-snapshot toolchain-funcs
 	SRC_URI="https://github.com/VFR-maniac/${PN}/archive/v${PV}.tar.gz -> ${PN}-${PV}.tar.gz"
 	KEYWORDS="~x86 ~amd64"
 fi
