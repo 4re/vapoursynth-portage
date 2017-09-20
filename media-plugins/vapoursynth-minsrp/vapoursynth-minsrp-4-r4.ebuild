@@ -35,6 +35,7 @@ S="${WORKDIR}/${P}/build/unix"
 src_prepare() {
 	cd "${WORKDIR}/${P}"
 	epatch "${FILESDIR}/${P}-memalign.patch"
+	epatch "${FILESDIR}/${P}-missingInclude.patch"
 	cd ${S}
 	autotools-utils_src_prepare
 }
