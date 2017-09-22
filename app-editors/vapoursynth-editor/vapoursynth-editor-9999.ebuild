@@ -1,9 +1,9 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=5
+EAPI=6
 
-inherit eutils qmake-utils
+inherit eutils qmake-utils xdg-utils
 
 DESCRIPTION="VapourSynth Editor"
 HOMEPAGE="https://bitbucket.org/mystery_keeper/vapoursynth-editor"
@@ -27,6 +27,7 @@ RDEPEND="
 	dev-qt/qtcore:5
 	dev-qt/qtgui:5
 	dev-qt/qtwidgets:5
+	dev-qt/qtwebsockets:5
 "
 DEPEND="${RDEPEND}
 	virtual/pkgconfig
@@ -34,6 +35,7 @@ DEPEND="${RDEPEND}
 
 src_prepare() {
 	rm -fr generated/* || die "Remove unused"
+	eapply_user
 }
 
 src_configure() {
