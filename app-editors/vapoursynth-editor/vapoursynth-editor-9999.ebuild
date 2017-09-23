@@ -27,6 +27,7 @@ RDEPEND="
 	dev-qt/qtcore:5
 	dev-qt/qtgui:5
 	dev-qt/qtwidgets:5
+	dev-qt/qtnetwork:5
 	dev-qt/qtwebsockets:5
 "
 DEPEND="${RDEPEND}
@@ -49,8 +50,7 @@ src_compile() {
 }
 
 src_install() {
-	# This is ugly
-	dobin   build/release-*/vsedit
+	dobin   build/release-*/vsedit build/release-*/vsedit-job-server build/release-*/vsedit-job-server-watcher
 	doicon  build/release-*/vsedit.ico build/release-*/vsedit.svg
 	dodoc   build/release-*/CHANGELOG build/release-*/LICENSE build/release-*/README
 	make_desktop_entry vsedit "VapourSynth Editor" vsedit Development "MimeType=text/x-vpy;\nTerminal=false\nStartupNotify=false"
