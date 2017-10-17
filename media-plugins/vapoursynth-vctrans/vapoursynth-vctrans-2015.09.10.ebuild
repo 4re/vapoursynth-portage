@@ -1,9 +1,9 @@
 # Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=5
+EAPI=6
 
-inherit toolchain-funcs multilib
+inherit toolchain-funcs
 
 DESCRIPTION="vctrans a plugin for transitions"
 HOMEPAGE="http://forum.doom9.org/showthread.php?t=172594"
@@ -23,7 +23,6 @@ RDEPEND+="
 	media-libs/vapoursynth
 "
 DEPEND="${RDEPEND}
-	app-arch/p7zip
 "
 
 S="${WORKDIR}"

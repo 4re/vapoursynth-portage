@@ -1,12 +1,12 @@
 # Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=5
+EAPI=6
 
-inherit toolchain-funcs multilib
+inherit toolchain-funcs
 
-DESCRIPTION="vcmod is a plugin for vapoursynth with several functions which essentially operate on pixel values and modify it as per some criteria. Useful for denoising"
-HOMEPAGE="http://forum.doom9.org/showthread.php?t=171412&highlight=vcmod"
+DESCRIPTION="A plugin which operate on pixel values and modify it as per some criteria. Useful for denoising"
+HOMEPAGE="http://forum.doom9.org/showthread.php?t=171412"
 
 if [[ ${PV} == *9999* ]]; then
 	inherit git-r3
@@ -23,7 +23,6 @@ RDEPEND+="
 	media-libs/vapoursynth
 "
 DEPEND="${RDEPEND}
-	app-arch/p7zip
 "
 
 S="${WORKDIR}"
