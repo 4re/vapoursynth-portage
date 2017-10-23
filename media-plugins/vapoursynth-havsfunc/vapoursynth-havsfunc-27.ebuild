@@ -36,6 +36,7 @@ RDEPEND+="
 	fftw? ( media-plugins/vapoursynth-depan )
 	fftw? ( media-plugins/vapoursynth-dfttest )
 	media-plugins/vapoursynth-eedi2
+	media-plugins/vapoursynth-eedi3
 	media-plugins/vapoursynth-flash3kyuu_deband
 	media-plugins/vapoursynth-fluxsmooth
 	fftw? ( media-plugins/vapoursynth-fft3dfilter )
