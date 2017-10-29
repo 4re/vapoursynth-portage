@@ -1,9 +1,9 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=5
+EAPI=6
 
-inherit toolchain-funcs multilib git-r3
+inherit toolchain-funcs git-r3
 
 DESCRIPTION="VapourSynth port of TNLMeans"
 HOMEPAGE="https://github.com/VFR-maniac/VapourSynth-TNLMeans"
@@ -23,10 +23,15 @@ DEPEND="${RDEPEND}
 "
 
 src_prepare() {
+	eapply_user
+	chmod +x configure
 	sed -i -e "s:CXX=\"g++\":CXX=\"$(tc-getCC)\":" configure || die
 	sed -i -e "s:LD=\"g++\":LD=\"$(tc-getCC)\":" configure || die
 }
 
 src_configure() {
-	./configure --prefix="${ROOT}/usr" --extra-cxxflags="${CXXFLAGS}" --extra-ldflags="${LDFLAGS}" || die
+	./configure --prefix="${ROOT}/usr" \
+				--libdir="${ROOT}/usr/$(get_libdir)" \
+				--extra-cxxflags="${CXXFLAGS}" \
+				--extra-ldflags="${LDFLAGS}" || die
 }
