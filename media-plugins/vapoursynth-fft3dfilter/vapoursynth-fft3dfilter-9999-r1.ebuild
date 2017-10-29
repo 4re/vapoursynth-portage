@@ -1,4 +1,4 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -32,11 +32,15 @@ PATCHES=("${FILESDIR}/${P}-cmath.patch")
 src_prepare() {
 	sed -i -e "s:CXX=\"g++\":CXX=\"$(tc-getCC)\":" configure || die
 	sed -i -e "s:LD=\"g++\":LD=\"$(tc-getCC)\":" configure || die
+	sed -i -e 's/CXXFLAGS="-O3 -ffast-math -fomit-frame-pointer -fno-tree-vectorize $CXXFLAGS"/CXXFLAGS="-ffast-math -fno-tree-vectorize $CXXFLAGS"; STRIP=""/g' configure || die
 
 	eapply ${PATCHES}
 	eapply_user
 }
 
 src_configure() {
-	./configure --prefix="${ROOT}/usr" --extra-cxxflags="${CXXFLAGS}" --extra-ldflags="${LDFLAGS}" || die
+	./configure --prefix="${ROOT}usr" \
+				--libdir="${ROOT}usr/$(get_libdir)" \
+				--extra-cxxflags="${CXXFLAGS}" \
+				--extra-ldflags="${LDFLAGS}" || die
 }
