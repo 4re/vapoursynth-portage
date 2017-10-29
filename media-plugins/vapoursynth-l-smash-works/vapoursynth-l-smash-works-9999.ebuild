@@ -1,9 +1,9 @@
 # Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=5
+EAPI=6
 
-inherit toolchain-funcs multilib
+inherit toolchain-funcs
 
 DESCRIPTION="Works based on L-SMASH project"
 HOMEPAGE="https://github.com/VFR-maniac/L-SMASH-Works"
@@ -19,14 +19,14 @@ else
 fi
 
 LICENSE="GPL-2"
-IUSE="-debug"
+IUSE=""
 SLOT="0"
 
 RDEPEND+="
+	media-video/ffmpeg
 	=media-libs/l-smash-${PV}
 "
 DEPEND="${RDEPEND}
-	>=media-video/ffmpeg-3.0.0
 	virtual/pkgconfig
 "
 
@@ -40,5 +40,8 @@ src_prepare() {
 }
 
 src_configure() {
-	./configure --prefix="${ROOT}/usr" --extra-cflags="${CFLAGS}" --extra-ldflags="${LDFLAGS}" || die
+	./configure --prefix="${ROOT}/usr" \
+				--libdir="${ROOT}/usr/$(get_libdir)" \
+				--extra-cflags="${CFLAGS}" \
+				--extra-ldflags="${LDFLAGS}" || die
 }

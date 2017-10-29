@@ -1,9 +1,9 @@
 # Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=5
+EAPI=6
 
-inherit toolchain-funcs multilib git-r3
+inherit toolchain-funcs git-r3
 
 DESCRIPTION="Works based on L-SMASH project"
 HOMEPAGE="https://github.com/VFR-maniac/L-SMASH-Works"
@@ -13,7 +13,7 @@ EGIT_COMMIT="dfea5072734e9b9022c53412229be0a0675f45f4"
 
 LICENSE="GPL-2"
 KEYWORDS="~x86 ~amd64"
-IUSE="-debug"
+IUSE=""
 SLOT="0"
 
 RDEPEND+="
@@ -34,5 +34,8 @@ src_prepare() {
 }
 
 src_configure() {
-	./configure --prefix="${ROOT}/usr" --extra-cflags="${CFLAGS}" --extra-ldflags="${LDFLAGS}" || die
+	./configure --prefix="${ROOT}/usr" \
+				--libdir="${ROOT}/usr/$(get_libdir)" \
+				--extra-cflags="${CFLAGS}" \
+				--extra-ldflags="${LDFLAGS}" || die
 }

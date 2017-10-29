@@ -1,0 +1,13 @@
+diff --git a/VapourSynth/configure b/VapourSynth/configure
+index 67b68e9..78b6827 100755
+--- a/VapourSynth/configure
++++ b/VapourSynth/configure
+@@ -178,7 +178,7 @@ case "$TARGET_OS" in
+         ;;
+     *)
+         SOSUFFIX="so"
+-        SONAME="lib$BASENAME.$SOSUFFIX.$REV"
++        SONAME="lib$BASENAME.$SOSUFFIX"
+         SONAME_LN="lib$BASENAME.$SOSUFFIX"
+         SOFLAGS="-Wl,-soname,$SONAME"
+         CFLAGS="$CFLAGS -fPIC"
