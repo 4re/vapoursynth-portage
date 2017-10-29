@@ -3,22 +3,17 @@
 
 EAPI=6
 
-inherit toolchain-funcs
+inherit toolchain-funcs git-r3
 
 DESCRIPTION="VapourSynth port of ReduceFlicker"
 HOMEPAGE="https://github.com/VFR-maniac/VapourSynth-ReduceFlicker
 http://home.arcor.de/kassandro/ReduceFlicker/ReduceFlicker.htm"
 
-if [[ ${PV} == *9999* ]]; then
-	inherit git-r3
-	EGIT_REPO_URI="https://github.com/VFR-maniac/${PN}.git"
-else
-	inherit vcs-snapshot
-	SRC_URI="https://github.com/VFR-maniac/${PN}/archive/v${PV}.tar.gz -> ${PN}-${PV}.tar.gz"
-fi
+EGIT_REPO_URI="https://github.com/VFR-maniac/${PN}.git"
+EGIT_COMMIT="8766391ceeb2540d10a75550f09cdf6821392a69"
 
 LICENSE="GPL-2"
-KEYWORDS=""
+KEYWORDS="~x86 ~amd64"
 IUSE=""
 SLOT="0"
 
