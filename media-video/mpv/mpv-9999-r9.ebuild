@@ -8,17 +8,17 @@ PYTHON_REQ_USE='threads(+)'
 
 WAF_PV=1.9.8
 
-inherit gnome2-utils pax-utils python-r1 toolchain-funcs versionator waf-utils xdg-utils
+inherit gnome2-utils pax-utils python-r1 toolchain-funcs versionator waf-utils xdg-utils flag-o-matic
 
 DESCRIPTION="Media player based on MPlayer and mplayer2"
 HOMEPAGE="https://mpv.io/"
 
 if [[ ${PV} != *9999* ]]; then
-	SRC_URI="https://github.com/mpv-player/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
+	SRC_URI="https://github.com/mpv-player/mpv/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 	KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ppc ~ppc64 ~x86 ~amd64-linux"
 	DOCS=( RELEASE_NOTES )
 else
-	EGIT_REPO_URI="https://github.com/mpv-player/${PN}.git"
+	EGIT_REPO_URI="https://github.com/mpv-player/mpv.git"
 	inherit git-r3
 fi
 SRC_URI+=" https://waf.io/waf-${WAF_PV}"
@@ -157,6 +157,8 @@ src_prepare() {
 src_configure() {
 	tc-export CC PKG_CONFIG AR
 
+	append-cppflags -DLIBAVCODEC_MPV=1  # Circumvent Gentoo bug 635650 for now
+
 	if tc-is-cross-compiler && use raspberry-pi; then
 		export EXTRA_PKG_CONFIG_LIBDIR="${SYSROOT%/}${EPREFIX}/opt/vc/lib/pkgconfig"
 		# Drop next line when Gentoo bug 607344 is fixed or if you fixed it locally.
@@ -183,6 +185,7 @@ src_configure() {
 		$(use_enable zsh-completion zsh-comp)
 		$(use_enable test)
 
+		--disable-android
 		$(use_enable iconv)
 		$(use_enable samba libsmbclient)
 		$(use_enable lua)
@@ -238,7 +241,6 @@ src_configure() {
 		$(usex vaapi "$(use_enable gbm vaapi-drm)" '--disable-vaapi-drm')
 		$(use_enable libcaca caca)
 		$(use_enable jpeg)
-		--disable-android
 		$(use_enable raspberry-pi rpi)
 		$(usex libmpv "$(use_enable opengl plain-gl)" '--disable-plain-gl')
 		--disable-mali-fbdev	# Only available in overlays.
@@ -291,10 +293,6 @@ src_install() {
 		newbin TOOLS/idet.sh mpv_idet.sh
 		python_replicate_script "${ED}"usr/bin/umpv
 	fi
-}
-
-pkg_preinst() {
-	gnome2_icon_savelist
 }
 
 pkg_postinst() {
