@@ -139,10 +139,10 @@ RDEPEND="${COMMON_DEPEND}
 	tools? ( ${PYTHON_DEPS} )
 "
 
-PATCHES=(
-	"${FILESDIR}/${PN}-0.19.0-make-ffmpeg-version-check-non-fatal.patch"
-	"${FILESDIR}/${PN}-0.23.0-make-libavdevice-check-accept-libav.patch"
-)
+# PATCHES=(
+# 	"${FILESDIR}/${PN}-0.19.0-make-ffmpeg-version-check-non-fatal.patch"
+# 	"${FILESDIR}/${PN}-0.23.0-make-libavdevice-check-accept-libav.patch"
+# )
 
 pkg_setup() {
 	[[ ${MERGE_TYPE} != "binary" ]] && python_setup
@@ -248,8 +248,8 @@ src_configure() {
 
 		# HWaccels:
 		# Automagic Video Toolbox HW acceleration. See Gentoo bug 577332.
-		$(use_enable vaapi vaapi-hwaccel)
-		$(use_enable vdpau vdpau-hwaccel)
+# 		$(use_enable vaapi vaapi-hwaccel)
+# 		$(use_enable vdpau vdpau-hwaccel)
 		$(use_enable cuda cuda-hwaccel)
 
 		# TV features:
