@@ -7,11 +7,7 @@ To make use of this overlay, first install layman (you need git support enabled 
 ```
 # emerge app-portage/layman
 ```
-Add layman at the end of your ```/etc/portage/make.conf```:
-```
-# echo "source /var/lib/layman/make.conf" >> /etc/portage/make.conf
-```
-Finally update layman's database and add vapoursynth's overlay to your system.
+Update layman's database and add vapoursynth's overlay to your system.
 ```
 # layman -L
 # layman -a vapoursynth
@@ -57,3 +53,8 @@ If you want to use python-3.5 you may need to add this to your `/etc/portage/pac
 ```
 */*::vapoursynth python_single_target_python3_5
 ```
+If you want to use mpv live ebuild you need to add this to your `make.conf` or your env files:
+```
+ffmpeg_LIVE_REPO="https://github.com/mpv-player/ffmpeg-mpv.git"
+```
+But be warned this may or may not play nice with the rest of the pakages in your system making use of ffmpeg libraries.
