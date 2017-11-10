@@ -51,7 +51,6 @@ RDEPEND+="${PYTHON_DEPS}
 	vapoursynth_plugins_miscfilters? ( !media-plugins/vapoursynth-miscfilters )
 "
 DEPEND="${RDEPEND}
-	amd64? ( dev-lang/nasm )
 	>=dev-python/cython-0.24.1
 	doc? (
 		dev-python/sphinx[${PYTHON_USEDEP}]

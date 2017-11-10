@@ -1,4 +1,4 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=5
@@ -46,16 +46,18 @@ RDEPEND+="${PYTHON_DEPS}
 		virtual/ffmpeg
 	)
 	vapoursynth_plugins_imagemagick? ( >=media-gfx/imagemagick-7.0.0.0[cxx,-q8(-),-q64(-)] )
-	>=media-libs/zimg-2.4
+	>=media-libs/zimg-2.6
 	vapoursynth_plugins_ocr? ( app-text/tesseract )
 	vapoursynth_plugins_miscfilters? ( !media-plugins/vapoursynth-miscfilters )
 "
 DEPEND="${RDEPEND}
-	amd64? ( dev-lang/yasm )
 	>=dev-python/cython-0.24.1
-	doc? ( dev-python/sphinx[${PYTHON_USEDEP}] )
+	doc? (
+		dev-python/sphinx[${PYTHON_USEDEP}]
+		dev-python/sphinxcontrib-websupport[${PYTHON_USEDEP}]
+	)
 	virtual/pkgconfig
-	x86? ( dev-lang/yasm )
+	x86? ( >=dev-lang/nasm-2.13.01 )
 "
 
 # bug with MAKEOPTS="-j1"
