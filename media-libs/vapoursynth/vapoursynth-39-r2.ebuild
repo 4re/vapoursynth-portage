@@ -36,7 +36,7 @@ VSPLUGINS="
 	vapoursynth_plugins_vinverse
 	vapoursynth_plugins_vivtc
 "
-IUSE="cpu_flags_x86_sse2 doc +vspipe -debug -guard +shared -static ${VSPLUGINS}"
+IUSE="doc +vspipe -debug -guard +shared -static ${VSPLUGINS}"
 
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
@@ -57,7 +57,7 @@ DEPEND="${RDEPEND}
 		dev-python/sphinxcontrib-websupport[${PYTHON_USEDEP}]
 	)
 	virtual/pkgconfig
-	x86? ( >=dev-lang/nasm-2.13.01 )
+	>=dev-lang/nasm-2.13.01
 "
 
 # bug with MAKEOPTS="-j1"
@@ -68,6 +68,7 @@ src_configure() {
 		--enable-core \
 		--enable-python-module \
 		--enable-vsscript \
+		--enable-x86-asm \
 		$( use_enable vapoursynth_plugins_eedi3 eedi3 ) \
 		$( use_enable vapoursynth_plugins_imagemagick imwri ) \
 		$( use_enable vapoursynth_plugins_miscfilters miscfilters ) \
@@ -77,7 +78,6 @@ src_configure() {
 		$( use_enable vapoursynth_plugins_subtext subtext ) \
 		$( use_enable vapoursynth_plugins_vinverse vinverse ) \
 		$( use_enable vapoursynth_plugins_vivtc vivtc ) \
-		$( use_enable cpu_flags_x86_sse2 x86-asm ) \
 		$( use_enable shared ) \
 		$( use_enable static ) \
 		$( use_enable debug ) \
