@@ -2,6 +2,7 @@
 ~media-libs/l-smash-9999 **
 ~media-libs/vapoursynth-9999 **
 ~media-libs/waifu2x-converter-cpp-9999 **
+~media-libs/zimg-9999 **
 ~media-plugins/vapoursynth-addgrain-9999 **
 ~media-plugins/vapoursynth-adjust-9999 **
 ~media-plugins/vapoursynth-autocrop-9999 **
@@ -87,6 +88,7 @@
 ~media-plugins/vapoursynth-waifu2x-w2xc-9999 **
 ~media-plugins/vapoursynth-wwxd-9999 **
 ~media-plugins/vapoursynth-yadifmod-9999 **
+~media-plugins/vapoursynth-znedi3-9999 **
 ~media-video/d2vwitch-9999 **
 ~media-video/mpv-9999 **
 ~media-video/wobbly-9999 **

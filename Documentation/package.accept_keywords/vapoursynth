@@ -2,6 +2,7 @@ app-editors/vapoursynth-editor ~*
 media-libs/l-smash ~*
 media-libs/vapoursynth ~*
 media-libs/waifu2x-converter-cpp ~*
+media-libs/zimg ~*
 media-plugins/vapoursynth-addgrain ~*
 media-plugins/vapoursynth-adjust ~*
 media-plugins/vapoursynth-autocrop ~*
@@ -87,6 +88,7 @@ media-plugins/vapoursynth-w3fdif ~*
 media-plugins/vapoursynth-waifu2x-w2xc ~*
 media-plugins/vapoursynth-wwxd ~*
 media-plugins/vapoursynth-yadifmod ~*
+media-plugins/vapoursynth-znedi3 ~*
 media-video/d2vwitch ~*
 media-video/mpv ~*
 media-video/wobbly ~*

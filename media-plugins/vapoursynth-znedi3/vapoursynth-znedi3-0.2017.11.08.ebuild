@@ -5,7 +5,7 @@ EAPI=6
 
 inherit git-r3
 
-DESCRIPTION="optimized nnedi3 filter"
+DESCRIPTION="Optimized nnedi3 filter"
 HOMEPAGE="https://github.com/sekrit-twc/znedi3"
 
 EGIT_REPO_URI="https://github.com/sekrit-twc/znedi3.git"

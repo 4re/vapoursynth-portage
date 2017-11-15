@@ -3,7 +3,7 @@
 
 EAPI=6
 
-DESCRIPTION="optimized nnedi3 filter"
+DESCRIPTION="Optimized nnedi3 filter"
 HOMEPAGE="https://github.com/sekrit-twc/znedi3"
 
 if [[ ${PV} == *9999* ]]; then
