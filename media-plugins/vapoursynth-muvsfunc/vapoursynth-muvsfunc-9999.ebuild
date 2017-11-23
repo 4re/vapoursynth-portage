@@ -42,15 +42,17 @@ RDEPEND+="
 "
 DEPEND="${RDEPEND}"
 
+
 src_install(){
 	python_domodule muvsfunc.py
+
 	if use misc; then
 		python_domodule Collections/muvsfunc_misc.py
-    fi
-    if use numpy; then
+	fi
+	if use numpy; then
 		python_domodule Collections/muvsfunc_numpy.py
-    fi
-    if use deprecated; then
+	fi
+	if use deprecated; then
 		python_domodule Collections/{LUM,SuperRes}.py
-    fi
+	fi
 }
