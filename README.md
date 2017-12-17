@@ -49,12 +49,7 @@ This overlay also includes an editor and a modified mpv ebuild with vapoursynth 
 
 Troubleshooting
 ---------------
-If you want to use python-3.5 you may need to add this to your `/etc/portage/package.use/use`:
+If you want to use python-3.6 you may need to add this to your `/etc/portage/package.use/use`:
 ```
-*/*::vapoursynth python_single_target_python3_5
+*/*::vapoursynth python_single_target_python3_6
 ```
-If you want to use mpv live ebuild you need to add this to your `make.conf` or your env files:
-```
-ffmpeg_LIVE_REPO="https://github.com/mpv-player/ffmpeg-mpv.git"
-```
-But be warned this may or may not play nice with the rest of the pakages in your system making use of ffmpeg libraries.
