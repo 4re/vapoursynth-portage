@@ -7,13 +7,7 @@ inherit toolchain-funcs
 
 DESCRIPTION="A plugin which operate on pixel values and modify it as per some criteria. Useful for denoising"
 HOMEPAGE="http://forum.doom9.org/showthread.php?t=171412"
-
-if [[ ${PV} == *9999* ]]; then
-	inherit git-r3
-	EGIT_REPO_URI=""
-else
-	SRC_URI="https://www.dropbox.com/s/it6gx663d3hevss/${P}.tar.bz2"
-fi
+SRC_URI="https://www.dropbox.com/s/it6gx663d3hevss/${P}.tar.bz2"
 
 LICENSE="GPL-3"
 SLOT="0"
@@ -31,8 +25,8 @@ LIBNAME="libvcmod.so"
 EXTRAFLAGS="-fPIC -shared -std=c++11"
 
 src_prepare(){
-	eapply_user
 	sed -i -e s/vapoursynth.h/VapourSynth.h/g -e s/vshelper.h/VSHelper.h/g *.cpp || die
+	eapply_user
 }
 
 src_compile(){
