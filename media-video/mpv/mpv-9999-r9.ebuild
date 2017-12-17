@@ -3,7 +3,7 @@
 
 EAPI=6
 
-PYTHON_COMPAT=( python{2_7,3_4,3_5} )
+PYTHON_COMPAT=( python{2_7,3_4,3_5,3_6} )
 PYTHON_REQ_USE='threads(+)'
 
 WAF_PV=1.9.8
@@ -96,7 +96,7 @@ COMMON_DEPEND="
 	vaapi? ( x11-libs/libva[drm?,X?,wayland?] )
 	vapoursynth? ( media-libs/vapoursynth )
 	vdpau? ( x11-libs/libvdpau )
-        wayland? (
+	wayland? (
 		>=dev-libs/wayland-1.6.0
 		>=x11-libs/libxkbcommon-0.3.0
 	)
