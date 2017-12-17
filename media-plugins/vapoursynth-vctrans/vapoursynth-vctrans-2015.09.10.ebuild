@@ -7,13 +7,7 @@ inherit toolchain-funcs
 
 DESCRIPTION="vctrans a plugin for transitions"
 HOMEPAGE="http://forum.doom9.org/showthread.php?t=172594"
-
-if [[ ${PV} == *9999* ]]; then
-	inherit git-r3
-	EGIT_REPO_URI=""
-else
-	SRC_URI="https://www.dropbox.com/s/cqsqjf04n58j38a/${P}.tar.bz2"
-fi
+SRC_URI="https://www.dropbox.com/s/cqsqjf04n58j38a/${P}.tar.bz2"
 
 LICENSE="GPL-3"
 SLOT="0"
@@ -32,6 +26,7 @@ EXTRAFLAGS="-fPIC -shared -std=c++11"
 
 src_prepare(){
 	rm VSHelper.h VapourSynth.h || die
+	eapply_user
 }
 
 src_compile(){
