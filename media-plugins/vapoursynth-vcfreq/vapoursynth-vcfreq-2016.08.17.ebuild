@@ -7,13 +7,7 @@ inherit toolchain-funcs
 
 DESCRIPTION="A plugin that operates in frequency domain to filter out certain types of regular noises"
 HOMEPAGE="http://forum.doom9.org/showthread.php?t=171413"
-
-if [[ ${PV} == *9999* ]]; then
-	inherit git-r3
-	EGIT_REPO_URI=""
-else
-	SRC_URI="https://www.dropbox.com/s/fyid7xne75zs9kl/${P}.tar.bz2"
-fi
+SRC_URI="https://www.dropbox.com/s/fyid7xne75zs9kl/${P}.tar.bz2"
 
 LICENSE="GPL-3"
 SLOT="0"
