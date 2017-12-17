@@ -24,6 +24,7 @@ IUSE="cuda doc debug models opencl cpu_flags_x86_avx"
 
 RDEPEND+="
 	>=media-libs/opencv-3.3.0
+	virtual/opencl
 	opencl? ( >=media-libs/opencv-3.3.0[opencl] )
 	cuda? ( dev-util/nvidia-cuda-toolkit )
 "
