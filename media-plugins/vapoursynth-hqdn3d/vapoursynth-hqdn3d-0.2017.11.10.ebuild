@@ -1,4 +1,4 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -8,7 +8,7 @@ HOMEPAGE="https://github.com/Hinterwaeldlers/vapoursynth-hqdn3d"
 
 inherit git-r3
 EGIT_REPO_URI="https://github.com/Hinterwaeldlers/${PN}.git"
-EGIT_COMMIT="c36c1b8609f78f75a1e8eb15e4919cb8ad0dfb94"
+EGIT_COMMIT="27e131f96d0e7e40cf0997ffe461d0fbeb0adc3f"
 KEYWORDS="~amd64 ~x86"
 
 LICENSE="GPL-2"
