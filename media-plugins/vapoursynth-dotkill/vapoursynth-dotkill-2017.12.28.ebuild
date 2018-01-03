@@ -1,4 +1,4 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -9,7 +9,7 @@ DESCRIPTION="Spatial dotcrawl remover for VapourSynth"
 HOMEPAGE="https://github.com/myrsloik/DotKill"
 
 EGIT_REPO_URI="https://github.com/myrsloik/DotKill.git"
-EGIT_COMMIT="40a737be3d940fa008fbcf840fe9d60836a15a7f"
+EGIT_COMMIT="30660feabef28f9ebd8e11915e24d50f331bb58c"
 
 KEYWORDS="~amd64 ~x86"
 
