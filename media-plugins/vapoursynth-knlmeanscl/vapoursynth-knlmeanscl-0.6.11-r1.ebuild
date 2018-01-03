@@ -1,4 +1,4 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=5
@@ -17,7 +17,7 @@ else
 fi
 
 LICENSE="LGPL-3"
-SLOT="0"
+SLOT="0/0.6"
 KEYWORDS="~x86 ~amd64"
 CARDS=( nvidia )
 IUSE="${CARDS[@]/#/video_cards_}"
