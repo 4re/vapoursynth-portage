@@ -1,4 +1,4 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -11,7 +11,7 @@ DESCRIPTION="Muonium's VapourSynth functions"
 HOMEPAGE="https://github.com/WolframRhodium/muvsfunc"
 
 EGIT_REPO_URI="https://github.com/WolframRhodium/muvsfunc.git"
-EGIT_COMMIT="a7191b9b64fed7374d4358209fbca1dbe0ad81a2"
+EGIT_COMMIT="886c6507c17a2289791ed02cb151afa2824bf93f"
 KEYWORDS="~amd64 ~x86"
 
 IUSE="misc numpy deprecated"
