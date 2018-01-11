@@ -11,7 +11,7 @@ DESCRIPTION="Muonium's VapourSynth functions"
 HOMEPAGE="https://github.com/WolframRhodium/muvsfunc"
 
 EGIT_REPO_URI="https://github.com/WolframRhodium/muvsfunc.git"
-EGIT_COMMIT="886c6507c17a2289791ed02cb151afa2824bf93f"
+EGIT_COMMIT="2473a199df202e9cf741aa3e47ed0e7dd7c50d04"
 KEYWORDS="~amd64 ~x86"
 
 IUSE="misc numpy deprecated"
