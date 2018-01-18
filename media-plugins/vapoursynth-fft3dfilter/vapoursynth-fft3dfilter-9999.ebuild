@@ -3,7 +3,7 @@
 
 EAPI=6
 
-inherit toolchain-funcs
+inherit meson
 
 DESCRIPTION="VapourSynth port of FFT3DFilter"
 HOMEPAGE="https://github.com/myrsloik/VapourSynth-FFT3DFilter"
@@ -27,11 +27,6 @@ RDEPEND+="
 	sci-libs/fftw:3.0[threads]
 "
 DEPEND="${RDEPEND}
+	dev-util/meson
+	virtual/pkgconfig
 "
-
-src_configure() {
-	./configure --prefix="${ROOT}usr" \
-				--libdir="${ROOT}usr/$(get_libdir)" \
-				--extra-cxxflags="${CXXFLAGS} $(pkg-config --cflags vapoursynth)" \
-				--extra-ldflags="${LDFLAGS}" || die
-}

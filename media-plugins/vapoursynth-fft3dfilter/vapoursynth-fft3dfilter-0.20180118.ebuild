@@ -3,13 +3,13 @@
 
 EAPI=6
 
-inherit toolchain-funcs git-r3
+inherit meson git-r3
 
 DESCRIPTION="VapourSynth port of FFT3DFilter"
 HOMEPAGE="https://github.com/myrsloik/VapourSynth-FFT3DFilter"
 
 EGIT_REPO_URI="https://github.com/myrsloik/VapourSynth-FFT3DFilter"
-EGIT_COMMIT="61a12e633ee94540e9809293dffac58f40b5c874"
+EGIT_COMMIT="9050e697f2c75d0e6cf3f44196fdd27aa66bbca2"
 
 KEYWORDS="~x86 ~amd64"
 
@@ -22,11 +22,6 @@ RDEPEND+="
 	sci-libs/fftw:3.0[threads]
 "
 DEPEND="${RDEPEND}
+	dev-util/meson
+	virtual/pkgconfig
 "
-
-src_configure() {
-	./configure --prefix="${ROOT}usr" \
-				--libdir="${ROOT}usr/$(get_libdir)" \
-				--extra-cxxflags="${CXXFLAGS} $(pkg-config --cflags vapoursynth)" \
-				--extra-ldflags="${LDFLAGS}" || die
-}
