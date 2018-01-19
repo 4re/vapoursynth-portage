@@ -20,6 +20,7 @@ SLOT="0"
 RDEPEND+="
 	media-libs/vapoursynth
 	sci-libs/fftw:3.0[threads]
+	>=sys-devel/gcc-7.2.0
 "
 DEPEND="${RDEPEND}
 	dev-util/meson
