@@ -67,6 +67,7 @@ media-plugins/vapoursynth-tdeintmod
 media-plugins/vapoursynth-templinearapproximate
 media-plugins/vapoursynth-temporalsoften
 media-plugins/vapoursynth-tnlmeans
+media-plugins/vapoursynth-tonemap
 media-plugins/vapoursynth-vaguedenoiser
 media-plugins/vapoursynth-vautodeint
 media-plugins/vapoursynth-vcfreq
