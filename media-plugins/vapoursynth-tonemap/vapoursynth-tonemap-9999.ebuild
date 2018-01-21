@@ -10,7 +10,6 @@ if [[ ${PV} == *9999* ]]; then
 	inherit git-r3
 	EGIT_REPO_URI="https://github.com/ifb/vapoursynth-tonemap.git"
 	KEYWORDS=""
-	KEYWORDS="~amd64 ~x86"
 else
 	inherit vcs-snapshot
 	SRC_URI="https://github.com/ifb/vapoursynth-tonemap/archive/R${PV}.tar.gz -> ${PN}-${PV}.tar.gz"
