@@ -1,4 +1,4 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=5
@@ -6,10 +6,10 @@ EAPI=5
 inherit toolchain-funcs multilib git-r3
 
 DESCRIPTION="Raw format video reader for VapourSynth"
-HOMEPAGE="https://github.com/chikuzen/vsrawsource"
+HOMEPAGE="https://github.com/maki-rxrz/vsrawsource"
 
-EGIT_REPO_URI="https://github.com/myrsloik/vsrawsource.git"
-EGIT_COMMIT="9634f88ae58f672245bc7dc742337bca9bb809c9"
+EGIT_REPO_URI="https://github.com/maki-rxrz/vsrawsource.git"
+EGIT_COMMIT="42cca2638263bfefc5ac62e9a81d20b24fea1781"
 
 LICENSE="LGPL-2.1"
 SLOT="0"
