@@ -138,6 +138,7 @@ RDEPEND="${COMMON_DEPEND}
 PATCHES=(
 	"${FILESDIR}/${PN}-0.19.0-make-ffmpeg-version-check-non-fatal.patch"
 	"${FILESDIR}/${PN}-0.23.0-make-libavdevice-check-accept-libav.patch"
+	"${FILESDIR}/${PN}-0.27.0-cve-2018-6360.patch"
 )
 
 pkg_setup() {
