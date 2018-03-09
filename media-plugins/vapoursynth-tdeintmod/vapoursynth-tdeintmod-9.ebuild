@@ -1,11 +1,7 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=5
-
-AUTOTOOLS_AUTORECONF=1
-
-inherit autotools-utils multilib eutils
+EAPI=6
 
 DESCRIPTION="VapourSynth port of TDeint and TMM"
 HOMEPAGE="https://github.com/HomeOfVapourSynthEvolution/VapourSynth-TDeintMod"
@@ -29,8 +25,11 @@ RDEPEND+="
 DEPEND="${RDEPEND}
 "
 
-DOCS=( README.md )
+src_prepare() {
+	eapply_user
+	./autogen.sh
+}
 
 src_configure() {
-	autotools-utils_src_configure --libdir="/usr/$(get_libdir)/vapoursynth/"
+	econf --libdir="/usr/$(get_libdir)/vapoursynth/"
 }
