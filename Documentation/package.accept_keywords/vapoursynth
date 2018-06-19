@@ -47,6 +47,7 @@ media-plugins/vapoursynth-it ~*
 media-plugins/vapoursynth-knlmeanscl ~*
 media-plugins/vapoursynth-l-smash-works ~*
 media-plugins/vapoursynth-minsrp ~*
+media-plugins/vapoursynth-motionmask ~*
 media-plugins/vapoursynth-msmoosh ~*
 media-plugins/vapoursynth-muvsfunc ~*
 media-plugins/vapoursynth-mvsfunc ~*
