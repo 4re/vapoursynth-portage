@@ -76,6 +76,7 @@ media-plugins/vapoursynth-tcomb ~*
 media-plugins/vapoursynth-tdeintmod ~*
 media-plugins/vapoursynth-templinearapproximate ~*
 media-plugins/vapoursynth-temporalsoften ~*
+media-plugins/vapoursynth-temporalsoften2 ~*
 media-plugins/vapoursynth-tnlmeans ~*
 media-plugins/vapoursynth-tonemap ~*
 media-plugins/vapoursynth-ttempsmooth ~*
