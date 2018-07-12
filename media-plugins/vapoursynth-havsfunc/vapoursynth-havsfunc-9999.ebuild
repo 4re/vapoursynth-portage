@@ -33,7 +33,6 @@ RDEPEND+="
 	media-plugins/vapoursynth-ctmf
 	media-plugins/vapoursynth-dctfilter
 	media-plugins/vapoursynth-deblock
-	fftw? ( media-plugins/vapoursynth-depan )
 	fftw? ( media-plugins/vapoursynth-dfttest )
 	media-plugins/vapoursynth-eedi2
 	media-plugins/vapoursynth-eedi3
