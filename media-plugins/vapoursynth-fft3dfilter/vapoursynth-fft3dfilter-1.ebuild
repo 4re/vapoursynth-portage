@@ -3,15 +3,20 @@
 
 EAPI=6
 
-inherit meson git-r3
+inherit meson
 
 DESCRIPTION="VapourSynth port of FFT3DFilter"
 HOMEPAGE="https://github.com/myrsloik/VapourSynth-FFT3DFilter"
 
-EGIT_REPO_URI="https://github.com/myrsloik/VapourSynth-FFT3DFilter"
-EGIT_COMMIT="9050e697f2c75d0e6cf3f44196fdd27aa66bbca2"
-
-KEYWORDS="~x86 ~amd64"
+if [[ ${PV} == *9999* ]]; then
+	inherit git-r3
+	EGIT_REPO_URI="https://github.com/myrsloik/VapourSynth-FFT3DFilter"
+	KEYWORDS=""
+else
+	inherit vcs-snapshot
+	SRC_URI="https://github.com/myrsloik/VapourSynth-FFT3DFilter/archive/R${PV}.tar.gz -> ${PN}-${PV}.tar.gz"
+	KEYWORDS="~x86 ~amd64"
+fi
 
 LICENSE="GPL-2"
 IUSE=""
