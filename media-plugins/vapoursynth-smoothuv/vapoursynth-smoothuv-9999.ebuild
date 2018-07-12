@@ -3,7 +3,7 @@
 
 EAPI=6
 
-inherit meson
+inherit meson flag-o-matic
 
 DESCRIPTION="Spatial derainbow filter"
 HOMEPAGE="https://github.com/dubhater/vapoursynth-smoothuv"
@@ -28,5 +28,6 @@ DEPEND="${RDEPEND}
 	>=dev-util/meson-0.46
 "
 src_configure() {
+	append-cxxflags $(test-flags-CXX -fpeel-loops)
 	meson_src_configure  --libdir="/usr/$(get_libdir)/vapoursynth/"
 }
