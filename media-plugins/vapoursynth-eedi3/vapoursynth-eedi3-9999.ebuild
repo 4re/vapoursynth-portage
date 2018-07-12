@@ -22,7 +22,7 @@ IUSE="opencl"
 
 RDEPEND+="
 	media-libs/vapoursynth
-	opencl? ( virtual/opencl media-libs/mesa[opencl] )
+	opencl? ( virtual/opencl )
 "
 DEPEND="${RDEPEND}
 "
