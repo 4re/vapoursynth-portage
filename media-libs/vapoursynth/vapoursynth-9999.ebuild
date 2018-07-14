@@ -51,7 +51,7 @@ RDEPEND+="${PYTHON_DEPS}
 	vapoursynth_plugins_miscfilters? ( !media-plugins/vapoursynth-miscfilters )
 "
 DEPEND="${RDEPEND}
-	>=dev-python/cython-0.24.1
+	>=dev-python/cython-0.28.2
 	doc? (
 		dev-python/sphinx[${PYTHON_USEDEP}]
 		dev-python/sphinxcontrib-websupport[${PYTHON_USEDEP}]
