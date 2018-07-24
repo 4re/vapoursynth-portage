@@ -5,14 +5,20 @@ EAPI=6
 
 PYTHON_COMPAT=( python3_{5,6} )
 
-inherit python-utils-r1 python-single-r1 git-r3
+inherit python-utils-r1 python-single-r1
 
 DESCRIPTION="Muonium's VapourSynth functions"
 HOMEPAGE="https://github.com/WolframRhodium/muvsfunc"
 
-EGIT_REPO_URI="https://github.com/WolframRhodium/muvsfunc.git"
-EGIT_COMMIT="2473a199df202e9cf741aa3e47ed0e7dd7c50d04"
-KEYWORDS="~amd64 ~x86"
+if [[ ${PV} == *9999* ]]; then
+	inherit git-r3
+	EGIT_REPO_URI="https://github.com/WolframRhodium/muvsfunc.git"
+	KEYWORDS=""
+else
+	inherit vcs-snapshot
+	SRC_URI="https://github.com/WolframRhodium/muvsfunc/archive/v${PV}.tar.gz -> ${PN}-${PV}.tar.gz"
+	KEYWORDS="~amd64 ~x86"
+fi
 
 IUSE="misc numpy deprecated"
 LICENSE=""
