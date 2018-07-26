@@ -76,6 +76,7 @@ media-plugins/vapoursynth-tcanny ~*
 media-plugins/vapoursynth-tcomb ~*
 media-plugins/vapoursynth-tdeintmod ~*
 media-plugins/vapoursynth-templinearapproximate ~*
+media-plugins/vapoursynth-temporalmedian ~*
 media-plugins/vapoursynth-temporalsoften ~*
 media-plugins/vapoursynth-temporalsoften2 ~*
 media-plugins/vapoursynth-tnlmeans ~*
