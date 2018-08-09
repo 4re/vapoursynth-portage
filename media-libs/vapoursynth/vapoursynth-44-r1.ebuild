@@ -5,7 +5,7 @@ EAPI=5
 
 AUTOTOOLS_AUTORECONF=1
 
-PYTHON_COMPAT=( python3_{4,5,6} )
+PYTHON_COMPAT=( python3_{4,5,6,7} )
 PYTHON_REQ_USE="threads(+)"
 
 inherit autotools-utils python-single-r1

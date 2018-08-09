@@ -3,7 +3,7 @@
 
 EAPI=5
 
-PYTHON_COMPAT=( python3_{4,5,6} )
+PYTHON_COMPAT=( python3_{4,5,6,7} )
 AUTOTOOLS_AUTORECONF=1
 
 inherit autotools-utils multilib python-utils-r1 python-single-r1
