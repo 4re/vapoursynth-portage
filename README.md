@@ -49,7 +49,7 @@ This overlay also includes an editor and a modified mpv ebuild with vapoursynth 
 
 Troubleshooting
 ---------------
-If you want to use python-3.6 you may need to add this to your `/etc/portage/package.use/use`:
+If you want to use python-3.7 you may need to add this to your `/etc/portage/package.use/use`:
 ```
-*/*::vapoursynth python_single_target_python3_6
+*/*::vapoursynth python_single_target_python3_7
 ```
