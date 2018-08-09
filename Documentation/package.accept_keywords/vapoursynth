@@ -21,6 +21,7 @@ media-plugins/vapoursynth-dctfilter ~*
 media-plugins/vapoursynth-deblock ~*
 media-plugins/vapoursynth-deblockpp7 ~*
 media-plugins/vapoursynth-decross ~*
+media-plugins/vapoursynth-dedot ~*
 media-plugins/vapoursynth-degrainmedian ~*
 media-plugins/vapoursynth-delogo ~*
 media-plugins/vapoursynth-depan ~*
