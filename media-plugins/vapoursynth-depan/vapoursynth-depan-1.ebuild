@@ -3,20 +3,13 @@
 
 EAPI=5
 
-inherit toolchain-funcs multilib
+inherit toolchain-funcs multilib vcs-snapshot
 
 DESCRIPTION="VapourSynth port of DePan"
 HOMEPAGE="https://github.com/HomeOfVapourSynthEvolution/VapourSynth-DePan"
 
-if [[ ${PV} == *9999* ]]; then
-	inherit git-r3
-	EGIT_REPO_URI="https://github.com/HomeOfVapourSynthEvolution/${PN}.git"
-	KEYWORDS=""
-else
-	inherit vcs-snapshot
-	SRC_URI="https://github.com/HomeOfVapourSynthEvolution/${PN}/archive/r${PV}.tar.gz -> ${PN}-${PV}.tar.gz"
-	KEYWORDS="~amd64 ~x86"
-fi
+SRC_URI="https://www.dropbox.com/s/d72bougsis2se58/vapoursynth-depan-1.tar.gz -> ${PN}-${PV}.tar.gz"
+KEYWORDS="~amd64 ~x86"
 
 LICENSE="GPL-2"
 SLOT="0"
