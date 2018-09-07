@@ -1,20 +1,27 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=5
+EAPI=6
 
 PYTHON_COMPAT=( python3_{4,5,6,7} )
 
-inherit python-utils-r1 python-single-r1 git-r3
+inherit python-utils-r1 python-single-r1
 
 DESCRIPTION="This is a very basic port of the built-in Avisynth filter Tweak"
 HOMEPAGE="https://github.com/dubhater/vapoursynth-adjust"
-EGIT_REPO_URI="https://github.com/dubhater/vapoursynth-adjust.git"
-EGIT_COMMIT="737057778a7da02cf686d9aeaf667610cedd3907"
+
+if [[ ${PV} == *9999* ]]; then
+	inherit git-r3
+	EGIT_REPO_URI="https://github.com/dubhater/vapoursynth-adjust.git"
+	KEYWORDS=""
+else
+	inherit vcs-snapshot
+	SRC_URI="https://github.com/dubhater/vapoursynth-adjust/archive/v${PV}.tar.gz -> ${PN}-${PV}.tar.gz"
+	KEYWORDS="~amd64 ~x86"
+fi
 
 LICENSE="WTFPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
 
 RDEPEND+="
 	media-libs/vapoursynth[${PYTHON_USEDEP}]
