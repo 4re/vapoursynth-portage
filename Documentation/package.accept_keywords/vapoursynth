@@ -99,6 +99,7 @@ media-plugins/vapoursynth-vsrawsource ~*
 media-plugins/vapoursynth-vstaambk ~*
 media-plugins/vapoursynth-w3fdif ~*
 media-plugins/vapoursynth-waifu2x-w2xc ~*
+media-plugins/vapoursynth-warpsharpsupport ~*
 media-plugins/vapoursynth-wwxd ~*
 media-plugins/vapoursynth-yadifmod ~*
 media-plugins/vapoursynth-znedi3 ~*
