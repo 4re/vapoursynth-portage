@@ -30,6 +30,7 @@ DEPEND="${RDEPEND}
 "
 
 src_configure() {
+	./autogen.sh
 	sed -i -e "s:CXX=\"g++\":CXX=\"$(tc-getCXX)\":" configure || die
 	sed -i -e "s:LD=\"g++\":LD=\"$(tc-getCXX)\":" configure || die
 
@@ -38,12 +39,12 @@ src_configure() {
 	fi
 
 	./configure \
-		--install="${ED}/usr/$(get_libdir)/vapoursynth/" \
-		--extra-cxxflags="${CXXFLAGS}" --extra-ldflags="${LDFLAGS}" \
+		--prefix="${ED}/usr/$(get_libdir)/vapoursynth/" \
+		CXXFLAGS="${CXXFLAGS}" LDFLAGS="${LDFLAGS}" \
 		${myflags} || die "configure failed"
 }
 
 src_install() {
-	emake DESTDIR="${D}" install
+	emake install
 	cp -R "${S}/Waifu2x-w2xc/models/" "${D}/usr/$(get_libdir)/vapoursynth" || die
 }
