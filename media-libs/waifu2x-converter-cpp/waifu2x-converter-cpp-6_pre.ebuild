@@ -1,22 +1,17 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
 
-inherit cmake-utils
+inherit cmake-utils git-r3
 
 DESCRIPTION="Image Super-Resolution for anime-style-art using Deep Convolutional Neural Networks implementation in c++ using opencv"
 HOMEPAGE="https://github.com/DeadSix27/waifu2x-converter-cpp"
 
-if [[ ${PV} == *9999* ]]; then
-	inherit git-r3
-	EGIT_REPO_URI="https://github.com/DeadSix27/${PN}.git"
-	KEYWORDS=""
-else
-	inherit vcs-snapshot
-	SRC_URI="https://github.com/DeadSix27/${PN}/archive/v${PV}.tar.gz -> ${PN}-${PV}.tar.gz"
-	KEYWORDS="~x86 ~amd64"
-fi
+EGIT_REPO_URI="https://github.com/DeadSix27/${PN}.git"
+EGIT_COMMIT="0529f441b7e13831ebcef3e90b1a96c58272a31e"
+
+KEYWORDS="~x86 ~amd64"
 
 LICENSE="MIT BSD BSD-2"
 SLOT="0"
