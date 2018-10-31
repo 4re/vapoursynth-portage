@@ -1,9 +1,9 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=5
+EAPI=6
 
-inherit toolchain-funcs multilib
+inherit toolchain-funcs
 
 DESCRIPTION="Image super-resolution/denoise filter for VapourSynth, based on the waifu2x-opt library"
 HOMEPAGE="https://github.com/HomeOfVapourSynthEvolution/VapourSynth-Waifu2x-w2xc"
@@ -24,23 +24,19 @@ IUSE="debug"
 
 RDEPEND+="
 	media-libs/vapoursynth
-	media-libs/waifu2x-converter-cpp
+	>=media-libs/waifu2x-converter-cpp-6_pre
 "
 DEPEND="${RDEPEND}
 "
 
+
+src_prepare() {
+	eapply_user
+	./autogen.sh
+}
+
 src_configure() {
-	sed -i -e "s:CXX=\"g++\":CXX=\"$(tc-getCXX)\":" configure || die
-	sed -i -e "s:LD=\"g++\":LD=\"$(tc-getCXX)\":" configure || die
-
-	if use debug; then
-		myflags="--enable-debug"
-	fi
-
-	./configure \
-		--install="${ED}/usr/$(get_libdir)/vapoursynth/" \
-		--extra-cxxflags="${CXXFLAGS}" --extra-ldflags="${LDFLAGS}" \
-		${myflags} || die "configure failed"
+	econf --libdir="/usr/$(get_libdir)/vapoursynth/"
 }
 
 src_install() {
