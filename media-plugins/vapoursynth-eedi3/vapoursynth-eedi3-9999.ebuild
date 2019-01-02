@@ -1,7 +1,9 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
+
+inherit meson
 
 DESCRIPTION="An intra-frame deinterlacer"
 HOMEPAGE="https://github.com/HomeOfVapourSynthEvolution/VapourSynth-EEDI3"
@@ -29,11 +31,11 @@ DEPEND="${RDEPEND}
 
 DOCS=( "README.md" )
 
-src_prepare() {
-	eapply_user
-	./autogen.sh
-}
 
 src_configure() {
-	econf $(use_enable opencl) --libdir="/usr/$(get_libdir)/vapoursynth/"
+	local emesonargs=(
+		--libdir="/usr/$(get_libdir)/vapoursynth/"
+		-Dopencl=$(usex opencl true false)
+	)
+	meson_src_configure
 }
