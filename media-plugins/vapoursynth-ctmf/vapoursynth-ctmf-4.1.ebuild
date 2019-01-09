@@ -1,7 +1,9 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
+
+inherit meson
 
 DESCRIPTION="Median filter for VapourSynth (the same algorithm that MedianBlur2)"
 HOMEPAGE="https://github.com/HomeOfVapourSynthEvolution/VapourSynth-CTMF"
@@ -25,11 +27,12 @@ RDEPEND+="
 DEPEND="${RDEPEND}
 "
 
-src_prepare() {
-	eapply_user
-	./autogen.sh
-}
+DOCS=( "README.md" )
+
 
 src_configure() {
-	econf --libdir="/usr/$(get_libdir)/vapoursynth/"
+	local emesonargs=(
+		--libdir="/usr/$(get_libdir)/vapoursynth/"
+	)
+	meson_src_configure
 }
