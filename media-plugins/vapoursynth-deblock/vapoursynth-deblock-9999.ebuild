@@ -1,9 +1,9 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
 
-inherit multilib
+inherit meson
 
 DESCRIPTION="It does a deblocking of the picture, using the deblocking filter of h264"
 HOMEPAGE="https://github.com/HomeOfVapourSynthEvolution/VapourSynth-Deblock"
@@ -25,22 +25,14 @@ RDEPEND+="
 	media-libs/vapoursynth
 "
 DEPEND="${RDEPEND}
-	|| ( >=sys-devel/gcc-5.1.0 sys-devel/clang )
 "
 
 DOCS=( "README.md" )
 
-pkg_pretend() {
-	if tc-is-gcc && [[ $(gcc-major-version) -lt 5 ]]; then
-		die "The active compiler needs to be >=gcc-5.x or clang"
-	fi
-}
-
-src_prepare() {
-	eapply_user
-	./autogen.sh
-}
 
 src_configure() {
-	econf --libdir="/usr/$(get_libdir)/vapoursynth/"
+	local emesonargs=(
+		--libdir="/usr/$(get_libdir)/vapoursynth/"
+	)
+	meson_src_configure
 }
