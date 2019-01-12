@@ -24,7 +24,7 @@ IUSE="debug"
 
 RDEPEND+="
 	media-libs/vapoursynth
-	>=media-libs/waifu2x-converter-cpp-6_pre
+	>=media-libs/waifu2x-converter-cpp-5.2.1
 "
 DEPEND="${RDEPEND}
 "
