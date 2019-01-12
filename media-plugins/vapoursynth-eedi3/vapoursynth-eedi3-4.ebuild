@@ -20,7 +20,7 @@ fi
 
 LICENSE="GPL-2"
 SLOT="0"
-IUSE="opencl"
+IUSE="lto opencl"
 
 RDEPEND+="
 	media-libs/vapoursynth
@@ -35,6 +35,7 @@ DOCS=( "README.md" )
 src_configure() {
 	local emesonargs=(
 		--libdir="/usr/$(get_libdir)/vapoursynth/"
+		-Db_lto=$(usex lto true false)
 		-Dopencl=$(usex opencl true false)
 	)
 	meson_src_configure
