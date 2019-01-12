@@ -1,11 +1,9 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=5
+EAPI=6
 
-AUTOTOOLS_AUTORECONF=1
-
-inherit autotools-utils multilib eutils
+inherit meson
 
 DESCRIPTION="Modified version of Fizick's avisynth filter port of yadif from mplayer"
 HOMEPAGE="https://github.com/HomeOfVapourSynthEvolution/VapourSynth-Yadifmod"
@@ -22,6 +20,7 @@ fi
 
 LICENSE="GPL-2"
 SLOT="0"
+IUSE="lto"
 
 RDEPEND+="
 	media-libs/vapoursynth
@@ -29,8 +28,13 @@ RDEPEND+="
 DEPEND="${RDEPEND}
 "
 
-DOCS=( README.md )
+DOCS=( "README.md" )
+
 
 src_configure() {
-	autotools-utils_src_configure --libdir="/usr/$(get_libdir)/vapoursynth/"
+	local emesonargs=(
+		--libdir="/usr/$(get_libdir)/vapoursynth/"
+		-Db_lto=$(usex lto true false)
+	)
+	meson_src_configure
 }
