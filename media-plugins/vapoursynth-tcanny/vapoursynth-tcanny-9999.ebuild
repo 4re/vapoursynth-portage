@@ -1,9 +1,9 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
 
-inherit toolchain-funcs
+inherit meson
 
 DESCRIPTION="Builds an edge map using canny edge detection"
 HOMEPAGE="https://github.com/HomeOfVapourSynthEvolution/VapourSynth-TCanny"
@@ -20,7 +20,7 @@ fi
 
 LICENSE="GPL-2"
 SLOT="0"
-IUSE="opencl"
+IUSE="lto opencl"
 
 RDEPEND+="
 	media-libs/vapoursynth
@@ -32,11 +32,14 @@ RDEPEND+="
 DEPEND="${RDEPEND}
 "
 
-src_prepare() {
-	eapply_user
-	./autogen.sh
-}
+DOCS=( "README.md" )
+
 
 src_configure() {
-	econf $(use_enable opencl) --libdir="/usr/$(get_libdir)/vapoursynth/"
+	local emesonargs=(
+		--libdir="/usr/$(get_libdir)/vapoursynth/"
+		-Db_lto=$(usex lto true false)
+		-Dopencl=$(usex opencl true false)
+	)
+	meson_src_configure
 }
