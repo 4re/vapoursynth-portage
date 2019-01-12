@@ -20,6 +20,7 @@ fi
 
 LICENSE="GPL-3"
 SLOT="0"
+IUSE="lto"
 
 RDEPEND+="
 	media-libs/vapoursynth
@@ -34,6 +35,7 @@ DOCS=( "README.md" )
 src_configure() {
 	local emesonargs=(
 		--libdir="/usr/$(get_libdir)/vapoursynth/"
+		-Db_lto=$(usex lto true false)
 	)
 	meson_src_configure
 }
