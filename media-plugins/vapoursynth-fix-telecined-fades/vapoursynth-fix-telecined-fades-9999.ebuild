@@ -1,7 +1,9 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
+
+inherit meson
 
 DESCRIPTION="Fix Telecined Fades"
 HOMEPAGE="https://github.com/IFeelBloated/Fix-Telecined-Fades"
@@ -18,35 +20,22 @@ fi
 
 LICENSE="GPL-3"
 SLOT="0"
+IUSE="lto"
 
 RDEPEND+="
 	media-libs/vapoursynth
 "
 DEPEND="${RDEPEND}
-	>=dev-util/meson-0.28.0
-	virtual/pkgconfig
+	dev-lang/yasm
 "
 
-src_prepare(){
-	rm VSHelper.h VapourSynth.h
-	mkdir build
-	eapply_user
-}
+DOCS=( "README.md" )
 
-src_configure(){
-	cd build
-	meson \
-		--prefix="${EPREFIX}/usr" \
-		--buildtype=plain \
-		.. || die
-}
 
-src_compile(){
-	cd build
-	ninja -v
-}
-
-src_install(){
-	cd build
-	DESTDIR="${D}" ninja install
+src_configure() {
+	local emesonargs=(
+		--libdir="/usr/$(get_libdir)/vapoursynth/"
+		-Db_lto=$(usex lto true false)
+	)
+	meson_src_configure
 }

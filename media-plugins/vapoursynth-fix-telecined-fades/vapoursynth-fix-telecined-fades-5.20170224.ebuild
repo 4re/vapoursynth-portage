@@ -5,14 +5,14 @@ EAPI=6
 
 inherit meson git-r3
 
-DESCRIPTION="A plugin which adjust the clip via bezier curve"
-HOMEPAGE="https://github.com/kewenyu/VapourSynth-BezierCurve"
+DESCRIPTION="Fix Telecined Fades"
+HOMEPAGE="https://github.com/IFeelBloated/Fix-Telecined-Fades"
 
-EGIT_REPO_URI="https://github.com/kewenyu/${PN}"
-EGIT_COMMIT="eadfc1372670b989e56845e6694b7be76fedf02b"
+EGIT_REPO_URI="https://github.com/IFeelBloated/Fix-Telecined-Fades"
+EGIT_COMMIT="e70d7fb759cf0109c8ed74a446c94124aa6b1201"
 KEYWORDS="~amd64 ~x86"
 
-LICENSE="MIT"
+LICENSE="GPL-3"
 SLOT="0"
 IUSE="lto"
 
@@ -20,6 +20,7 @@ RDEPEND+="
 	media-libs/vapoursynth
 "
 DEPEND="${RDEPEND}
+	dev-lang/yasm
 "
 
 DOCS=( "README.md" )

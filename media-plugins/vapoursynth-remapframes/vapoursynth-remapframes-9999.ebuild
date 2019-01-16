@@ -1,7 +1,9 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
+
+inherit meson
 
 DESCRIPTION="Allows easy remapping of frames in a clip through the use of a text file or an input string"
 HOMEPAGE="https://github.com/Irrational-Encoding-Wizardry/Vapoursynth-RemapFrames"
@@ -18,34 +20,22 @@ fi
 
 LICENSE="BSD-2"
 SLOT="0"
+IUSE="lto"
 
 RDEPEND+="
 	media-libs/vapoursynth
 "
 DEPEND="${RDEPEND}
-	>=dev-util/meson-0.28.0
 	virtual/pkgconfig
 "
 
-src_prepare(){
-	mkdir build
-	eapply_user
-}
+DOCS=( "README.rst" )
 
-src_configure(){
-	cd build
-	meson \
-		--prefix="${EPREFIX}/usr" \
-		--buildtype=plain \
-		.. || die
-}
 
-src_compile(){
-	cd build
-	ninja -v
-}
-
-src_install(){
-	cd build
-	DESTDIR="${D}" ninja install
+src_configure() {
+	local emesonargs=(
+		--libdir="/usr/$(get_libdir)/vapoursynth/"
+		-Db_lto=$(usex lto true false)
+	)
+	meson_src_configure
 }

@@ -1,4 +1,4 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -19,8 +19,8 @@ else
 fi
 
 LICENSE="GPL-2"
-IUSE=""
 SLOT="0"
+IUSE="lto"
 
 RDEPEND+="
 	media-libs/vapoursynth
@@ -28,6 +28,15 @@ RDEPEND+="
 	>=sys-devel/gcc-7.2.0
 "
 DEPEND="${RDEPEND}
-	dev-util/meson
-	virtual/pkgconfig
 "
+
+DOCS=( "doc/fft3dfilter.md" )
+
+
+src_configure() {
+	local emesonargs=(
+		--libdir="/usr/$(get_libdir)/vapoursynth/"
+		-Db_lto=$(usex lto true false)
+	)
+	meson_src_configure
+}
