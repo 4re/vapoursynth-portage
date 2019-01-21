@@ -1,4 +1,4 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -54,4 +54,12 @@ src_install() {
 	doicon  build/release-*/vsedit.ico build/release-*/vsedit.svg
 	dodoc   build/release-*/CHANGELOG build/release-*/LICENSE build/release-*/README
 	make_desktop_entry vsedit "VapourSynth Editor" vsedit Development "MimeType=text/x-vpy;\nTerminal=false\nStartupNotify=false"
+}
+
+pkg_postinst() {
+	xdg_desktop_database_update
+}
+
+pkg_postrm() {
+	xdg_desktop_database_update
 }
