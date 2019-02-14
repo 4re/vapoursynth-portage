@@ -1,11 +1,9 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=5
+EAPI=6
 
-AUTOTOOLS_AUTORECONF=1
-
-inherit autotools-utils eutils
+inherit toolchain-funcs
 
 DESCRIPTION="IVTC assistant for VapourSynth, similar to Yatta"
 HOMEPAGE="https://github.com/dubhater/Wobbly"
@@ -25,8 +23,20 @@ SLOT="0"
 IUSE=""
 
 RDEPEND+="
-    media-libs/vapoursynth
-    dev-qt/qtwidgets
+	media-libs/vapoursynth
+	dev-qt/qtwidgets
+	media-plugins/vapoursynth-d2vsource
+	media-plugins/vapoursynth-fieldhint
+	media-plugins/vapoursynth-scxvid
 "
 DEPEND="${RDEPEND}
 "
+
+src_prepare() {
+	eapply_user
+	./autogen.sh
+}
+
+src_configure() {
+	econf --libdir="/usr/$(get_libdir)/vapoursynth/"
+}
