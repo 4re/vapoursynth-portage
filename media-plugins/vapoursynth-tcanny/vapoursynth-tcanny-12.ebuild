@@ -27,6 +27,7 @@ RDEPEND+="
 	opencl? (
 		dev-libs/boost
 		virtual/opencl
+		dev-libs/ocl-icd
 		)
 "
 DEPEND="${RDEPEND}
