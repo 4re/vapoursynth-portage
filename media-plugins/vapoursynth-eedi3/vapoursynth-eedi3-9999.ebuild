@@ -24,7 +24,10 @@ IUSE="lto opencl"
 
 RDEPEND+="
 	media-libs/vapoursynth
-	opencl? ( virtual/opencl )
+	opencl? ( 
+		virtual/opencl
+		dev-libs/ocl-icd
+	)
 "
 DEPEND="${RDEPEND}
 "

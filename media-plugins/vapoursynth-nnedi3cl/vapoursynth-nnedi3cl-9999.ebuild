@@ -26,6 +26,7 @@ RDEPEND+="
 	media-libs/vapoursynth
 	dev-libs/boost
 	virtual/opencl
+	dev-libs/ocl-icd
 "
 DEPEND="${RDEPEND}
 "
