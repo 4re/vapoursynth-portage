@@ -15,6 +15,7 @@ media-plugins/vapoursynth-cnr2 ~*
 media-plugins/vapoursynth-combmask ~*
 media-plugins/vapoursynth-continuityfixer ~*
 media-plugins/vapoursynth-ctmf ~*
+media-plugins/vapoursynth-curve ~*
 media-plugins/vapoursynth-d2vsource ~*
 media-plugins/vapoursynth-damb ~*
 media-plugins/vapoursynth-dctfilter ~*
@@ -76,6 +77,7 @@ media-plugins/vapoursynth-tc2cfr ~*
 media-plugins/vapoursynth-tcanny ~*
 media-plugins/vapoursynth-tcomb ~*
 media-plugins/vapoursynth-tdeintmod ~*
+media-plugins/vapoursynth-tedgemask ~*
 media-plugins/vapoursynth-templinearapproximate ~*
 media-plugins/vapoursynth-temporalmedian ~*
 media-plugins/vapoursynth-temporalsoften ~*
