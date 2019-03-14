@@ -9,8 +9,8 @@ DESCRIPTION="A rewrite version of AVISynth SangNom2"
 HOMEPAGE="https://github.com/dubhater/vapoursynth-sangnom https://bitbucket.org/James1201/vapoursynth-sangnom"
 
 if [[ ${PV} == *9999* ]]; then
-	inherit mercurial
-	EHG_REPO_URI="https://github.com/dubhater/vapoursynth-sangnom"
+	inherit git-r3
+	EGIT_REPO_URI="https://github.com/dubhater/vapoursynth-sangnom.git"
 	KEYWORDS=""
 else
 	inherit vcs-snapshot
