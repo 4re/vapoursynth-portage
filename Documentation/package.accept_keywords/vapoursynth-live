@@ -5,6 +5,7 @@
 ~media-libs/zimg-9999 **
 ~media-plugins/vapoursynth-addgrain-9999 **
 ~media-plugins/vapoursynth-adjust-9999 **
+~media-plugins/vapoursynth-astdr-9999 **
 ~media-plugins/vapoursynth-autocrop-9999 **
 ~media-plugins/vapoursynth-awarpsharp2-9999 **
 ~media-plugins/vapoursynth-beziercurve-9999 **
@@ -27,6 +28,7 @@
 ~media-plugins/vapoursynth-delogo-9999 **
 ~media-plugins/vapoursynth-depan-9999 **
 ~media-plugins/vapoursynth-descale-9999 **
+~media-plugins/vapoursynth-dfmderainbow-9999 **
 ~media-plugins/vapoursynth-dfttest-9999 **
 ~media-plugins/vapoursynth-dotkill-9999 **
 ~media-plugins/vapoursynth-eedi2-9999 **
@@ -40,12 +42,15 @@
 ~media-plugins/vapoursynth-flash3kyuu_deband-9999 **
 ~media-plugins/vapoursynth-fluxsmooth-9999 **
 ~media-plugins/vapoursynth-fmtconv-9999 **
+~media-plugins/vapoursynth-fvsfunc-9999 **
 ~media-plugins/vapoursynth-genericfilters-9999 **
 ~media-plugins/vapoursynth-havsfunc-9999 **
 ~media-plugins/vapoursynth-histogram-9999 **
 ~media-plugins/vapoursynth-hqdn3d-9999 **
+~media-plugins/vapoursynth-hysteria-9999 **
 ~media-plugins/vapoursynth-inpaint-9999 **
 ~media-plugins/vapoursynth-it-9999 **
+~media-plugins/vapoursynth-kagefunc-9999 **
 ~media-plugins/vapoursynth-knlmeanscl-9999 **
 ~media-plugins/vapoursynth-l-smash-works-9999 **
 ~media-plugins/vapoursynth-minideen-9999 **
@@ -59,6 +64,7 @@
 ~media-plugins/vapoursynth-nnedi3-9999 **
 ~media-plugins/vapoursynth-nnedi3cl-9999 **
 ~media-plugins/vapoursynth-nnedi3_resample-9999 **
+~media-plugins/vapoursynth-nnedi3_rpow2-9999 **
 ~media-plugins/vapoursynth-oyster-9999 **
 ~media-plugins/vapoursynth-plugins-meta-9999 **
 ~media-plugins/vapoursynth-plum-9999 **
@@ -103,6 +109,7 @@
 ~media-plugins/vapoursynth-waifu2x-w2xc-9999 **
 ~media-plugins/vapoursynth-warpsharpsupport-9999 **
 ~media-plugins/vapoursynth-wwxd-9999 **
+~media-plugins/vapoursynth-xaa-9999 **
 ~media-plugins/vapoursynth-yadifmod-9999 **
 ~media-plugins/vapoursynth-znedi3-9999 **
 ~media-video/d2vwitch-9999 **
