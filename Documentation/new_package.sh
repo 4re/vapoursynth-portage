@@ -1,6 +1,22 @@
 #!/bin/bash
 
 root="../"
+pack_cat="app-editors media-libs media-plugins media-video"
+keywordsfile="${root}/Documentation/package.accept_keywords/vapoursynth"
+unmaskfile="${root}/Documentation/package.accept_keywords/vapoursynth-live"
+
+[[ -f ${keywordsfile} ]] && rm -f ${keywordsfile}
+[[ -f ${unmaskfile} ]] && rm -f ${unmaskfile}
+
+for category in ${pack_cat}; do
+	for package in $( ls -1 "${root}/${category}" ); do
+		echo "${category}/${package} ~*" >> ${keywordsfile}
+		echo "~${category}/${package}-9999 **" >> ${unmaskfile}
+	done
+done
+
+# ==================================================================================================
+
 meta_ebuild_cat="media-plugins"
 meta_ebuild_name="vapoursynth-plugins-meta"
 meta_ebuild_iuse="$(mktemp)"
