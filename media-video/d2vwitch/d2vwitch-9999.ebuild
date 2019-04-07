@@ -1,11 +1,7 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=5
-
-AUTOTOOLS_AUTORECONF=1
-
-inherit autotools-utils eutils
+EAPI=6
 
 DESCRIPTION="Cross-platform D2V creator"
 HOMEPAGE="https://github.com/dubhater/D2VWitch"
@@ -25,9 +21,18 @@ SLOT="0"
 IUSE=""
 
 RDEPEND+="
-	>=virtual/ffmpeg-9
+	media-video/ffmpeg
 "
 DEPEND="${RDEPEND}
 	dev-qt/qtwidgets
 	media-libs/vapoursynth
 "
+
+src_prepare() {
+	eapply_user
+	./autogen.sh
+}
+
+src_configure() {
+	econf --libdir="/usr/$(get_libdir)/vapoursynth/"
+}
