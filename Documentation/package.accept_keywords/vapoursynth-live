@@ -13,6 +13,7 @@
 ~media-plugins/vapoursynth-bilateral-9999 **
 ~media-plugins/vapoursynth-bm3d-9999 **
 ~media-plugins/vapoursynth-cnr2-9999 **
+~media-plugins/vapoursynth-colorbars-9999 **
 ~media-plugins/vapoursynth-combmask-9999 **
 ~media-plugins/vapoursynth-continuityfixer-9999 **
 ~media-plugins/vapoursynth-ctmf-9999 **
@@ -35,6 +36,7 @@
 ~media-plugins/vapoursynth-eedi3-9999 **
 ~media-plugins/vapoursynth-ffmpegsource-9999 **
 ~media-plugins/vapoursynth-fft3dfilter-9999 **
+~media-plugins/vapoursynth-fftspectrum-9999 **
 ~media-plugins/vapoursynth-fieldhint-9999 **
 ~media-plugins/vapoursynth-fillborders-9999 **
 ~media-plugins/vapoursynth-finesharp-9999 **
@@ -53,6 +55,7 @@
 ~media-plugins/vapoursynth-kagefunc-9999 **
 ~media-plugins/vapoursynth-knlmeanscl-9999 **
 ~media-plugins/vapoursynth-l-smash-works-9999 **
+~media-plugins/vapoursynth-median-9999 **
 ~media-plugins/vapoursynth-minideen-9999 **
 ~media-plugins/vapoursynth-minsrp-9999 **
 ~media-plugins/vapoursynth-motionmask-9999 **

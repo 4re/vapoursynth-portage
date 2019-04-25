@@ -13,6 +13,7 @@ media-plugins/vapoursynth-bifrost ~*
 media-plugins/vapoursynth-bilateral ~*
 media-plugins/vapoursynth-bm3d ~*
 media-plugins/vapoursynth-cnr2 ~*
+media-plugins/vapoursynth-colorbars ~*
 media-plugins/vapoursynth-combmask ~*
 media-plugins/vapoursynth-continuityfixer ~*
 media-plugins/vapoursynth-ctmf ~*
@@ -35,6 +36,7 @@ media-plugins/vapoursynth-eedi2 ~*
 media-plugins/vapoursynth-eedi3 ~*
 media-plugins/vapoursynth-ffmpegsource ~*
 media-plugins/vapoursynth-fft3dfilter ~*
+media-plugins/vapoursynth-fftspectrum ~*
 media-plugins/vapoursynth-fieldhint ~*
 media-plugins/vapoursynth-fillborders ~*
 media-plugins/vapoursynth-finesharp ~*
@@ -53,6 +55,7 @@ media-plugins/vapoursynth-it ~*
 media-plugins/vapoursynth-kagefunc ~*
 media-plugins/vapoursynth-knlmeanscl ~*
 media-plugins/vapoursynth-l-smash-works ~*
+media-plugins/vapoursynth-median ~*
 media-plugins/vapoursynth-minideen ~*
 media-plugins/vapoursynth-minsrp ~*
 media-plugins/vapoursynth-motionmask ~*
