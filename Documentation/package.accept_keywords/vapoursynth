@@ -104,6 +104,7 @@ media-plugins/vapoursynth-vctrans ~*
 media-plugins/vapoursynth-vfrtocrf ~*
 media-plugins/vapoursynth-videoscope ~*
 media-plugins/vapoursynth-vine ~*
+media-plugins/vapoursynth-vmaf ~*
 media-plugins/vapoursynth-vsimagereader ~*
 media-plugins/vapoursynth-vs-maskdetail ~*
 media-plugins/vapoursynth-vsrawsource ~*
