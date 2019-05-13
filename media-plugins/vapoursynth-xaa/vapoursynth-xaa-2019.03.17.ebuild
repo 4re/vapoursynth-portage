@@ -11,7 +11,7 @@ DESCRIPTION="xaa is a many-in-one antialiasing function for VapourSynth"
 HOMEPAGE="https://github.com/dubhater/vapoursynth-xaa"
 
 EGIT_REPO_URI="https://github.com/dubhater/vapoursynth-xaa.git"
-EGIT_COMMIT="a04c5f8b9a3b722b89a4a4aa9713f2d387639a2a"
+EGIT_COMMIT="a7766a0f954a6a4bd973f1e9925cbd99b8746c9a"
 KEYWORDS="~amd64 ~x86"
 
 LICENSE=""
