@@ -116,6 +116,7 @@ media-plugins/vapoursynth-wwxd ~*
 media-plugins/vapoursynth-xaa ~*
 media-plugins/vapoursynth-yadifmod ~*
 media-plugins/vapoursynth-znedi3 ~*
+media-plugins/vsutil ~*
 media-video/d2vwitch ~*
 media-video/mpv ~*
 media-video/wobbly ~*
