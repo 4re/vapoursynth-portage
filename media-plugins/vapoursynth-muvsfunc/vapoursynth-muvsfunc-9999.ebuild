@@ -1,4 +1,4 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -33,6 +33,7 @@ RDEPEND+="
 	media-plugins/vapoursynth-dfttest
 	media-plugins/vapoursynth-eedi2
 	media-plugins/vapoursynth-fmtconv
+	media-plugins/vapoursynth-median
 	media-plugins/vapoursynth-mvsfunc[${PYTHON_USEDEP}]
 	media-plugins/vapoursynth-mvtools
 	media-plugins/vapoursynth-nnedi3
