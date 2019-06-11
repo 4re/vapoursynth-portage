@@ -1,7 +1,7 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=5
+EAPI=6
 
 PYTHON_COMPAT=( python3_{4,5,6,7} )
 
@@ -32,7 +32,7 @@ src_compile(){
 
 src_install(){
 	python_domodule temporalsoften2.py
-	exeinto /usr/lib/vapoursynth/
+	exeinto "/usr/$(get_libdir)/vapoursynth/"
 	doexe ${LIBNAMESC} ${LIBNAMETS}
 	dodoc readme_temporalsoften.txt readme.txt
 }
