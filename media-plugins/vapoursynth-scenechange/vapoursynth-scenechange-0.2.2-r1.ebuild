@@ -5,7 +5,7 @@ EAPI=6
 
 PYTHON_COMPAT=( python3_{4,5,6,7} )
 
-inherit python-utils-r1 python-single-r1 toolchain-funcs multilib
+inherit python-utils-r1 python-single-r1
 
 DESCRIPTION="A scene change detection plugin for VapourSynth plus temporalsoften2 that makes use of it"
 HOMEPAGE="http://forum.doom9.org/showthread.php?t=166769"
