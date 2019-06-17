@@ -1,9 +1,9 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
 
-inherit toolchain-funcs
+inherit meson
 
 DESCRIPTION="Image super-resolution/denoise filter for VapourSynth, based on the waifu2x-opt library"
 HOMEPAGE="https://github.com/HomeOfVapourSynthEvolution/VapourSynth-Waifu2x-w2xc"
@@ -20,7 +20,7 @@ fi
 
 LICENSE="MIT"
 SLOT="0"
-IUSE="debug"
+IUSE="debug lto"
 
 RDEPEND+="
 	media-libs/vapoursynth
@@ -29,17 +29,13 @@ RDEPEND+="
 DEPEND="${RDEPEND}
 "
 
+DOCS=( "README.md" )
 
-src_prepare() {
-	eapply_user
-	./autogen.sh
-}
 
 src_configure() {
-	econf --libdir="/usr/$(get_libdir)/vapoursynth/"
-}
-
-src_install() {
-	emake DESTDIR="${D}" install
-	cp -R "${S}/Waifu2x-w2xc/models/" "${D}/usr/$(get_libdir)/vapoursynth" || die
+	local emesonargs=(
+		--libdir="/usr/$(get_libdir)/vapoursynth/"
+		-Db_lto=$(usex lto true false)
+	)
+	meson_src_configure
 }
