@@ -1,4 +1,4 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -47,6 +47,7 @@ RDEPEND+="
 	opencl? ( media-plugins/vapoursynth-nnedi3cl )
 	media-plugins/vapoursynth-nnedi3_resample
 	media-plugins/vapoursynth-sangnom
+	media-plugins/vapoursynth-ttempsmooth
 	media-plugins/vapoursynth-znedi3
 "
 DEPEND="${RDEPEND}"

@@ -1,4 +1,4 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -33,7 +33,6 @@ RDEPEND+="
 	media-plugins/vapoursynth-ctmf
 	media-plugins/vapoursynth-dctfilter
 	media-plugins/vapoursynth-deblock
-	fftw? ( media-plugins/vapoursynth-depan )
 	fftw? ( media-plugins/vapoursynth-dfttest )
 	media-plugins/vapoursynth-eedi2
 	media-plugins/vapoursynth-eedi3
@@ -48,6 +47,7 @@ RDEPEND+="
 	opencl? ( media-plugins/vapoursynth-nnedi3cl )
 	media-plugins/vapoursynth-nnedi3_resample
 	media-plugins/vapoursynth-sangnom
+	media-plugins/vapoursynth-ttempsmooth
 	media-plugins/vapoursynth-znedi3
 "
 DEPEND="${RDEPEND}"
