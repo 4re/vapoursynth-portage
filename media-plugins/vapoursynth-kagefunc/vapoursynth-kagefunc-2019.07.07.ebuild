@@ -11,7 +11,7 @@ DESCRIPTION="kageru's Vapoursynth functions"
 HOMEPAGE="https://github.com/Irrational-Encoding-Wizardry/kagefunc"
 
 EGIT_REPO_URI="https://github.com/Irrational-Encoding-Wizardry/kagefunc.git"
-EGIT_COMMIT="cec7e335d98c2d2eb4adb9faa73b37eb47b7531b"
+EGIT_COMMIT="5c7cd6725fec0688aab8d3272e653dea39ee946a"
 KEYWORDS="~amd64 ~x86"
 
 LICENSE="MIT"
