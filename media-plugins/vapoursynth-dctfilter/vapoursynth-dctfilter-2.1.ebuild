@@ -1,9 +1,9 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
 
-inherit toolchain-funcs
+inherit meson
 
 DESCRIPTION="Performs DCT on 8x8 blocks, applies modification to it, then performs IDCT"
 HOMEPAGE="https://github.com/HomeOfVapourSynthEvolution/VapourSynth-DCTFilter"
@@ -20,6 +20,7 @@ fi
 
 LICENSE="MIT"
 SLOT="0"
+IUSE="lto"
 
 RDEPEND+="
 	media-libs/vapoursynth
@@ -28,12 +29,13 @@ RDEPEND+="
 DEPEND="${RDEPEND}
 "
 
+DOCS=( "README.md" )
 
-src_prepare() {
-	eapply_user
-	./autogen.sh
-}
 
 src_configure() {
-	econf --libdir="/usr/$(get_libdir)/vapoursynth/"
+	local emesonargs=(
+		--libdir="/usr/$(get_libdir)/vapoursynth/"
+		-Db_lto=$(usex lto true false)
+	)
+	meson_src_configure
 }
