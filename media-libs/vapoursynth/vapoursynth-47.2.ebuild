@@ -1,14 +1,12 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=5
-
-AUTOTOOLS_AUTORECONF=1
+EAPI=6
 
 PYTHON_COMPAT=( python3_{4,5,6,7} )
 PYTHON_REQ_USE="threads(+)"
 
-inherit autotools-utils python-single-r1
+inherit autotools python-single-r1
 
 DESCRIPTION="VapourSynth is an library for video manipulation."
 HOMEPAGE="http://www.vapoursynth.com/"
@@ -36,7 +34,7 @@ VSPLUGINS="
 	vapoursynth_plugins_vinverse
 	vapoursynth_plugins_vivtc
 "
-IUSE="doc +vspipe -debug -guard +shared -static ${VSPLUGINS}"
+IUSE="doc +vspipe -debug -guard +shared -static cpu_flags_x86_sse2 ${VSPLUGINS}"
 
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
@@ -45,30 +43,31 @@ RDEPEND+="${PYTHON_DEPS}
 		media-libs/libass
 		virtual/ffmpeg
 	)
-	vapoursynth_plugins_imagemagick? ( >=media-gfx/imagemagick-7.0.0.0[cxx,hdri,-q8(-),-q64(-)] )
-	>=media-libs/zimg-2.9.1
+	vapoursynth_plugins_imagemagick? ( >=media-gfx/imagemagick-7.0[cxx,hdri,-q8(-),-q64(-)] )
+	>=media-libs/zimg-2.9.2
 	vapoursynth_plugins_ocr? ( app-text/tesseract )
 	vapoursynth_plugins_miscfilters? ( !media-plugins/vapoursynth-miscfilters )
 "
 DEPEND="${RDEPEND}
-	>=dev-python/cython-0.28.2
+	>=dev-python/cython-0.29
 	doc? (
 		dev-python/sphinx[${PYTHON_USEDEP}]
 		dev-python/sphinxcontrib-websupport[${PYTHON_USEDEP}]
 	)
 	virtual/pkgconfig
-	>=dev-lang/nasm-2.13.01
 "
 
-# bug with MAKEOPTS="-j1"
-AUTOTOOLS_IN_SOURCE_BUILD=1
+src_prepare() {
+	default
+	eautoreconf
+}
 
 src_configure() {
-	autotools-utils_src_configure \
+	econf \
 		--enable-core \
 		--enable-python-module \
 		--enable-vsscript \
-		--enable-x86-asm \
+		$( use_enable cpu_flags_x86_sse2 x86-asm ) \
 		$( use_enable vapoursynth_plugins_eedi3 eedi3 ) \
 		$( use_enable vapoursynth_plugins_imagemagick imwri ) \
 		$( use_enable vapoursynth_plugins_miscfilters miscfilters ) \
@@ -86,11 +85,11 @@ src_configure() {
 }
 
 src_compile() {
-	autotools-utils_src_compile
-	use doc && autotools-utils_src_compile -C "${S}/doc" html
+	emake
+	use doc && emake -C "${S}/doc" html
 }
 
 src_install() {
-	use doc && HTML_DOCS=("${S}/doc/_build/html")
-	autotools-utils_src_install
+	emake DESTDIR="${D}" install
+	use doc && HTML_DOCS="${S}/doc/_build/html/" einstalldocs
 }
