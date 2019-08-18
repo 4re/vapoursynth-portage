@@ -1,11 +1,9 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=5
+EAPI=6
 
-AUTOTOOLS_AUTORECONF=1
-
-inherit autotools-utils multilib
+inherit autotools
 
 DESCRIPTION="D2V Source plugin for VapourSynth"
 HOMEPAGE="https://github.com/dwbuiten/d2vsource"
@@ -32,6 +30,12 @@ DEPEND="${RDEPEND}
 
 DOCS=( README )
 
+
+src_prepare() {
+	default
+	eautoreconf
+}
+
 src_configure() {
-	autotools-utils_src_configure --libdir="/usr/$(get_libdir)/vapoursynth/"
+	econf  --libdir="/usr/$(get_libdir)/vapoursynth/"
 }
