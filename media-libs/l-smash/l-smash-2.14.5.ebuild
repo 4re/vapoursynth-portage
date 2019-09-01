@@ -1,9 +1,7 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=5
-
-inherit multilib
+EAPI=7
 
 DESCRIPTION="Media library"
 HOMEPAGE="https://github.com/l-smash/l-smash"
@@ -11,14 +9,14 @@ HOMEPAGE="https://github.com/l-smash/l-smash"
 if [[ ${PV} == *9999* ]]; then
 	inherit git-r3
 	EGIT_REPO_URI="https://github.com/${PN}/${PN}.git"
+	KEYWORDS=""
 else
-	inherit vcs-snapshot
 	SRC_URI="https://github.com/${PN}/${PN}/archive/v${PV}.tar.gz -> ${PN}-${PV}.tar.gz"
+	KEYWORDS="~amd64 ~x86"
 fi
 
 LICENSE="ISC"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
 IUSE="+shared -static -debug"
 
 RDEPEND+="
@@ -41,5 +39,10 @@ src_configure() {
 		myconf="${myconf} --enable-debug"
 	fi
 
-	./configure --prefix=/usr --libdir=/usr/$(get_libdir) ${myconf} --extra-cflags="${CFLAGS}" --extra-ldflags="${LDFLAGS}" || die
+	./configure \
+		--prefix=/usr \
+		--libdir=/usr/$(get_libdir) \
+		--extra-cflags="${CFLAGS}" \
+		--extra-ldflags="${LDFLAGS}" \
+		${myconf}  || die
 }
