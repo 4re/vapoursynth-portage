@@ -3,20 +3,15 @@
 
 EAPI=7
 
-inherit meson
+inherit meson git-r3
 
 DESCRIPTION="Works based on L-SMASH project"
 HOMEPAGE="https://github.com/HolyWu/L-SMASH-Works"
 
-if [[ ${PV} == *9999* ]]; then
-	inherit git-r3
-	EGIT_REPO_URI="https://github.com/HolyWu/L-SMASH-Works.git"
-	KEYWORDS=""
-else
-	SRC_URI="https://github.com/HolyWu/L-SMASH-Works/archive/${PV}.tar.gz -> ${PN}-${PV}.tar.gz"
-	KEYWORDS="~amd64 ~x86"
-fi
+EGIT_REPO_URI="https://github.com/HolyWu/L-SMASH-Works.git"
+EGIT_COMMIT="fd471fcff30c71dcfcb580909cd17261954b4b54"
 
+KEYWORDS="~x86 ~amd64"
 LICENSE="GPL-2"
 SLOT="0"
 IUSE=""

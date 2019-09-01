@@ -1,0 +1,13 @@
+diff --git a/video_output.c b/video_output.c
+index c0fe03b..15a1b6f 100644
+--- a/video_output.c
++++ b/video_output.c
+@@ -20,7 +20,7 @@
+
+ /* This file is available under an ISC license. */
+
+-#include <string.h>
++#include <strings.h>
+
+ #ifdef _MSC_VER
+ #define strcasecmp _stricmp
