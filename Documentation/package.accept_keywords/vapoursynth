@@ -55,6 +55,7 @@ media-plugins/vapoursynth-it ~*
 media-plugins/vapoursynth-kagefunc ~*
 media-plugins/vapoursynth-knlmeanscl ~*
 media-plugins/vapoursynth-l-smash-works ~*
+media-plugins/vapoursynth-matchhistogram ~*
 media-plugins/vapoursynth-median ~*
 media-plugins/vapoursynth-minideen ~*
 media-plugins/vapoursynth-minsrp ~*
