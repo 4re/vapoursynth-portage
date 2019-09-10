@@ -30,7 +30,3 @@ DEPEND="${RDEPEND}
 "
 
 S="${WORKDIR}/${P}/VapourSynth"
-
-PATCHES=(
-	"${FILESDIR}/${PN}-strings.patch"
-)
