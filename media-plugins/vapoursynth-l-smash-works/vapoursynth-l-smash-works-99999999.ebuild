@@ -13,6 +13,7 @@ if [[ ${PV} == *9999* ]]; then
 	EGIT_REPO_URI="https://github.com/HolyWu/L-SMASH-Works.git"
 	KEYWORDS=""
 else
+	inherit vcs-snapshot
 	SRC_URI="https://github.com/HolyWu/L-SMASH-Works/archive/${PV}.tar.gz -> ${PN}-${PV}.tar.gz"
 	KEYWORDS="~amd64 ~x86"
 fi

@@ -3,15 +3,21 @@
 
 EAPI=7
 
-inherit meson git-r3
+inherit meson
 
 DESCRIPTION="Works based on L-SMASH project"
 HOMEPAGE="https://github.com/HolyWu/L-SMASH-Works"
 
-EGIT_REPO_URI="https://github.com/HolyWu/L-SMASH-Works.git"
-EGIT_COMMIT="fd471fcff30c71dcfcb580909cd17261954b4b54"
+if [[ ${PV} == *9999* ]]; then
+	inherit git-r3
+	EGIT_REPO_URI="https://github.com/HolyWu/L-SMASH-Works.git"
+	KEYWORDS=""
+else
+	inherit vcs-snapshot
+	SRC_URI="https://github.com/HolyWu/L-SMASH-Works/archive/${PV}.tar.gz -> ${PN}-${PV}.tar.gz"
+	KEYWORDS="~amd64 ~x86"
+fi
 
-KEYWORDS="~x86 ~amd64"
 LICENSE="GPL-2"
 SLOT="0"
 IUSE=""
@@ -25,7 +31,3 @@ DEPEND="${RDEPEND}
 "
 
 S="${WORKDIR}/${P}/VapourSynth"
-
-PATCHES=(
-	"${FILESDIR}/${PN}-strings.patch"
-)
