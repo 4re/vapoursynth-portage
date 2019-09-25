@@ -31,7 +31,7 @@ SLOT="0"
 IUSE="+alsa aqua archive bluray cdda +cli coreaudio cplugins cuda doc drm dvb
 	dvd +egl gbm +iconv jack javascript jpeg lcms +libass libcaca libmpv +lua
 	luajit openal +opengl oss pulseaudio raspberry-pi rubberband samba sdl
-	selinux test tools +uchardet v4l vaapi vapoursynth vdpau vulkan wayland +X +xv zlib
+	selinux test tools +uchardet vaapi vapoursynth vdpau vulkan wayland +X +xv zlib
 	zsh-completion"
 
 REQUIRED_USE="
@@ -47,7 +47,6 @@ REQUIRED_USE="
 	test? ( opengl )
 	tools? ( cli )
 	uchardet? ( iconv )
-	v4l? ( || ( alsa oss ) )
 	vaapi? ( || ( gbm X wayland ) )
 	vdpau? ( X )
 	vulkan? ( || ( X wayland ) )
@@ -65,10 +64,7 @@ COMMON_DEPEND="
 	bluray? ( >=media-libs/libbluray-0.3.0:= )
 	cdda? ( dev-libs/libcdio-paranoia )
 	drm? ( x11-libs/libdrm )
-	dvd? (
-		>=media-libs/libdvdnav-4.2.0
-		>=media-libs/libdvdread-4.1.0
-	)
+	dvd? ( >=media-libs/libdvdnav-6.0.0 )
 	egl? ( media-libs/mesa[egl,gbm(-)?,wayland(-)?] )
 	iconv? (
 		virtual/libiconv
@@ -93,7 +89,6 @@ COMMON_DEPEND="
 	rubberband? ( >=media-libs/rubberband-1.8.0 )
 	samba? ( net-fs/samba )
 	sdl? ( media-libs/libsdl2[sound,threads,video] )
-	v4l? ( media-libs/libv4l )
 	vaapi? ( x11-libs/libva:=[drm?,X?,wayland?] )
 	vapoursynth? ( media-libs/vapoursynth )
 	vdpau? ( x11-libs/libvdpau )
@@ -102,7 +97,7 @@ COMMON_DEPEND="
 		media-libs/vulkan-loader[X?,wayland?]
 	)
 	wayland? (
-		>=dev-libs/wayland-1.6.0
+		>=dev-libs/wayland-1.15.0
 		>=dev-libs/wayland-protocols-1.14
 		>=x11-libs/libxkbcommon-0.3.0
 	)
@@ -128,7 +123,6 @@ DEPEND="${COMMON_DEPEND}
 	doc? ( dev-python/rst2pdf )
 	dvb? ( virtual/linuxtv-dvb-headers )
 	test? ( >=dev-util/cmocka-1.0.0 )
-	v4l? ( virtual/os-headers )
 	zsh-completion? ( dev-lang/perl )
 "
 RDEPEND="${COMMON_DEPEND}
@@ -190,14 +184,12 @@ src_configure() {
 		$(use_enable libass libass-osd)
 		$(use_enable zlib)
 		$(use_enable bluray libbluray)
-		$(use_enable dvd dvdread)
 		$(use_enable dvd dvdnav)
 		$(use_enable cdda)
 		$(use_enable uchardet)
 		$(use_enable rubberband)
 		$(use_enable lcms lcms2)
 		$(use_enable vapoursynth)
-		--disable-vapoursynth-lazy
 		$(use_enable archive libarchive)
 
 		--enable-libavdevice
@@ -237,9 +229,8 @@ src_configure() {
 		$(use_enable libcaca caca)
 		$(use_enable jpeg)
 		$(use_enable vulkan shaderc)
-		$(use_enable raspberry-pi rpi)
+		$(use_enable raspberry-pi rpi-mmal)
 		$(usex libmpv "$(use_enable opengl plain-gl)" '--disable-plain-gl')
-		--disable-mali-fbdev # Only available in overlays.
 		$(usex opengl '' '--disable-gl')
 		$(use_enable vulkan)
 
@@ -248,10 +239,6 @@ src_configure() {
 		$(use_enable cuda cuda-hwaccel)
 
 		# TV features:
-		$(use_enable v4l tv)
-		$(use_enable v4l tv-v4l2)
-		$(use_enable v4l libv4l2)
-		$(use_enable v4l audio-input)
 		$(use_enable dvb dvbin)
 
 		# Miscellaneous features:
@@ -260,7 +247,6 @@ src_configure() {
 
 	if use vaapi && use X; then
 		mywafargs+=(
-			$(use_enable opengl vaapi-glx)
 			$(use_enable egl vaapi-x-egl)
 		)
 	fi
