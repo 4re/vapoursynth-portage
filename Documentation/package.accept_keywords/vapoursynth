@@ -73,6 +73,7 @@ media-plugins/vapoursynth-oyster ~*
 media-plugins/vapoursynth-plugins-meta ~*
 media-plugins/vapoursynth-plum ~*
 media-plugins/vapoursynth-qrcodesource ~*
+media-plugins/vapoursynth-readmpls ~*
 media-plugins/vapoursynth-reduceflicker ~*
 media-plugins/vapoursynth-remapframes ~*
 media-plugins/vapoursynth-removedirt ~*
