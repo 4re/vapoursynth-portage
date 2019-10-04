@@ -84,6 +84,7 @@ media-plugins/vapoursynth-scxvid ~*
 media-plugins/vapoursynth-smoothuv ~*
 media-plugins/vapoursynth-ssiq ~*
 media-plugins/vapoursynth-surfaceblur ~*
+media-plugins/vapoursynth-tbilateral ~*
 media-plugins/vapoursynth-tc2cfr ~*
 media-plugins/vapoursynth-tcanny ~*
 media-plugins/vapoursynth-tcomb ~*
