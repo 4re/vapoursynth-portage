@@ -1,7 +1,7 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=5
+EAPI=7
 
 PYTHON_COMPAT=( python3_{4,5,6,7} )
 
@@ -16,7 +16,7 @@ SLOT="0"
 KEYWORDS=""
 
 RDEPEND+="
-	>=media-libs/vapoursynth-33[${PYTHON_USEDEP}]
+	>=media-libs/vapoursynth-47[${PYTHON_USEDEP}]
 "
 DEPEND="${RDEPEND}
 "
