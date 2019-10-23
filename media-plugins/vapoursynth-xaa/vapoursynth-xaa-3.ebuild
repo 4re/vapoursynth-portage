@@ -1,18 +1,23 @@
 # Copyright 1999-2019 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
 PYTHON_COMPAT=( python3_{4,5,6,7} )
 
-inherit python-utils-r1 python-single-r1 git-r3
+inherit python-utils-r1 python-single-r1
 
 DESCRIPTION="xaa is a many-in-one antialiasing function for VapourSynth"
 HOMEPAGE="https://github.com/dubhater/vapoursynth-xaa"
 
-EGIT_REPO_URI="https://github.com/dubhater/vapoursynth-xaa.git"
-EGIT_COMMIT="a7766a0f954a6a4bd973f1e9925cbd99b8746c9a"
-KEYWORDS="~amd64 ~x86"
+if [[ ${PV} == *9999* ]]; then
+	inherit git-r3
+	EGIT_REPO_URI="https://github.com/dubhater/vapoursynth-xaa.git"
+	KEYWORDS=""
+else
+	SRC_URI="https://github.com/dubhater/vapoursynth-xaa/archive/v${PV}.tar.gz -> ${PN}-${PV}.tar.gz"
+	KEYWORDS="~amd64 ~x86"
+fi
 
 LICENSE=""
 SLOT="0"

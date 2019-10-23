@@ -1,7 +1,7 @@
 # Copyright 1999-2019 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
 PYTHON_COMPAT=( python3_{4,5,6,7} )
 
@@ -15,8 +15,7 @@ if [[ ${PV} == *9999* ]]; then
 	EGIT_REPO_URI="https://github.com/dubhater/vapoursynth-xaa.git"
 	KEYWORDS=""
 else
-	inherit vcs-snapshot
-	SRC_URI="https://github.com/dubhater/vapoursynth-xaa/archive/${PV}.tar.gz -> ${PN}-${PV}.tar.gz"
+	SRC_URI="https://github.com/dubhater/vapoursynth-xaa/archive/v${PV}.tar.gz -> ${PN}-${PV}.tar.gz"
 	KEYWORDS="~amd64 ~x86"
 fi
 
