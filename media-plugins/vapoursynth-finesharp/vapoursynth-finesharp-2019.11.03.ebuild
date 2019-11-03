@@ -10,7 +10,7 @@ inherit python-utils-r1 python-single-r1 git-r3
 DESCRIPTION="Small and relatively fast realtime-sharpening function for VapourSynth"
 HOMEPAGE="http://forum.doom9.org/showthread.php?t=166524"
 EGIT_REPO_URI="https://gist.github.com/8676fd350d4b5b223ab9.git"
-EGIT_COMMIT="926297c30a49d64bdeb06ef2d97f3773f80c91b8"
+EGIT_COMMIT="fe25e925e7e318e53e950b3060ad0f4fdc0c1f3e"
 
 LICENSE=""
 SLOT="0"
