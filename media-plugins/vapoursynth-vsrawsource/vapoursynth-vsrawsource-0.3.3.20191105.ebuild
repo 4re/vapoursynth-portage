@@ -9,7 +9,7 @@ DESCRIPTION="Raw format video reader for VapourSynth"
 HOMEPAGE="https://github.com/HolyWu/vsrawsource"
 
 EGIT_REPO_URI="https://github.com/HolyWu/vsrawsource.git"
-EGIT_COMMIT=""
+EGIT_COMMIT="82400b7ad8e57cb71cc7cde44e36579cf40455f0"
 
 LICENSE="LGPL-2.1"
 SLOT="0"
