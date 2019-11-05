@@ -3,22 +3,17 @@
 
 EAPI=7
 
-inherit meson
+inherit meson git-r3
 
 DESCRIPTION="Raw format video reader for VapourSynth"
 HOMEPAGE="https://github.com/HolyWu/vsrawsource"
 
-if [[ ${PV} == *9999* ]]; then
-	inherit git-r3
-	EGIT_REPO_URI="https://github.com/HolyWu/vsrawsource.git"
-	KEYWORDS=""
-else
-	SRC_URI="https://github.com/HolyWu/vsrawsource/archive/${PV}.tar.gz -> ${PN}-${PV}.tar.gz"
-	KEYWORDS="~amd64 ~x86"
-fi
+EGIT_REPO_URI="https://github.com/HolyWu/vsrawsource.git"
+EGIT_COMMIT=""
 
 LICENSE="LGPL-2.1"
 SLOT="0"
+KEYWORDS="~x86 ~amd64"
 IUSE="lto"
 
 RDEPEND+="
