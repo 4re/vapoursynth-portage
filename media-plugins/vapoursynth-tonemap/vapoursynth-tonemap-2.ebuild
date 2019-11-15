@@ -1,7 +1,7 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
 DESCRIPTION="A filter for converting high dynamic range (HDR) video to standard dynamic range (SDR)"
 HOMEPAGE="https://github.com/ifb/vapoursynth-tonemap"
