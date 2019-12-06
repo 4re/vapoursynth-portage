@@ -20,7 +20,7 @@ fi
 
 LICENSE="GPL-2"
 SLOT="0"
-IUSE=""
+IUSE="lto"
 
 RDEPEND+="
 	media-video/ffmpeg
@@ -31,3 +31,14 @@ DEPEND="${RDEPEND}
 "
 
 S="${WORKDIR}/${P}/VapourSynth"
+
+DOCS=( "README" )
+
+
+src_configure() {
+	local emesonargs=(
+		--libdir="/usr/$(get_libdir)/vapoursynth/"
+		-Db_lto=$(usex lto true false)
+	)
+	meson_src_configure
+}
