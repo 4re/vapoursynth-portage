@@ -32,7 +32,3 @@ src_prepare() {
 	eapply_user
 	./autogen.sh
 }
-
-src_configure() {
-	econf --libdir="/usr/$(get_libdir)/vapoursynth/"
-}
