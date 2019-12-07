@@ -21,7 +21,7 @@ fi
 
 LICENSE="ISC LGPL-2.1"
 SLOT="0"
-IUSE=""
+IUSE="lto"
 
 RDEPEND+="
 	media-video/ffmpeg
