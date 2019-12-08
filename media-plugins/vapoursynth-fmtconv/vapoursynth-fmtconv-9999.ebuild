@@ -1,11 +1,7 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=5
-
-AUTOTOOLS_AUTORECONF=1
-
-inherit toolchain-funcs multilib autotools-utils
+EAPI=7
 
 DESCRIPTION="A format-conversion plug-in for the Vapoursynth video processing engine"
 HOMEPAGE="http://forum.doom9.org/showthread.php?t=166504"
@@ -22,7 +18,7 @@ fi
 
 LICENSE="GPL-2"
 SLOT="0"
-IUSE="doc"
+IUSE=""
 
 RDEPEND+="
 	media-libs/vapoursynth
@@ -30,13 +26,16 @@ RDEPEND+="
 DEPEND="${RDEPEND}
 "
 
+HTML_DOCS=( "${WORKDIR}/${P}"/doc/. )
+
 S="${WORKDIR}/${P}/build/unix"
 
-src_configure() {
-	autotools-utils_src_configure --libdir="/usr/$(get_libdir)/vapoursynth/"
+
+src_prepare() {
+	eapply_user
+	./autogen.sh
 }
 
-src_install() {
-	use doc && HTML_DOCS=("${WORKDIR}/${P}/doc/")
-	autotools-utils_src_install
+src_configure() {
+	econf --libdir="/usr/$(get_libdir)/vapoursynth/"
 }
