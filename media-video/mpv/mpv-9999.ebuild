@@ -256,7 +256,6 @@ src_configure() {
 		--disable-audiounit
 		--disable-wasapi
 		--disable-ios-gl
-		--disable-apple-remote
 		--disable-macos-touchbar
 		--disable-macos-cocoa-cb
 		--disable-tvos
