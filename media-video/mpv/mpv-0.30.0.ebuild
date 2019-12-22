@@ -1,9 +1,9 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
 
-PYTHON_COMPAT=( python{2_7,3_4,3_5,3_6,3_7} )
+PYTHON_COMPAT=( python{2_7,3_5,3_6,3_7} )
 PYTHON_REQ_USE='threads(+)'
 
 WAF_PV=2.0.9
@@ -11,11 +11,11 @@ WAF_PV=2.0.9
 inherit eapi7-ver flag-o-matic gnome2-utils pax-utils python-r1 toolchain-funcs waf-utils xdg-utils
 
 DESCRIPTION="Media player based on MPlayer and mplayer2"
-HOMEPAGE="https://mpv.io/"
+HOMEPAGE="https://mpv.io/ https://github.com/mpv-player/mpv"
 
 if [[ ${PV} != *9999* ]]; then
 	SRC_URI="https://github.com/mpv-player/mpv/archive/v${PV}.tar.gz -> ${P}.tar.gz"
-	KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ppc ~ppc64 ~x86 ~amd64-linux"
+	KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ppc ~ppc64 ~x86 ~amd64-linux"
 	DOCS=( RELEASE_NOTES )
 else
 	EGIT_REPO_URI="https://github.com/mpv-player/mpv.git"
@@ -28,16 +28,17 @@ DOCS+=( README.md DOCS/{client-api,interface}-changes.rst )
 # See Copyright in sources and Gentoo bug 506946. Waf is BSD, libmpv is ISC.
 LICENSE="LGPL-2.1+ GPL-2+ BSD ISC samba? ( GPL-3+ )"
 SLOT="0"
-IUSE="+alsa aqua archive bluray cdda +cli coreaudio cplugins cuda doc drm dvb
-	dvd +egl gbm +iconv jack javascript jpeg lcms +libass libcaca libmpv +lua
+IUSE="+alsa aqua archive bluray cdda +cli coreaudio cplugins cuda debug doc drm dvb
+	dvd +egl gamepad gbm +iconv jack javascript jpeg lcms +libass libcaca libmpv +lua
 	luajit openal +opengl oss pulseaudio raspberry-pi rubberband samba sdl
-	selinux test tools +uchardet vaapi vapoursynth vdpau vulkan wayland +X +xv zlib"
+	selinux test tools +uchardet vaapi vapoursynth vdpau vulkan wayland +X +xv zlib zimg"
 
 REQUIRED_USE="
 	|| ( cli libmpv )
 	aqua? ( opengl )
 	cuda? ( opengl )
 	egl? ( || ( gbm X wayland ) )
+	gamepad? ( sdl )
 	gbm? ( drm egl opengl )
 	lcms? ( opengl )
 	luajit? ( lua )
@@ -55,6 +56,8 @@ REQUIRED_USE="
 	${PYTHON_REQUIRED_USE}
 "
 
+RESTRICT="!test? ( test )"
+
 COMMON_DEPEND="
 	>=media-video/ffmpeg-4.0:0=[encode,threads,vaapi?,vdpau?]
 	alsa? ( >=media-libs/alsa-lib-1.0.18 )
@@ -62,8 +65,12 @@ COMMON_DEPEND="
 	bluray? ( >=media-libs/libbluray-0.3.0:= )
 	cdda? ( dev-libs/libcdio-paranoia )
 	drm? ( x11-libs/libdrm )
-	dvd? ( >=media-libs/libdvdnav-6.0.0 )
+	dvd? (
+		>=media-libs/libdvdnav-4.2.0:=
+		>=media-libs/libdvdread-4.1.0:=
+	)
 	egl? ( media-libs/mesa[egl,gbm(-)?,wayland(-)?] )
+	gamepad? ( media-libs/libsdl2 )
 	iconv? (
 		virtual/libiconv
 		uchardet? ( app-i18n/uchardet )
@@ -91,11 +98,11 @@ COMMON_DEPEND="
 	vapoursynth? ( media-libs/vapoursynth )
 	vdpau? ( x11-libs/libvdpau )
 	vulkan? (
+		media-libs/libplacebo[vulkan]
 		media-libs/shaderc
-		media-libs/vulkan-loader[X?,wayland?]
 	)
 	wayland? (
-		>=dev-libs/wayland-1.15.0
+		>=dev-libs/wayland-1.6.0
 		>=dev-libs/wayland-protocols-1.14
 		>=x11-libs/libxkbcommon-0.3.0
 	)
@@ -112,13 +119,14 @@ COMMON_DEPEND="
 		xv? ( x11-libs/libXv )
 	)
 	zlib? ( sys-libs/zlib )
+	zimg? ( >=media-libs/zimg-2.9.2 )
 "
 DEPEND="${COMMON_DEPEND}
 	${PYTHON_DEPS}
-	dev-python/docutils
 	virtual/pkgconfig
 	cuda? ( >=media-libs/nv-codec-headers-8.1.24.1 )
-	doc? ( dev-python/rst2pdf )
+	doc? (  dev-python/docutils
+			dev-python/rst2pdf )
 	dvb? ( virtual/linuxtv-dvb-headers )
 	test? ( >=dev-util/cmocka-1.0.0 )
 "
@@ -128,14 +136,10 @@ RDEPEND="${COMMON_DEPEND}
 	tools? ( ${PYTHON_DEPS} )
 "
 
-# PATCHES=(
-# 	"${FILESDIR}/${PN}-0.29.0-make-ffmpeg-version-check-non-fatal.patch"
-# )
-
 src_prepare() {
 	cp "${DISTDIR}/waf-${WAF_PV}" "${S}"/waf || die
 	chmod +x "${S}"/waf || die
-	default_src_prepare
+	default
 }
 
 src_configure() {
@@ -159,14 +163,14 @@ src_configure() {
 		--disable-static-build
 		# See deep down below for build-date.
 		--disable-optimize # Don't add '-O2' to CFLAGS.
-		--disable-debug-build # Don't add '-g' to CFLAGS.
-		--enable-html-build
+		$(use_enable debug debug-build)
 
+		$(use_enable doc html-build)
 		$(use_enable doc pdf-build)
+		$(use_enable doc manpage-build)
 		$(use_enable cplugins)
 		$(use_enable test)
 
-		--disable-android
 		$(use_enable iconv)
 		$(use_enable samba libsmbclient)
 		$(use_enable lua)
@@ -221,10 +225,11 @@ src_configure() {
 		$(use_enable libcaca caca)
 		$(use_enable jpeg)
 		$(use_enable vulkan shaderc)
-		$(use_enable raspberry-pi rpi-mmal)
+		$(use_enable raspberry-pi rpi)
 		$(usex libmpv "$(use_enable opengl plain-gl)" '--disable-plain-gl')
 		$(usex opengl '' '--disable-gl')
 		$(use_enable vulkan)
+		$(use_enable gamepad sdl2-gamepad)
 
 		# HWaccels:
 		# Automagic Video Toolbox HW acceleration. See Gentoo bug 577332.
@@ -234,7 +239,7 @@ src_configure() {
 		$(use_enable dvb dvbin)
 
 		# Miscellaneous features:
-		--disable-apple-remote # Needs testing first. See Gentoo bug 577332.
+		$(use_enable zimg)
 	)
 
 	if use vaapi && use X; then
@@ -242,6 +247,21 @@ src_configure() {
 			$(use_enable egl vaapi-x-egl)
 		)
 	fi
+
+	# Not for us
+	mywafargs+=(
+		--disable-android
+		--disable-egl-android
+		--disable-uwp
+		--disable-audiounit
+		--disable-wasapi
+		--disable-ios-gl
+		--disable-apple-remote
+		--disable-macos-touchbar
+		--disable-macos-cocoa-cb
+		--disable-tvos
+		--disable-egl-angle-win32
+	)
 
 	# Create reproducible non-live builds.
 	[[ ${PV} != *9999* ]] && mywafargs+=(--disable-build-date)
@@ -320,6 +340,8 @@ pkg_postinst() {
 		elog "If command-line completion doesn't work after mpv update,"
 		elog "please rebuild app-shells/mpv-bash-completion."
 	fi
+
+	elog "If you want URL support, please install net-misc/youtube-dl."
 
 	gnome2_icon_cache_update
 	xdg_desktop_database_update
