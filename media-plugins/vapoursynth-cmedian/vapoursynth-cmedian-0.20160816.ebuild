@@ -9,7 +9,7 @@ DESCRIPTION="Implements the constant time median filter algorithm for Vapoursynt
 HOMEPAGE="https://bitbucket.org/James1201/vapoursynth-cmedian"
 
 EHG_REPO_URI="https://bitbucket.org/James1201/vapoursynth-cmedian"
-EHG_COMMIT="46063df02b428978de661363ab7e927d3fc70f87"
+EHG_REVISION="46063df02b428978de661363ab7e927d3fc70f87"
 KEYWORDS="~amd64 ~x86"
 
 LICENSE="LGPL-2.1"
