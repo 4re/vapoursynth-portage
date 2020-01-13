@@ -1,9 +1,9 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
 
-PYTHON_COMPAT=( python{2_7,3_5,3_6,3_7} )
+PYTHON_COMPAT=( python{3_6,3_7} )
 PYTHON_REQ_USE='threads(+)'
 
 WAF_PV=2.0.9
@@ -124,9 +124,9 @@ COMMON_DEPEND="
 DEPEND="${COMMON_DEPEND}
 	${PYTHON_DEPS}
 	virtual/pkgconfig
-	cuda? ( >=media-libs/nv-codec-headers-8.1.24.1 )
-	doc? (  dev-python/docutils
-			dev-python/rst2pdf )
+	dev-python/docutils
+	cuda? ( >=media-libs/nv-codec-headers-8.2.15.7 )
+	doc? ( dev-python/rst2pdf )
 	dvb? ( virtual/linuxtv-dvb-headers )
 	test? ( >=dev-util/cmocka-1.0.0 )
 "
@@ -167,7 +167,7 @@ src_configure() {
 
 		$(use_enable doc html-build)
 		$(use_enable doc pdf-build)
-		$(use_enable doc manpage-build)
+		--enable-manpage-build
 		$(use_enable cplugins)
 		$(use_enable test)
 
