@@ -3,7 +3,7 @@
 
 EAPI=5
 
-PYTHON_COMPAT=( python3_{4,5,6,7} )
+PYTHON_COMPAT=( python3_{6,7,8} )
 
 inherit python-utils-r1 python-single-r1 git-r3
 
@@ -20,7 +20,7 @@ SLOT="0"
 IUSE="doc"
 
 RDEPEND+="
-	media-libs/vapoursynth[${PYTHON_USEDEP}]
+	media-libs/vapoursynth[${PYTHON_SINGLE_USEDEP}]
 	media-plugins/vapoursynth-bm3d
 	media-plugins/vapoursynth-dfttest
 	media-plugins/vapoursynth-vcfreq

@@ -3,7 +3,7 @@
 
 EAPI=7
 
-PYTHON_COMPAT=( python3_{4,5,6,7} )
+PYTHON_COMPAT=( python3_{6,7,8} )
 
 inherit python-utils-r1 python-single-r1 git-r3
 
@@ -17,7 +17,7 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 
 RDEPEND+="
-	>=media-libs/vapoursynth-47[${PYTHON_USEDEP}]
+	>=media-libs/vapoursynth-47[${PYTHON_SINGLE_USEDEP}]
 "
 DEPEND="${RDEPEND}
 "

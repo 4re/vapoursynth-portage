@@ -3,7 +3,7 @@
 
 EAPI=6
 
-PYTHON_COMPAT=( python3_{5,6,7} )
+PYTHON_COMPAT=( python3_{6,7,8} )
 
 inherit python-utils-r1 python-single-r1
 
@@ -25,9 +25,9 @@ LICENSE=""
 SLOT="0"
 
 RDEPEND+="
-	numpy? ( dev-python/numpy[${PYTHON_USEDEP}] )
-	media-libs/vapoursynth[${PYTHON_USEDEP},vapoursynth_plugins_miscfilters,vapoursynth_plugins_removegrain,vapoursynth_plugins_vivtc,vapoursynth_plugins_subtext]
-	media-plugins/vapoursynth-havsfunc[${PYTHON_USEDEP}]
+	numpy? ( dev-python/numpy[${PYTHON_MULTI_USEDEP}] )
+	media-libs/vapoursynth[${PYTHON_SINGLE_USEDEP},vapoursynth_plugins_miscfilters,vapoursynth_plugins_removegrain,vapoursynth_plugins_vivtc,vapoursynth_plugins_subtext]
+	media-plugins/vapoursynth-havsfunc[${PYTHON_SINGLE_USEDEP}]
 	deprecated? ( media-plugins/vapoursynth-knlmeanscl )
 	media-plugins/vapoursynth-awarpsharp2
 	media-plugins/vapoursynth-bilateral
@@ -37,7 +37,7 @@ RDEPEND+="
 	media-plugins/vapoursynth-fmtconv
 	media-plugins/vapoursynth-histogram
 	media-plugins/vapoursynth-median
-	media-plugins/vapoursynth-mvsfunc[${PYTHON_USEDEP}]
+	media-plugins/vapoursynth-mvsfunc[${PYTHON_SINGLE_USEDEP}]
 	media-plugins/vapoursynth-mvtools
 	media-plugins/vapoursynth-nnedi3
 	media-plugins/vapoursynth-sangnom

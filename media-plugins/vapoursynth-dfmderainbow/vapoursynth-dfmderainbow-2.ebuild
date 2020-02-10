@@ -3,7 +3,7 @@
 
 EAPI=6
 
-PYTHON_COMPAT=( python3_{4,5,6,7} )
+PYTHON_COMPAT=( python3_{6,7,8} )
 
 inherit python-utils-r1 python-single-r1
 
@@ -25,7 +25,7 @@ SLOT="0"
 IUSE="+fftw"
 
 RDEPEND+="
-	media-libs/vapoursynth[${PYTHON_USEDEP}]
+	media-libs/vapoursynth[${PYTHON_SINGLE_USEDEP}]
 	media-plugins/vapoursynth-temporalmedian
 	media-plugins/vapoursynth-temporalsoften2
 	media-plugins/vapoursynth-fluxsmooth

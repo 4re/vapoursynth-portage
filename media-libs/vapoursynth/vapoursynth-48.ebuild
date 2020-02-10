@@ -51,8 +51,8 @@ RDEPEND+="${PYTHON_DEPS}
 DEPEND="${RDEPEND}
 	>=dev-python/cython-0.29
 	doc? (
-		dev-python/sphinx[${PYTHON_USEDEP}]
-		dev-python/sphinxcontrib-websupport[${PYTHON_USEDEP}]
+		dev-python/sphinx
+		dev-python/sphinxcontrib-websupport
 	)
 	virtual/pkgconfig
 "
