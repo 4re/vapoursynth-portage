@@ -1,7 +1,7 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
 inherit toolchain-funcs git-r3
 
@@ -12,8 +12,8 @@ EGIT_COMMIT="dafa5b52a0dd05a17901950add8677ededcb50a2"
 
 LICENSE=""
 KEYWORDS="~amd64 ~x86"
-IUSE=""
 SLOT="0"
+IUSE=""
 
 RDEPEND+="
 	media-libs/vapoursynth
@@ -32,14 +32,21 @@ src_configure() {
 	selfcflags="-Wall -fPIC -std=c++11"
 	selfldflags="-shared"
 	libname="libinpaint.so"
+	if has_version ">=media-libs/opencv-4.0.0"; then
+		opencv_inc="$(pkg-config --cflags opencv4)"
+		opencv_lib="$(pkg-config --libs opencv4)"
+	else
+		opencv_inc="$(pkg-config --cflags opencv)"
+		opencv_lib="$(pkg-config --libs opencv)"
+	fi
 }
 
 src_compile() {
-	echo "$(tc-getCC) ${selfcflags} ${CFLAGS} $(pkg-config --cflags vapoursynth) -c Inpaint.cpp -o Inpaint.o"
-	$(tc-getCC) ${selfcflags} ${CFLAGS} $(pkg-config --cflags vapoursynth) -c Inpaint.cpp -o Inpaint.o || die
+	echo "$(tc-getCC) ${selfcflags} ${CFLAGS} ${opencv_inc} $(pkg-config --cflags vapoursynth) -c Inpaint.cpp -o Inpaint.o"
+	$(tc-getCC) ${selfcflags} ${CFLAGS} ${opencv_inc} $(pkg-config --cflags vapoursynth) -c Inpaint.cpp -o Inpaint.o || die
 
-	echo "$(tc-getCC) ${CFLAGS} ${selfldflags} ${LDFLAGS} Inpaint.o $(pkg-config --libs opencv) -o ${libname}"
-	$(tc-getCC) ${CFLAGS} ${selfldflags} ${LDFLAGS} Inpaint.o $(pkg-config --libs opencv) -o ${libname} || die
+	echo "$(tc-getCC) ${CFLAGS} ${selfldflags} ${LDFLAGS} Inpaint.o ${opencv_lib} -o ${libname}"
+	$(tc-getCC) ${CFLAGS} ${selfldflags} ${LDFLAGS} Inpaint.o ${opencv_lib} -o ${libname} || die
 }
 
 src_install() {
