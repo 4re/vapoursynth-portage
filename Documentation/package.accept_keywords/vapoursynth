@@ -3,8 +3,11 @@ media-libs/l-smash ~*
 media-libs/vapoursynth ~*
 media-libs/waifu2x-converter-cpp ~*
 media-libs/zimg ~*
+media-plugins/acsuite ~*
+media-plugins/audiocutter ~*
 media-plugins/vapoursynth-addgrain ~*
 media-plugins/vapoursynth-adjust ~*
+media-plugins/vapoursynth-arearesize ~*
 media-plugins/vapoursynth-astdr ~*
 media-plugins/vapoursynth-autocrop ~*
 media-plugins/vapoursynth-awarpsharp2 ~*
@@ -12,6 +15,7 @@ media-plugins/vapoursynth-beziercurve ~*
 media-plugins/vapoursynth-bifrost ~*
 media-plugins/vapoursynth-bilateral ~*
 media-plugins/vapoursynth-bm3d ~*
+media-plugins/vapoursynth-cmedian ~*
 media-plugins/vapoursynth-cnr2 ~*
 media-plugins/vapoursynth-colorbars ~*
 media-plugins/vapoursynth-combmask ~*
@@ -55,6 +59,7 @@ media-plugins/vapoursynth-it ~*
 media-plugins/vapoursynth-kagefunc ~*
 media-plugins/vapoursynth-knlmeanscl ~*
 media-plugins/vapoursynth-l-smash-works ~*
+media-plugins/vapoursynth-lvsfunc ~*
 media-plugins/vapoursynth-matchhistogram ~*
 media-plugins/vapoursynth-median ~*
 media-plugins/vapoursynth-minideen ~*
