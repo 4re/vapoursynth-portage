@@ -11,7 +11,7 @@ DESCRIPTION="Frame-based cutting/trimming/splicing of audio files from within Va
 HOMEPAGE="https://github.com/OrangeChannel/acsuite"
 
 EGIT_REPO_URI="https://github.com/OrangeChannel/acsuite.git"
-EGIT_COMMIT="55c9c174d6dd67345514389ccb3af9be906ba8bf"
+EGIT_COMMIT="b326d8609b64830e186caccaa00ba16ad4432ca2"
 KEYWORDS="~amd64 ~x86"
 
 LICENSE=""
