@@ -11,7 +11,7 @@ DESCRIPTION="Light's Vapoursynth Functions"
 HOMEPAGE="https://github.com/Irrational-Encoding-Wizardry/lvsfunc"
 
 EGIT_REPO_URI="https://github.com/Irrational-Encoding-Wizardry/lvsfunc.git"
-EGIT_COMMIT="c162c96b6fa6fa884c3a28bfb1a0b0bf3c118eba"
+EGIT_COMMIT="442bac479a162f5127b0fd2495fd6b486b09cfe9"
 KEYWORDS="~amd64 ~x86"
 
 LICENSE=""
@@ -20,6 +20,7 @@ IUSE=""
 
 RDEPEND+="
 	media-libs/vapoursynth[${PYTHON_SINGLE_USEDEP}]
+	media-plugins/vapoursynth-continuityfixer
 	media-plugins/vapoursynth-fvsfunc
 	media-plugins/vapoursynth-havsfunc
 	media-plugins/vapoursynth-kagefunc
@@ -30,7 +31,7 @@ RDEPEND+="
 "
 DEPEND="${RDEPEND}"
 
-# FIXME:Optional dependencies
+# TODO (maybe): Optional dependencies
 #     waifu2x-caffe
 #     L-SMASH Source
 #     d2vsource

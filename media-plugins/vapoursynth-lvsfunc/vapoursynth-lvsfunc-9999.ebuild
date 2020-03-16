@@ -25,6 +25,7 @@ IUSE=""
 
 RDEPEND+="
 	media-libs/vapoursynth[${PYTHON_SINGLE_USEDEP}]
+	media-plugins/vapoursynth-continuityfixer
 	media-plugins/vapoursynth-fvsfunc
 	media-plugins/vapoursynth-havsfunc
 	media-plugins/vapoursynth-kagefunc
@@ -35,7 +36,7 @@ RDEPEND+="
 "
 DEPEND="${RDEPEND}"
 
-# FIXME:Optional dependencies
+# TODO (maybe): Optional dependencies
 #     waifu2x-caffe
 #     L-SMASH Source
 #     d2vsource
