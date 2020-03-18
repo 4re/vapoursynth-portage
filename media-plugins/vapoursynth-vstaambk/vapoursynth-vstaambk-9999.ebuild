@@ -1,7 +1,7 @@
 # Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
 PYTHON_COMPAT=( python3_{6,7,8} )
 
@@ -9,12 +9,20 @@ inherit python-utils-r1 python-single-r1 git-r3
 
 DESCRIPTION="A ported AA-script from Avisynth"
 HOMEPAGE="https://github.com/HomeOfVapourSynthEvolution/vsTAAmbk"
-EGIT_REPO_URI="https://github.com/HomeOfVapourSynthEvolution/vsTAAmbk.git"
-# EGIT_COMMIT=""
+
+if [[ ${PV} == *9999* ]]; then
+	inherit git-r3
+	EGIT_REPO_URI="https://github.com/HomeOfVapourSynthEvolution/vsTAAmbk.git"
+	KEYWORDS=""
+else
+	inherit vcs-snapshot
+	SRC_URI="https://github.com/HomeOfVapourSynthEvolution/vsTAAmbk/archive/v${PV}.tar.gz -> ${PN}-${PV}.tar.gz"
+	KEYWORDS="~amd64 ~x86"
+fi
+
 
 LICENSE=""
 SLOT="0"
-KEYWORDS=""
 IUSE="opencl"
 
 RDEPEND+="
@@ -27,16 +35,20 @@ RDEPEND+="
 	media-plugins/vapoursynth-mvtools
 	media-plugins/vapoursynth-nnedi3
 	media-plugins/vapoursynth-sangnom
+	media-plugins/vapoursynth-znedi3
 	opencl? (
-		media-plugins/vapoursynth-tcanny[opencl]
 		media-plugins/vapoursynth-eedi3[opencl]
+		media-plugins/vapoursynth-nnedi3cl
+		media-plugins/vapoursynth-tcanny[opencl]
 		)
 	!opencl? (
-		media-plugins/vapoursynth-tcanny
 		media-plugins/vapoursynth-eedi3
+		media-plugins/vapoursynth-tcanny
 		)
 "
 DEPEND="${RDEPEND}"
+
+DOCS=( "README.md" "doc/Documentation_EN.html" )
 
 src_install(){
 	python_domodule vsTAAmbk.py
