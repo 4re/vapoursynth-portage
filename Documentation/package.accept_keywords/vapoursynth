@@ -5,6 +5,7 @@ media-libs/waifu2x-converter-cpp ~*
 media-libs/zimg ~*
 media-plugins/acsuite ~*
 media-plugins/audiocutter ~*
+media-plugins/ocsuite ~*
 media-plugins/vapoursynth-addgrain ~*
 media-plugins/vapoursynth-adjust ~*
 media-plugins/vapoursynth-arearesize ~*
