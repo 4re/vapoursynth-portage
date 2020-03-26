@@ -1,7 +1,7 @@
 # Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
 PYTHON_COMPAT=( python3_{6,7,8} )
 PYTHON_REQ_USE="threads(+)"
@@ -44,7 +44,7 @@ RDEPEND+="${PYTHON_DEPS}
 		virtual/ffmpeg
 	)
 	vapoursynth_plugins_imagemagick? ( >=media-gfx/imagemagick-7.0[cxx,hdri,-q8(-),-q64(-)] )
-	>=media-libs/zimg-2.9.2
+	>=media-libs/zimg-2.9.3
 	vapoursynth_plugins_ocr? ( app-text/tesseract )
 	vapoursynth_plugins_miscfilters? ( !media-plugins/vapoursynth-miscfilters )
 "
