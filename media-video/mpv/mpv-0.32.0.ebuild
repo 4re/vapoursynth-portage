@@ -8,14 +8,14 @@ PYTHON_REQ_USE='threads(+)'
 
 WAF_PV=2.0.9
 
-inherit eapi7-ver flag-o-matic gnome2-utils pax-utils python-r1 toolchain-funcs waf-utils xdg-utils
+inherit bash-completion-r1 eapi7-ver flag-o-matic gnome2-utils pax-utils python-r1 toolchain-funcs waf-utils xdg-utils
 
 DESCRIPTION="Media player based on MPlayer and mplayer2"
 HOMEPAGE="https://mpv.io/ https://github.com/mpv-player/mpv"
 
 if [[ ${PV} != *9999* ]]; then
 	SRC_URI="https://github.com/mpv-player/mpv/archive/v${PV}.tar.gz -> ${P}.tar.gz"
-	KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ppc ~ppc64 ~x86 ~amd64-linux"
+	KEYWORDS="~alpha amd64 ~arm ~arm64 ~hppa ppc ppc64 x86 ~amd64-linux"
 	DOCS=( RELEASE_NOTES )
 else
 	EGIT_REPO_URI="https://github.com/mpv-player/mpv.git"
@@ -59,12 +59,13 @@ REQUIRED_USE="
 RESTRICT="!test? ( test )"
 
 COMMON_DEPEND="
-	!app-shells/mpv-bash-completion
+	!!app-shells/mpv-bash-completion
 	>=media-video/ffmpeg-4.0:0=[encode,threads,vaapi?,vdpau?]
 	alsa? ( >=media-libs/alsa-lib-1.0.18 )
 	archive? ( >=app-arch/libarchive-3.4.0:= )
 	bluray? ( >=media-libs/libbluray-0.3.0:= )
-	cdda? ( dev-libs/libcdio-paranoia )
+	cdda? ( dev-libs/libcdio-paranoia
+			dev-libs/libcdio:= )
 	drm? ( x11-libs/libdrm )
 	dvd? (
 		>=media-libs/libdvdnav-4.2.0:=
@@ -154,8 +155,6 @@ src_configure() {
 
 	local mywafargs=(
 		--confdir="${EPREFIX}/etc/${PN}"
-		--docdir="${EPREFIX}/usr/share/doc/${PF}"
-		--htmldir="${EPREFIX}/usr/share/doc/${PF}/html"
 
 		$(usex cli '' '--disable-cplayer')
 		$(use_enable libmpv libmpv-shared)
@@ -226,6 +225,7 @@ src_configure() {
 		$(use_enable libcaca caca)
 		$(use_enable jpeg)
 		$(use_enable vulkan shaderc)
+		$(use_enable vulkan libplacebo)
 		$(use_enable raspberry-pi rpi)
 		$(usex libmpv "$(use_enable opengl plain-gl)" '--disable-plain-gl')
 		$(usex opengl '' '--disable-gl')
@@ -235,6 +235,7 @@ src_configure() {
 		# HWaccels:
 		# Automagic Video Toolbox HW acceleration. See Gentoo bug 577332.
 		$(use_enable cuda cuda-hwaccel)
+		$(use_enable cuda cuda-interop)
 
 		# TV features:
 		$(use_enable dvb dvbin)
@@ -263,6 +264,11 @@ src_configure() {
 		--disable-tvos
 		--disable-egl-angle-win32
 	)
+
+	mywafargs+=(
+		--bashdir="$(get_bashcompdir)"
+		--zshdir="${EPREFIX}"/usr/share/zsh/site-functions
+)
 
 	# Create reproducible non-live builds.
 	[[ ${PV} != *9999* ]] && mywafargs+=(--disable-build-date)
