@@ -5,7 +5,7 @@ EAPI=7
 
 PYTHON_COMPAT=( python3_{6,7,8} )
 
-inherit python-utils-r1 python-single-r1 git-r3
+inherit python-single-r1 git-r3
 
 DESCRIPTION="Small and relatively fast realtime-sharpening function for VapourSynth"
 HOMEPAGE="http://forum.doom9.org/showthread.php?t=166524"

@@ -5,7 +5,7 @@ EAPI=7
 
 PYTHON_COMPAT=( python3_{6,7,8} )
 
-inherit python-utils-r1 python-single-r1
+inherit python-single-r1
 
 DESCRIPTION="Light's Vapoursynth Functions"
 HOMEPAGE="https://github.com/Irrational-Encoding-Wizardry/lvsfunc"
@@ -46,5 +46,5 @@ DOCS=( "README.md" )
 
 
 src_install(){
-	python_domodule lvsfunc.py
+	python_domodule lvsfunc
 }

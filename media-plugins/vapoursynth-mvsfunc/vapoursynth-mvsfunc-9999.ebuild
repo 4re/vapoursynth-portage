@@ -5,7 +5,7 @@ EAPI=5
 
 PYTHON_COMPAT=( python3_{6,7,8} )
 
-inherit python-utils-r1 python-single-r1
+inherit python-single-r1
 
 DESCRIPTION="mawen1250's VapourSynth functions"
 HOMEPAGE="http://forum.doom9.org/showthread.php?p=1737309"

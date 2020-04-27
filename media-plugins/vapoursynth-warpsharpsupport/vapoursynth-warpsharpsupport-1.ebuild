@@ -5,7 +5,7 @@ EAPI=6
 
 PYTHON_COMPAT=( python3_{6,7,8} )
 
-inherit python-utils-r1 python-single-r1
+inherit python-single-r1
 
 DESCRIPTION="Script versions of support functions from WarpSharp"
 HOMEPAGE="https://github.com/myrsloik/WarpSharpSupport"

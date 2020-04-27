@@ -5,7 +5,7 @@ EAPI=6
 
 PYTHON_COMPAT=( python3_{6,7,8} )
 
-inherit python-utils-r1 python-single-r1
+inherit python-single-r1
 
 DESCRIPTION="kageru's Vapoursynth functions"
 HOMEPAGE="https://github.com/Irrational-Encoding-Wizardry/kagefunc"

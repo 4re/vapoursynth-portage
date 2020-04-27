@@ -6,7 +6,7 @@ EAPI=5
 PYTHON_COMPAT=( python3_{6,7,8} )
 AUTOTOOLS_AUTORECONF=1
 
-inherit autotools-utils multilib python-utils-r1 python-single-r1
+inherit autotools-utils multilib python-single-r1
 
 DESCRIPTION="MVTools is a set of filters for motion estimation and compensation"
 HOMEPAGE="https://github.com/IFeelBloated/vapoursynth-mvtools-sf"

@@ -5,7 +5,7 @@ EAPI=5
 
 PYTHON_COMPAT=( python3_{6,7,8} )
 
-inherit python-utils-r1 python-single-r1 git-r3
+inherit python-single-r1 git-r3
 
 DESCRIPTION="A sharpening/blind deconvolution suite with certain advanced features like Non-Local error, Block Matching, etc..."
 HOMEPAGE="https://github.com/IFeelBloated/Plum"

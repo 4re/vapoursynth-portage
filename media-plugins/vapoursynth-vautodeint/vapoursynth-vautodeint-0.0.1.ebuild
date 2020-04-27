@@ -5,7 +5,7 @@ EAPI=5
 
 PYTHON_COMPAT=( python3_{6,7,8} )
 
-inherit python-utils-r1 python-single-r1 toolchain-funcs multilib
+inherit python-single-r1 toolchain-funcs multilib
 
 DESCRIPTION="Auto interlace detection and deinterlace vapoursynth python script"
 HOMEPAGE="https://github.com/gnaggnoyil/VAutoDeint"

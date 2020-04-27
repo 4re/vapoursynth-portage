@@ -5,7 +5,7 @@ EAPI=6
 
 PYTHON_COMPAT=( python3_{6,7,8} )
 
-inherit python-utils-r1 python-single-r1
+inherit python-single-r1
 
 DESCRIPTION="This is a very basic port of the built-in Avisynth filter Tweak"
 HOMEPAGE="https://github.com/dubhater/vapoursynth-adjust"

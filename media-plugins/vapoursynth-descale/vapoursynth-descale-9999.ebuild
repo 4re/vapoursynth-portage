@@ -3,7 +3,9 @@
 
 EAPI=7
 
-inherit meson
+PYTHON_COMPAT=( python3_{6,7,8} )
+
+inherit meson python-single-r1
 
 DESCRIPTION="VapourSynth plugin to undo upscaling"
 HOMEPAGE="https://github.com/Frechdachs/vapoursynth-descale"
@@ -25,3 +27,8 @@ RDEPEND+="
 	media-libs/vapoursynth
 "
 DEPEND="${RDEPEND}"
+
+src_install() {
+	meson_src_install
+	python_domodule descale.py
+}

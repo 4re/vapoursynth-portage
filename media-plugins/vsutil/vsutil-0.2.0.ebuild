@@ -5,7 +5,7 @@ EAPI=6
 
 PYTHON_COMPAT=( python3_{6,7,8} )
 
-inherit python-utils-r1 python-single-r1
+inherit python-single-r1
 
 DESCRIPTION="A collection of general purpose Vapoursynth functions to be reused in modules and scripts"
 HOMEPAGE="https://github.com/Irrational-Encoding-Wizardry/vsutil"

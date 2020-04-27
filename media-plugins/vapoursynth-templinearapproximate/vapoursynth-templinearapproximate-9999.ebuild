@@ -5,7 +5,7 @@ EAPI=5
 
 PYTHON_COMPAT=( python3_{6,7,8} )
 
-inherit python-utils-r1 python-single-r1 toolchain-funcs multilib eutils
+inherit python-single-r1 toolchain-funcs multilib eutils
 
 DESCRIPTION="Takes several frames and for each pixel calculates linear approximation of its values through time"
 HOMEPAGE="https://bitbucket.org/mystery_keeper/templinearapproximate-vapoursynth"

@@ -5,7 +5,7 @@ EAPI=5
 
 PYTHON_COMPAT=( python3_{6,7,8} )
 
-inherit python-utils-r1 python-single-r1
+inherit python-single-r1
 
 DESCRIPTION="A function for scaling, color space conversion, etc."
 HOMEPAGE="https://github.com/mawen1250/VapourSynth-script"
