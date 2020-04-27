@@ -15,21 +15,10 @@ Update layman's database and add vapoursynth's overlay to your system.
 
 Usage
 -----
-First of all to activate default vapoursynth plugins:
+The preferred way to manage vapoursynth plugins is through `VAPOURSYNTH_PLUGINS` variable in `/etc/portage/package.use/use`:
 ```
-# echo 'VAPOURSYNTH_PLUGINS="subtext eedi3 imagemagick morpho ocr removegrain vinverse vivtc"' >> /etc/portage/make.conf
+*/*::vapoursynth VAPOURSYNTH_PLUGINS: * -addgrain -ffmpegsource -morpho -ocr
 ```
-If you just want some plugins but not all of them:
-```
-# VAPOURSYNTH_PLUGINS="mvtools fmtconv" emerge vapoursynth-plugins-meta
-```
-To make it persistent you can add `VAPOURSYNTH_PLUGINS` variable to your `make.conf`.
-
-If your want everything but a very few plugins you can edit your `/etc/portage/package.use/use` with something like:
-```
-media-plugins/vapoursynth-plugins-meta VAPOURSYNTH_PLUGINS: * -addgrain -ffmpegsource
-```
-For this to work you must not have `VAPOURSYNTH_PLUGINS` defined in your `make.conf` as it may interfer.
 
 If you are on stable use the provided file to keyword everything:
 ```
@@ -53,7 +42,7 @@ This overlay also includes an editor and a modified mpv ebuild with vapoursynth 
 
 Troubleshooting
 ---------------
-If you want to use python-3.7 you may need to add this to your `/etc/portage/package.use/use`:
+If you want to use python-3.8 you may need to add this to your `/etc/portage/package.use/use`:
 ```
-*/*::vapoursynth python_single_target_python3_7
+*/*::vapoursynth PYTHON_SINGLE_TARGET: -* python3_8
 ```
