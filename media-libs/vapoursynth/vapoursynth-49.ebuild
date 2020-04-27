@@ -24,15 +24,15 @@ fi
 LICENSE="LGPL-2.1 OFL-1.1"
 SLOT="0"
 VSPLUGINS="
-	vapoursynth_plugins_eedi3
-	vapoursynth_plugins_imagemagick
-	vapoursynth_plugins_miscfilters
-	vapoursynth_plugins_morpho
-	vapoursynth_plugins_ocr
-	vapoursynth_plugins_removegrain
-	vapoursynth_plugins_subtext
-	vapoursynth_plugins_vinverse
-	vapoursynth_plugins_vivtc
+	+vapoursynth_plugins_eedi3
+	+vapoursynth_plugins_imagemagick
+	+vapoursynth_plugins_miscfilters
+	+vapoursynth_plugins_morpho
+	+vapoursynth_plugins_ocr
+	+vapoursynth_plugins_removegrain
+	+vapoursynth_plugins_subtext
+	+vapoursynth_plugins_vinverse
+	+vapoursynth_plugins_vivtc
 "
 IUSE="doc +vspipe -debug -guard +shared -static cpu_flags_x86_sse2 ${VSPLUGINS}"
 
