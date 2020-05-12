@@ -8,15 +8,15 @@ PYTHON_COMPAT=( python3_{6,7,8} )
 inherit meson python-single-r1
 
 DESCRIPTION="VapourSynth plugin to undo upscaling"
-HOMEPAGE="https://github.com/Frechdachs/vapoursynth-descale"
+HOMEPAGE="https://github.com/Irrational-Encoding-Wizardry/vapoursynth-descale"
 
 if [[ ${PV} == *9999* ]]; then
 	inherit git-r3
-	EGIT_REPO_URI="https://github.com/Frechdachs/vapoursynth-descale.git"
+	EGIT_REPO_URI="https://github.com/Irrational-Encoding-Wizardry/vapoursynth-descale.git"
 	KEYWORDS=""
 else
 	inherit vcs-snapshot
-	SRC_URI="https://github.com/Frechdachs/${PN}/archive/r${PV}.tar.gz -> ${PN}-${PV}.tar.gz"
+	SRC_URI="https://github.com/Irrational-Encoding-Wizardry/vapoursynth-descale/archive/r${PV}.tar.gz -> ${PN}-${PV}.tar.gz"
 	KEYWORDS="~amd64 ~x86"
 fi
 
