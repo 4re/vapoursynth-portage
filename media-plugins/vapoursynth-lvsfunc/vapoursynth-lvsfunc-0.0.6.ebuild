@@ -5,19 +5,14 @@ EAPI=7
 
 PYTHON_COMPAT=( python3_8 )
 
-inherit python-single-r1
+inherit python-single-r1 git-r3
 
 DESCRIPTION="Light's Vapoursynth Functions"
 HOMEPAGE="https://github.com/Irrational-Encoding-Wizardry/lvsfunc"
 
-if [[ ${PV} == *9999* ]]; then
-	inherit git-r3
-	EGIT_REPO_URI="https://github.com/Irrational-Encoding-Wizardry/lvsfunc.git"
-	KEYWORDS=""
-else
-	SRC_URI="https://github.com/Irrational-Encoding-Wizardry/lvsfunc/archive/v${PV}.tar.gz -> ${PN}-${PV}.tar.gz"
-	KEYWORDS="~amd64 ~x86"
-fi
+EGIT_REPO_URI="https://github.com/Irrational-Encoding-Wizardry/lvsfunc.git"
+EGIT_COMMIT="32e831cf235c1264a86c7df2e9237a568d74a444"
+KEYWORDS="~amd64 ~x86"
 
 LICENSE="MIT"
 SLOT="0"
