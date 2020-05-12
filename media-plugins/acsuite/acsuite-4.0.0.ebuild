@@ -19,7 +19,7 @@ else
 	KEYWORDS="~amd64 ~x86"
 fi
 
-LICENSE=""
+LICENSE="Unlicense"
 SLOT="0"
 IUSE="ffmpeg"
 
