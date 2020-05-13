@@ -28,6 +28,16 @@ RDEPEND+="
 "
 DEPEND="${RDEPEND}"
 
+DOCS=( "README.md" )
+
+
+src_configure() {
+	local emesonargs=(
+		-Db_lto=$(usex lto true false)
+	)
+	meson_src_configure
+}
+
 src_install() {
 	meson_src_install
 	python_domodule descale.py
