@@ -22,6 +22,7 @@ fi
 
 LICENSE="WTFPL"
 SLOT="0"
+IUSE="lto"
 
 RDEPEND+="
 	media-libs/vapoursynth
