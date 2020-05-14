@@ -11,7 +11,7 @@ DESCRIPTION="Light's Vapoursynth Functions"
 HOMEPAGE="https://github.com/Irrational-Encoding-Wizardry/lvsfunc"
 
 EGIT_REPO_URI="https://github.com/Irrational-Encoding-Wizardry/lvsfunc.git"
-EGIT_COMMIT="32e831cf235c1264a86c7df2e9237a568d74a444"
+EGIT_COMMIT="337cd40a878f2d3aedc59c4ece260c641c97a4d4"
 KEYWORDS="~amd64 ~x86"
 
 LICENSE="MIT"
