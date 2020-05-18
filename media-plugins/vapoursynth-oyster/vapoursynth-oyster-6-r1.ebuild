@@ -1,7 +1,7 @@
 # Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=5
+EAPI=7
 
 PYTHON_COMPAT=( python3_{6,7,8} )
 
@@ -11,7 +11,7 @@ DESCRIPTION="A top class de-noising filter against compression artifacts"
 HOMEPAGE="https://github.com/IFeelBloated/Oyster"
 
 EGIT_REPO_URI="https://github.com/IFeelBloated/Oyster.git"
-EGIT_COMMIT="1daff941757c4a426b94b0edc210c1d178a0c01d"
+EGIT_COMMIT="5777942830fedd8e7e452ed9fe256cb4500b35bb"
 
 KEYWORDS="~amd64 ~x86"
 
