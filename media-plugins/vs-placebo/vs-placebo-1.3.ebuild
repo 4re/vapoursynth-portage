@@ -3,19 +3,14 @@
 
 EAPI=7
 
-inherit meson
+inherit meson git-r3
 
 DESCRIPTION="libplacebo-based debanding, scaling and color mapping plugin for VapourSynth"
 HOMEPAGE="https://github.com/Lypheo/vs-placebo"
 
-if [[ ${PV} == *9999* ]]; then
-	inherit git-r3
-	EGIT_REPO_URI="https://github.com/Lypheo/vs-placebo.git"
-	KEYWORDS=""
-else
-	SRC_URI="https://github.com/Lypheo/vs-placebo/archive/${PV}.tar.gz -> ${PN}-${PV}.tar.gz"
-	KEYWORDS="~amd64 ~x86"
-fi
+EGIT_REPO_URI="https://github.com/Lypheo/vs-placebo.git"
+EGIT_COMMIT="b809a4caf1f35df5c4f2e93354172bc4d60c39dc"
+KEYWORDS="~amd64 ~x86"
 
 LICENSE="LGPL-2.1"
 SLOT="0"
