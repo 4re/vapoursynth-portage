@@ -20,6 +20,10 @@ LICENSE="WTFPL-2"
 SLOT="0"
 IUSE="cpu_flags_x86_sse debug static-libs"
 
+PATCHES=(
+	"${FILESDIR}/zimg-2.9.3-gcc10.patch"
+)
+
 src_prepare() {
 	default
 	eautoreconf
