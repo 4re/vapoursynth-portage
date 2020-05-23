@@ -32,6 +32,9 @@ DEPEND="${RDEPEND}
 
 DOCS=( "doc/fft3dfilter.md" )
 
+PATCHES=(
+	"${FILESDIR}/fix-gcc10.patch"
+)
 
 src_configure() {
 	local emesonargs=(
