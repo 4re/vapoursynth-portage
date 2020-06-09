@@ -119,6 +119,7 @@ media-plugins/vapoursynth-vs-maskdetail ~*
 media-plugins/vapoursynth-vsrawsource ~*
 media-plugins/vapoursynth-vstaambk ~*
 media-plugins/vapoursynth-w3fdif ~*
+media-plugins/vapoursynth-waifu2x-ncnn-vulkan ~*
 media-plugins/vapoursynth-waifu2x-w2xc ~*
 media-plugins/vapoursynth-warpsharpsupport ~*
 media-plugins/vapoursynth-wwxd ~*
