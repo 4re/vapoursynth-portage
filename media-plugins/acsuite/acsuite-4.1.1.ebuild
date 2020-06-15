@@ -30,9 +30,10 @@ RDEPEND+="
 "
 DEPEND="${RDEPEND}"
 
-DOCS=( "README.md" )
+DOCS=( "docs/html/" )
 
 
 src_install(){
-	python_domodule acsuite.py
+	default
+	python_domodule acsuite
 }
