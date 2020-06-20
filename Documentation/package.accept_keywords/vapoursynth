@@ -17,6 +17,7 @@ media-plugins/vapoursynth-bifrost ~*
 media-plugins/vapoursynth-bilateral ~*
 media-plugins/vapoursynth-bm3d ~*
 media-plugins/vapoursynth-bwdif ~*
+media-plugins/vapoursynth-cas ~*
 media-plugins/vapoursynth-cmedian ~*
 media-plugins/vapoursynth-cnr2 ~*
 media-plugins/vapoursynth-colorbars ~*
