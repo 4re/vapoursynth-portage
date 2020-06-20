@@ -1,7 +1,7 @@
 # Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
 inherit meson
 
@@ -19,6 +19,7 @@ else
 fi
 
 LICENSE="GPL-2"
+RESTRICT="mirror"
 SLOT="0"
 IUSE="lto"
 
@@ -31,6 +32,13 @@ DEPEND="${RDEPEND}
 "
 
 DOCS=( "doc/fft3dfilter.md" )
+
+PATCHES=(
+	"${FILESDIR}/vapoursynth-fft3dfilter-1-add-missing-include.patch"
+	"${FILESDIR}/vapoursynth-fft3dfilter-1-meson-update.patch"
+	"${FILESDIR}/vapoursynth-fft3dfilter-1-fix-constructor-ordering.patch"
+)
+
 
 src_configure() {
 	local emesonargs=(
