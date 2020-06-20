@@ -9,6 +9,7 @@ media-plugins/ocsuite ~*
 media-plugins/vapoursynth-addgrain ~*
 media-plugins/vapoursynth-adjust ~*
 media-plugins/vapoursynth-arearesize ~*
+media-plugins/vapoursynth-asharp ~*
 media-plugins/vapoursynth-astdr ~*
 media-plugins/vapoursynth-autocrop ~*
 media-plugins/vapoursynth-awarpsharp2 ~*
