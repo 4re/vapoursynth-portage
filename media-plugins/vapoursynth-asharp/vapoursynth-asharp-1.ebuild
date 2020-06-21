@@ -13,7 +13,6 @@ if [[ ${PV} == *9999* ]]; then
 	EGIT_REPO_URI="https://github.com/dubhater/vapoursynth-asharp.git"
 	KEYWORDS=""
 else
-	inherit vcs-snapshot
 	SRC_URI="https://github.com/dubhater/vapoursynth-asharp/archive/v${PV}.tar.gz -> ${PN}-${PV}.tar.gz"
 	KEYWORDS="~amd64 ~x86"
 fi
