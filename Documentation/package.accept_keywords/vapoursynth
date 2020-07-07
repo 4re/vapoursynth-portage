@@ -62,6 +62,7 @@ media-plugins/vapoursynth-inpaint ~*
 media-plugins/vapoursynth-it ~*
 media-plugins/vapoursynth-kagefunc ~*
 media-plugins/vapoursynth-knlmeanscl ~*
+media-plugins/vapoursynth-lghost ~*
 media-plugins/vapoursynth-l-smash-works ~*
 media-plugins/vapoursynth-lvsfunc ~*
 media-plugins/vapoursynth-matchhistogram ~*
