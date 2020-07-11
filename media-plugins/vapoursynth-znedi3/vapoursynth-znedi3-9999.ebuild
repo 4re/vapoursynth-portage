@@ -1,7 +1,7 @@
 # Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
 DESCRIPTION="Optimized nnedi3 filter"
 HOMEPAGE="https://github.com/sekrit-twc/znedi3"

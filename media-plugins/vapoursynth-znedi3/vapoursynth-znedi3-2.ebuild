@@ -1,15 +1,15 @@
 # Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
+
+inherit git-r3
 
 DESCRIPTION="Optimized nnedi3 filter"
 HOMEPAGE="https://github.com/sekrit-twc/znedi3"
 
-inherit git-r3
-
 EGIT_REPO_URI="https://github.com/sekrit-twc/znedi3.git"
-EGIT_COMMIT="815beb9904e4a0f0e1df7e9d748fd96570e85693"
+EGIT_COMMIT="78e5e67475b75c7adeca8ccec239be9f963f6646"
 KEYWORDS="~amd64 ~x86"
 
 LICENSE="GPL-2"
