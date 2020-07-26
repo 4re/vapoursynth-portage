@@ -22,7 +22,7 @@ SLOT="0"
 IUSE="lto"
 
 RDEPEND+="
-	>=media-libs/libplacebo-2.44.0
+	>=media-libs/libplacebo-2.72.0
 	media-libs/vapoursynth
 "
 DEPEND="${RDEPEND}"
