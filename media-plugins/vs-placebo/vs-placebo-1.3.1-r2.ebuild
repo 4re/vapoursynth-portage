@@ -9,7 +9,7 @@ DESCRIPTION="libplacebo-based debanding, scaling and color mapping plugin for Va
 HOMEPAGE="https://github.com/Lypheo/vs-placebo"
 
 EGIT_REPO_URI="https://github.com/Lypheo/vs-placebo.git"
-EGIT_COMMIT="b809a4caf1f35df5c4f2e93354172bc4d60c39dc"
+EGIT_COMMIT="a8be1640483dad34e2872834aa99e71dea5882e0"
 KEYWORDS="~amd64 ~x86"
 
 LICENSE="LGPL-2.1"
