@@ -21,12 +21,11 @@ fi
 
 LICENSE="Unlicense"
 SLOT="0"
-IUSE="ffmpeg"
+IUSE=""
 
 RDEPEND+="
 	media-libs/vapoursynth[${PYTHON_SINGLE_USEDEP}]
-	media-video/mkvtoolnix
-	ffmpeg? ( media-video/ffmpeg )
+	media-video/ffmpeg
 "
 DEPEND="${RDEPEND}"
 
