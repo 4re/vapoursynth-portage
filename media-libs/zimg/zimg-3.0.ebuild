@@ -3,6 +3,8 @@
 
 EAPI=7
 
+inherit autotools multilib-minimal
+
 if [[ ${PV} = *9999* ]] ; then
 	EGIT_REPO_URI="https://github.com/sekrit-twc/zimg"
 	inherit git-r3
@@ -11,7 +13,6 @@ else
 	KEYWORDS="~alpha amd64 arm arm64 hppa ia64 ppc ppc64 sparc x86"
 	S="${WORKDIR}/${PN}-release-${PV}/"
 fi
-inherit autotools multilib-minimal
 
 DESCRIPTION="Scaling, colorspace conversion, and dithering library"
 HOMEPAGE="https://github.com/sekrit-twc/zimg"
@@ -20,9 +21,6 @@ LICENSE="WTFPL-2"
 SLOT="0"
 IUSE="cpu_flags_x86_sse debug static-libs"
 
-PATCHES=(
-	"${FILESDIR}/zimg-2.9.3-gcc10.patch"
-)
 
 src_prepare() {
 	default
@@ -32,6 +30,6 @@ src_prepare() {
 multilib_src_configure() {
 	ECONF_SOURCE="${S}" econf \
 		$(use_enable debug) \
-		$(use_enable cpu_flags_x86_sse x86simd) \
+		$(use_enable cpu_flags_x86_sse simd) \
 		$(use_enable static-libs static)
 }
