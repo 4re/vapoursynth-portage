@@ -14,15 +14,14 @@ HOMEPAGE="http://www.vapoursynth.com/"
 if [[ ${PV} == *9999* ]]; then
 	inherit git-r3
 	EGIT_REPO_URI="https://github.com/${PN}/${PN}.git"
-# 	EGIT_COMMIT=""
 else
 	inherit vcs-snapshot
-	SRC_URI="https://github.com/${PN}/${PN}/archive/R${PV}.tar.gz -> ${PN}-${PV}.tar.gz"
+	SRC_URI="https://github.com/${PN}/${PN}/archive/R52-RC1.tar.gz -> ${PN}-${PV}.tar.gz"
 	KEYWORDS="~amd64 ~x86"
 fi
 
 LICENSE="LGPL-2.1 OFL-1.1"
-SLOT="0"
+SLOT="0/3"
 VSPLUGINS="
 	+vapoursynth_plugins_eedi3
 	+vapoursynth_plugins_imagemagick
@@ -56,6 +55,7 @@ DEPEND="${RDEPEND}
 	)
 	virtual/pkgconfig
 "
+
 
 src_prepare() {
 	default
