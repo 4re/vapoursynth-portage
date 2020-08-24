@@ -40,6 +40,7 @@ media-plugins/vapoursynth-descale ~*
 media-plugins/vapoursynth-dfmderainbow ~*
 media-plugins/vapoursynth-dfttest ~*
 media-plugins/vapoursynth-dotkill ~*
+media-plugins/vapoursynth-edgefixer ~*
 media-plugins/vapoursynth-eedi2 ~*
 media-plugins/vapoursynth-eedi3 ~*
 media-plugins/vapoursynth-ffmpegsource ~*
