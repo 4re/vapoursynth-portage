@@ -29,8 +29,6 @@ RDEPEND+="
 "
 DEPEND="${RDEPEND}"
 
-DOCS=( "docs/html/" )
-
 
 src_install(){
 	default
