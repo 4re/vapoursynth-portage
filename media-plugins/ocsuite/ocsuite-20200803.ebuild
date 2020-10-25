@@ -5,19 +5,14 @@ EAPI=7
 
 PYTHON_COMPAT=( python3_8 )
 
-inherit python-single-r1
+inherit python-single-r1 git-r3
 
 DESCRIPTION="Mastroka ordered chapters automation script"
 HOMEPAGE="https://github.com/OrangeChannel/ocsuite"
 
-if [[ ${PV} == *9999* ]]; then
-	inherit git-r3
-	EGIT_REPO_URI="https://github.com/OrangeChannel/ocsuite.git"
-	KEYWORDS=""
-else
-	SRC_URI="https://github.com/OrangeChannel/ocsuite/archive/${PV}.tar.gz -> ${PN}-${PV}.tar.gz"
-	KEYWORDS="~amd64 ~x86"
-fi
+EGIT_REPO_URI="https://github.com/OrangeChannel/ocsuite.git"
+EGIT_COMMIT="c20a1661be33c31a4fa071e1571eac04a2c7cf0c"
+KEYWORDS="~amd64 ~x86"
 
 LICENSE="Unlicense"
 SLOT="0"
