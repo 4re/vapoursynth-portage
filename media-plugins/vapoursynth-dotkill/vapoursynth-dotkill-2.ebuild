@@ -1,17 +1,22 @@
 # Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
-inherit toolchain-funcs git-r3
+inherit toolchain-funcs
 
 DESCRIPTION="Spatial dotcrawl remover for VapourSynth"
 HOMEPAGE="https://github.com/myrsloik/DotKill"
 
-EGIT_REPO_URI="https://github.com/myrsloik/DotKill.git"
-EGIT_COMMIT="30660feabef28f9ebd8e11915e24d50f331bb58c"
-
-KEYWORDS="~amd64 ~x86"
+if [[ ${PV} == *9999* ]]; then
+	inherit git-r3
+	EGIT_REPO_URI="https://github.com/myrsloik/DotKill.git"
+	KEYWORDS=""
+else
+	inherit vcs-snapshot
+	SRC_URI="https://github.com/myrsloik/DotKill/archive/R${PV}.tar.gz -> ${PN}-${PV}.tar.gz"
+	KEYWORDS="~amd64 ~x86"
+fi
 
 LICENSE="MIT"
 SLOT="0"
@@ -23,7 +28,7 @@ DEPEND="${RDEPEND}
 "
 
 LIBNAME="libdotkill.so"
-COMMON_FLAGS="-shared -fPIC"
+COMMON_FLAGS="-shared -fPIC -std=c++17"
 
 src_compile() {
 	$(tc-getCC) ${COMMON_FLAGS} ${CFLAGS} ${LDFLAGS} -o ${LIBNAME} $(pkg-config --cflags vapoursynth) dotkill1.cpp || die "Build failed"

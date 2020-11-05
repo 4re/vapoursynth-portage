@@ -1,7 +1,7 @@
 # Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
 inherit toolchain-funcs
 
@@ -14,7 +14,7 @@ if [[ ${PV} == *9999* ]]; then
 	KEYWORDS=""
 else
 	inherit vcs-snapshot
-	SRC_URI="https://github.com/myrsloik/DotKill/archive/r${PV}.tar.gz -> ${PN}-${PV}.tar.gz"
+	SRC_URI="https://github.com/myrsloik/DotKill/archive/R${PV}.tar.gz -> ${PN}-${PV}.tar.gz"
 	KEYWORDS="~amd64 ~x86"
 fi
 
@@ -28,7 +28,7 @@ DEPEND="${RDEPEND}
 "
 
 LIBNAME="libdotkill.so"
-COMMON_FLAGS="-shared -fPIC"
+COMMON_FLAGS="-shared -fPIC -std=c++17"
 
 src_compile() {
 	$(tc-getCC) ${COMMON_FLAGS} ${CFLAGS} ${LDFLAGS} -o ${LIBNAME} $(pkg-config --cflags vapoursynth) dotkill1.cpp || die "Build failed"
