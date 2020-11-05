@@ -24,7 +24,7 @@ SLOT="0"
 IUSE="lto"
 
 RDEPEND+="
-	media-libs/vapoursynth
+	media-libs/vapoursynth:0/4
 	sci-libs/fftw:3.0[threads]
 	>=sys-devel/gcc-7.2.0
 "
