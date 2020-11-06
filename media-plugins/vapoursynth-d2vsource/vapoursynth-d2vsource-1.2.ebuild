@@ -23,7 +23,7 @@ SLOT="0"
 
 RDEPEND+="
 	media-libs/vapoursynth
-	>=virtual/ffmpeg-9
+	media-video/ffmpeg
 "
 DEPEND="${RDEPEND}
 "

@@ -20,7 +20,7 @@ SLOT="0"
 IUSE="+shared -static -debug"
 
 RDEPEND+="
-	>=virtual/ffmpeg-9
+	media-video/ffmpeg
 "
 DEPEND="${RDEPEND}
 	virtual/pkgconfig

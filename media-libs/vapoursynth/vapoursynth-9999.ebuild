@@ -40,7 +40,7 @@ REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 RDEPEND+="${PYTHON_DEPS}
 	vapoursynth_plugins_subtext? (
 		media-libs/libass
-		virtual/ffmpeg
+		media-video/ffmpeg
 	)
 	vapoursynth_plugins_imagemagick? ( >=media-gfx/imagemagick-7.0[cxx,hdri,-q8(-),-q64(-)] )
 	>=media-libs/zimg-2.9.3
