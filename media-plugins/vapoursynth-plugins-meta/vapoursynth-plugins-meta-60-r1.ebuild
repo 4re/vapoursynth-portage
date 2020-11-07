@@ -26,7 +26,6 @@ IUSE="
 	vapoursynth_plugins_bm3d
 	vapoursynth_plugins_bwdif
 	vapoursynth_plugins_cas
-	vapoursynth_plugins_cmedian
 	vapoursynth_plugins_cnr2
 	vapoursynth_plugins_colorbars
 	vapoursynth_plugins_combmask
@@ -47,6 +46,7 @@ IUSE="
 	vapoursynth_plugins_dfmderainbow
 	vapoursynth_plugins_dfttest
 	vapoursynth_plugins_dotkill
+	vapoursynth_plugins_dpid
 	vapoursynth_plugins_edgefixer
 	vapoursynth_plugins_eedi2
 	vapoursynth_plugins_eedi3
@@ -159,7 +159,6 @@ DEPEND="${RDEPEND}
 	vapoursynth_plugins_bm3d? ( media-plugins/vapoursynth-bm3d )
 	vapoursynth_plugins_bwdif? ( media-plugins/vapoursynth-bwdif )
 	vapoursynth_plugins_cas? ( media-plugins/vapoursynth-cas )
-	vapoursynth_plugins_cmedian? ( media-plugins/vapoursynth-cmedian )
 	vapoursynth_plugins_cnr2? ( media-plugins/vapoursynth-cnr2 )
 	vapoursynth_plugins_colorbars? ( media-plugins/vapoursynth-colorbars )
 	vapoursynth_plugins_combmask? ( media-plugins/vapoursynth-combmask )
@@ -180,6 +179,7 @@ DEPEND="${RDEPEND}
 	vapoursynth_plugins_dfmderainbow? ( media-plugins/vapoursynth-dfmderainbow )
 	vapoursynth_plugins_dfttest? ( media-plugins/vapoursynth-dfttest )
 	vapoursynth_plugins_dotkill? ( media-plugins/vapoursynth-dotkill )
+	vapoursynth_plugins_dpid? ( media-plugins/vapoursynth-dpid )
 	vapoursynth_plugins_edgefixer? ( media-plugins/vapoursynth-edgefixer )
 	vapoursynth_plugins_eedi2? ( media-plugins/vapoursynth-eedi2 )
 	vapoursynth_plugins_eedi3? ( media-plugins/vapoursynth-eedi3 )
