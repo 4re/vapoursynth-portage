@@ -22,7 +22,7 @@ DEPEND="${RDEPEND}
 "
 
 src_compile() {
-	emake CPPFLAGS="-DNNEDI3_WEIGHTS_PATH=\\\"\"${EROOT}usr/share/znedi3/nnedi3_weights.bin\"\\\"" X86=1
+	emake CPPFLAGS="-DNNEDI3_WEIGHTS_PATH=\\\"\"${EROOT}/usr/share/znedi3/nnedi3_weights.bin\"\\\"" X86=1
 }
 
 src_install() {
