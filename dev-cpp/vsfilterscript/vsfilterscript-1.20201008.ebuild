@@ -9,7 +9,7 @@ DESCRIPTION="C++ wrapper for VSAPI to help you sketch your filter in the fastest
 HOMEPAGE="https://github.com/IFeelBloated/vsFilterScript"
 
 EGIT_REPO_URI="https://github.com/IFeelBloated/vsFilterScript.git"
-EGIT_COMMIT="aa00068ddfbae8e6ec163ccf2776c75d41718c62"
+EGIT_COMMIT="fc6f2fc53e2eb1e041d837e84dc2ce7e82774188"
 KEYWORDS="~x86 ~amd64"
 
 LICENSE=""
