@@ -1,5 +1,5 @@
 # vapoursynth-portage
-Unofficial portage tree with all vapoursynth related ebuilds
+Unofficial portage tree with all VapourSynth related ebuilds
 
 Install
 -------
@@ -42,7 +42,7 @@ This overlay also includes an editor and a modified mpv ebuild with vapoursynth 
 
 Troubleshooting
 ---------------
-If you want to use python-3.8 you may need to add this to your `/etc/portage/package.use/use`:
+If you want to use python-3.9 you may need to add this to your `/etc/portage/package.use/use`:
 ```
-*/*::vapoursynth PYTHON_SINGLE_TARGET: -* python3_8
+*/*::vapoursynth PYTHON_SINGLE_TARGET: -* python3_9
 ```
