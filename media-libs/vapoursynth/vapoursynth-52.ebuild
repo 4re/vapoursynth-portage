@@ -33,7 +33,7 @@ VSPLUGINS="
 	+vapoursynth_plugins_vinverse
 	+vapoursynth_plugins_vivtc
 "
-IUSE="doc +vspipe -debug -guard +shared -static cpu_flags_x86_sse2 ${VSPLUGINS}"
+IUSE="doc +vspipe -debug -guard +shared -static-libs cpu_flags_x86_sse2 ${VSPLUGINS}"
 
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
@@ -55,7 +55,6 @@ DEPEND="${RDEPEND}
 	)
 	virtual/pkgconfig
 "
-
 
 src_prepare() {
 	default

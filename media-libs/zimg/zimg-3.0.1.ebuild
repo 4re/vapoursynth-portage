@@ -10,7 +10,7 @@ if [[ ${PV} = *9999* ]] ; then
 	inherit git-r3
 else
 	SRC_URI="https://github.com/sekrit-twc/zimg/archive/release-${PV}.tar.gz -> ${P}.tar.gz"
-	KEYWORDS="~alpha amd64 arm arm64 hppa ia64 ppc ppc64 sparc x86"
+	KEYWORDS="~alpha amd64 arm arm64 hppa ppc ppc64 sparc x86"
 	S="${WORKDIR}/${PN}-release-${PV}/"
 fi
 
@@ -20,7 +20,6 @@ HOMEPAGE="https://github.com/sekrit-twc/zimg"
 LICENSE="WTFPL-2"
 SLOT="0"
 IUSE="cpu_flags_x86_sse debug static-libs"
-
 
 src_prepare() {
 	default

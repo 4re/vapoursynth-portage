@@ -10,7 +10,7 @@ HOMEPAGE="https://github.com/Netflix/vmaf/"
 
 EGIT_REPO_URI="https://github.com/Netflix/vmaf.git"
 EGIT_COMMIT="e558029b40125edebfd837e7b2ac1b0ff099f552"
-KEYWORDS="~x86 ~amd64"
+KEYWORDS="~amd64"
 
 LICENSE="Apache-2.0"
 SLOT="0"

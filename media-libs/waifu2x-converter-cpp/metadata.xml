@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM 'http://www.gentoo.org/dtd/metadata.dtd'>
+<pkgmetadata>
+    <maintainer type="person">
+        <email>vapoursynth@overlay.org</email>
+        <name>Are_</name>
+    </maintainer>
+  <use>
+    <flag name="cuda">Compiles with CUDA support.</flag>
+    <flag name="models">Install models to use in the standalone app.</flag>
+    <flag name="opencl">Compiles with OpenCL support.</flag>
+  </use>
+</pkgmetadata>

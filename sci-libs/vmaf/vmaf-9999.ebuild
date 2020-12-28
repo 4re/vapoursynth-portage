@@ -14,7 +14,7 @@ if [[ ${PV} == *9999* ]]; then
 	KEYWORDS=""
 else
 	SRC_URI="https://github.com/Netflix/vmaf/archive/v${PV}.tar.gz -> ${PN}-${PV}.tar.gz"
-	KEYWORDS="~x86 ~amd64"
+	KEYWORDS="~amd64"
 fi
 
 LICENSE="Apache-2.0"

@@ -15,7 +15,7 @@ if [[ ${PV} == *9999* ]]; then
 else
 	inherit vcs-snapshot
 	SRC_URI="https://github.com/dubhater/${PN}/archive/v${PV}.tar.gz -> ${PN}-${PV}.tar.gz"
-	KEYWORDS="~x86 ~amd64"
+	KEYWORDS="~amd64"
 fi
 
 LICENSE="ISC"

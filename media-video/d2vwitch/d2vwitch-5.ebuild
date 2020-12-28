@@ -33,7 +33,6 @@ DEPEND="${RDEPEND}
 
 DOCS=( "readme.rst" )
 
-
 src_configure() {
 	local emesonargs=(
 		-Db_lto=$(usex lto true false)

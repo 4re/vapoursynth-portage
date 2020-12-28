@@ -3,9 +3,9 @@
 
 EAPI=7
 
-inherit cmake-utils
+inherit cmake
 
-DESCRIPTION="Image Super-Resolution for anime-style-art using Deep Convolutional Neural Networks implementation in c++ using opencv"
+DESCRIPTION="Super-Resolution for anime-style-art using opencv"
 HOMEPAGE="https://github.com/DeadSix27/waifu2x-converter-cpp"
 
 if [[ ${PV} == *9999* ]]; then
@@ -14,7 +14,7 @@ if [[ ${PV} == *9999* ]]; then
 	KEYWORDS=""
 else
 	SRC_URI="https://github.com/DeadSix27/${PN}/archive/v${PV}.tar.gz -> ${PN}-${PV}.tar.gz"
-	KEYWORDS="~x86 ~amd64"
+	KEYWORDS="~amd64"
 fi
 
 LICENSE="MIT BSD BSD-2"
@@ -29,7 +29,6 @@ RDEPEND+="
 "
 DEPEND="${RDEPEND}
 "
-
 
 src_configure() {
 	local mycmakeargs=(
@@ -55,7 +54,7 @@ src_configure() {
 		)
 	fi
 
-	cmake-utils_src_configure
+	cmake_src_configure
 }
 
 pkg_postinst() {

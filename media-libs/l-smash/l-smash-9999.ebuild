@@ -17,7 +17,7 @@ fi
 
 LICENSE="ISC"
 SLOT="0"
-IUSE="+shared -static -debug"
+IUSE="-static-libs -debug"
 
 RDEPEND+="
 	media-video/ffmpeg
@@ -27,13 +27,10 @@ DEPEND="${RDEPEND}
 "
 
 src_configure() {
-	local myconf
+	local myconf="--enable-shared"
 
-	if ! use static; then
+	if ! use static-libs; then
 		myconf="${myconf} --disable-static"
-	fi
-	if use shared; then
-		myconf="${myconf} --enable-shared"
 	fi
 	if use debug; then
 		myconf="${myconf} --enable-debug"

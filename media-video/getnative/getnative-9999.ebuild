@@ -34,7 +34,6 @@ RDEPEND="${DEPEND}"
 
 DOCS=( "README.md" )
 
-
 src_prepare(){
 	default
 	sed -ni '/VapourSynth/!p' requirements.txt || die "sed failed."

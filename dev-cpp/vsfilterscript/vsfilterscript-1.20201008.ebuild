@@ -10,7 +10,7 @@ HOMEPAGE="https://github.com/IFeelBloated/vsFilterScript"
 
 EGIT_REPO_URI="https://github.com/IFeelBloated/vsFilterScript.git"
 EGIT_COMMIT="fc6f2fc53e2eb1e041d837e84dc2ce7e82774188"
-KEYWORDS="~x86 ~amd64"
+KEYWORDS="~amd64"
 
 LICENSE=""
 SLOT="0"
@@ -22,7 +22,6 @@ RDEPEND+="
 "
 DEPEND="${RDEPEND}
 "
-
 
 src_configure() {
 	local emesonargs=(
