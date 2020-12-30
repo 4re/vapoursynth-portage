@@ -77,7 +77,7 @@ src_configure() {
 		$( use_enable vapoursynth_plugins_vinverse vinverse ) \
 		$( use_enable vapoursynth_plugins_vivtc vivtc ) \
 		$( use_enable shared ) \
-		$( use_enable static ) \
+		$( use_enable static-libs static ) \
 		$( use_enable debug ) \
 		$( use_enable guard guard-pattern ) \
 		$( use_enable vspipe )
