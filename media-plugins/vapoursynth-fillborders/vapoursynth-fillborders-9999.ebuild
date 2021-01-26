@@ -28,3 +28,10 @@ DEPEND="${RDEPEND}
 "
 
 DOCS=( readme.rst )
+
+src_configure() {
+	local emesonargs=(
+		--libdir="/usr/$(get_libdir)/vapoursynth/"
+	)
+	meson_src_configure
+}
