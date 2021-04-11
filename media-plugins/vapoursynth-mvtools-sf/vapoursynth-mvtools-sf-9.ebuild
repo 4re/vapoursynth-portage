@@ -1,12 +1,12 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=5
+EAPI=7
 
 PYTHON_COMPAT=( python3_{6,7,8} )
 AUTOTOOLS_AUTORECONF=1
 
-inherit autotools-utils multilib python-single-r1
+inherit python-single-r1
 
 DESCRIPTION="MVTools is a set of filters for motion estimation and compensation"
 HOMEPAGE="https://github.com/IFeelBloated/vapoursynth-mvtools-sf"
@@ -34,15 +34,16 @@ DEPEND="${RDEPEND}
 DOCS=( README.md )
 
 src_prepare() {
-	epatch "${FILESDIR}/${P}-autotools.patch"
-	autotools-utils_src_prepare
+	eapply_user
+	eapply "${FILESDIR}/${P}-autotools.patch"
+	./autogen.sh
 }
 
 src_configure() {
-	autotools-utils_src_configure --libdir="/usr/$(get_libdir)/vapoursynth/"
+	econf --libdir="${ED}/usr/$(get_libdir)/vapoursynth/" || die "configure failed"
 }
 
 src_install() {
-	autotools-utils_src_install
+	emake install
 	python_domodule src/mvmulti.py
 }
