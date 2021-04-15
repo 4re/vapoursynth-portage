@@ -1,4 +1,4 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -25,7 +25,7 @@ IUSE=""
 RESTRICT="mirror"
 
 RDEPEND+="
-	dev-libs/ncnn[vulkan]
+	dev-libs/ncnn
 	dev-util/glslang
 	dev-util/vulkan-headers
 	dev-util/vulkan-tools
