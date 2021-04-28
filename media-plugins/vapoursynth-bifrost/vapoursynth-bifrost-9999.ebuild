@@ -1,11 +1,9 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=5
+EAPI=7
 
-AUTOTOOLS_AUTORECONF=1
-
-inherit autotools-utils multilib
+inherit multilib
 
 DESCRIPTION="Decrawler plugin for VapourSynth"
 HOMEPAGE="https://github.com/dubhater/vapoursynth-bifrost"
@@ -13,14 +11,15 @@ HOMEPAGE="https://github.com/dubhater/vapoursynth-bifrost"
 if [[ ${PV} == *9999* ]]; then
 	inherit git-r3
 	EGIT_REPO_URI="https://github.com/dubhater/${PN}.git"
+	KEYWORDS=""
 else
-	inherit vcs-snapshot
 	SRC_URI="https://github.com/dubhater/${PN}/archive/v${PV}.tar.gz -> ${PN}-${PV}.tar.gz"
+	KEYWORDS="~amd64 ~x86"
 fi
 
+RESTRICT="mirror"
 LICENSE="WTFPL-2"
 SLOT="0"
-KEYWORDS=""
 
 RDEPEND+="
 	media-libs/vapoursynth
@@ -30,6 +29,11 @@ DEPEND="${RDEPEND}
 
 DOCS=( readme.rst )
 
+src_prepare() {
+	eapply_user
+	./autogen.sh
+}
+
 src_configure() {
-	autotools-utils_src_configure --libdir="/usr/$(get_libdir)/vapoursynth/"
+	econf --libdir="/usr/$(get_libdir)/vapoursynth/"
 }
