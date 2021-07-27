@@ -1,4 +1,4 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -9,7 +9,7 @@ DESCRIPTION="libplacebo-based debanding, scaling and color mapping plugin for Va
 HOMEPAGE="https://github.com/Lypheo/vs-placebo"
 
 EGIT_REPO_URI="https://github.com/Lypheo/vs-placebo.git"
-EGIT_COMMIT="a8be1640483dad34e2872834aa99e71dea5882e0"
+EGIT_COMMIT="cf02e29e542c1c2fc3cf9434f5ba521e6421551d"
 KEYWORDS="~amd64 ~x86"
 
 LICENSE="LGPL-2.1"

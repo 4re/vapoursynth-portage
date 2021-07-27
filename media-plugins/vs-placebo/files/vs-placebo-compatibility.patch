@@ -1,0 +1,573 @@
+From a8be1640483dad34e2872834aa99e71dea5882e0 Mon Sep 17 00:00:00 2001
+From: Lypheo <saifullah124@hotmail.de>
+Date: Wed, 10 Jun 2020 14:48:41 +0200
+Subject: [PATCH 1/8] Switch to fmParallel
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Work around libplacebo’s thread-unsafety with a mutex instead of fmUnordered.
+I don’t know jackshit about concurrent programming tbh,
+so I have no idea if this is even remotely sane or correct,
+but it seems to work lmao.
+Provides nearly a 2x speed up for .Tonemap and .Shader,
+and a solid speed-up of up to 1.2x for .Resample and .Deband.
+---
+ deband.c   | 14 ++++++++++++--
+ resample.c | 14 ++++++++++++--
+ shader.c   | 12 +++++++++++-
+ tonemap.c  | 13 +++++++++++--
+ 4 files changed, 46 insertions(+), 7 deletions(-)
+
+diff --git a/deband.c b/deband.c
+index bc50178..b7cc28c 100644
+--- a/deband.c
++++ b/deband.c
+@@ -6,6 +6,7 @@
+ #include <stdbool.h>
+ #include <libplacebo/dispatch.h>
+ #include <libplacebo/utils/upload.h>
++#include <pthread.h>
+ 
+ typedef struct {
+     VSNodeRef *node;
+@@ -16,6 +17,7 @@ typedef struct {
+     struct pl_dither_params *ditherParams;
+     struct pl_deband_params *debandParams;
+     int renderer; // for debugging purposes
++    pthread_mutex_t lock;
+ } MData;
+ 
+ bool do_plane(struct priv *p, void* data, int chroma)
+@@ -173,9 +175,10 @@ static const VSFrameRef *VS_CC DebandGetFrame(int n, int activationReason, void
+                         .component_pad[0] = 0,
+                         .component_map[0] = 0,
+                 };
+-
++                pthread_mutex_lock(&d->lock); // libplacebo isn’t thread-safe
+                 if (reconfig(d->vf, &plane, vsapi))
+                     filter(d->vf, vsapi->getWritePtr(dst, i), &plane, d, vsapi, i != 0);
++                pthread_mutex_unlock(&d->lock);
+             }
+         }
+ 
+@@ -192,6 +195,7 @@ static void VS_CC DebandFree(void *instanceData, VSCore *core, const VSAPI *vsap
+     uninit(d->vf);
+     free(d->ditherParams);
+     free(d->debandParams);
++    pthread_mutex_destroy(&d->lock);
+     free(d);
+ }
+ 
+@@ -200,6 +204,12 @@ void VS_CC DebandCreate(const VSMap *in, VSMap *out, void *userData, VSCore *cor
+     MData *data;
+     int err;
+ 
++    if (pthread_mutex_init(&d.lock, NULL) != 0)
++    {
++        vsapi->setError(out, "placebo.Deband: mutex init failed\n");
++        return;
++    }
++
+     d.node = vsapi->propGetNode(in, "clip", 0, 0);
+     d.vi = vsapi->getVideoInfo(d.node);
+ 
+@@ -239,5 +249,5 @@ void VS_CC DebandCreate(const VSMap *in, VSMap *out, void *userData, VSCore *cor
+     data = malloc(sizeof(d));
+     *data = d;
+ 
+-    vsapi->createFilter(in, out, "Deband", DebandInit, DebandGetFrame, DebandFree, fmUnordered, 0, data, core);
++    vsapi->createFilter(in, out, "Deband", DebandInit, DebandGetFrame, DebandFree, fmParallel, 0, data, core);
+ }
+\ No newline at end of file
+diff --git a/resample.c b/resample.c
+index dff65f0..b8eaa86 100644
+--- a/resample.c
++++ b/resample.c
+@@ -8,6 +8,7 @@
+ #include <libplacebo/utils/upload.h>
+ #include <libplacebo/filters.h>
+ #include <libplacebo/colorspace.h>
++#include <pthread.h>
+ 
+ typedef struct {
+     VSNodeRef *node;
+@@ -22,6 +23,7 @@ typedef struct {
+     struct pl_sigmoid_params * sigmoid_params;
+     enum pl_color_transfer trc;
+     bool linear;
++    pthread_mutex_t lock;
+ } RData;
+ 
+ bool do_plane_R(struct priv *p, void* data, int w, int h, const VSAPI *vsapi, float sx, float sy)
+@@ -239,9 +241,11 @@ static const VSFrameRef *VS_CC ResampleGetFrame(int n, int activationReason, voi
+             float sx = (shift ? subsampling_shift : 0.f) + d->src_x * vsapi->getFrameWidth(frame, i)/d->vi->width;
+             float sy = d->src_y * vsapi->getFrameHeight(frame, i)/d->vi->height;
+             int w = vsapi->getFrameWidth(dst, i), h = vsapi->getFrameHeight(dst, i);
++
++            pthread_mutex_lock(&d->lock);
+             if (reconfig_R(d->vf, &plane, w, h, vsapi))
+                 filter_R(d->vf, vsapi->getWritePtr(dst, i), &plane, d, w, h, vsapi->getStride(dst, i) / d->vi->format->bytesPerSample, vsapi, sx, sy);
+-
++            pthread_mutex_unlock(&d->lock);
+         }
+ 
+         vsapi->freeFrame(frame);
+@@ -259,6 +263,7 @@ static void VS_CC ResampleFree(void *instanceData, VSCore *core, const VSAPI *vs
+     free(d->sampleParams);
+     free(d->sigmoid_params);
+     uninit(d->vf);
++    pthread_mutex_destroy(&d->lock);
+     free(d);
+ }
+ 
+@@ -266,6 +271,11 @@ void VS_CC ResampleCreate(const VSMap *in, VSMap *out, void *userData, VSCore *c
+     RData d;
+     RData *data;
+     int err;
++    if (pthread_mutex_init(&d.lock, NULL) != 0)
++    {
++        vsapi->setError(out, "placebo.Resample: mutex init failed\n");
++        return;
++    }
+ 
+     d.node = vsapi->propGetNode(in, "clip", 0, 0);
+     d.vi = vsapi->getVideoInfo(d.node);
+@@ -366,5 +376,5 @@ void VS_CC ResampleCreate(const VSMap *in, VSMap *out, void *userData, VSCore *c
+     d.sampleParams = sampleFilterParams;
+     data = malloc(sizeof(d));
+     *data = d;
+-    vsapi->createFilter(in, out, "Resample", ResampleInit, ResampleGetFrame, ResampleFree, fmUnordered, 0, data, core);
++    vsapi->createFilter(in, out, "Resample", ResampleInit, ResampleGetFrame, ResampleFree, fmParallel, 0, data, core);
+ }
+diff --git a/shader.c b/shader.c
+index 2bde3db..da63a90 100644
+--- a/shader.c
++++ b/shader.c
+@@ -10,6 +10,7 @@
+ #include <libplacebo/utils/upload.h>
+ #include <libplacebo/shaders/custom.h>
+ #include <libplacebo/colorspace.h>
++#include <pthread.h>
+ #include "libp2p/p2p_api.h"
+ 
+ typedef  struct {
+@@ -26,6 +27,7 @@ typedef  struct {
+     struct pl_sigmoid_params * sigmoid_params;
+     enum pl_color_transfer trc;
+     bool linear;
++    pthread_mutex_t lock;
+ } SData;
+ 
+ 
+@@ -192,9 +194,11 @@ static const VSFrameRef *VS_CC SGetFrame(int n, int activationReason, void **ins
+         }
+ 
+         void * packed_dst = malloc(d->width*d->height*2*3);
++        pthread_mutex_lock(&d->lock);
+         if (config_S(d->vf, planes, vsapi, d)) {
+             filter_S(d->vf, packed_dst, planes, d, n, vsapi);
+         }
++        pthread_mutex_unlock(&d->lock);
+ 
+         struct p2p_buffer_param pack_params = {};
+         pack_params.width = d->width; pack_params.height = d->height;
+@@ -224,6 +228,7 @@ static void VS_CC SFree(void *instanceData, VSCore *core, const VSAPI *vsapi) {
+     free(d->sampleParams);
+     free(d->sigmoid_params);
+     uninit(d->vf);
++    pthread_mutex_destroy(&d->lock);
+     free(d);
+ }
+ 
+@@ -232,6 +237,11 @@ void VS_CC SCreate(const VSMap *in, VSMap *out, void *userData, VSCore *core, co
+     SData *data;
+     int err;
+ 
++    if (pthread_mutex_init(&d.lock, NULL) != 0) {
++        vsapi->setError(out, "placebo.Shader: mutex init failed\n");
++        return;
++    }
++
+     char* sh = vsapi->propGetData(in, "shader", 0, &err);
+     FILE* fl = fopen(sh, "r");
+     if (fl == NULL) {
+@@ -357,5 +367,5 @@ void VS_CC SCreate(const VSMap *in, VSMap *out, void *userData, VSCore *core, co
+     data = malloc(sizeof(d));
+     *data = d;
+ 
+-    vsapi->createFilter(in, out, "Shader", SInit, SGetFrame, SFree, fmUnordered, 0, data, core);
++    vsapi->createFilter(in, out, "Shader", SInit, SGetFrame, SFree, fmParallel, 0, data, core);
+ }
+diff --git a/tonemap.c b/tonemap.c
+index 57b3939..0b1cead 100644
+--- a/tonemap.c
++++ b/tonemap.c
+@@ -9,6 +9,7 @@
+ #include <libplacebo/utils/upload.h>
+ #include <libplacebo/vulkan.h>
+ #include "libp2p/p2p_api.h"
++#include <pthread.h>
+ 
+ typedef  struct {
+     VSNodeRef *node;
+@@ -17,6 +18,7 @@ typedef  struct {
+     struct pl_render_params *renderParams;
+     struct pl_color_space *src_csp;
+     struct pl_color_space *dst_csp;
++    pthread_mutex_t lock;
+ } TMData;
+ 
+ bool do_plane_TM(struct priv *p, void* data, int n)
+@@ -156,9 +158,10 @@ static const VSFrameRef *VS_CC TMGetFrame(int n, int activationReason, void **in
+         }
+ 
+         void * packed_dst = malloc(iw*ih*2*3);
+-
++        pthread_mutex_lock(&d->lock); // libplacebo isn’t thread-safe
+         if (config_TM(d->vf, planes, vsapi))
+             filter_TM(d->vf, packed_dst, planes, d, n, vsapi);
++        pthread_mutex_unlock(&d->lock);
+ 
+         struct p2p_buffer_param pack_params = {};
+         pack_params.width = iw; pack_params.height = ih;
+@@ -189,6 +192,7 @@ static void VS_CC TMFree(void *instanceData, VSCore *core, const VSAPI *vsapi) {
+     free(d->renderParams->peak_detect_params);
+     free(d->renderParams->color_map_params);
+     free(d->renderParams);
++    pthread_mutex_destroy(&d->lock);
+     free(d);
+ }
+ 
+@@ -196,6 +200,11 @@ void VS_CC TMCreate(const VSMap *in, VSMap *out, void *userData, VSCore *core, c
+     TMData d;
+     TMData *data;
+     int err;
++    if (pthread_mutex_init(&d.lock, NULL) != 0)
++    {
++        vsapi->setError(out, "placebo.Tonemap: mutex init failed\n");
++        return;
++    }
+ 
+     d.node = vsapi->propGetNode(in, "clip", 0, 0);
+     d.vi = vsapi->getVideoInfo(d.node);
+@@ -264,5 +273,5 @@ void VS_CC TMCreate(const VSMap *in, VSMap *out, void *userData, VSCore *core, c
+     data = malloc(sizeof(d));
+     *data = d;
+ 
+-    vsapi->createFilter(in, out, "Tonemap", TMInit, TMGetFrame, TMFree, peak_detection ? fmSerial : fmUnordered, 0, data, core);
++    vsapi->createFilter(in, out, "Tonemap", TMInit, TMGetFrame, TMFree, fmParallel, 0, data, core);
+ }
+
+From d717bb49ce03ea9d67152a7c2e4df026de040c35 Mon Sep 17 00:00:00 2001
+From: Lypheo <saifullah124@hotmail.de>
+Date: Mon, 15 Jun 2020 09:17:00 +0200
+Subject: [PATCH 2/8] fix build with libplacebo master
+
+---
+ deband.c | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/deband.c b/deband.c
+index b7cc28c..9ee2d9e 100644
+--- a/deband.c
++++ b/deband.c
+@@ -52,7 +52,6 @@ bool do_plane(struct priv *p, void* data, int chroma)
+                 .repr = crpr, .color = (struct pl_color_space) {0}};
+         struct pl_render_target out = {.color = (struct pl_color_space) {0}, .repr = crpr, .fbo = p->tex_out[0]};
+         struct pl_render_params par = pl_render_default_params;
+-        par.skip_redraw_caching = true;
+         par.deband_params = d->debandParams;
+         par.dither_params = d->dither ? d->ditherParams : NULL;
+ 
+
+From 2944a098d803b979bc90bfe21694942030c1892b Mon Sep 17 00:00:00 2001
+From: Lypheo <45497420+lypheo@users.noreply.github.com>
+Date: Mon, 27 Jul 2020 16:03:39 +0200
+Subject: [PATCH 3/8] shader.c: Allow shader to passed as string
+
+Fixes #5
+---
+ README.md    |  5 +++--
+ shader.c     | 38 ++++++++++++++++++++++++++------------
+ vs-placebo.c |  4 ++--
+ 3 files changed, 31 insertions(+), 16 deletions(-)
+
+diff --git a/README.md b/README.md
+index a75e51e..3283095 100644
+--- a/README.md
++++ b/README.md
+@@ -42,7 +42,7 @@ When sigmodizing, ``linearize`` should be True as well. (Currently mangles HDR v
+ - ``sigmoid_center, sigmoid_slope``: Sigmoid curve parameters.
+ - ``trc``: The [transfer curve](https://github.com/haasn/libplacebo/blob/master/src/include/libplacebo/colorspace.h#L183) to use for linearizing.
+ 
+-#### ``placebo.Shader(clip clip, string shader[, int width, int height, int chroma_loc = 1, int matrix = 2, int trc = 1, string filter = "ewa_lanczos", float radius, float clamp, float taper, float blur, float param1, float param2, float antiring = 0.0, int lut_entries = 64, float cutoff = 0.001, bool sigmoidize = 1, bool linearize = 1, float sigmoid_center = 0.75, float sigmoid_slope = 6.5])``
++#### ``placebo.Shader(clip clip, [string shader, int width, int height, int chroma_loc = 1, int matrix = 2, int trc = 1, string filter = "ewa_lanczos", float radius, float clamp, float taper, float blur, float param1, float param2, float antiring = 0.0, int lut_entries = 64, float cutoff = 0.001, bool sigmoidize = 1, bool linearize = 1, float sigmoid_center = 0.75, float sigmoid_slope = 6.5, string shader_s])``
+ 
+ Runs a GLSL shader in [mpv syntax](https://mpv.io/manual/master/#options-glsl-shader).
+ 
+@@ -57,6 +57,7 @@ For example, if a shader hooks into the LINEAR texture,
+ it will only be executed when ``linearize = True``. 
+ 
+ - ``shader``: Path to shader file.
++- ``shader_s``: Alternatively, String containing the shader. (``shader`` takes precedence.)
+ - ``width, height``: Output dimensions. Need to be specified for scaling shaders to be run. 
+ Any planes the shader doesn’t scale appropiately will be scaled to output res by libplacebo
+ using the supplied filter options, which are identical to ``Resample``’s.
+@@ -64,7 +65,7 @@ using the supplied filter options, which are identical to ``Resample``’s.
+ (or the source luma res); then the image will be scaled to output res in RGB and converted back to YUV.)
+ - ``chroma_loc``: Chroma location to derive chroma shift from. Uses [pl_chroma_location](https://github.com/haasn/libplacebo/blob/524e3965c6f8f976b3f8d7d82afe3083d61a7c4d/src/include/libplacebo/colorspace.h#L332) enum values.
+ - ``matrix``: [YUV matrix](https://github.com/haasn/libplacebo/blob/524e3965c6f8f976b3f8d7d82afe3083d61a7c4d/src/include/libplacebo/colorspace.h#L26).
+-- ``sigmoidize, linearize, sigmoid_center, sigmoid_slope,trc``: For shaders that hook into the LINEARIZE or SIGMOID texture.
++- ``sigmoidize, linearize, sigmoid_center, sigmoid_slope, trc``: For shaders that hook into the LINEAR or SIGMOID texture.
+ 
+ 
+ ### Installing
+diff --git a/shader.c b/shader.c
+index da63a90..2b3e7eb 100644
+--- a/shader.c
++++ b/shader.c
+@@ -243,23 +243,37 @@ void VS_CC SCreate(const VSMap *in, VSMap *out, void *userData, VSCore *core, co
+     }
+ 
+     char* sh = vsapi->propGetData(in, "shader", 0, &err);
+-    FILE* fl = fopen(sh, "r");
+-    if (fl == NULL) {
+-        perror("Failed: ");
+-        vsapi->setError(out, "placebo.Shader: Failed reading shader file!");
+-        return;
++    char *shader;
++    long fsize;
++    if (!err) {
++        FILE *fl = fopen(sh, "r");
++        if (fl == NULL) {
++            perror("Failed: ");
++            vsapi->setError(out, "placebo.Shader: Failed reading shader file!");
++            return;
++        }
++
++        fseek(fl, 0, SEEK_END);
++        fsize = ftell(fl);
++        fseek(fl, 0, SEEK_SET);
++        shader = malloc(fsize + 1);
++        fread(shader, 1, fsize, fl);
++        fclose(fl);
++        shader[fsize] = 0;
++    } else {
++        char* shader_s = vsapi->propGetData(in, "shader_s", 0, &err);
++        if (err) {
++            vsapi->setError(out, "placebo.Shader: Either shader or shader_s must be specified!");
++            return;
++        }
++        fsize =  strlen(shader_s);
++        shader = malloc(fsize + 1);
++        strcpy(shader, shader_s);
+     }
+ 
+     d.node = vsapi->propGetNode(in, "clip", 0, 0);
+     d.vi = vsapi->getVideoInfo(d.node);
+ 
+-    fseek(fl, 0, SEEK_END);
+-    long fsize = ftell(fl);
+-    fseek(fl, 0, SEEK_SET);
+-    char *shader = malloc(fsize + 1);
+-    fread(shader, 1, fsize, fl);
+-    fclose(fl);
+-    shader[fsize] = 0;
+     d.vf = init();
+     d.shader = pl_mpv_user_shader_parse(d.vf->gpu, shader, fsize);
+     free(shader);
+diff --git a/vs-placebo.c b/vs-placebo.c
+index 611bb23..26f2a5b 100644
+--- a/vs-placebo.c
++++ b/vs-placebo.c
+@@ -95,8 +95,8 @@ VS_EXTERNAL_API(void) VapourSynthPluginInit(VSConfigPlugin configFunc, VSRegiste
+                             "intent:int:opt;"
+                             "tone_mapping_algo:int:opt;tone_mapping_param:float:opt;desaturation_strength:float:opt;desaturation_exponent:float:opt;desaturation_base:float:opt;max_boost:float:opt;gamut_warning:int:opt;"
+                             , TMCreate, 0, plugin);
+-    registerFunc("Shader", "clip:clip;shader:data;width:int:opt;height:int:opt;chroma_loc:int:opt;matrix:int:opt;trc:int:opt;"
++    registerFunc("Shader", "clip:clip;shader:data:opt;width:int:opt;height:int:opt;chroma_loc:int:opt;matrix:int:opt;trc:int:opt;"
+                            "linearize:int:opt;sigmoidize:int:opt;sigmoid_center:float:opt;sigmoid_slope:float:opt;"
+                            "lut_entries:int:opt;antiring:float:opt;"
+-                           "filter:data:opt;clamp:float:opt;blur:float:opt;taper:float:opt;radius:float:opt;param1:float:opt;param2:float:opt;", SCreate, 0, plugin);
++                           "filter:data:opt;clamp:float:opt;blur:float:opt;taper:float:opt;radius:float:opt;param1:float:opt;param2:float:opt;shader_s:data:opt;", SCreate, 0, plugin);
+ }
+
+From 041eacb350d072c81d2a6f383daf72ca4cadab9a Mon Sep 17 00:00:00 2001
+From: Lypheo <45497420+lypheo@users.noreply.github.com>
+Date: Mon, 27 Jul 2020 18:11:39 +0200
+Subject: [PATCH 4/8] tonemap.c: add gamut_clipping option
+
+---
+ tonemap.c    | 1 +
+ vs-placebo.c | 3 ++-
+ 2 files changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/tonemap.c b/tonemap.c
+index 0b1cead..2d0c621 100644
+--- a/tonemap.c
++++ b/tonemap.c
+@@ -228,6 +228,7 @@ void VS_CC TMCreate(const VSMap *in, VSMap *out, void *userData, VSCore *core, c
+     COLORM_PARAM(max_boost, Float)
+     COLORM_PARAM(gamut_warning, Int)
+     COLORM_PARAM(intent, Int)
++    COLORM_PARAM(gamut_clipping, Int)
+ 
+     struct pl_peak_detect_params *peakDetectParams = malloc(sizeof(struct pl_peak_detect_params));
+ #define PEAK_PARAM(par, type) peakDetectParams->par = vsapi->propGet##type(in, #par, 0, &err); \
+diff --git a/vs-placebo.c b/vs-placebo.c
+index 26f2a5b..7471097 100644
+--- a/vs-placebo.c
++++ b/vs-placebo.c
+@@ -93,7 +93,8 @@ VS_EXTERNAL_API(void) VapourSynthPluginInit(VSConfigPlugin configFunc, VSRegiste
+                             "dstp:int:opt;dstt:int:opt;dstl:int:opt;dst_peak:float:opt;dst_avg:float:opt;dst_scale:float:opt;"
+                             "dynamic_peak_detection:int:opt;smoothing_period:float:opt;scene_threshold_low:float:opt;scene_threshold_high:float:opt;"
+                             "intent:int:opt;"
+-                            "tone_mapping_algo:int:opt;tone_mapping_param:float:opt;desaturation_strength:float:opt;desaturation_exponent:float:opt;desaturation_base:float:opt;max_boost:float:opt;gamut_warning:int:opt;"
++                            "tone_mapping_algo:int:opt;tone_mapping_param:float:opt;desaturation_strength:float:opt;desaturation_exponent:float:opt;desaturation_base:float:opt;"
++                            "max_boost:float:opt;gamut_warning:int:opt;gamut_clipping:int:opt"
+                             , TMCreate, 0, plugin);
+     registerFunc("Shader", "clip:clip;shader:data:opt;width:int:opt;height:int:opt;chroma_loc:int:opt;matrix:int:opt;trc:int:opt;"
+                            "linearize:int:opt;sigmoidize:int:opt;sigmoid_center:float:opt;sigmoid_slope:float:opt;"
+
+From a3826f34313216251745569605b2b0c269ceb6f9 Mon Sep 17 00:00:00 2001
+From: Lypheo <45497420+lypheo@users.noreply.github.com>
+Date: Mon, 27 Jul 2020 18:11:39 +0200
+Subject: [PATCH 5/8] tonemap.c: add gamut_clipping option
+
+---
+ tonemap.c    | 1 +
+ vs-placebo.c | 3 ++-
+ 2 files changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/tonemap.c b/tonemap.c
+index 0b1cead..2d0c621 100644
+--- a/tonemap.c
++++ b/tonemap.c
+@@ -228,6 +228,7 @@ void VS_CC TMCreate(const VSMap *in, VSMap *out, void *userData, VSCore *core, c
+     COLORM_PARAM(max_boost, Float)
+     COLORM_PARAM(gamut_warning, Int)
+     COLORM_PARAM(intent, Int)
++    COLORM_PARAM(gamut_clipping, Int)
+ 
+     struct pl_peak_detect_params *peakDetectParams = malloc(sizeof(struct pl_peak_detect_params));
+ #define PEAK_PARAM(par, type) peakDetectParams->par = vsapi->propGet##type(in, #par, 0, &err); \
+diff --git a/vs-placebo.c b/vs-placebo.c
+index 26f2a5b..7471097 100644
+--- a/vs-placebo.c
++++ b/vs-placebo.c
+@@ -93,7 +93,8 @@ VS_EXTERNAL_API(void) VapourSynthPluginInit(VSConfigPlugin configFunc, VSRegiste
+                             "dstp:int:opt;dstt:int:opt;dstl:int:opt;dst_peak:float:opt;dst_avg:float:opt;dst_scale:float:opt;"
+                             "dynamic_peak_detection:int:opt;smoothing_period:float:opt;scene_threshold_low:float:opt;scene_threshold_high:float:opt;"
+                             "intent:int:opt;"
+-                            "tone_mapping_algo:int:opt;tone_mapping_param:float:opt;desaturation_strength:float:opt;desaturation_exponent:float:opt;desaturation_base:float:opt;max_boost:float:opt;gamut_warning:int:opt;"
++                            "tone_mapping_algo:int:opt;tone_mapping_param:float:opt;desaturation_strength:float:opt;desaturation_exponent:float:opt;desaturation_base:float:opt;"
++                            "max_boost:float:opt;gamut_warning:int:opt;gamut_clipping:int:opt"
+                             , TMCreate, 0, plugin);
+     registerFunc("Shader", "clip:clip;shader:data:opt;width:int:opt;height:int:opt;chroma_loc:int:opt;matrix:int:opt;trc:int:opt;"
+                            "linearize:int:opt;sigmoidize:int:opt;sigmoid_center:float:opt;sigmoid_slope:float:opt;"
+
+From 343588092ca9118fb65762cefd089ff14021ebf6 Mon Sep 17 00:00:00 2001
+From: Lypheo <saifullah124@hotmail.de>
+Date: Sat, 9 Jan 2021 14:53:45 +0100
+Subject: [PATCH 6/8] Fix shader ingestion
+
+Closes #7
+---
+ shader.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/shader.c b/shader.c
+index 2b3e7eb..ea946c0 100644
+--- a/shader.c
++++ b/shader.c
+@@ -259,7 +259,7 @@ void VS_CC SCreate(const VSMap *in, VSMap *out, void *userData, VSCore *core, co
+         shader = malloc(fsize + 1);
+         fread(shader, 1, fsize, fl);
+         fclose(fl);
+-        shader[fsize] = 0;
++        shader[fsize] = '\0';
+     } else {
+         char* shader_s = vsapi->propGetData(in, "shader_s", 0, &err);
+         if (err) {
+@@ -275,7 +275,7 @@ void VS_CC SCreate(const VSMap *in, VSMap *out, void *userData, VSCore *core, co
+     d.vi = vsapi->getVideoInfo(d.node);
+ 
+     d.vf = init();
+-    d.shader = pl_mpv_user_shader_parse(d.vf->gpu, shader, fsize);
++    d.shader = pl_mpv_user_shader_parse(d.vf->gpu, shader, strlen(shader));
+     free(shader);
+ 
+     if (!d.shader) {
+
+From 6a99aa1c427f9119d695d3e9d1a08782f51740d1 Mon Sep 17 00:00:00 2001
+From: quietvoid <39477805+quietvoid@users.noreply.github.com>
+Date: Wed, 28 Apr 2021 09:03:52 -0400
+Subject: [PATCH 7/8] Remove haasnsoft
+
+---
+ resample.c | 1 -
+ shader.c   | 5 ++++-
+ 2 files changed, 4 insertions(+), 2 deletions(-)
+
+diff --git a/resample.c b/resample.c
+index b8eaa86..b825fbf 100644
+--- a/resample.c
++++ b/resample.c
+@@ -341,7 +341,6 @@ void VS_CC ResampleCreate(const VSMap *in, VSMap *out, void *userData, VSCore *c
+     FILTER_ELIF(ewa_jinc)
+     FILTER_ELIF(ewa_ginseng)
+     FILTER_ELIF(ewa_hann)
+-    FILTER_ELIF(haasnsoft)
+     FILTER_ELIF(bicubic)
+     FILTER_ELIF(catmull_rom)
+     FILTER_ELIF(mitchell)
+diff --git a/shader.c b/shader.c
+index ea946c0..6e4d8c0 100644
+--- a/shader.c
++++ b/shader.c
+@@ -117,6 +117,10 @@ bool filter_S(void *priv, void *dst, struct pl_plane_data *src,  SData* d, int n
+     bool ok = true;
+ 
+     for (int i = 0; i < 3; ++i) {
++        // Initialize because they're not set to 0 anymore
++        planes[i].shift_x = 0;
++        planes[i].shift_y = 0;
++
+         ok &= pl_upload_plane(p->gpu, &planes[i], &p->tex_in[i], &src[i]);
+     }
+ 
+@@ -345,7 +349,6 @@ void VS_CC SCreate(const VSMap *in, VSMap *out, void *userData, VSCore *core, co
+     FILTER_ELIF(ewa_jinc)
+     FILTER_ELIF(ewa_ginseng)
+     FILTER_ELIF(ewa_hann)
+-    FILTER_ELIF(haasnsoft)
+     FILTER_ELIF(bicubic)
+     FILTER_ELIF(catmull_rom)
+     FILTER_ELIF(mitchell)
+
+From 834dc300bbe2b3e5d8adf89a78264fbd1f33b8bb Mon Sep 17 00:00:00 2001
+From: akarin <i@akarin.info>
+Date: Mon, 7 Jun 2021 20:52:27 -0400
+Subject: [PATCH 8/8] meson.build: use pkg-config to find libplacebo
+
+Signed-off-by: akarin <i@akarin.info>
+---
+ meson.build | 4 +---
+ 1 file changed, 1 insertion(+), 3 deletions(-)
+
+diff --git a/meson.build b/meson.build
+index 64120e8..3992a29 100644
+--- a/meson.build
++++ b/meson.build
+@@ -4,9 +4,7 @@ project('vs-placebo', ['c', 'cpp'],
+     version: '1.2'
+ )
+ 
+-cc = meson.get_compiler('c')
+-
+-placebo = cc.find_library('placebo', required: true)
++placebo = dependency('libplacebo', required: true)
+ vapoursynth_dep = dependency('vapoursynth').partial_dependency(includes: true, compile_args: true)
+ 
+ sources = ['vs-placebo.c', 'deband.c', 'tonemap.c', 'resample.c', 'shader.c']
