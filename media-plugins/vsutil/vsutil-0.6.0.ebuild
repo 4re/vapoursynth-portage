@@ -1,7 +1,7 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=8
 
 PYTHON_COMPAT=( python3_{8..10} )
 
@@ -15,7 +15,6 @@ if [[ ${PV} == *9999* ]]; then
 	EGIT_REPO_URI="https://github.com/Irrational-Encoding-Wizardry/vsutil.git"
 	KEYWORDS=""
 else
-	inherit vcs-snapshot
 	SRC_URI="https://github.com/Irrational-Encoding-Wizardry/vsutil/archive/${PV}.tar.gz -> ${PN}-${PV}.tar.gz"
 	KEYWORDS="~amd64 ~x86"
 fi
@@ -30,5 +29,5 @@ RDEPEND+="
 DEPEND="${RDEPEND}"
 
 src_install(){
-	python_domodule vsutil.py
+	python_domodule vsutil
 }
