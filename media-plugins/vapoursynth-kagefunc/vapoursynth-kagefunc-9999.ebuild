@@ -1,7 +1,7 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=8
 
 PYTHON_COMPAT=( python3_{8..10} )
 
@@ -27,6 +27,7 @@ IUSE=""
 RDEPEND+="
 	media-libs/vapoursynth[${PYTHON_SINGLE_USEDEP},vapoursynth_plugins_miscfilters]
 	media-plugins/vapoursynth-addgrain
+	media-plugins/vapoursynth-bm3d
 	media-plugins/vapoursynth-descale
 	media-plugins/vapoursynth-fmtconv
 	media-plugins/vapoursynth-fvsfunc

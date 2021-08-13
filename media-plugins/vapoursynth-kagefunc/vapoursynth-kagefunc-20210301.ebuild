@@ -1,7 +1,7 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=8
 
 PYTHON_COMPAT=( python3_{8..10} )
 
@@ -11,7 +11,7 @@ DESCRIPTION="kageru's Vapoursynth functions"
 HOMEPAGE="https://github.com/Irrational-Encoding-Wizardry/kagefunc"
 
 EGIT_REPO_URI="https://github.com/Irrational-Encoding-Wizardry/kagefunc.git"
-EGIT_COMMIT="8d3f377c37348cd4ec9fd706f707aa0bbc20f8e2"
+EGIT_COMMIT="ab4f79a4d04a70bc83ef3e37d68c01fb4995a902"
 KEYWORDS="~amd64 ~x86"
 
 LICENSE="MIT"
@@ -21,6 +21,7 @@ IUSE=""
 RDEPEND+="
 	media-libs/vapoursynth[${PYTHON_SINGLE_USEDEP},vapoursynth_plugins_miscfilters]
 	media-plugins/vapoursynth-addgrain
+	media-plugins/vapoursynth-bm3d
 	media-plugins/vapoursynth-descale
 	media-plugins/vapoursynth-fmtconv
 	media-plugins/vapoursynth-fvsfunc
