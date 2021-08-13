@@ -1,7 +1,7 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=8
 
 PYTHON_COMPAT=( python3_{8..10} )
 
@@ -11,7 +11,7 @@ DESCRIPTION="Frechdachs's Vapoursynth functions"
 HOMEPAGE="https://github.com/Irrational-Encoding-Wizardry/fvsfunc"
 
 EGIT_REPO_URI="https://github.com/Irrational-Encoding-Wizardry/fvsfunc.git"
-EGIT_COMMIT="edb4ed92f37d71629006526a355c726fabfa08f1"
+EGIT_COMMIT="2f5b28d5ee5c61e37249bca9b3e10a07f337e785"
 KEYWORDS="~amd64 ~x86"
 
 LICENSE=""
