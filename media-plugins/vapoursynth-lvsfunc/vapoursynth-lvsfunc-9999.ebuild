@@ -1,4 +1,4 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -15,17 +15,21 @@ if [[ ${PV} == *9999* ]]; then
 	EGIT_REPO_URI="https://github.com/Irrational-Encoding-Wizardry/lvsfunc.git"
 	KEYWORDS=""
 else
+	inherit vcs-snapshot
 	SRC_URI="https://github.com/Irrational-Encoding-Wizardry/lvsfunc/archive/v${PV}.tar.gz -> ${PN}-${PV}.tar.gz"
 	KEYWORDS="~amd64 ~x86"
 fi
 
 LICENSE="MIT"
 SLOT="0"
-IUSE=""
+IUSE="deint dvd fixedges mpls"
 
 RDEPEND+="
 	media-libs/vapoursynth[${PYTHON_SINGLE_USEDEP}]
-	media-plugins/vapoursynth-continuityfixer
+	deint? ( media-plugins/vapoursynth-combmask )
+	dvd? ( media-plugins/vapoursynth-d2vsource )
+	fixedges? ( media-plugins/vapoursynth-continuityfixer )
+	mpls? ( media-plugins/vapoursynth-readmpls )
 	media-plugins/vapoursynth-fvsfunc
 	media-plugins/vapoursynth-havsfunc
 	media-plugins/vapoursynth-kagefunc
@@ -35,12 +39,6 @@ RDEPEND+="
 	media-plugins/vsutil
 "
 DEPEND="${RDEPEND}"
-
-# TODO (maybe): Optional dependencies
-#     waifu2x-caffe
-#     L-SMASH Source
-#     d2vsource
-#     FFMS2
 
 DOCS=( "README.md" )
 

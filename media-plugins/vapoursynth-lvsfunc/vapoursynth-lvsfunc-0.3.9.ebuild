@@ -1,26 +1,35 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
 PYTHON_COMPAT=( python3_{8..10} )
 
-inherit python-single-r1 git-r3
+inherit python-single-r1
 
 DESCRIPTION="Light's Vapoursynth Functions"
 HOMEPAGE="https://github.com/Irrational-Encoding-Wizardry/lvsfunc"
 
-EGIT_REPO_URI="https://github.com/Irrational-Encoding-Wizardry/lvsfunc.git"
-EGIT_COMMIT="337cd40a878f2d3aedc59c4ece260c641c97a4d4"
-KEYWORDS="~amd64 ~x86"
+if [[ ${PV} == *9999* ]]; then
+	inherit git-r3
+	EGIT_REPO_URI="https://github.com/Irrational-Encoding-Wizardry/lvsfunc.git"
+	KEYWORDS=""
+else
+	inherit vcs-snapshot
+	SRC_URI="https://github.com/Irrational-Encoding-Wizardry/lvsfunc/archive/v${PV}.tar.gz -> ${PN}-${PV}.tar.gz"
+	KEYWORDS="~amd64 ~x86"
+fi
 
 LICENSE="MIT"
 SLOT="0"
-IUSE=""
+IUSE="deint dvd fixedges mpls"
 
 RDEPEND+="
 	media-libs/vapoursynth[${PYTHON_SINGLE_USEDEP}]
-	media-plugins/vapoursynth-continuityfixer
+	deint? ( media-plugins/vapoursynth-combmask )
+	dvd? ( media-plugins/vapoursynth-d2vsource )
+	fixedges? ( media-plugins/vapoursynth-continuityfixer )
+	mpls? ( media-plugins/vapoursynth-readmpls )
 	media-plugins/vapoursynth-fvsfunc
 	media-plugins/vapoursynth-havsfunc
 	media-plugins/vapoursynth-kagefunc
@@ -30,12 +39,6 @@ RDEPEND+="
 	media-plugins/vsutil
 "
 DEPEND="${RDEPEND}"
-
-# TODO (maybe): Optional dependencies
-#     waifu2x-caffe
-#     L-SMASH Source
-#     d2vsource
-#     FFMS2
 
 DOCS=( "README.md" )
 
