@@ -6,19 +6,15 @@ EAPI=7
 PYTHON_COMPAT=( python3_{8..10} )
 PYTHON_REQ_USE="threads(+)"
 
-inherit autotools python-single-r1
+inherit autotools python-single-r1 git-r3
 
 DESCRIPTION="VapourSynth is an library for video manipulation."
 HOMEPAGE="http://www.vapoursynth.com/"
 
-if [[ ${PV} == *9999* ]]; then
-	inherit git-r3
-	EGIT_REPO_URI="https://github.com/${PN}/${PN}.git"
-else
-	inherit vcs-snapshot
-	SRC_URI="https://github.com/${PN}/${PN}/archive/R${PV}.tar.gz -> ${PN}-${PV}.tar.gz"
-	KEYWORDS="~amd64 ~x86"
-fi
+EGIT_REPO_URI="https://github.com/vapoursynth/vapoursynth.git"
+EGIT_BRANCH="api3"
+EGIT_COMMIT="1eb3bed73c9233ab6116be42af06110d0310f759"
+KEYWORDS="~amd64 ~x86"
 
 LICENSE="LGPL-2.1 OFL-1.1"
 SLOT="0/3"
