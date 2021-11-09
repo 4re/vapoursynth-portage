@@ -1,0 +1,45 @@
+From 2ec8ef6f6d0148d3c213199de8c8fe422e5c9fed Mon Sep 17 00:00:00 2001
+From: DeadNews <uhjnnn@gmail.com>
+Date: Sun, 17 Oct 2021 23:16:21 +0200
+Subject: [PATCH 1/2] Fix build with GCC 11
+
+---
+ source/BM3D_Final.cpp | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/source/BM3D_Final.cpp b/source/BM3D_Final.cpp
+index f39f641..5f9acae 100644
+--- a/source/BM3D_Final.cpp
++++ b/source/BM3D_Final.cpp
+@@ -21,7 +21,7 @@
+ * SOFTWARE.
+ */
+ 
+-
++#include <limits>
+ #include "BM3D_Final.h"
+ 
+ 
+
+From bb493cc031094e622a3069355bfefbefab57c616 Mon Sep 17 00:00:00 2001
+From: DeadNews <uhjnnn@gmail.com>
+Date: Sun, 17 Oct 2021 23:23:55 +0200
+Subject: [PATCH 2/2] Fix build with GCC 11
+
+---
+ source/VBM3D_Final.cpp | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/source/VBM3D_Final.cpp b/source/VBM3D_Final.cpp
+index ce0b3e3..afd149d 100644
+--- a/source/VBM3D_Final.cpp
++++ b/source/VBM3D_Final.cpp
+@@ -21,7 +21,7 @@
+ * SOFTWARE.
+ */
+ 
+-
++#include <limits>
+ #include "VBM3D_Final.h"
+ 
+ 
