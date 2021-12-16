@@ -1,4 +1,4 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -19,7 +19,7 @@ fi
 
 LICENSE="MIT BSD BSD-2"
 SLOT="0"
-IUSE="cuda doc debug models opencl cpu_flags_x86_avx"
+IUSE="cuda debug models opencl cpu_flags_x86_avx"
 
 RDEPEND+="
 	>=media-libs/opencv-3.3.0
@@ -30,10 +30,11 @@ RDEPEND+="
 DEPEND="${RDEPEND}
 "
 
+PATCHES=( "${FILESDIR}/${PN}-fix-picojson.diff" )
+
 src_configure() {
 	local mycmakeargs=(
 		-DCMAKE_INSTALL_PREFIX="${EPREFIX}/usr"
-		-DINSTALL_DOCS="$(usex doc)"
 		-DINSTALL_MODELS="$(usex models)"
 		-DX86OPT="$(usex cpu_flags_x86_avx)"
 	)
