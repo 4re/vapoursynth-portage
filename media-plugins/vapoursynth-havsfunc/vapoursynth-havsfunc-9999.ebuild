@@ -1,4 +1,4 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -24,21 +24,23 @@ LICENSE=""
 SLOT="0"
 IUSE="+fftw opencl"
 
+# TODO: update miscfilters dep when done.
 RDEPEND+="
-	>=media-libs/vapoursynth-39[${PYTHON_SINGLE_USEDEP},vapoursynth_plugins_miscfilters]
+	media-libs/vapoursynth:0/4
 	media-plugins/vapoursynth-addgrain
 	media-plugins/vapoursynth-adjust
 	media-plugins/vapoursynth-awarpsharp2
 	media-plugins/vapoursynth-bilateral
+	media-plugins/vapoursynth-cas
 	media-plugins/vapoursynth-ctmf
 	media-plugins/vapoursynth-dctfilter
 	media-plugins/vapoursynth-deblock
 	fftw? ( media-plugins/vapoursynth-dfttest )
 	media-plugins/vapoursynth-eedi2
 	media-plugins/vapoursynth-eedi3
+	fftw? ( media-plugins/vapoursynth-fft3dfilter )
 	media-plugins/vapoursynth-flash3kyuu_deband
 	media-plugins/vapoursynth-fluxsmooth
-	fftw? ( media-plugins/vapoursynth-fft3dfilter )
 	media-plugins/vapoursynth-fmtconv
 	media-plugins/vapoursynth-hqdn3d
 	opencl? ( >=media-plugins/vapoursynth-knlmeanscl-1.0.2 )
@@ -47,6 +49,7 @@ RDEPEND+="
 	opencl? ( media-plugins/vapoursynth-nnedi3cl )
 	media-plugins/vapoursynth-nnedi3_resample
 	media-plugins/vapoursynth-sangnom
+	media-plugins/vapoursynth-temporalsoften2
 	media-plugins/vapoursynth-ttempsmooth
 	media-plugins/vapoursynth-znedi3
 "
