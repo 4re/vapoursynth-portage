@@ -1,4 +1,4 @@
-# Copyright 1999-2021 Gentoo Authors
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -7,9 +7,9 @@ LUA_COMPAT=( lua5-{1..2} luajit )
 PYTHON_COMPAT=( python3_{8..10} )
 PYTHON_REQ_USE='threads(+)'
 
-WAF_PV=2.0.9
+WAF_PV=2.0.22
 
-inherit bash-completion-r1 flag-o-matic lua-single pax-utils python-r1 toolchain-funcs waf-utils xdg-utils
+inherit bash-completion-r1 flag-o-matic lua-single optfeature pax-utils python-r1 toolchain-funcs waf-utils xdg-utils
 
 DESCRIPTION="Media player based on MPlayer and mplayer2"
 HOMEPAGE="https://mpv.io/ https://github.com/mpv-player/mpv"
@@ -71,7 +71,7 @@ COMMON_DEPEND="
 		>=media-libs/libdvdnav-4.2.0:=
 		>=media-libs/libdvdread-4.1.0:=
 	)
-	egl? ( media-libs/mesa[egl,gbm(-)?,wayland(-)?] )
+	egl? ( media-libs/mesa[egl(+),gbm(+)?,wayland(-)?] )
 	gamepad? ( media-libs/libsdl2 )
 	iconv? (
 		virtual/libiconv
@@ -337,7 +337,7 @@ pkg_postinst() {
 		elog "X11 or Mac OS Aqua. Consider enabling the 'opengl' USE flag."
 	fi
 
-	elog "If you want URL support, please install net-misc/youtube-dl."
+	optfeature "URL support" net-misc/yt-dlp
 
 	xdg_icon_cache_update
 	xdg_desktop_database_update

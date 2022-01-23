@@ -1,4 +1,4 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -7,16 +7,16 @@ LUA_COMPAT=( lua5-{1..2} luajit )
 PYTHON_COMPAT=( python3_{8..10} )
 PYTHON_REQ_USE='threads(+)'
 
-WAF_PV=2.0.9
+WAF_PV=2.0.22
 
-inherit bash-completion-r1 flag-o-matic lua-single pax-utils python-r1 toolchain-funcs waf-utils xdg-utils
+inherit bash-completion-r1 flag-o-matic lua-single optfeature pax-utils python-r1 toolchain-funcs waf-utils xdg-utils
 
 DESCRIPTION="Media player based on MPlayer and mplayer2"
 HOMEPAGE="https://mpv.io/ https://github.com/mpv-player/mpv"
 
 if [[ ${PV} != *9999* ]]; then
 	SRC_URI="https://github.com/mpv-player/mpv/archive/v${PV}.tar.gz -> ${P}.tar.gz"
-	KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ppc ~ppc64 ~x86 ~amd64-linux"
+	KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ppc ~ppc64 ~riscv ~x86 ~amd64-linux"
 	DOCS=( RELEASE_NOTES )
 else
 	EGIT_REPO_URI="https://github.com/mpv-player/mpv.git"
@@ -71,7 +71,7 @@ COMMON_DEPEND="
 		>=media-libs/libdvdnav-4.2.0:=
 		>=media-libs/libdvdread-4.1.0:=
 	)
-	egl? ( media-libs/mesa[egl,gbm(-)?,wayland(-)?] )
+	egl? ( media-libs/mesa[egl(+),gbm(+)?,wayland(-)?] )
 	gamepad? ( media-libs/libsdl2 )
 	iconv? (
 		virtual/libiconv
@@ -94,7 +94,7 @@ COMMON_DEPEND="
 	vapoursynth? ( media-libs/vapoursynth )
 	vdpau? ( x11-libs/libvdpau )
 	vulkan? (
-		media-libs/libplacebo:=[vulkan]
+		>=media-libs/libplacebo-3.104.0:=[vulkan]
 		media-libs/shaderc
 	)
 	wayland? (
@@ -337,7 +337,7 @@ pkg_postinst() {
 		elog "X11 or Mac OS Aqua. Consider enabling the 'opengl' USE flag."
 	fi
 
-	elog "If you want URL support, please install net-misc/youtube-dl."
+	optfeature "URL support" net-misc/yt-dlp
 
 	xdg_icon_cache_update
 	xdg_desktop_database_update
