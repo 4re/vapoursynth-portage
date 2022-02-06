@@ -1,7 +1,7 @@
-# Copyright 1999-2021 Gentoo Authors
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=5
+EAPI=7
 
 inherit toolchain-funcs multilib eutils
 
@@ -34,19 +34,9 @@ RDEPEND+="
 DEPEND="${RDEPEND}
 "
 
-pkg_setup() {
-	if use video_cards_nvidia; then
-		elog "This packages will switch your current opencl working implementation,"
-		elog "try to emerge this package individually if the build happens to fail."
-		ewarn "If this package fails to build you will be left with mesa as your opencl"
-		ewarn "active implementation, switch back to nvidia with:"
-		ewarn "# eselect opencl set nvidia"
-		eselect opencl set mesa  || die "eselect can't find mesa opencl implementation."
-	fi
-}
-
 src_prepare() {
 	chmod +x configure
+	default
 }
 
 src_configure() {
@@ -56,12 +46,6 @@ src_configure() {
 	./configure \
 		--install="${ED}/usr/$(get_libdir)/vapoursynth/" \
 		--extra-cxxflags="${CXXFLAGS}" --extra-ldflags="${LDFLAGS}" || die "configure failed"
-}
-
-pkg_postinst() {
-	if use video_cards_nvidia; then
-		eselect opencl set nvidia
-	fi
 }
 
 src_install() {

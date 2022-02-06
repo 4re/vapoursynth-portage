@@ -1,7 +1,7 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=5
+EAPI=7
 
 inherit toolchain-funcs multilib eutils
 
@@ -30,9 +30,7 @@ DEPEND="${RDEPEND}
 SOURCEFILES="AVSFrontend.cpp VSFrontend.cpp Backend.cpp"
 LIBNAME="tc2cfr.so"
 
-src_prepare() {
-	epatch "${FILESDIR}/${P}-includes.patch" || die
-}
+PATCHES=( "${FILESDIR}/${P}-includes.patch" )
 
 src_compile() {
 	for i in ${SOURCEFILES}; do
