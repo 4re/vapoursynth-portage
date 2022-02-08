@@ -1,4 +1,5 @@
 app-editors/vapoursynth-editor ~*
+media-libs/ffmpegsource ~*
 media-libs/l-smash ~*
 media-libs/vapoursynth ~*
 media-libs/waifu2x-converter-cpp ~*
@@ -16,6 +17,7 @@ media-plugins/vapoursynth-awarpsharp2 ~*
 media-plugins/vapoursynth-beziercurve ~*
 media-plugins/vapoursynth-bifrost ~*
 media-plugins/vapoursynth-bilateral ~*
+media-plugins/vapoursynth-bilateralgpu ~*
 media-plugins/vapoursynth-bm3d ~*
 media-plugins/vapoursynth-bwdif ~*
 media-plugins/vapoursynth-cas ~*
@@ -42,6 +44,7 @@ media-plugins/vapoursynth-dfttest ~*
 media-plugins/vapoursynth-dotkill ~*
 media-plugins/vapoursynth-dpid ~*
 media-plugins/vapoursynth-edgefixer ~*
+media-plugins/vapoursynth-edi_rpow2 ~*
 media-plugins/vapoursynth-eedi2 ~*
 media-plugins/vapoursynth-eedi3 ~*
 media-plugins/vapoursynth-ffmpegsource ~*
@@ -64,8 +67,8 @@ media-plugins/vapoursynth-inpaint ~*
 media-plugins/vapoursynth-it ~*
 media-plugins/vapoursynth-kagefunc ~*
 media-plugins/vapoursynth-knlmeanscl ~*
-media-plugins/vapoursynth-lghost ~*
 media-plugins/vapoursynth-l-smash-works ~*
+media-plugins/vapoursynth-lghost ~*
 media-plugins/vapoursynth-lvsfunc ~*
 media-plugins/vapoursynth-matchhistogram ~*
 media-plugins/vapoursynth-median ~*
@@ -78,9 +81,9 @@ media-plugins/vapoursynth-mvsfunc ~*
 media-plugins/vapoursynth-mvtools ~*
 media-plugins/vapoursynth-mvtools-sf ~*
 media-plugins/vapoursynth-nnedi3 ~*
-media-plugins/vapoursynth-nnedi3cl ~*
 media-plugins/vapoursynth-nnedi3_resample ~*
 media-plugins/vapoursynth-nnedi3_rpow2 ~*
+media-plugins/vapoursynth-nnedi3cl ~*
 media-plugins/vapoursynth-oyster ~*
 media-plugins/vapoursynth-plugins-meta ~*
 media-plugins/vapoursynth-plum ~*
@@ -107,6 +110,7 @@ media-plugins/vapoursynth-temporalmedian ~*
 media-plugins/vapoursynth-temporalsoften ~*
 media-plugins/vapoursynth-temporalsoften2 ~*
 media-plugins/vapoursynth-timecube ~*
+media-plugins/vapoursynth-tivtc ~*
 media-plugins/vapoursynth-tnlmeans ~*
 media-plugins/vapoursynth-tonemap ~*
 media-plugins/vapoursynth-ttempsmooth ~*
@@ -120,8 +124,8 @@ media-plugins/vapoursynth-vfrtocrf ~*
 media-plugins/vapoursynth-videoscope ~*
 media-plugins/vapoursynth-vine ~*
 media-plugins/vapoursynth-vmaf ~*
-media-plugins/vapoursynth-vsimagereader ~*
 media-plugins/vapoursynth-vs-maskdetail ~*
+media-plugins/vapoursynth-vsimagereader ~*
 media-plugins/vapoursynth-vsrawsource ~*
 media-plugins/vapoursynth-vstaambk ~*
 media-plugins/vapoursynth-w3fdif ~*
@@ -132,6 +136,7 @@ media-plugins/vapoursynth-wwxd ~*
 media-plugins/vapoursynth-xaa ~*
 media-plugins/vapoursynth-yadifmod ~*
 media-plugins/vapoursynth-znedi3 ~*
+media-plugins/vs-ccd ~*
 media-plugins/vs-placebo ~*
 media-plugins/vsutil ~*
 media-video/d2vwitch ~*

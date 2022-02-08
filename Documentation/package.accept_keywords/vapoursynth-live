@@ -1,4 +1,5 @@
 ~app-editors/vapoursynth-editor-9999 **
+~media-libs/ffmpegsource-9999 **
 ~media-libs/l-smash-9999 **
 ~media-libs/vapoursynth-9999 **
 ~media-libs/waifu2x-converter-cpp-9999 **
@@ -16,6 +17,7 @@
 ~media-plugins/vapoursynth-beziercurve-9999 **
 ~media-plugins/vapoursynth-bifrost-9999 **
 ~media-plugins/vapoursynth-bilateral-9999 **
+~media-plugins/vapoursynth-bilateralgpu-9999 **
 ~media-plugins/vapoursynth-bm3d-9999 **
 ~media-plugins/vapoursynth-bwdif-9999 **
 ~media-plugins/vapoursynth-cas-9999 **
@@ -42,6 +44,7 @@
 ~media-plugins/vapoursynth-dotkill-9999 **
 ~media-plugins/vapoursynth-dpid-9999 **
 ~media-plugins/vapoursynth-edgefixer-9999 **
+~media-plugins/vapoursynth-edi_rpow2-9999 **
 ~media-plugins/vapoursynth-eedi2-9999 **
 ~media-plugins/vapoursynth-eedi3-9999 **
 ~media-plugins/vapoursynth-ffmpegsource-9999 **
@@ -64,8 +67,8 @@
 ~media-plugins/vapoursynth-it-9999 **
 ~media-plugins/vapoursynth-kagefunc-9999 **
 ~media-plugins/vapoursynth-knlmeanscl-9999 **
-~media-plugins/vapoursynth-lghost-9999 **
 ~media-plugins/vapoursynth-l-smash-works-9999 **
+~media-plugins/vapoursynth-lghost-9999 **
 ~media-plugins/vapoursynth-lvsfunc-9999 **
 ~media-plugins/vapoursynth-matchhistogram-9999 **
 ~media-plugins/vapoursynth-median-9999 **
@@ -78,9 +81,9 @@
 ~media-plugins/vapoursynth-mvtools-9999 **
 ~media-plugins/vapoursynth-mvtools-sf-9999 **
 ~media-plugins/vapoursynth-nnedi3-9999 **
-~media-plugins/vapoursynth-nnedi3cl-9999 **
 ~media-plugins/vapoursynth-nnedi3_resample-9999 **
 ~media-plugins/vapoursynth-nnedi3_rpow2-9999 **
+~media-plugins/vapoursynth-nnedi3cl-9999 **
 ~media-plugins/vapoursynth-oyster-9999 **
 ~media-plugins/vapoursynth-plugins-meta-9999 **
 ~media-plugins/vapoursynth-plum-9999 **
@@ -107,6 +110,7 @@
 ~media-plugins/vapoursynth-temporalsoften-9999 **
 ~media-plugins/vapoursynth-temporalsoften2-9999 **
 ~media-plugins/vapoursynth-timecube-9999 **
+~media-plugins/vapoursynth-tivtc-9999 **
 ~media-plugins/vapoursynth-tnlmeans-9999 **
 ~media-plugins/vapoursynth-tonemap-9999 **
 ~media-plugins/vapoursynth-ttempsmooth-9999 **
@@ -120,8 +124,8 @@
 ~media-plugins/vapoursynth-videoscope-9999 **
 ~media-plugins/vapoursynth-vine-9999 **
 ~media-plugins/vapoursynth-vmaf-9999 **
-~media-plugins/vapoursynth-vsimagereader-9999 **
 ~media-plugins/vapoursynth-vs-maskdetail-9999 **
+~media-plugins/vapoursynth-vsimagereader-9999 **
 ~media-plugins/vapoursynth-vsrawsource-9999 **
 ~media-plugins/vapoursynth-vstaambk-9999 **
 ~media-plugins/vapoursynth-w3fdif-9999 **
@@ -132,6 +136,7 @@
 ~media-plugins/vapoursynth-xaa-9999 **
 ~media-plugins/vapoursynth-yadifmod-9999 **
 ~media-plugins/vapoursynth-znedi3-9999 **
+~media-plugins/vs-ccd-9999 **
 ~media-plugins/vs-placebo-9999 **
 ~media-plugins/vsutil-9999 **
 ~media-video/d2vwitch-9999 **
