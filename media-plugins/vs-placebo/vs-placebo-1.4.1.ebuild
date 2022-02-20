@@ -1,21 +1,16 @@
-# Copyright 1999-20222 Gentoo Authors
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
-inherit meson
+inherit meson git-r3
 
 DESCRIPTION="libplacebo-based debanding, scaling and color mapping plugin for VapourSynth"
 HOMEPAGE="https://github.com/Lypheo/vs-placebo"
 
-if [[ ${PV} == *9999* ]]; then
-	inherit git-r3
-	EGIT_REPO_URI="https://github.com/Lypheo/vs-placebo.git"
-	KEYWORDS=""
-else
-	SRC_URI="https://github.com/Lypheo/vs-placebo/archive/${PV}.tar.gz -> ${PN}-${PV}.tar.gz"
-	KEYWORDS="~amd64 ~x86"
-fi
+EGIT_REPO_URI="https://github.com/Lypheo/vs-placebo.git"
+EGIT_COMMIT="0633d39ed91b18d2393a5e695dc2777d4bb024f5"
+KEYWORDS="~amd64 ~x86"
 
 LICENSE="LGPL-2.1"
 SLOT="0"
