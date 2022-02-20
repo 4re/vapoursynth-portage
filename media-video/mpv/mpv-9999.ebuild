@@ -94,7 +94,7 @@ COMMON_DEPEND="
 	vapoursynth? ( media-libs/vapoursynth )
 	vdpau? ( x11-libs/libvdpau )
 	vulkan? (
-		>=media-libs/libplacebo-3.120.0:=[vulkan]
+		>=media-libs/libplacebo-4.192.1:=[vulkan]
 		media-libs/shaderc
 	)
 	wayland? (
