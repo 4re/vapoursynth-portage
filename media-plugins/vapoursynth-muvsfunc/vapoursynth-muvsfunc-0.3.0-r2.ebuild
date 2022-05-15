@@ -1,7 +1,7 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=8
 
 PYTHON_COMPAT=( python3_{8..10} )
 
@@ -25,7 +25,7 @@ LICENSE=""
 SLOT="0"
 
 RDEPEND+="
-	numpy? ( $(python_gen_cond_dep 'dev-python/numpy[${PYTHON_MULTI_USEDEP}]') )
+	numpy? ( $(python_gen_cond_dep 'dev-python/numpy[${PYTHON_USEDEP}]') )
 	media-libs/vapoursynth[${PYTHON_SINGLE_USEDEP},vapoursynth_plugins_miscfilters,vapoursynth_plugins_removegrain,vapoursynth_plugins_vivtc,vapoursynth_plugins_subtext]
 	media-plugins/vapoursynth-havsfunc[${PYTHON_SINGLE_USEDEP}]
 	deprecated? ( media-plugins/vapoursynth-knlmeanscl )
