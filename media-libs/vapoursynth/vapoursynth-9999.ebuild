@@ -3,7 +3,7 @@
 
 EAPI=8
 
-PYTHON_COMPAT=( python3_{8..10} )
+PYTHON_COMPAT=( python3_{9..11} )
 PYTHON_REQ_USE="threads(+)"
 
 inherit autotools python-single-r1
