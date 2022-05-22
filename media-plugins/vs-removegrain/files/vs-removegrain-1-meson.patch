@@ -1,0 +1,81 @@
+From 1d1aa3047ec129f4152c3ae7933afe3921d67c34 Mon Sep 17 00:00:00 2001
+From: dmo <marillat@users.noreply.github.com>
+Date: Sun, 26 Sep 2021 22:34:27 +0200
+Subject: [PATCH 1/2] Add meson build
+
+---
+ meson.build | 25 +++++++++++++++++++++++++
+ 1 file changed, 25 insertions(+)
+ create mode 100644 meson.build
+
+diff --git a/meson.build b/meson.build
+new file mode 100644
+index 0000000..71b0655
+--- /dev/null
++++ b/meson.build
+@@ -0,0 +1,25 @@
++project('removegrain', 'c', 'cpp',
++  version : '1',
++  default_options : ['warning_level=3'])
++
++add_project_arguments('-ffast-math', language : 'c')
++
++sources = [
++     'src/clense.cpp',
++     'src/removegrainvs.cpp',
++     'src/repairvs.cpp',
++     'src/shared.cpp',
++     'src/shared.h',
++     'src/verticalcleaner.cpp'
++]
++
++vapoursynth_dep = dependency('vapoursynth', version: '>=55').partial_dependency(compile_args : true, includes : true)
++
++deps = [vapoursynth_dep]
++
++shared_module('removegrain', sources,
++  dependencies : deps,
++  install : true,
++  install_dir : join_paths(vapoursynth_dep.get_pkgconfig_variable('libdir'), 'vapoursynth'),
++  gnu_symbol_visibility : 'hidden'
++)
+
+From 734b0687446a7a630f9f4a37bc7827c39e73154e Mon Sep 17 00:00:00 2001
+From: YomikoR <monommino@gmail.com>
+Date: Mon, 27 Sep 2021 19:21:59 +0800
+Subject: [PATCH 2/2] Let meson use SSE2
+
+---
+ meson.build | 12 ++++++++++--
+ 1 file changed, 10 insertions(+), 2 deletions(-)
+
+diff --git a/meson.build b/meson.build
+index 71b0655..89d6ef4 100644
+--- a/meson.build
++++ b/meson.build
+@@ -1,8 +1,8 @@
+-project('removegrain', 'c', 'cpp',
++project('removegrain', 'cpp',
+   version : '1',
+   default_options : ['warning_level=3'])
+ 
+-add_project_arguments('-ffast-math', language : 'c')
++add_project_arguments('-ffast-math', language : 'cpp')
+ 
+ sources = [
+      'src/clense.cpp',
+@@ -15,6 +15,14 @@ sources = [
+ 
+ vapoursynth_dep = dependency('vapoursynth', version: '>=55').partial_dependency(compile_args : true, includes : true)
+ 
++if host_machine.cpu_family().startswith('x86')
++  add_project_arguments('-DVS_TARGET_CPU_X86', '-mfpmath=sse', '-msse2', language: 'cpp')
++endif
++
++if host_machine.system() == 'windows'
++  add_project_link_arguments('-static', language: 'cpp')
++endif
++
+ deps = [vapoursynth_dep]
+ 
+ shared_module('removegrain', sources,

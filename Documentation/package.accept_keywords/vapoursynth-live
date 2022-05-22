@@ -6,7 +6,9 @@
 ~media-libs/zimg-9999 **
 ~media-plugins/acsuite-9999 **
 ~media-plugins/audiocutter-9999 **
+~media-plugins/bestaudiosource-9999 **
 ~media-plugins/ocsuite-9999 **
+~media-plugins/subtext-9999 **
 ~media-plugins/vapoursynth-addgrain-9999 **
 ~media-plugins/vapoursynth-adjust-9999 **
 ~media-plugins/vapoursynth-arearesize-9999 **
@@ -29,7 +31,6 @@
 ~media-plugins/vapoursynth-ctmf-9999 **
 ~media-plugins/vapoursynth-curve-9999 **
 ~media-plugins/vapoursynth-d2vsource-9999 **
-~media-plugins/vapoursynth-damb-9999 **
 ~media-plugins/vapoursynth-dctfilter-9999 **
 ~media-plugins/vapoursynth-deblock-9999 **
 ~media-plugins/vapoursynth-deblockpp7-9999 **
@@ -74,6 +75,7 @@
 ~media-plugins/vapoursynth-median-9999 **
 ~media-plugins/vapoursynth-minideen-9999 **
 ~media-plugins/vapoursynth-minsrp-9999 **
+~media-plugins/vapoursynth-miscfilters-obsolete-9999 **
 ~media-plugins/vapoursynth-motionmask-9999 **
 ~media-plugins/vapoursynth-msmoosh-9999 **
 ~media-plugins/vapoursynth-muvsfunc-9999 **
@@ -116,11 +118,10 @@
 ~media-plugins/vapoursynth-ttempsmooth-9999 **
 ~media-plugins/vapoursynth-vaguedenoiser-9999 **
 ~media-plugins/vapoursynth-vautodeint-9999 **
-~media-plugins/vapoursynth-vcfreq-9999 **
-~media-plugins/vapoursynth-vcmod-9999 **
-~media-plugins/vapoursynth-vcmove-9999 **
+~media-plugins/vapoursynth-vcm-9999 **
 ~media-plugins/vapoursynth-vctrans-9999 **
 ~media-plugins/vapoursynth-vfrtocrf-9999 **
+~media-plugins/vapoursynth-vfx-9999 **
 ~media-plugins/vapoursynth-videoscope-9999 **
 ~media-plugins/vapoursynth-vine-9999 **
 ~media-plugins/vapoursynth-vmaf-9999 **
@@ -136,8 +137,12 @@
 ~media-plugins/vapoursynth-xaa-9999 **
 ~media-plugins/vapoursynth-yadifmod-9999 **
 ~media-plugins/vapoursynth-znedi3-9999 **
+~media-plugins/vivtc-9999 **
 ~media-plugins/vs-ccd-9999 **
+~media-plugins/vs-imwri-9999 **
+~media-plugins/vs-ocr-9999 **
 ~media-plugins/vs-placebo-9999 **
+~media-plugins/vs-removegrain-9999 **
 ~media-plugins/vsutil-9999 **
 ~media-video/d2vwitch-9999 **
 ~media-video/getnative-9999 **

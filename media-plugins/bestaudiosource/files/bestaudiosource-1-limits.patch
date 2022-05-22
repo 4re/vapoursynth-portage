@@ -1,0 +1,165 @@
+From b8db11dd60d8df2c6be0339ddbea861983f5563c Mon Sep 17 00:00:00 2001
+From: stas <stas-fomin@yandex.ru>
+Date: Sun, 19 Sep 2021 01:29:33 +0300
+Subject: [PATCH 1/4] =?UTF-8?q?fix=20'error:=20=E2=80=98numeric=5Flimits?=
+ =?UTF-8?q?=E2=80=99=20is=20not=20a=20member=20of=20=E2=80=98std=E2=80=99'?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+---
+ src/vapoursynth.cpp | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/src/vapoursynth.cpp b/src/vapoursynth.cpp
+index d28cf0c..72bf5a3 100644
+--- a/src/vapoursynth.cpp
++++ b/src/vapoursynth.cpp
+@@ -23,6 +23,7 @@
+ #include <vector>
+ #include <algorithm>
+ #include <memory>
++#include <limits>
+ 
+ struct BestAudioSourceData {
+     VSAudioInfo AI = {};
+
+From fc3982205c3cbb85f301e60ace37be479c55f641 Mon Sep 17 00:00:00 2001
+From: Fredrik Mellbin <fredrik.mellbin@gmail.com>
+Date: Mon, 27 Sep 2021 18:23:44 +0200
+Subject: [PATCH 2/4] Consistent Case
+
+---
+ src/audiosource.cpp | 10 +++++-----
+ src/audiosource.h   |  4 ++--
+ 2 files changed, 7 insertions(+), 7 deletions(-)
+
+diff --git a/src/audiosource.cpp b/src/audiosource.cpp
+index 81cd42e..df21f23 100644
+--- a/src/audiosource.cpp
++++ b/src/audiosource.cpp
+@@ -63,12 +63,12 @@ bool LWAudioDecoder::DecodeNextAVFrame() {
+     return false;
+ }
+ 
+-void LWAudioDecoder::OpenFile(const char *SourceFile, int Track, const FFmpegOptions &options) {
++void LWAudioDecoder::OpenFile(const char *SourceFile, int Track, const FFmpegOptions &Options) {
+     TrackNumber = Track;
+ 
+     AVDictionary *Dict = nullptr;
+-    av_dict_set_int(&Dict, "enable_drefs", options.enable_drefs, 0);
+-    av_dict_set_int(&Dict, "use_absolute_path", options.use_absolute_path, 0);
++    av_dict_set_int(&Dict, "enable_drefs", Options.enable_drefs, 0);
++    av_dict_set_int(&Dict, "use_absolute_path", Options.use_absolute_path, 0);
+ 
+     if (avformat_open_input(&FormatContext, SourceFile, nullptr, &Dict) != 0)
+         throw AudioException(std::string("Couldn't open '") + SourceFile + "'");
+@@ -131,10 +131,10 @@ void LWAudioDecoder::OpenFile(const char *SourceFile, int Track, const FFmpegOpt
+     av_dict_free(&CodecDict);
+ }
+ 
+-LWAudioDecoder::LWAudioDecoder(const char *SourceFile, int Track, const FFmpegOptions &options) {
++LWAudioDecoder::LWAudioDecoder(const char *SourceFile, int Track, const FFmpegOptions &Options) {
+     try {
+         Packet = av_packet_alloc();
+-        OpenFile(SourceFile, Track, options);
++        OpenFile(SourceFile, Track, Options);
+ 
+         DecodeSuccess = DecodeNextAVFrame();
+         
+diff --git a/src/audiosource.h b/src/audiosource.h
+index f2a0ff0..09d3f9e 100644
+--- a/src/audiosource.h
++++ b/src/audiosource.h
+@@ -71,12 +71,12 @@ class LWAudioDecoder {
+     bool DecodeSuccess = false;
+     AVPacket *Packet = nullptr;
+ 
+-    void OpenFile(const char *SourceFile, int Track, const FFmpegOptions &options);
++    void OpenFile(const char *SourceFile, int Track, const FFmpegOptions &Options);
+     bool ReadPacket(AVPacket *Packet);
+     bool DecodeNextAVFrame();
+     void Free();
+ public:
+-    LWAudioDecoder(const char *SourceFile, int Track, const FFmpegOptions &options); // Positive track numbers are absolute. Negative track numbers mean nth audio track to simplify things.
++    LWAudioDecoder(const char *SourceFile, int Track, const FFmpegOptions &Options); // Positive track numbers are absolute. Negative track numbers mean nth audio track to simplify things.
+     ~LWAudioDecoder();
+     int64_t GetRelativeStartTime(int Track) const; // Returns INT64_MIN on error
+     int64_t GetSamplePosition() const;
+
+From c30012db0e2e42d01c23679404b51c556b9a4fb0 Mon Sep 17 00:00:00 2001
+From: Fredrik Mellbin <fredrik.mellbin@gmail.com>
+Date: Mon, 27 Sep 2021 18:24:16 +0200
+Subject: [PATCH 3/4] Consistent case again
+
+---
+ src/audiosource.cpp | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/src/audiosource.cpp b/src/audiosource.cpp
+index df21f23..9d34f47 100644
+--- a/src/audiosource.cpp
++++ b/src/audiosource.cpp
+@@ -118,12 +118,12 @@ void LWAudioDecoder::OpenFile(const char *SourceFile, int Track, const FFmpegOpt
+     // Probably guard against mid-stream format changes
+     CodecContext->flags |= AV_CODEC_FLAG_DROPCHANGED;
+ 
+-    if (options.drc_scale < 0)
++    if (Options.drc_scale < 0)
+         throw AudioException("Invalid drc_scale value");
+ 
+     AVDictionary *CodecDict = nullptr;
+     if (Codec->id == AV_CODEC_ID_AC3 || Codec->id == AV_CODEC_ID_EAC3)
+-        av_dict_set(&CodecDict, "drc_scale", std::to_string(options.drc_scale).c_str(), 0);
++        av_dict_set(&CodecDict, "drc_scale", std::to_string(Options.drc_scale).c_str(), 0);
+ 
+     if (avcodec_open2(CodecContext, Codec, &CodecDict) < 0)
+         throw AudioException("Could not open audio codec");
+
+From 87d6cba4a119f347e146de8f9751646b6f21284c Mon Sep 17 00:00:00 2001
+From: Fredrik Mellbin <fredrik.mellbin@gmail.com>
+Date: Tue, 28 Sep 2021 14:11:59 +0200
+Subject: [PATCH 4/4] Remove wrong license file
+
+---
+ COPYING | 31 -------------------------------
+ 1 file changed, 31 deletions(-)
+ delete mode 100644 COPYING
+
+diff --git a/COPYING b/COPYING
+deleted file mode 100644
+index 45cbe08..0000000
+--- a/COPYING
++++ /dev/null
+@@ -1,31 +0,0 @@
+-The FFMS2 source is licensed under the MIT license, but its binaries
+-are licensed under the GPL because GPL components of FFmpeg are
+-used. FFmpeg can be built as either LGPL, GPLv2, GPLv3, or even be
+-nonredistributable. Refer to FFmpeg's sources for licensing information.
+-
+-Text of MIT license:
+------------------------------------------------------------
+-Copyright (c) <year> <copyright holders>
+-
+-Permission is hereby granted, free of charge, to any person
+-obtaining a copy of this software and associated documentation
+-files (the "Software"), to deal in the Software without
+-restriction, including without limitation the rights to use,
+-copy, modify, merge, publish, distribute, sublicense, and/or sell
+-copies of the Software, and to permit persons to whom the
+-Software is furnished to do so, subject to the following
+-conditions:
+-
+-The above copyright notice and this permission notice shall be
+-included in all copies or substantial portions of the Software.
+-
+-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+-EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+-OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+-NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+-HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+-WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+-FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+-OTHER DEALINGS IN THE SOFTWARE.
+------------------------------------------------------------
+-

@@ -6,7 +6,9 @@ media-libs/waifu2x-converter-cpp ~*
 media-libs/zimg ~*
 media-plugins/acsuite ~*
 media-plugins/audiocutter ~*
+media-plugins/bestaudiosource ~*
 media-plugins/ocsuite ~*
+media-plugins/subtext ~*
 media-plugins/vapoursynth-addgrain ~*
 media-plugins/vapoursynth-adjust ~*
 media-plugins/vapoursynth-arearesize ~*
@@ -29,7 +31,6 @@ media-plugins/vapoursynth-continuityfixer ~*
 media-plugins/vapoursynth-ctmf ~*
 media-plugins/vapoursynth-curve ~*
 media-plugins/vapoursynth-d2vsource ~*
-media-plugins/vapoursynth-damb ~*
 media-plugins/vapoursynth-dctfilter ~*
 media-plugins/vapoursynth-deblock ~*
 media-plugins/vapoursynth-deblockpp7 ~*
@@ -74,6 +75,7 @@ media-plugins/vapoursynth-matchhistogram ~*
 media-plugins/vapoursynth-median ~*
 media-plugins/vapoursynth-minideen ~*
 media-plugins/vapoursynth-minsrp ~*
+media-plugins/vapoursynth-miscfilters-obsolete ~*
 media-plugins/vapoursynth-motionmask ~*
 media-plugins/vapoursynth-msmoosh ~*
 media-plugins/vapoursynth-muvsfunc ~*
@@ -116,11 +118,10 @@ media-plugins/vapoursynth-tonemap ~*
 media-plugins/vapoursynth-ttempsmooth ~*
 media-plugins/vapoursynth-vaguedenoiser ~*
 media-plugins/vapoursynth-vautodeint ~*
-media-plugins/vapoursynth-vcfreq ~*
-media-plugins/vapoursynth-vcmod ~*
-media-plugins/vapoursynth-vcmove ~*
+media-plugins/vapoursynth-vcm ~*
 media-plugins/vapoursynth-vctrans ~*
 media-plugins/vapoursynth-vfrtocrf ~*
+media-plugins/vapoursynth-vfx ~*
 media-plugins/vapoursynth-videoscope ~*
 media-plugins/vapoursynth-vine ~*
 media-plugins/vapoursynth-vmaf ~*
@@ -136,8 +137,12 @@ media-plugins/vapoursynth-wwxd ~*
 media-plugins/vapoursynth-xaa ~*
 media-plugins/vapoursynth-yadifmod ~*
 media-plugins/vapoursynth-znedi3 ~*
+media-plugins/vivtc ~*
 media-plugins/vs-ccd ~*
+media-plugins/vs-imwri ~*
+media-plugins/vs-ocr ~*
 media-plugins/vs-placebo ~*
+media-plugins/vs-removegrain ~*
 media-plugins/vsutil ~*
 media-video/d2vwitch ~*
 media-video/getnative ~*

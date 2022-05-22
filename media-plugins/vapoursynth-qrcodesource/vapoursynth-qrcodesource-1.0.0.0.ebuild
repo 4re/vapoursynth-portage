@@ -1,9 +1,9 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=8
 
-inherit toolchain-funcs
+inherit toolchain-funcs meson
 
 DESCRIPTION="Plugin to provide a means to embed QR codes in video"
 HOMEPAGE="https://github.com/jeremypoulter/QRCodeSource"
@@ -14,8 +14,7 @@ if [[ ${PV} == *9999* ]]; then
 	KEYWORDS=""
 else
 	inherit vcs-snapshot
-	SRC_URI="https://github.com/jeremypoulter/QRCodeSource/archive/Release_${PV}.tar.gz -> ${P}.tar.gz
-		https://github.com/fukuchi/libqrencode/archive/ca465caa9f497beab26dd17dc45cd08c76634820.zip -> LibQREncode-2014.09.23.zip"
+	SRC_URI="https://github.com/jeremypoulter/QRCodeSource/archive/Release_${PV}.tar.gz -> ${P}.tar.gz"
 	KEYWORDS="~amd64 ~x86"
 fi
 
@@ -25,29 +24,36 @@ SLOT="0"
 RDEPEND+="
 	media-libs/vapoursynth
 	media-libs/libpng
+	media-gfx/qrencode
 "
 DEPEND="${RDEPEND}
 "
 
-if [[ ${PV} != *9999* ]]; then
-	S="${WORKDIR}/QRCodeSource-Release_${PV}"
-fi
-
-src_unpack() {
-	if [[ ${PV} != *9999* ]]; then
-		unpack ${P}.tar.gz
-		unpack LibQREncode-2014.09.23.zip
-		mv libqrencode-ca465caa9f497beab26dd17dc45cd08c76634820/* "QRCodeSource-Release_${PV}/QRCodeSource/LibQREncode" || die
-	else
-		git-r3_src_unpack
-	fi
-}
 
 src_prepare() {
-	eapply_user
-	./autogen.sh
-}
+	sed -i -e "s:LibQREncode/qrencode.h:qrencode.h:" QRCodeSource/QRCodeSource.cpp || die
+	cat << EOF > meson.build
+project('QRCodeSource',
+        'cpp',
+        default_options: ['buildtype=release', 'b_ndebug=if-release'],
+        license : ['GPL-2.0'],
+        version : '1')
 
-src_configure() {
-	econf --libdir="/usr/$(get_libdir)/vapoursynth/"
+add_project_arguments('-DIS_VAPOURSYNTH', language : 'cpp')
+
+vs_dep = dependency('vapoursynth')
+
+deps = [vs_dep,
+        dependency('libpng'),
+        dependency('libqrencode')]
+
+src = ['QRCodeSource/QRCodeSource.cpp']
+
+library('qrcodesource', src,
+    dependencies : deps,
+    install : true,
+    install_dir : join_paths(vs_dep.get_pkgconfig_variable('libdir'), 'vapoursynth')
+)
+EOF
+	default
 }

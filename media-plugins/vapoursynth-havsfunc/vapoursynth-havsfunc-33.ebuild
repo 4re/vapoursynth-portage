@@ -1,7 +1,7 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
 PYTHON_COMPAT=( python3_{8..10} )
 
@@ -24,8 +24,9 @@ LICENSE=""
 SLOT="0"
 IUSE="+fftw opencl"
 
+
 RDEPEND+="
-	>=media-libs/vapoursynth-39[${PYTHON_SINGLE_USEDEP},vapoursynth_plugins_miscfilters]
+	media-libs/vapoursynth[${PYTHON_SINGLE_USEDEP}]
 	media-plugins/vapoursynth-addgrain
 	media-plugins/vapoursynth-adjust
 	media-plugins/vapoursynth-awarpsharp2
@@ -42,6 +43,7 @@ RDEPEND+="
 	media-plugins/vapoursynth-fmtconv
 	media-plugins/vapoursynth-hqdn3d
 	opencl? ( >=media-plugins/vapoursynth-knlmeanscl-1.0.2 )
+	media-plugins/vapoursynth-miscfilters-obsolete
 	media-plugins/vapoursynth-mvsfunc
 	fftw? ( media-plugins/vapoursynth-mvtools )
 	opencl? ( media-plugins/vapoursynth-nnedi3cl )

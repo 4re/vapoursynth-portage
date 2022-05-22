@@ -1,11 +1,11 @@
-# Copyright 1999-2021 Gentoo Authors
+# Copyright 2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
 PYTHON_COMPAT=( python3_{8..10} )
 
-inherit python-single-r1 toolchain-funcs multilib eutils
+inherit python-single-r1 toolchain-funcs multilib
 
 DESCRIPTION="Takes several frames and for each pixel calculates linear approximation of its values through time"
 HOMEPAGE="https://bitbucket.org/mystery_keeper/templinearapproximate-vapoursynth"
@@ -29,6 +29,11 @@ DEPEND="${RDEPEND}
 "
 
 LIBNAME="libtemplinearapproximate.so"
+
+src_prepare() {
+	sed -i -e "s:get_core():core:" MCDenoise.py || die
+	default
+}
 
 src_compile() {
 	$(tc-getCC) -shared -fPIC ${CFLAGS} ${LDFLAGS} -o ${LIBNAME} $(pkg-config --cflags vapoursynth) src/processplane.c src/main.c || die "Build failed"

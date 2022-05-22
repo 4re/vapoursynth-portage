@@ -1,22 +1,16 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=8
 
-inherit meson
+inherit meson git-r3
 
 DESCRIPTION="Creates a mask of moving pixels. Every output pixel will be set to the absolute difference between the current frame and the previous frame"
 HOMEPAGE="https://github.com/dubhater/vapoursynth-motionmask"
 
-if [[ ${PV} == *9999* ]]; then
-	inherit git-r3
-	EGIT_REPO_URI="https://github.com/dubhater/${PN}.git"
-	KEYWORDS=""
-else
-	inherit vcs-snapshot
-	SRC_URI="https://github.com/dubhater/${PN}/archive/v${PV}.tar.gz -> ${PN}-${PV}.tar.gz"
-	KEYWORDS="~amd64 ~x86"
-fi
+EGIT_REPO_URI="https://github.com/dubhater/${PN}.git"
+EGIT_COMMIT="ed86b06688c2db1b05d7026f66a2574e64c9e69e"
+KEYWORDS="~amd64 ~x86"
 
 LICENSE="MIT"
 SLOT="0"

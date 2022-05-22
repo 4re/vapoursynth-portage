@@ -1,7 +1,7 @@
-# Copyright 1999-2021 Gentoo Authors
+# Copyright 2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
 PYTHON_COMPAT=( python3_{8..10} )
 
@@ -24,7 +24,7 @@ LICENSE=""
 SLOT="0"
 IUSE="+fftw opencl"
 
-# TODO: update miscfilters dep when done.
+
 RDEPEND+="
 	media-libs/vapoursynth:0/4
 	media-plugins/vapoursynth-addgrain
@@ -37,13 +37,13 @@ RDEPEND+="
 	media-plugins/vapoursynth-deblock
 	fftw? ( media-plugins/vapoursynth-dfttest )
 	media-plugins/vapoursynth-eedi2
-	media-plugins/vapoursynth-eedi3
 	fftw? ( media-plugins/vapoursynth-fft3dfilter )
 	media-plugins/vapoursynth-flash3kyuu_deband
 	media-plugins/vapoursynth-fluxsmooth
 	media-plugins/vapoursynth-fmtconv
 	media-plugins/vapoursynth-hqdn3d
 	opencl? ( >=media-plugins/vapoursynth-knlmeanscl-1.0.2 )
+	media-plugins/vapoursynth-miscfilters-obsolete
 	media-plugins/vapoursynth-mvsfunc
 	fftw? ( media-plugins/vapoursynth-mvtools )
 	opencl? ( media-plugins/vapoursynth-nnedi3cl )

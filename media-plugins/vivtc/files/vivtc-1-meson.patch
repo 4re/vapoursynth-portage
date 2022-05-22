@@ -1,0 +1,36 @@
+From a54c3c48f7910dcea47282a36fa43cb38feee730 Mon Sep 17 00:00:00 2001
+From: dmo <marillat@users.noreply.github.com>
+Date: Sun, 26 Sep 2021 22:28:47 +0200
+Subject: [PATCH] Add meson build
+
+---
+ meson.build | 20 ++++++++++++++++++++
+ 1 file changed, 20 insertions(+)
+ create mode 100644 meson.build
+
+diff --git a/meson.build b/meson.build
+new file mode 100644
+index 0000000..2e33e65
+--- /dev/null
++++ b/meson.build
+@@ -0,0 +1,20 @@
++project('vivtc', 'c', 'cpp',
++  version : '1',
++  default_options : ['warning_level=3'])
++
++add_project_arguments('-ffast-math', language : 'c')
++
++sources = [
++     'src/vivtc.c'
++]
++
++vapoursynth_dep = dependency('vapoursynth', version: '>=55').partial_dependency(compile_args : true, includes : true)
++
++deps = [vapoursynth_dep]
++
++shared_module('vivtc', sources,
++  dependencies : deps,
++  install : true,
++  install_dir : join_paths(vapoursynth_dep.get_pkgconfig_variable('libdir'), 'vapoursynth'),
++  gnu_symbol_visibility : 'hidden'
++)

@@ -1,7 +1,7 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=8
 
 inherit autotools
 
@@ -22,7 +22,7 @@ LICENSE="LGPL-2.1"
 SLOT="0"
 
 RDEPEND+="
-	media-libs/vapoursynth
+	media-libs/vapoursynth:0/4
 	media-video/ffmpeg
 "
 DEPEND="${RDEPEND}

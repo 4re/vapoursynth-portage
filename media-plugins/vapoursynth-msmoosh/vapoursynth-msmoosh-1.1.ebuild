@@ -1,7 +1,7 @@
-# Copyright 1999-2021 Gentoo Authors
+# Copyright 2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
 DESCRIPTION="MSmooth is a spatial smoother that doesn't touch edges, MSharpen tries to sharpen only edges"
 HOMEPAGE="https://github.com/dubhater/vapoursynth-msmoosh"

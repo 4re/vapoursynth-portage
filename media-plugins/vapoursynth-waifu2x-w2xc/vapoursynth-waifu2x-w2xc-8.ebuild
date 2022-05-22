@@ -1,22 +1,16 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=8
 
-inherit meson
+inherit meson git-r3
 
 DESCRIPTION="Image super-resolution/denoise filter for VapourSynth, based on the waifu2x-opt library"
 HOMEPAGE="https://github.com/HomeOfVapourSynthEvolution/VapourSynth-Waifu2x-w2xc"
 
-if [[ ${PV} == *9999* ]]; then
-	inherit git-r3
-	EGIT_REPO_URI="https://github.com/HomeOfVapourSynthEvolution/${PN}.git"
-	KEYWORDS=""
-else
-	inherit vcs-snapshot
-	SRC_URI="https://github.com/HomeOfVapourSynthEvolution/${PN}/archive/r${PV}.tar.gz -> ${PN}-${PV}.tar.gz"
-	KEYWORDS="~x86 ~amd64"
-fi
+EGIT_REPO_URI="https://github.com/HomeOfVapourSynthEvolution/${PN}.git"
+EGIT_COMMIT="a9f064adbbd2930ac717bb2e1667b71783587bce"
+KEYWORDS="~x86 ~amd64"
 
 LICENSE="MIT"
 SLOT="0"

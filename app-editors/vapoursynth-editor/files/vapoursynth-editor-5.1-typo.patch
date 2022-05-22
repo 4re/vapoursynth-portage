@@ -1,0 +1,22 @@
+From b2edeab3f79ce4560bd0c145ccbf1298846e1725 Mon Sep 17 00:00:00 2001
+From: Yomiko <monommino@gmail.com>
+Date: Sat, 26 Mar 2022 18:36:15 +0800
+Subject: [PATCH] fix a typo
+
+---
+ vsedit/src/preview/preview_dialog.cpp | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/vsedit/src/preview/preview_dialog.cpp b/vsedit/src/preview/preview_dialog.cpp
+index 66a8260..ef82147 100644
+--- a/vsedit/src/preview/preview_dialog.cpp
++++ b/vsedit/src/preview/preview_dialog.cpp
+@@ -1987,7 +1987,7 @@ bool PreviewDialog::requestShowFrame(int a_frameNumber)
+ 
+ void PreviewDialog::setPreviewPixmap()
+ {
+-#if QT_VERSION_MAJOR < 6:
++#if (QT_VERSION_MAJOR < 6)
+ 	m_devicePixelRatio = 1;
+ #else
+ 	m_devicePixelRatio =

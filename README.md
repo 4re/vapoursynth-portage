@@ -42,7 +42,8 @@ This overlay also includes an editor and a modified mpv ebuild with vapoursynth 
 
 Troubleshooting
 ---------------
-If you want to use python-3.9 you may need to add this to your `/etc/portage/package.use/use`:
+If you want to use python-3.11 you may need to add this to your `/etc/portage/package.use/use`:
 ```
-*/*::vapoursynth PYTHON_SINGLE_TARGET: -* python3_9
+*/*::vapoursynth PYTHON_SINGLE_TARGET: -* python3_11
 ```
+Be aware that not all ebuilds may be able to satisfy all dependencies.

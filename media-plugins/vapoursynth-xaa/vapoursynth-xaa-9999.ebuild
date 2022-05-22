@@ -1,7 +1,7 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
 PYTHON_COMPAT=( python3_{8..10} )
 
@@ -24,7 +24,7 @@ SLOT="0"
 IUSE=""
 
 RDEPEND+="
-	media-libs/vapoursynth[${PYTHON_SINGLE_USEDEP},vapoursynth_plugins_removegrain]
+	media-libs/vapoursynth[${PYTHON_SINGLE_USEDEP}]
 	media-plugins/vapoursynth-eedi2
 	media-plugins/vapoursynth-eedi3
 	media-plugins/vapoursynth-znedi3
@@ -32,6 +32,7 @@ RDEPEND+="
 	media-plugins/vapoursynth-sangnom
 	media-plugins/vapoursynth-tcanny
 	media-plugins/vapoursynth-tedgemask
+	media-plugins/vs-removegrain
 "
 DEPEND="${RDEPEND}"
 

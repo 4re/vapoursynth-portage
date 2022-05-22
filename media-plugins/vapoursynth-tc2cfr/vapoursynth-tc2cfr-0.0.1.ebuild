@@ -1,9 +1,9 @@
-# Copyright 1999-2022 Gentoo Authors
+# Copyright 2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
-inherit toolchain-funcs multilib eutils
+inherit toolchain-funcs multilib
 
 DESCRIPTION="Plugin that can read a timecode file and convert a given video clip into one with constant framerate"
 HOMEPAGE="https://github.com/gnaggnoyil/tc2cfr"

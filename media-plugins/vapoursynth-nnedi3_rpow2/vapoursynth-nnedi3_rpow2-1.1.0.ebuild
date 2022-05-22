@@ -1,14 +1,14 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=8
 
 PYTHON_COMPAT=( python3_{8..10} )
 
 inherit python-single-r1 git-r3
 
-DESCRIPTION=""
-HOMEPAGE=""
+DESCRIPTION="nnedi3 rpow2 wrapper"
+HOMEPAGE="https://gist.github.com/4re/342624c9e1a144a696c6"
 
 EGIT_REPO_URI="https://gist.github.com/4re/342624c9e1a144a696c6"
 EGIT_COMMIT="68ec4bdff1e51a3832b163198ed7ea00e1c1ab46"

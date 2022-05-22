@@ -40,10 +40,10 @@ version_increase() {
 
 mheader() {
 cat << EOF
-# Copyright 1999-2022 Gentoo Foundation
+# Copyright 2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
 DESCRIPTION="VapourSynth plugins meta package."
 HOMEPAGE="http://www.vapoursynth.com/"

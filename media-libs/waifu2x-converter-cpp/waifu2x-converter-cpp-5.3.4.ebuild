@@ -1,7 +1,7 @@
-# Copyright 1999-2021 Gentoo Authors
+# Copyright 2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
 inherit cmake
 
@@ -37,13 +37,9 @@ src_configure() {
 		-DCMAKE_INSTALL_PREFIX="${EPREFIX}/usr"
 		-DINSTALL_MODELS="$(usex models)"
 		-DX86OPT="$(usex cpu_flags_x86_avx)"
+		-DENABLE_CUDA="$(usex cuda)"
+		-DENABLE_OPENCV="$(usex opencl)"
 	)
-
-	if ! use cuda; then
-		mycmakeargs+=(
-			-DCUDA_TOOLKIT_ROOT_DIR=""
-		)
-	fi
 
 	if use debug; then
 		mycmakeargs+=(

@@ -1,7 +1,7 @@
-# Copyright 1999-2021 Gentoo Authors
+# Copyright 2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
 PYTHON_COMPAT=( python3_{8..10} )
 
@@ -41,4 +41,5 @@ DOCS=( "README.md" )
 src_install(){
 	use doc && dodoc ${DOCS}
 	python_domodule Plum.py
+	python_domodule PlumAlpha.py
 }
