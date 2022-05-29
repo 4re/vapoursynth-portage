@@ -21,6 +21,7 @@
 ~media-plugins/vapoursynth-bilateral-9999 **
 ~media-plugins/vapoursynth-bilateralgpu-9999 **
 ~media-plugins/vapoursynth-bm3d-9999 **
+~media-plugins/vapoursynth-bm3dcuda-9999 **
 ~media-plugins/vapoursynth-bwdif-9999 **
 ~media-plugins/vapoursynth-cas-9999 **
 ~media-plugins/vapoursynth-cmedian-9999 **

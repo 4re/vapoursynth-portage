@@ -21,6 +21,7 @@ media-plugins/vapoursynth-bifrost ~*
 media-plugins/vapoursynth-bilateral ~*
 media-plugins/vapoursynth-bilateralgpu ~*
 media-plugins/vapoursynth-bm3d ~*
+media-plugins/vapoursynth-bm3dcuda ~*
 media-plugins/vapoursynth-bwdif ~*
 media-plugins/vapoursynth-cas ~*
 media-plugins/vapoursynth-cmedian ~*
