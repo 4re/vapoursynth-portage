@@ -5,18 +5,24 @@ EAPI=8
 
 PYTHON_COMPAT=( python3_{9..11} )
 
-inherit meson flag-o-matic git-r3 python-single-r1
+inherit meson flag-o-matic python-single-r1
 
 DESCRIPTION="Spatial derainbow filter"
 HOMEPAGE="https://github.com/dubhater/vapoursynth-smoothuv"
 
-EGIT_REPO_URI="https://github.com/dubhater/${PN}.git"
-EGTI_COMMIT="d75886e6876c7ec45010cc735d69985bab3936df"
-KEYWORDS="~amd64 ~x86"
+if [[ ${PV} == *9999* ]]; then
+	inherit git-r3
+	EGIT_REPO_URI="https://github.com/dubhater/${PN}.git"
+	KEYWORDS=""
+else
+	SRC_URI="https://github.com/dubhater/${PN}/archive/v${PV}.tar.gz -> ${PN}-${PV}.tar.gz"
+	KEYWORDS="~amd64 ~x86"
+fi
 
 LICENSE="GPL"
 SLOT="0"
 IUSE="lto"
+RESTRICT="mirror"
 
 RDEPEND+="
 	media-libs/vapoursynth

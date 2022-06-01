@@ -15,7 +15,6 @@ if [[ ${PV} == *9999* ]]; then
 	EGIT_REPO_URI="https://github.com/dubhater/${PN}.git"
 	KEYWORDS=""
 else
-	inherit vcs-snapshot
 	SRC_URI="https://github.com/dubhater/${PN}/archive/v${PV}.tar.gz -> ${PN}-${PV}.tar.gz"
 	KEYWORDS="~amd64 ~x86"
 fi
@@ -23,6 +22,7 @@ fi
 LICENSE="GPL"
 SLOT="0"
 IUSE="lto"
+RESTRICT="mirror"
 
 RDEPEND+="
 	media-libs/vapoursynth
