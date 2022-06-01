@@ -14,11 +14,12 @@ if [[ ${PV} == *9999* ]]; then
 else
 	inherit vcs-snapshot
 	SRC_URI="https://github.com/MonoS/VS-ContinuityFixer/archive/V${PV}.tar.gz -> ${PN}-${PV}.tar.gz"
+	KEYWORDS="~x86 ~amd64"
 fi
 
 LICENSE=""
 SLOT="0"
-KEYWORDS="~x86 ~amd64"
+RESTRICT="mirror"
 
 RDEPEND+="
 	media-libs/vapoursynth

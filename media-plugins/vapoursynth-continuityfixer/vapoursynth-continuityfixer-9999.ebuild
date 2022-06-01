@@ -13,12 +13,13 @@ if [[ ${PV} == *9999* ]]; then
 	EGIT_REPO_URI="https://github.com/MonoS/VS-ContinuityFixer.git"
 else
 	inherit vcs-snapshot
-	SRC_URI="https://github.com/MonoS/VS-ContinuityFixer/archive/v${PV}.tar.gz -> ${PN}-${PV}.tar.gz"
+	SRC_URI="https://github.com/MonoS/VS-ContinuityFixer/archive/V${PV}.tar.gz -> ${PN}-${PV}.tar.gz"
+	KEYWORDS="~x86 ~amd64"
 fi
 
 LICENSE=""
 SLOT="0"
-KEYWORDS=""
+RESTRICT="mirror"
 
 RDEPEND+="
 	media-libs/vapoursynth
