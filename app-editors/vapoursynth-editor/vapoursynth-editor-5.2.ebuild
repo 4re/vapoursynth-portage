@@ -34,8 +34,6 @@ DEPEND="${RDEPEND}
 	virtual/pkgconfig
 "
 
-PATCHES=( "${FILESDIR}/${P}-typo.patch" )
-
 src_prepare() {
 	rm -fr generated/* || die "Remove unused"
 	default
