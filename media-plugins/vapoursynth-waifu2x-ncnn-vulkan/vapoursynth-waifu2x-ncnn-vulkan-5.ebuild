@@ -33,7 +33,7 @@ RDEPEND+="
 DEPEND="${RDEPEND}
 "
 
-PATCHES=( "${FILESDIR}/${PN}-4-fix-build.diff" )
+PATCHES=( "${FILESDIR}/${PN}-5-fix-build.diff" )
 
 src_unpack() {
 	if [[ ${PV} == *9999* ]]; then
