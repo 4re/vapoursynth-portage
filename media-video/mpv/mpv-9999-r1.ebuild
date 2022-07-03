@@ -16,7 +16,7 @@ HOMEPAGE="https://mpv.io/ https://github.com/mpv-player/mpv"
 
 if [[ ${PV} != *9999* ]]; then
 	SRC_URI="https://github.com/mpv-player/mpv/archive/v${PV}.tar.gz -> ${P}.tar.gz"
-	KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ppc ~ppc64 ~x86 ~amd64-linux"
+	KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ppc ~ppc64 ~riscv ~x86 ~amd64-linux"
 	DOCS=( RELEASE_NOTES )
 else
 	EGIT_REPO_URI="https://github.com/mpv-player/mpv.git"
@@ -29,20 +29,20 @@ DOCS+=( README.md DOCS/{client-api,interface}-changes.rst )
 # See Copyright in sources and Gentoo bug 506946. Waf is BSD, libmpv is ISC.
 LICENSE="LGPL-2.1+ GPL-2+ BSD ISC"
 SLOT="0"
-IUSE="+alsa aqua archive bluray cdda +cli coreaudio cplugins cuda debug doc drm dvb
+IUSE="+alsa aqua archive bluray cdda +cli coreaudio cplugins debug doc drm dvb
 	dvd +egl gamepad gbm +iconv jack javascript jpeg lcms libcaca libmpv +lua
-	openal +opengl pulseaudio raspberry-pi rubberband sdl
+	nvenc openal +opengl pulseaudio raspberry-pi rubberband sdl
 	selinux test tools +uchardet vaapi vapoursynth vdpau vulkan wayland +X +xv zlib zimg"
 
 REQUIRED_USE="
 	|| ( cli libmpv )
 	aqua? ( opengl )
-	cuda? ( opengl )
 	egl? ( || ( gbm X wayland ) )
 	gamepad? ( sdl )
 	gbm? ( drm egl opengl )
 	lcms? ( opengl )
 	lua? ( ${LUA_REQUIRED_USE} )
+	nvenc? ( opengl )
 	opengl? ( || ( aqua egl X raspberry-pi !cli ) )
 	raspberry-pi? ( opengl )
 	test? ( opengl )
@@ -90,7 +90,7 @@ COMMON_DEPEND="
 	raspberry-pi? ( >=media-libs/raspberrypi-userland-0_pre20160305-r1 )
 	rubberband? ( >=media-libs/rubberband-1.8.0 )
 	sdl? ( media-libs/libsdl2[sound,threads,video] )
-	vaapi? ( x11-libs/libva:=[drm?,X?,wayland?] )
+	vaapi? ( x11-libs/libva:=[drm(+)?,X?,wayland?] )
 	vapoursynth? ( media-libs/vapoursynth )
 	vdpau? ( x11-libs/libvdpau )
 	vulkan? (
@@ -107,6 +107,7 @@ COMMON_DEPEND="
 		x11-libs/libXScrnSaver
 		x11-libs/libXext
 		x11-libs/libXinerama
+		x11-libs/libXpresent
 		x11-libs/libXrandr
 		opengl? (
 			x11-libs/libXdamage
@@ -119,11 +120,11 @@ COMMON_DEPEND="
 "
 DEPEND="${COMMON_DEPEND}
 	${PYTHON_DEPS}
-	cuda? ( >=media-libs/nv-codec-headers-8.2.15.7 )
 	dvb? ( virtual/linuxtv-dvb-headers )
+	nvenc? ( >=media-libs/nv-codec-headers-8.2.15.7 )
 "
 RDEPEND="${COMMON_DEPEND}
-	cuda? ( x11-drivers/nvidia-drivers[X] )
+	nvenc? ( x11-drivers/nvidia-drivers[X] )
 	selinux? ( sec-policy/selinux-mplayer )
 	tools? ( ${PYTHON_DEPS} )
 "
@@ -147,8 +148,8 @@ src_configure() {
 	tc-export CC PKG_CONFIG AR
 
 	if use raspberry-pi; then
-		append-cflags -I"${SYSROOT%/}${EPREFIX}/opt/vc/include"
-		append-ldflags -L"${SYSROOT%/}${EPREFIX}/opt/vc/lib"
+		append-cflags -I"${ESYSROOT}/opt/vc/include"
+		append-ldflags -L"${ESYSROOT%/}/opt/vc/lib"
 	fi
 
 	local mywafargs=(
@@ -225,8 +226,8 @@ src_configure() {
 
 		# HWaccels:
 		# Automagic Video Toolbox HW acceleration. See Gentoo bug 577332.
-		$(use_enable cuda cuda-hwaccel)
-		$(use_enable cuda cuda-interop)
+		$(use_enable nvenc cuda-hwaccel)
+		$(use_enable nvenc cuda-interop)
 
 		# TV features:
 		$(use_enable dvb dvbin)
