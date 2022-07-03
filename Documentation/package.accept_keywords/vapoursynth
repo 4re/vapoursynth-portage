@@ -59,6 +59,7 @@ media-plugins/vapoursynth-fix-telecined-fades ~*
 media-plugins/vapoursynth-flash3kyuu_deband ~*
 media-plugins/vapoursynth-fluxsmooth ~*
 media-plugins/vapoursynth-fmtconv ~*
+media-plugins/vapoursynth-frfun7 ~*
 media-plugins/vapoursynth-fvsfunc ~*
 media-plugins/vapoursynth-genericfilters ~*
 media-plugins/vapoursynth-havsfunc ~*
