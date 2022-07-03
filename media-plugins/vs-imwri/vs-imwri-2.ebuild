@@ -3,14 +3,20 @@
 
 EAPI=8
 
-inherit meson git-r3
+inherit meson
 
 DESCRIPTION="Image reader and writer for VapourSynth using the ImageMagick library"
 HOMEPAGE="https://github.com/vapoursynth/vs-imwri"
 
-EGIT_REPO_URI="https://github.com/vapoursynth/vs-imwri.git"
-EGIT_COMMIT="3042a327739e44b929f5ab02ff1da4d8de5ee061"
-KEYWORDS="~x86 ~amd64"
+if [[ ${PV} == *9999* ]]; then
+	inherit git-r3
+	EGIT_REPO_URI="https://github.com/vapoursynth/vs-imwri.git"
+	KEYWORDS=""
+else
+	inherit vcs-snapshot
+	SRC_URI="https://github.com/vapoursynth/vs-imwri/archive/R${PV}.tar.gz -> ${PN}-${PV}.tar.gz"
+	KEYWORDS="~x86 ~amd64"
+fi
 
 LICENSE="LGPL-2.1"
 SLOT="0"
