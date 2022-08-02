@@ -52,6 +52,7 @@ RDEPEND+="
 	media-plugins/vapoursynth-temporalsoften2
 	media-plugins/vapoursynth-ttempsmooth
 	media-plugins/vapoursynth-znedi3
+	media-plugins/vsutil
 "
 DEPEND="${RDEPEND}"
 
