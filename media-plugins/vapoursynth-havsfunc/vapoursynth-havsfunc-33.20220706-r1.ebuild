@@ -25,6 +25,7 @@ RDEPEND+="
 	media-plugins/vapoursynth-adjust
 	media-plugins/vapoursynth-awarpsharp2
 	media-plugins/vapoursynth-bilateral
+	media-plugins/vapoursynth-bwdif
 	media-plugins/vapoursynth-cas
 	media-plugins/vapoursynth-ctmf
 	media-plugins/vapoursynth-dctfilter
