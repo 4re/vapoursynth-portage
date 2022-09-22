@@ -21,10 +21,10 @@ LICENSE="MIT BSD BSD-2"
 SLOT="0"
 IUSE="cuda debug models opencl cpu_flags_x86_avx"
 
+REQUIRED_USE="|| ( opencl cuda )"
 RDEPEND+="
 	>=media-libs/opencv-3.3.0
-	virtual/opencl
-	opencl? ( >=media-libs/opencv-3.3.0[opencl] )
+	opencl? ( virtual/opencl >=media-libs/opencv-3.3.0[opencl] )
 	cuda? ( dev-util/nvidia-cuda-toolkit )
 "
 DEPEND="${RDEPEND}
