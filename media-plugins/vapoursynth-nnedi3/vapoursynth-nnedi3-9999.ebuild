@@ -20,6 +20,7 @@ LICENSE="GPL-2"
 SLOT="0"
 
 RDEPEND+="
+	dev-lang/yasm
 	media-libs/vapoursynth
 "
 DEPEND="${RDEPEND}
@@ -34,5 +35,5 @@ src_prepare() {
 }
 
 src_configure() {
-	econf --libdir="/usr/$(get_libdir)/vapoursynth/"
+	econf --libdir="${EPREFIX}/usr/$(get_libdir)/vapoursynth/"
 }

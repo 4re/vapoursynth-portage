@@ -267,7 +267,7 @@ src_configure() {
 
 	mywafargs+=(
 		--bashdir="$(get_bashcompdir)"
-		--zshdir="${EPREFIX}"/usr/share/zsh/site-functions
+		--zshdir=${EPREFIX}/usr/share/zsh/site-functions
 )
 
 	# Create reproducible non-live builds.
@@ -285,13 +285,13 @@ src_install() {
 	fi
 
 	if use cli && use lua_single_target_luajit; then
-		pax-mark -m "${ED}"/usr/bin/${PN}
+		pax-mark -m "${ED}"${EPREFIX}/usr/bin/${PN}
 	fi
 
 	if use tools; then
 		dobin TOOLS/{mpv_identify.sh,umpv}
 		newbin TOOLS/idet.sh mpv_idet.sh
-		python_replicate_script "${ED}"/usr/bin/umpv
+		python_replicate_script "${ED}"${EPREFIX}/usr/bin/umpv
 	fi
 }
 

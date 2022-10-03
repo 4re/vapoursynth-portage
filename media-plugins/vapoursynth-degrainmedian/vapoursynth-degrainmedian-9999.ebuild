@@ -33,5 +33,5 @@ src_prepare() {
 
 src_configure() {
 	if use doc; then DOCS=( readme.rst ); fi
-	econf --libdir="/usr/$(get_libdir)/vapoursynth/"
+	econf --libdir="${EPREFIX}/usr/$(get_libdir)/vapoursynth/"
 }

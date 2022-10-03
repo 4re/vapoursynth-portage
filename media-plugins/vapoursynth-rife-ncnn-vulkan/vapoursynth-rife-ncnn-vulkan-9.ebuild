@@ -35,7 +35,7 @@ BDEPEND="dev-util/ninja"
 
 src_configure() {
 	local emesonargs=(
-		--libdir="/usr/$(get_libdir)/vapoursynth/"
+		--libdir="${EPREFIX}/usr/$(get_libdir)/vapoursynth/"
 		-Duse_system_ncnn=true
 	)
 	meson_src_configure

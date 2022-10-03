@@ -33,7 +33,7 @@ DEPEND="${RDEPEND}
 
 src_configure() {
 	local emesonargs=(
-		--libdir="/usr/$(get_libdir)/vapoursynth/"
+		--libdir="${EPREFIX}/usr/$(get_libdir)/vapoursynth/"
 		-Db_lto=$(usex lto true false)
 	)
 	meson_src_configure
