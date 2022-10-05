@@ -37,8 +37,8 @@ src_configure() {
 	fi
 
 	./configure \
-		--prefix=/usr \
-		--libdir=/usr/$(get_libdir) \
+		--prefix="${EPREFIX}"/usr \
+		--libdir="${EPREFIX}"/usr/$(get_libdir) \
 		--extra-cflags="${CFLAGS}" \
 		--extra-ldflags="${LDFLAGS}" \
 		${myconf}  || die

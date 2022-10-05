@@ -31,7 +31,7 @@ DOCS=( readme.rst )
 
 src_configure() {
 	local emesonargs=(
-		--libdir="/usr/$(get_libdir)/vapoursynth/"
+		--libdir="${EPREFIX}/usr/$(get_libdir)/vapoursynth/"
 	)
 	meson_src_configure
 }
