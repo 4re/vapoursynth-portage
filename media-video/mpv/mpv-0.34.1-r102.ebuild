@@ -1,4 +1,4 @@
-# Copyright 2022 Gentoo Authors
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -90,7 +90,7 @@ COMMON_DEPEND="
 	raspberry-pi? ( >=media-libs/raspberrypi-userland-0_pre20160305-r1 )
 	rubberband? ( >=media-libs/rubberband-1.8.0 )
 	sdl? ( media-libs/libsdl2[sound,threads,video] )
-	vaapi? ( x11-libs/libva:=[drm(+)?,X?,wayland?] )
+	vaapi? ( media-libs/libva:=[drm(+)?,X?,wayland?] )
 	vapoursynth? ( media-libs/vapoursynth )
 	vdpau? ( x11-libs/libvdpau )
 	vulkan? (
@@ -267,7 +267,7 @@ src_configure() {
 
 	mywafargs+=(
 		--bashdir="$(get_bashcompdir)"
-		--zshdir=${EPREFIX}/usr/share/zsh/site-functions
+		--zshdir="${EPREFIX}"/usr/share/zsh/site-functions
 )
 
 	# Create reproducible non-live builds.
@@ -285,13 +285,13 @@ src_install() {
 	fi
 
 	if use cli && use lua_single_target_luajit; then
-		pax-mark -m "${ED}"${EPREFIX}/usr/bin/${PN}
+		pax-mark -m "${ED}"/usr/bin/${PN}
 	fi
 
 	if use tools; then
 		dobin TOOLS/{mpv_identify.sh,umpv}
 		newbin TOOLS/idet.sh mpv_idet.sh
-		python_replicate_script "${ED}"${EPREFIX}/usr/bin/umpv
+		python_replicate_script "${ED}"/usr/bin/umpv
 	fi
 }
 
