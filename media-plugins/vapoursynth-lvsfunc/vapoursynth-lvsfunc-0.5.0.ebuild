@@ -27,7 +27,7 @@ IUSE="deint dvd fixedges mpls"
 RDEPEND+="
 	media-libs/vapoursynth[${PYTHON_SINGLE_USEDEP}]
 	deint? ( media-plugins/vapoursynth-combmask )
-	dvd? ( media-plugins/vapoursynth-d2vsource )
+	dvd? ( media-plugins/vapoursynth-d2vsource media-plugins/vs-parsedvd )
 	fixedges? ( media-plugins/vapoursynth-continuityfixer )
 	mpls? ( media-plugins/vapoursynth-readmpls )
 	media-plugins/vapoursynth-fvsfunc
