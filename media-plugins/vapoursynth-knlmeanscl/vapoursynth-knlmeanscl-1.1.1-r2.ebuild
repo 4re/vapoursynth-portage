@@ -22,7 +22,7 @@ RDEPEND+="
 	virtual/opencl
 	video_cards_nvidia? (
 		x11-drivers/nvidia-drivers
-		dev-libs/ocl-icd
+		dev-libs/opencl-icd-loader
 		)
 "
 DEPEND="${RDEPEND}
