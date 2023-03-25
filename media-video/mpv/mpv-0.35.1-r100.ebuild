@@ -1,4 +1,4 @@
-# Copyright 1999-2022 Gentoo Authors
+# Copyright 1999-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -12,7 +12,7 @@ if [[ ${PV} == 9999 ]]; then
 	EGIT_REPO_URI="https://github.com/mpv-player/mpv.git"
 else
 	SRC_URI="https://github.com/mpv-player/mpv/archive/v${PV}.tar.gz -> ${P}.tar.gz"
-	KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~loong ~ppc ~ppc64 ~riscv ~x86 ~amd64-linux"
+	KEYWORDS="amd64 ~arm ~arm64 ~hppa ~loong ppc ppc64 ~riscv ~x86 ~amd64-linux"
 fi
 
 DESCRIPTION="Media player for the command line"
@@ -24,7 +24,7 @@ IUSE="
 	+X +alsa aqua archive bluray cdda +cli coreaudio debug +drm dvb
 	dvd +egl gamepad +iconv jack javascript jpeg lcms libcaca +libmpv
 	+libplacebo +lua mmal nvenc openal opengl pipewire pulseaudio
-	raspberry-pi rubberband sdl selinux sndio test tools +uchardet
+	raspberry-pi rubberband sdl selinux sixel sndio test tools +uchardet
 	vaapi vapoursynth vdpau vulkan wayland +xv zimg zlib"
 REQUIRED_USE="
 	${PYTHON_REQUIRED_USE}
@@ -37,12 +37,16 @@ REQUIRED_USE="
 	test? ( cli )
 	tools? ( cli )
 	uchardet? ( iconv )
-	vaapi? ( || ( X egl libplacebo wayland ) )
+	vaapi? (
+		|| ( X egl libplacebo wayland )
+		wayland? ( drm )
+	)
 	vdpau? ( X )
 	vulkan? ( || ( X wayland ) libplacebo )
 	xv? ( X )"
 RESTRICT="!test? ( test )"
 
+# raspberry-pi: default to -bin given non-bin is known broken (bug #893422)
 COMMON_DEPEND="
 	media-libs/libass:=[fontconfig]
 	media-video/ffmpeg:=[encode,threads,vaapi?,vdpau?]
@@ -90,9 +94,15 @@ COMMON_DEPEND="
 	opengl? ( media-libs/libglvnd[X?] )
 	pipewire? ( media-video/pipewire:= )
 	pulseaudio? ( media-libs/libpulse )
-	raspberry-pi? ( media-libs/raspberrypi-userland )
+	raspberry-pi? (
+		|| (
+			media-libs/raspberrypi-userland-bin
+			media-libs/raspberrypi-userland
+		)
+	)
 	rubberband? ( media-libs/rubberband )
 	sdl? ( media-libs/libsdl2[sound,threads,video] )
+	sixel? ( media-libs/libsixel )
 	sndio? ( media-sound/sndio:= )
 	vaapi? ( media-libs/libva:=[X?,drm(+)?,wayland?] )
 	vapoursynth? ( media-libs/vapoursynth )
@@ -124,15 +134,13 @@ BDEPEND="
 	cli? ( dev-python/docutils )
 	wayland? ( dev-util/wayland-scanner )"
 
+PATCHES=(
+	"${FILESDIR}"/${P}-yt-dlp-edl-fragments.patch
+)
+
 pkg_setup() {
 	use lua && lua-single_pkg_setup
 	python-single-r1_pkg_setup
-}
-
-src_prepare() {
-	default
-
-	sed -i "s/'rst2html/&.py/" meson.build || die
 }
 
 src_configure() {
@@ -142,11 +150,6 @@ src_configure() {
 		else
 			append-cppflags -DNDEBUG # treated specially
 		fi
-	fi
-
-	if use raspberry-pi; then
-		append-cflags -I"${ESYSROOT}"/opt/vc/include
-		append-ldflags -L"${ESYSROOT}"/opt/vc/lib
 	fi
 
 	mpv_feature_multi() {
@@ -208,7 +211,7 @@ src_configure() {
 		$(meson_feature libplacebo)
 		$(meson_feature mmal rpi-mmal)
 		$(meson_feature sdl sdl2-video)
-		-Dsixel=disabled # TODO? needs keywording/testing
+		$(meson_feature sixel)
 		$(meson_feature wayland)
 		$(meson_feature xv)
 
@@ -247,7 +250,22 @@ src_configure() {
 
 src_test() {
 	# https://github.com/mpv-player/mpv/blob/master/DOCS/man/options.rst#debugging
-	edo "${BUILD_DIR}"/mpv --no-config -v --unittest=all-simple
+	local tests=($("${BUILD_DIR}"/mpv --no-config --unittest=help | tail -n +2; assert))
+	(( ${#tests[@]} )) || die "failed to gather any tests"
+
+	local skip=(
+		all-simple
+
+		# fails on non-issue minor inconsistencies (bug #888639)
+		img_format
+		repack_sws
+	)
+
+	local test
+	for test in "${tests[@]}"; do
+		[[ ${test} == @($(IFS='|'; echo "${skip[*]}")) ]] ||
+			edo "${BUILD_DIR}"/mpv -v --no-config --unittest="${test}"
+	done
 }
 
 src_install() {
@@ -281,5 +299,5 @@ src_install() {
 pkg_postinst() {
 	xdg_pkg_postinst
 
-	optfeature "URL support" net-misc/yt-dlp
+	optfeature "URL support with USE=lua" net-misc/yt-dlp
 }

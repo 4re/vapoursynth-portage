@@ -1,11 +1,11 @@
-# Copyright 1999-2022 Gentoo Authors
+# Copyright 1999-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 
 LUA_COMPAT=( lua5-1 luajit )
 PYTHON_COMPAT=( python3_{9..11} )
-inherit edo flag-o-matic lua-single meson optfeature pax-utils python-single-r1 xdg
+inherit flag-o-matic lua-single meson optfeature pax-utils python-single-r1 xdg
 
 if [[ ${PV} == 9999 ]]; then
 	inherit git-r3
@@ -24,7 +24,7 @@ IUSE="
 	+X +alsa aqua archive bluray cdda +cli coreaudio debug +drm dvb
 	dvd +egl gamepad +iconv jack javascript jpeg lcms libcaca +libmpv
 	+libplacebo +lua mmal nvenc openal opengl pipewire pulseaudio
-	raspberry-pi rubberband sdl selinux sndio test tools +uchardet
+	raspberry-pi rubberband sdl selinux sixel sndio test tools +uchardet
 	vaapi vapoursynth vdpau vulkan wayland +xv zimg zlib"
 REQUIRED_USE="
 	${PYTHON_REQUIRED_USE}
@@ -37,15 +37,19 @@ REQUIRED_USE="
 	test? ( cli )
 	tools? ( cli )
 	uchardet? ( iconv )
-	vaapi? ( || ( X egl libplacebo wayland ) )
+	vaapi? (
+		|| ( X egl libplacebo wayland )
+		wayland? ( drm )
+	)
 	vdpau? ( X )
 	vulkan? ( || ( X wayland ) libplacebo )
 	xv? ( X )"
 RESTRICT="!test? ( test )"
 
+# raspberry-pi: default to -bin given non-bin is known broken (bug #893422)
 COMMON_DEPEND="
 	media-libs/libass:=[fontconfig]
-	media-video/ffmpeg:=[encode,threads,vaapi?,vdpau?]
+	>=media-video/ffmpeg-4.4:=[encode,threads,vaapi?,vdpau?]
 	X? (
 		x11-libs/libX11
 		x11-libs/libXScrnSaver
@@ -90,9 +94,15 @@ COMMON_DEPEND="
 	opengl? ( media-libs/libglvnd[X?] )
 	pipewire? ( media-video/pipewire:= )
 	pulseaudio? ( media-libs/libpulse )
-	raspberry-pi? ( media-libs/raspberrypi-userland )
+	raspberry-pi? (
+		|| (
+			media-libs/raspberrypi-userland-bin
+			media-libs/raspberrypi-userland
+		)
+	)
 	rubberband? ( media-libs/rubberband )
 	sdl? ( media-libs/libsdl2[sound,threads,video] )
+	sixel? ( media-libs/libsixel )
 	sndio? ( media-sound/sndio:= )
 	vaapi? ( media-libs/libva:=[X?,drm(+)?,wayland?] )
 	vapoursynth? ( media-libs/vapoursynth )
@@ -129,12 +139,6 @@ pkg_setup() {
 	python-single-r1_pkg_setup
 }
 
-src_prepare() {
-	default
-
-	sed -i "s/'rst2html/&.py/" meson.build || die
-}
-
 src_configure() {
 	if use !debug; then
 		if use test; then
@@ -142,11 +146,6 @@ src_configure() {
 		else
 			append-cppflags -DNDEBUG # treated specially
 		fi
-	fi
-
-	if use raspberry-pi; then
-		append-cflags -I"${ESYSROOT}"/opt/vc/include
-		append-ldflags -L"${ESYSROOT}"/opt/vc/lib
 	fi
 
 	mpv_feature_multi() {
@@ -208,7 +207,7 @@ src_configure() {
 		$(meson_feature libplacebo)
 		$(meson_feature mmal rpi-mmal)
 		$(meson_feature sdl sdl2-video)
-		-Dsixel=disabled # TODO? needs keywording/testing
+		$(meson_feature sixel)
 		$(meson_feature wayland)
 		$(meson_feature xv)
 
@@ -245,11 +244,6 @@ src_configure() {
 	meson_src_configure
 }
 
-src_test() {
-	# https://github.com/mpv-player/mpv/blob/master/DOCS/man/options.rst#debugging
-	edo "${BUILD_DIR}"/mpv --no-config -v --unittest=all-simple
-}
-
 src_install() {
 	meson_src_install
 
@@ -281,5 +275,5 @@ src_install() {
 pkg_postinst() {
 	xdg_pkg_postinst
 
-	optfeature "URL support" net-misc/yt-dlp
+	optfeature "URL support with USE=lua" net-misc/yt-dlp
 }
