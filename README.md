@@ -44,6 +44,6 @@ Troubleshooting
 ---------------
 If you want to use python-3.11 you may need to add this to your `/etc/portage/package.use/use`:
 ```
-*/*::vapoursynth PYTHON_SINGLE_TARGET: -* python3_11
+*/*::vapoursynth PYTHON_SINGLE_TARGET: -* python3_12
 ```
 Be aware that not all ebuilds may be able to satisfy all dependencies.
