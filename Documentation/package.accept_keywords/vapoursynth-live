@@ -7,6 +7,7 @@
 ~media-plugins/acsuite-9999 **
 ~media-plugins/audiocutter-9999 **
 ~media-plugins/bestaudiosource-9999 **
+~media-plugins/bestsource-9999 **
 ~media-plugins/ocsuite-9999 **
 ~media-plugins/subtext-9999 **
 ~media-plugins/vapoursynth-addgrain-9999 **
@@ -144,6 +145,7 @@
 ~media-plugins/vs-ccd-9999 **
 ~media-plugins/vs-imwri-9999 **
 ~media-plugins/vs-ocr-9999 **
+~media-plugins/vs-parsedvd-9999 **
 ~media-plugins/vs-placebo-9999 **
 ~media-plugins/vs-removegrain-9999 **
 ~media-plugins/vsutil-9999 **

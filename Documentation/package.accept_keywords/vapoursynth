@@ -7,6 +7,7 @@ media-libs/zimg ~*
 media-plugins/acsuite ~*
 media-plugins/audiocutter ~*
 media-plugins/bestaudiosource ~*
+media-plugins/bestsource ~*
 media-plugins/ocsuite ~*
 media-plugins/subtext ~*
 media-plugins/vapoursynth-addgrain ~*
@@ -144,6 +145,7 @@ media-plugins/vivtc ~*
 media-plugins/vs-ccd ~*
 media-plugins/vs-imwri ~*
 media-plugins/vs-ocr ~*
+media-plugins/vs-parsedvd ~*
 media-plugins/vs-placebo ~*
 media-plugins/vs-removegrain ~*
 media-plugins/vsutil ~*
