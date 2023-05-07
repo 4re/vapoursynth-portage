@@ -8,6 +8,7 @@ media-plugins/acsuite ~*
 media-plugins/audiocutter ~*
 media-plugins/bestaudiosource ~*
 media-plugins/bestsource ~*
+media-plugins/dmetrics ~*
 media-plugins/ocsuite ~*
 media-plugins/subtext ~*
 media-plugins/vapoursynth-addgrain ~*
