@@ -3,9 +3,12 @@
 
 EAPI=8
 
-PYTHON_COMPAT=( python3_{9..11} )
+PYTHON_COMPAT=( python3_{10..11} )
 
-inherit python-single-r1
+DISTUTILS_USE_PEP517=hatchling
+DISTUTILS_SINGLE_IMPL=1
+
+inherit distutils-r1
 
 DESCRIPTION="HolyWu's ported AviSynth scripts for VapourSynth"
 HOMEPAGE="http://forum.doom9.org/showthread.php?t=166582"
@@ -20,10 +23,9 @@ else
 	KEYWORDS="~amd64 ~x86"
 fi
 
-LICENSE=""
+LICENSE="Unlicense"
 SLOT="0"
 IUSE="+fftw opencl"
-
 
 RDEPEND+="
 	media-libs/vapoursynth:0/4
@@ -39,7 +41,7 @@ RDEPEND+="
 	fftw? ( media-plugins/vapoursynth-dfttest )
 	media-plugins/vapoursynth-eedi2
 	fftw? ( media-plugins/vapoursynth-fft3dfilter )
-	media-plugins/vapoursynth-flash3kyuu_deband
+	media-plugins/vapoursynth-neo_f3kdb
 	media-plugins/vapoursynth-fluxsmooth
 	media-plugins/vapoursynth-fmtconv
 	media-plugins/vapoursynth-hqdn3d
@@ -53,10 +55,8 @@ RDEPEND+="
 	media-plugins/vapoursynth-temporalsoften2
 	media-plugins/vapoursynth-ttempsmooth
 	media-plugins/vapoursynth-znedi3
-	media-plugins/vsutil
+	media-plugins/vs-tools
+	media-plugins/vs-rgtools
+	media-plugins/vs-denoise
 "
 DEPEND="${RDEPEND}"
-
-src_install(){
-	python_domodule havsfunc.py
-}
