@@ -15,7 +15,7 @@ if [[ ${PV} == *9999* ]]; then
 else
 	inherit vcs-snapshot
 	SRC_URI="https://github.com/WolframRhodium/VapourSynth-BM3DCUDA/archive/R${PV}.tar.gz -> ${PN}-${PV}.tar.gz"
-	KEYWORDS="~amd64 ~x86"
+	KEYWORDS="~amd64"
 fi
 
 LICENSE="GPL-2"
@@ -32,6 +32,18 @@ RDEPEND+="
 "
 DEPEND="${RDEPEND}
 "
+
+pkg_setup() {
+	# Pulled from firefox ebuild
+	#
+	# Fixes sandbox error
+	if use cuda; then
+		nvidia_cards=$(echo -n /dev/nvidia* | sed 's/ /:/g')
+		if [[ -n "${nvidia_cards}" ]] ; then
+			addpredict "${nvidia_cards}"
+		fi
+	fi
+}
 
 src_configure() {
 	local mycmakeargs=(
