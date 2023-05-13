@@ -1,9 +1,9 @@
-# Copyright 2022 Gentoo Authors
+# Copyright 2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 
-inherit toolchain-funcs
+inherit toolchain-funcs meson
 
 DESCRIPTION="Rapid, Detail-Preserving Image Downscaler for VapourSynth"
 HOMEPAGE="https://github.com/WolframRhodium/VapourSynth-dpid"
@@ -28,14 +28,4 @@ RDEPEND+="
 DEPEND="${RDEPEND}
 "
 
-LIBNAME="libdpid.so"
-EXTRAFLAGS="-fPIC -shared --std=c++17"
-
-src_compile() {
-	$(tc-getCC) ${CFLAGS} ${EXTRAFLAGS} ${LDFLAGS} -o ${LIBNAME} $(pkg-config --cflags vapoursynth) Source/Source.cpp || die "Build failed"
-}
-
-src_install() {
-	insinto /usr/$(get_libdir)/vapoursynth/
-	doins ${LIBNAME}
-}
+S="${S}/Source"
