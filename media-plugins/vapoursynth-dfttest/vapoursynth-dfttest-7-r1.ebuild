@@ -32,6 +32,7 @@ DEPEND="${RDEPEND}
 
 DOCS=( "README.md" )
 
+PATCHES="${FILESDIR}/meson_properly-handle-fftw-deps.patch"
 
 src_configure() {
 	local emesonargs=(
