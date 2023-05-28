@@ -11,7 +11,7 @@ DESCRIPTION="A sharpening/blind deconvolution suite with certain advanced featur
 HOMEPAGE="https://github.com/IFeelBloated/Plum"
 
 EGIT_REPO_URI="https://github.com/IFeelBloated/Plum.git"
-EGIT_COMMIT="cffeb87117f05d296b3b9451ee687a4fb439f9b4"
+EGIT_COMMIT="647f53a80c4fc2cf26f1d9a56c6c2031554f46d8"
 
 KEYWORDS="~amd64 ~x86"
 

@@ -1,6 +1,6 @@
-diff -urN a/Plum/Plum.py b/Plum/Plum.py
---- a/Plum/Plum.py	2023-05-28 18:20:05.437341367 +0200
-+++ b/Plum/Plum.py	2023-05-28 18:20:43.401433876 +0200
+diff -urN a/Plum.py b/Plum.py
+--- a/Plum.py	2023-05-28 18:20:05.437341367 +0200
++++ b/Plum.py	2023-05-28 18:20:43.401433876 +0200
 @@ -22,7 +22,7 @@
            self.OPP2RGB       = vs.core.bm3d.OPP2RGB
            self.KNLMeansCL    = vs.core.knlm.KNLMeansCL
@@ -19,9 +19,9 @@ diff -urN a/Plum/Plum.py b/Plum/Plum.py
            sharp              = self.CutOff(src, sharp, 1, 0)
            clip               = self.Crop(sharp, radius+fr, radius+fr, radius+fr, radius+fr)
            return clip
-diff -urN a/Plum/PlumAlpha.py b/Plum/PlumAlpha.py
---- a/Plum/PlumAlpha.py	2023-05-28 18:20:05.437341367 +0200
-+++ b/Plum/PlumAlpha.py	2023-05-28 18:20:43.402433878 +0200
+diff -urN a/PlumAlpha.py b/PlumAlpha.py
+--- a/PlumAlpha.py	2023-05-28 18:20:05.437341367 +0200
++++ b/PlumAlpha.py	2023-05-28 18:20:43.402433878 +0200
 @@ -22,7 +22,7 @@
            self.OPP2RGB       = vs.core.bm3d.OPP2RGB
            self.KNLMeansCL    = vs.core.knlm.KNLMeansCL
