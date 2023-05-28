@@ -36,15 +36,14 @@ RDEPEND+="
 	media-plugins/vapoursynth-mvtools
 	media-plugins/vapoursynth-nnedi3
 	media-plugins/vapoursynth-sangnom
+	media-plugins/vapoursynth-tcanny
 	media-plugins/vapoursynth-znedi3
 	opencl? (
 		media-plugins/vapoursynth-eedi3[opencl]
 		media-plugins/vapoursynth-nnedi3cl
-		media-plugins/vapoursynth-tcanny[opencl]
 		)
 	!opencl? (
 		media-plugins/vapoursynth-eedi3
-		media-plugins/vapoursynth-tcanny
 		)
 	media-plugins/vs-removegrain
 "
