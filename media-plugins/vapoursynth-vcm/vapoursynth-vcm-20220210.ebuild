@@ -6,9 +6,9 @@ EAPI=8
 inherit meson git-r3
 
 DESCRIPTION="TFM and TDecimate functions for field matching and decimation"
-HOMEPAGE="https://github.com/AmusementClub/vcm"
+HOMEPAGE="https://github.com/AmusementClub/vcm http://www.avisynth.nl/users/vcmohan/vcm/vcm.html"
 
-EGIT_REPO_URI="https://github.com/AmusementClub/vcm http://www.avisynth.nl/users/vcmohan/vcm/vcm.html"
+EGIT_REPO_URI="https://github.com/AmusementClub/vcm"
 EGIT_COMMIT="744c82d16728accb43022df9a82e0f609e381617"
 KEYWORDS="~amd64"
 
