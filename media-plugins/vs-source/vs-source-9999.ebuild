@@ -25,7 +25,7 @@ IUSE=""
 
 RDEPEND+="
 	media-libs/vapoursynth[${PYTHON_SINGLE_USEDEP}]
-	dev-python/pyparsedvd
+	media-plugins/vs-tools
 "
 DEPEND="${RDEPEND}"
 
