@@ -1,0 +1,42 @@
+diff -urN a/Plum/Plum.py b/Plum/Plum.py
+--- a/Plum/Plum.py	2023-05-28 18:20:05.437341367 +0200
++++ b/Plum/Plum.py	2023-05-28 18:20:43.401433876 +0200
+@@ -22,7 +22,7 @@
+           self.OPP2RGB       = vs.core.bm3d.OPP2RGB
+           self.KNLMeansCL    = vs.core.knlm.KNLMeansCL
+           self.NNEDI         = vs.core.nnedi3.nnedi3
+-          self.FQSharp       = vs.core.vcm.fqSharp
++          self.F2QSharp       = vs.core.vcm.F2QSharp
+           self.Resample      = vs.core.fmtc.resample
+           self.MakeDiff      = vs.core.std.MakeDiff
+           self.MergeDiff     = vs.core.std.MergeDiff
+@@ -54,7 +54,7 @@
+ 
+       def Deconvolution(self, src, radius, wn, fr, scale):
+           src                = self.Pad(src, radius+fr, radius+fr, radius+fr, radius+fr)
+-          sharp              = self.FQSharp(src, x=radius, y=radius, wn=wn, fr=fr, scale=scale, **deconvolution_args)
++          sharp              = self.F2QSharp(src, x=radius, y=radius, wn=wn, scale=scale, **deconvolution_args)
+           sharp              = self.CutOff(src, sharp, 1, 0)
+           clip               = self.Crop(sharp, radius+fr, radius+fr, radius+fr, radius+fr)
+           return clip
+diff -urN a/Plum/PlumAlpha.py b/Plum/PlumAlpha.py
+--- a/Plum/PlumAlpha.py	2023-05-28 18:20:05.437341367 +0200
++++ b/Plum/PlumAlpha.py	2023-05-28 18:20:43.402433878 +0200
+@@ -22,7 +22,7 @@
+           self.OPP2RGB       = vs.core.bm3d.OPP2RGB
+           self.KNLMeansCL    = vs.core.knlm.KNLMeansCL
+           self.NNEDI         = vs.core.nnedi3.nnedi3
+-          self.FQSharp       = vs.core.vcm.fqSharp
++          self.F2QSharp       = vs.core.vcm.F2QSharp
+           self.Resample      = vs.core.fmtc.resample
+           self.MakeDiff      = vs.core.std.MakeDiff
+           self.MergeDiff     = vs.core.std.MergeDiff
+@@ -55,7 +55,7 @@
+       def Deconvolution(self, src, radius, wn, scale):
+           fr                 = 25  
+           src                = self.Pad(src, radius+fr, radius+fr, radius+fr, radius+fr)
+-          sharp              = self.FQSharp(src, x=radius, y=radius, wn=wn, fr=fr, scale=scale, **deconvolution_args)
++          sharp              = self.F2QSharp(src, x=radius, y=radius, wn=wn, scale=scale, **deconvolution_args)
+           sharp              = self.CutOff(src, sharp, 1, 0)
+           clip               = self.Crop(sharp, radius+fr, radius+fr, radius+fr, radius+fr)
+           return clip
