@@ -18,7 +18,7 @@ fi
 
 LICENSE="BSD-2"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS=""
 IUSE="doc"
 
 RDEPEND+="
@@ -27,23 +27,15 @@ RDEPEND+="
 DEPEND="${RDEPEND}
 "
 
-SOURCEFILES="AVSFrontend.cpp VSFrontend.cpp Backend.cpp"
-LIBNAME="tc2cfr.so"
-
 PATCHES=( "${FILESDIR}/${P}-includes.patch" )
 
+SOURCEFILES="VSFrontend.cpp Backend.cpp"
+LIBNAME="libtc2cfr.so"
+EXTRAFLAGS="-fPIC -shared"
+
+
 src_compile() {
-	for i in ${SOURCEFILES}; do
-		echo "$(tc-getCXX) ${CFLAGS} ${LDFLAGS} -shared -fPIC $(pkg-config --cflags vapoursynth) -o ${i%.*}.o ${i}"
-		$(tc-getCXX) \
-			${CFLAGS} ${LDFLAGS} -shared -fPIC \
-			$(pkg-config --cflags vapoursynth) \
-			-o ${i%.*}.o ${i} || die "compile failed"
-	done
-	echo "$(tc-getCXX) ${LDFLAGS} -shared -o ${LIBNAME} *.o"
-	$(tc-getCXX) \
-			${LDFLAGS} -shared \
-			-o ${LIBNAME} *.o || die "linking failed"
+	$(tc-getCC) ${CXXFLAGS} ${EXTRAFLAGS} ${LDFLAGS} -o ${LIBNAME} $(pkg-config --cflags vapoursynth) ${SOURCEFILES} || die "Build failed"
 }
 
 src_install() {
