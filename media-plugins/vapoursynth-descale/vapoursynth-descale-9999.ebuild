@@ -20,7 +20,7 @@ else
 	KEYWORDS="~amd64 ~x86"
 fi
 
-LICENSE="WTFPL"
+LICENSE="WTFPL-2"
 SLOT="0"
 IUSE="lto"
 

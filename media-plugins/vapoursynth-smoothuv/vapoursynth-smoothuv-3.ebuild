@@ -19,7 +19,7 @@ else
 	KEYWORDS="~amd64 ~x86"
 fi
 
-LICENSE="GPL"
+LICENSE="GPL-2"
 SLOT="0"
 IUSE="lto"
 RESTRICT="mirror"

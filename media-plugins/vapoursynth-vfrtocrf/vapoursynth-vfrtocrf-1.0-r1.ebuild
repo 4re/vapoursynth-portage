@@ -12,7 +12,7 @@ EGIT_REPO_URI="https://github.com/Irrational-Encoding-Wizardry/Vapoursynth-VFRTo
 EGIT_COMMIT="6c8cd2b13179e1861fcabe64dadb32b411bfeb69"
 KEYWORDS="~amd64 ~x86"
 
-LICENSE="BSD-3"
+LICENSE="BSD"
 SLOT="0"
 IUSE="lto"
 

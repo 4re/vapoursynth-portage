@@ -18,7 +18,7 @@ else
 fi
 
 SLOT="0"
-LICENSE="WTFPL"
+LICENSE="WTFPL-2"
 RESTRICT="mirror"
 
 RDEPEND+="
