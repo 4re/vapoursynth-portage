@@ -24,7 +24,7 @@ fi
 
 LICENSE="MIT"
 SLOT="0"
-IUSE=""
+IUSE="cuda"
 
 RDEPEND+="
 	media-libs/vapoursynth[${PYTHON_SINGLE_USEDEP}]
@@ -39,7 +39,7 @@ RDEPEND+="
 	media-plugins/vapoursynth-knlmeanscl
 	media-plugins/vapoursynth-dfttest
 	media-plugins/vapoursynth-fft3dfilter
-	media-plugins/vapoursynth-bm3dcuda
+	cuda? ( media-plugins/vapoursynth-bm3dcuda )
 	media-plugins/vapoursynth-bm3d
 	media-plugins/vapoursynth-bmdegrain
 	media-plugins/vapoursynth-wnnm
