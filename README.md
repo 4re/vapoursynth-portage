@@ -3,14 +3,10 @@ Unofficial portage tree with all VapourSynth related ebuilds
 
 Install
 -------
-To make use of this overlay, first install layman (you need git support enabled on this ebuild):
+The prefered way is using the eselect's repository module:
 ```
-# emerge app-portage/layman
-```
-Update layman's database and add vapoursynth's overlay to your system.
-```
-# layman -L
-# layman -a vapoursynth
+# emerge app-eselect/eselect-repository
+# eselect repository add vapoursynth git https://github.com/4re/vapoursynth-portage
 ```
 
 Usage
