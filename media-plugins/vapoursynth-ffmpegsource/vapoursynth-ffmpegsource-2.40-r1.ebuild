@@ -18,7 +18,7 @@ LICENSE="MIT"
 SLOT="0"
 
 RDEPEND="
-	=media-libs/ffmpegsource-${PV}
+	~media-libs/ffmpegsource-${PV}
 	media-libs/vapoursynth
 "
 DEPEND="${RDEPEND}
