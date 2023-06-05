@@ -3,7 +3,9 @@
 
 EAPI=8
 
-inherit meson
+LLVM_MAX_SLOT=15
+
+inherit meson llvm
 
 DESCRIPTION="Akarin's experimental VapourSynth plugin"
 HOMEPAGE="https://github.com/AkarinVS/vapoursynth-plugin"
@@ -26,7 +28,7 @@ RDEPEND+="
 "
 DEPEND="
 	${RDEPEND}
-	<sys-devel/llvm-16.0.0
+	<=sys-devel/llvm-${LLVM_MAX_SLOT}
 "
 
 if ver_test ${PV} -ne 9999; then
