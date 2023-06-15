@@ -28,7 +28,7 @@ RDEPEND+="
 "
 DEPEND="
 	${RDEPEND}
-	<=sys-devel/llvm-${LLVM_MAX_SLOT}
+	sys-devel/llvm:${LLVM_MAX_SLOT}
 "
 
 if ver_test ${PV} -ne 9999; then
