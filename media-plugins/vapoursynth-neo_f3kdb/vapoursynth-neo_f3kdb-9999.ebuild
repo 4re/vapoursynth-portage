@@ -23,6 +23,7 @@ IUSE=""
 
 RDEPEND+="
 	media-libs/vapoursynth
+	dev-cpp/tbb
 "
 DEPEND="
 	${RDEPEND}
