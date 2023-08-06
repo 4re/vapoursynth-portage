@@ -9,7 +9,7 @@ DESCRIPTION="Sample/frame accurate access to audio and video source plugin for V
 HOMEPAGE="https://github.com/vapoursynth/bestsource"
 
 EGIT_REPO_URI="https://github.com/vapoursynth/bestsource.git https://github.com/sekrit-twc/libp2p"
-EGIT_COMMIT="d917b26767c41851c50ccad29d8d126e139a7822"
+EGIT_COMMIT="ef18d7f4dbbb77a2b2f5fdbb95d100f070c0ca38"
 
 KEYWORDS="~x86 ~amd64"
 
