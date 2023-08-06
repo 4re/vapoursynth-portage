@@ -26,7 +26,7 @@ RESTRICT="mirror"
 RDEPEND+="
 	dev-libs/jansson
 	media-libs/vapoursynth:0/4
-	media-video/ffmpeg
+	>=media-video/ffmpeg-5.1
 "
 DEPEND="${RDEPEND}
 "
