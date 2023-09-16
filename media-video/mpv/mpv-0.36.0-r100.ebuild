@@ -86,8 +86,7 @@ COMMON_DEPEND="
 	lcms? ( media-libs/lcms:2 )
 	libcaca? ( media-libs/libcaca )
 	libplacebo? (
-		<media-libs/libplacebo-6.287.0-rc1:=[opengl?,vulkan?]
-		>=media-libs/libplacebo-4.202:=[opengl?,vulkan?]
+		>=media-libs/libplacebo-6.292.0:=[opengl?,vulkan?]
 		egl? ( media-libs/libplacebo[opengl] )
 	)
 	lua? ( ${LUA_DEPS} )
@@ -136,7 +135,6 @@ BDEPEND="
 	wayland? ( dev-util/wayland-scanner )"
 
 PATCHES=(
-	"${FILESDIR}"/${P}-yt-dlp-edl-fragments.patch
 )
 
 pkg_setup() {
