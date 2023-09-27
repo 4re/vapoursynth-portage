@@ -39,6 +39,8 @@ DEPEND="${RDEPEND}
 	virtual/pkgconfig
 "
 
+PATCHES=( "${FILESDIR}/${P}-fix-sar.patch" )
+
 src_prepare() {
 	default
 	eautoreconf
