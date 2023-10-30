@@ -23,15 +23,14 @@ SLOT="0/2" # soname
 IUSE="
 	+X +alsa aqua archive bluray cdda +cli coreaudio debug +drm dvb
 	dvd +egl gamepad +iconv jack javascript jpeg lcms libcaca +libmpv
-	+libplacebo +lua mmal nvenc openal opengl pipewire pulseaudio
-	raspberry-pi rubberband sdl selinux sixel sndio test tools
-	+uchardet vaapi vapoursynth vdpau vulkan wayland xv zimg zlib
+	+lua mmal nvenc openal opengl pipewire pulseaudio raspberry-pi
+	rubberband sdl selinux sixel sndio test tools +uchardet vaapi
+	vdpau vulkan wayland xv zimg zlib
 "
 REQUIRED_USE="
 	${PYTHON_REQUIRED_USE}
 	|| ( cli libmpv )
 	egl? ( || ( X drm wayland ) )
-	libplacebo? ( || ( egl opengl vulkan ) )
 	lua? ( ${LUA_REQUIRED_USE} )
 	nvenc? ( || ( egl opengl vulkan ) )
 	opengl? ( || ( X aqua ) )
@@ -40,7 +39,7 @@ REQUIRED_USE="
 	uchardet? ( iconv )
 	vaapi? ( || ( X drm wayland ) )
 	vdpau? ( X )
-	vulkan? ( || ( X wayland ) libplacebo )
+	vulkan? ( || ( X wayland ) )
 	xv? ( X )
 "
 RESTRICT="!test? ( test )"
@@ -48,12 +47,12 @@ RESTRICT="!test? ( test )"
 # raspberry-pi: default to -bin given non-bin is known broken (bug #893422)
 COMMON_DEPEND="
 	media-libs/libass:=[fontconfig]
+	>=media-libs/libplacebo-6.338:=[opengl?,vulkan?]
 	>=media-video/ffmpeg-4.4:=[encode,threads,vaapi?,vdpau?]
 	X? (
 		x11-libs/libX11
 		x11-libs/libXScrnSaver
 		x11-libs/libXext
-		x11-libs/libXinerama
 		x11-libs/libXpresent
 		x11-libs/libXrandr
 		xv? ( x11-libs/libXv )
@@ -73,7 +72,10 @@ COMMON_DEPEND="
 		media-libs/libdvdnav
 		media-libs/libdvdread:=
 	)
-	egl? ( media-libs/libglvnd )
+	egl? (
+		media-libs/libglvnd
+		media-libs/libplacebo[opengl]
+	)
 	gamepad? ( media-libs/libsdl2[joystick] )
 	iconv? (
 		virtual/libiconv
@@ -84,10 +86,6 @@ COMMON_DEPEND="
 	jpeg? ( media-libs/libjpeg-turbo:= )
 	lcms? ( media-libs/lcms:2 )
 	libcaca? ( media-libs/libcaca )
-	libplacebo? (
-		>=media-libs/libplacebo-4.157:=[opengl?,vulkan?]
-		egl? ( media-libs/libplacebo[opengl] )
-	)
 	lua? ( ${LUA_DEPS} )
 	openal? ( media-libs/openal )
 	opengl? ( media-libs/libglvnd[X?] )
@@ -206,7 +204,6 @@ src_configure() {
 		$(meson_feature drm)
 		$(meson_feature jpeg)
 		$(meson_feature libcaca caca)
-		$(meson_feature libplacebo)
 		$(meson_feature mmal rpi-mmal)
 		$(meson_feature sdl sdl2-video)
 		$(meson_feature sixel)
@@ -244,13 +241,9 @@ src_configure() {
 
 		# notable options left to automagic
 		#dmabuf-wayland: USE="drm wayland" + plus memfd_create support
-		#libplacebo-next: USE="libplacebo" + >=libplacebo-5.266
-		#vulkan-interop: USE="libplacebo vulkan" + ffmpeg-9999 currently
+		#vulkan-interop: USE="vulkan" + ffmpeg-9999 currently
 		# TODO?: perhaps few more similar compound options should be left auto
 	)
-
-	has_version '>=media-libs/libplacebo-5.266' ||
-		ewarn "${PN}'s gpu-next video output requires ${_} to be used"
 
 	meson_src_configure
 }
