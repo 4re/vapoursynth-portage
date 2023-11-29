@@ -4,7 +4,7 @@
 EAPI=8
 
 DESCRIPTION="A format-conversion plug-in for the Vapoursynth video processing engine"
-HOMEPAGE="http://forum.doom9.org/showthread.php?t=166504"
+HOMEPAGE="http://forum.doom9.org/showthread.php?t=166504 https://gitlab.com/EleonoreMizo/fmtconv"
 
 if [[ ${PV} == *9999* ]]; then
 	inherit git-r3
