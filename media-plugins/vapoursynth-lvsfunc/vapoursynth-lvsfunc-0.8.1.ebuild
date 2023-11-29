@@ -22,7 +22,7 @@ fi
 
 LICENSE="MIT"
 SLOT="0"
-IUSE="deint dvd fixedges mpls"
+IUSE=""
 
 # Missing: vsdehalo, vsdeinterlace
 RDEPEND+="
