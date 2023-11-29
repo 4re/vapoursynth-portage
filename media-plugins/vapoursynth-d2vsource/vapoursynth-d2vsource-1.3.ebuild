@@ -3,14 +3,20 @@
 
 EAPI=8
 
-inherit autotools git-r3
+inherit autotools
 
 DESCRIPTION="D2V Source plugin for VapourSynth"
 HOMEPAGE="https://github.com/dwbuiten/d2vsource"
 
-EGIT_REPO_URI="https://github.com/dwbuiten/d2vsource.git"
-EDIT_COMMIT="700523ca0eb4232ae624f12dd81b23ab52517534"
-KEYWORDS="~amd64 ~x86"
+if [[ ${PV} == *9999* ]]; then
+	inherit git-r3
+	EGIT_REPO_URI="https://github.com/dwbuiten/d2vsource.git"
+	KEYWORDS=""
+else
+	inherit vcs-snapshot
+	SRC_URI="https://github.com/dwbuiten/d2vsource/archive/v${PV}.tar.gz -> ${PN}-${PV}.tar.gz"
+	KEYWORDS="~amd64 ~x86"
+fi
 
 LICENSE="LGPL-2.1"
 SLOT="0"
