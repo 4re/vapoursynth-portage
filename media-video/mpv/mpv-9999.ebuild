@@ -25,7 +25,7 @@ IUSE="
 	dvd +egl gamepad +iconv jack javascript jpeg lcms libcaca +libmpv
 	+lua mmal nvenc openal opengl pipewire pulseaudio raspberry-pi
 	rubberband sdl selinux sixel sndio test tools +uchardet vaapi
-	vdpau vulkan wayland xv zimg zlib
+	vapoursynth vdpau vulkan wayland xv zimg zlib
 "
 REQUIRED_USE="
 	${PYTHON_REQUIRED_USE}
@@ -104,10 +104,7 @@ COMMON_DEPEND="
 	vaapi? ( media-libs/libva:=[X?,drm(+)?,wayland?] )
 	vapoursynth? ( media-libs/vapoursynth )
 	vdpau? ( x11-libs/libvdpau )
-	vulkan? (
-		media-libs/shaderc
-		media-libs/vulkan-loader[X?,wayland?]
-	)
+	vulkan? ( media-libs/vulkan-loader[X?,wayland?] )
 	wayland? (
 		dev-libs/wayland
 		dev-libs/wayland-protocols
@@ -223,7 +220,6 @@ src_configure() {
 		$(meson_feature raspberry-pi rpi)
 
 		$(meson_feature vulkan)
-		$(meson_feature vulkan shaderc)
 
 		# hardware decoding
 		$(meson_feature nvenc cuda-hwaccel)
@@ -241,7 +237,7 @@ src_configure() {
 
 		# notable options left to automagic
 		#dmabuf-wayland: USE="drm wayland" + plus memfd_create support
-		#vulkan-interop: USE="vulkan" + ffmpeg-9999 currently
+		#vulkan-interop: USE="vulkan" + >=ffmpeg-6.1
 		# TODO?: perhaps few more similar compound options should be left auto
 	)
 
