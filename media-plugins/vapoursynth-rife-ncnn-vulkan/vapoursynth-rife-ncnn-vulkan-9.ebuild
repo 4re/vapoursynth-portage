@@ -31,7 +31,7 @@ RDEPEND+="
 	media-libs/zimg"
 DEPEND="${RDEPEND}
 "
-BDEPEND="dev-util/ninja"
+BDEPEND="app-alternatives/ninja"
 
 src_configure() {
 	local emesonargs=(
