@@ -12,7 +12,7 @@ if [[ ${PV} == 9999 ]]; then
 	EGIT_REPO_URI="https://github.com/mpv-player/mpv.git"
 else
 	SRC_URI="https://github.com/mpv-player/mpv/archive/v${PV}.tar.gz -> ${P}.tar.gz"
-	KEYWORDS="~amd64 ~arm ~arm64 ~hppa ~loong ~ppc ~ppc64 ~riscv ~x86 ~amd64-linux"
+	KEYWORDS="~amd64 ~arm ~arm64 ~loong ~ppc ~ppc64 ~riscv ~x86 ~amd64-linux"
 fi
 
 DESCRIPTION="Media player for the command line"
@@ -23,9 +23,9 @@ SLOT="0/2" # soname
 IUSE="
 	+X +alsa aqua archive bluray cdda +cli coreaudio debug +drm dvb
 	dvd +egl gamepad +iconv jack javascript jpeg lcms libcaca +libmpv
-	+lua mmal nvenc openal opengl pipewire pulseaudio raspberry-pi
-	rubberband sdl selinux sixel sndio test tools +uchardet vaapi
-	vapoursynth vdpau vulkan wayland xv zimg zlib
+	+lua nvenc openal opengl pipewire pulseaudio rubberband sdl selinux
+	sixel sndio test tools +uchardet vaapi vapoursynth vdpau vulkan
+	wayland xv zimg zlib
 "
 REQUIRED_USE="
 	${PYTHON_REQUIRED_USE}
@@ -44,10 +44,9 @@ REQUIRED_USE="
 "
 RESTRICT="!test? ( test )"
 
-# raspberry-pi: default to -bin given non-bin is known broken (bug #893422)
 COMMON_DEPEND="
 	media-libs/libass:=[fontconfig]
-	>=media-libs/libplacebo-6.338:=[opengl?,vulkan?]
+	>=media-libs/libplacebo-6.338.2:=[opengl?,vulkan?]
 	>=media-video/ffmpeg-4.4:=[encode,threads,vaapi?,vdpau?]
 	X? (
 		x11-libs/libX11
@@ -91,12 +90,6 @@ COMMON_DEPEND="
 	opengl? ( media-libs/libglvnd[X?] )
 	pipewire? ( media-video/pipewire:= )
 	pulseaudio? ( media-libs/libpulse )
-	raspberry-pi? (
-		|| (
-			media-libs/raspberrypi-userland-bin
-			media-libs/raspberrypi-userland
-		)
-	)
 	rubberband? ( media-libs/rubberband )
 	sdl? ( media-libs/libsdl2[sound,threads,video] )
 	sixel? ( media-libs/libsixel )
@@ -201,7 +194,6 @@ src_configure() {
 		$(meson_feature drm)
 		$(meson_feature jpeg)
 		$(meson_feature libcaca caca)
-		$(meson_feature mmal rpi-mmal)
 		$(meson_feature sdl sdl2-video)
 		$(meson_feature sixel)
 		$(meson_feature wayland)
@@ -217,7 +209,6 @@ src_configure() {
 		$(meson_feature libmpv plain-gl)
 		$(mpv_feature_multi opengl X gl-x11)
 		$(mpv_feature_multi opengl aqua gl-cocoa)
-		$(meson_feature raspberry-pi rpi)
 
 		$(meson_feature vulkan)
 
@@ -242,6 +233,12 @@ src_configure() {
 	)
 
 	meson_src_configure
+}
+
+src_test() {
+	# ffmpeg tests are picky and easily break without necessarily
+	# meaning that there are runtime issues (bug #921091,#924276)
+	meson_src_test --no-suite ffmpeg
 }
 
 src_install() {
