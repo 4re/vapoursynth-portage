@@ -1,4 +1,4 @@
-# Copyright 2022 Gentoo Authors
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -11,6 +11,7 @@ HOMEPAGE="https://github.com/dubhater/D2VWitch"
 if [[ ${PV} == *9999* ]]; then
 	inherit git-r3
 	EGIT_REPO_URI="https://github.com/dubhater/${PN}.git"
+	EGIT_SUBMODULES=()
 	KEYWORDS=""
 else
 	inherit vcs-snapshot
@@ -23,7 +24,7 @@ SLOT="0"
 IUSE="lto"
 
 RDEPEND+="
-	media-video/ffmpeg
+	>=media-video/ffmpeg-6.0
 "
 DEPEND="${RDEPEND}
 	dev-qt/qtwidgets
