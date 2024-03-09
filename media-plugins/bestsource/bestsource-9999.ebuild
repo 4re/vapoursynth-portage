@@ -1,20 +1,19 @@
-# Copyright 1999-2023 Gentoo Authors
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 
-inherit meson
+inherit meson git-r3
 
 DESCRIPTION="Sample/frame accurate access to audio and video source plugin for VaporSynth"
 HOMEPAGE="https://github.com/vapoursynth/bestsource"
 
+EGIT_REPO_URI="https://github.com/vapoursynth/bestsource.git"
+
 if [[ ${PV} == *9999* ]]; then
-	inherit git-r3
-	EGIT_REPO_URI="https://github.com/vapoursynth/bestsource.git https://github.com/sekrit-twc/libp2p"
 	KEYWORDS=""
 else
-	inherit vcs-snapshot
-	SRC_URI="https://github.com/vapoursynth/bestsource/archive/R${PV}.tar.gz -> ${PN}-${PV}.tar.gz"
+	EGIT_COMMIT="9513bdc74b8c8c3fb921dcbad743a021239b7fa9"
 	KEYWORDS="~x86 ~amd64"
 fi
 
@@ -31,12 +30,6 @@ RDEPEND+="
 DEPEND="${RDEPEND}
 "
 
-src_unpack() {
-	git-r3_fetch
-	git-r3_checkout
-	git-r3_fetch "https://github.com/sekrit-twc/libp2p.git" "5e65679ae54d0f9fa412ab36289eb2255e341625"
-	git-r3_checkout "https://github.com/sekrit-twc/libp2p.git" "${S}/libp2p"
-}
 
 src_configure() {
 	local emesonargs=(
