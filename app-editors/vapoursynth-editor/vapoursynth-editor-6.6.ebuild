@@ -14,7 +14,7 @@ if [[ ${PV} == *9999* ]]; then
 	KEYWORDS=""
 else
 	inherit vcs-snapshot
-	SRC_URI="https://github.com/YomikoR/VapourSynth-Editor/archive/refs/tags/r19-mod-${PV}.tar.gz -> ${PN}-${PV}.tar.gz"
+	SRC_URI="https://github.com/YomikoR/VapourSynth-Editor/archive/refs/tags/R19-mod-${PV}.tar.gz -> ${PN}-${PV}.tar.gz"
 	KEYWORDS="~amd64 ~x86"
 fi
 
