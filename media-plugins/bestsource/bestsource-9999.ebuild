@@ -24,8 +24,9 @@ RESTRICT="mirror"
 
 RDEPEND+="
 	dev-libs/jansson
+	dev-libs/xxhash
 	media-libs/vapoursynth:0/4
-	>=media-video/ffmpeg-5.1
+	>=media-video/ffmpeg-6.1
 "
 DEPEND="${RDEPEND}
 "
