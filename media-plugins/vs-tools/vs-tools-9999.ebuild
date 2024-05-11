@@ -27,7 +27,7 @@ SLOT="0"
 IUSE=""
 
 RDEPEND+="
-	media-libs/vapoursynth[${PYTHON_SINGLE_USEDEP}]
+	<=media-libs/vapoursynth-66[${PYTHON_SINGLE_USEDEP}]
 	$(python_gen_cond_dep 'dev-python/rich[${PYTHON_USEDEP}]')
 "
 DEPEND="${RDEPEND}"
