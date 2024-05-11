@@ -3,7 +3,7 @@
 
 EAPI=8
 
-PYTHON_COMPAT=( python3_{10..11} )
+PYTHON_COMPAT=( python3_{11..11} )
 
 DISTUTILS_USE_PEP517=setuptools
 DISTUTILS_SINGLE_IMPL=1
@@ -29,5 +29,6 @@ IUSE=""
 RDEPEND+="
 	<=media-libs/vapoursynth-66[${PYTHON_SINGLE_USEDEP}]
 	$(python_gen_cond_dep 'dev-python/rich[${PYTHON_USEDEP}]')
+	$(python_gen_cond_dep 'dev-python/stgpytools[${PYTHON_USEDEP}]')
 "
 DEPEND="${RDEPEND}"
