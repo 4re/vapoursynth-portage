@@ -26,8 +26,10 @@ LICENSE="MIT"
 SLOT="0"
 IUSE=""
 
+PATCHES="${FILESDIR}/vapoursynth-67-fix.patch"
+
 RDEPEND+="
-	<=media-libs/vapoursynth-66[${PYTHON_SINGLE_USEDEP}]
+	media-libs/vapoursynth[${PYTHON_SINGLE_USEDEP}]
 	$(python_gen_cond_dep 'dev-python/rich[${PYTHON_USEDEP}]')
 	$(python_gen_cond_dep 'dev-python/stgpytools[${PYTHON_USEDEP}]')
 "
