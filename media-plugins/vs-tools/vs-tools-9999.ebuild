@@ -1,4 +1,4 @@
-# Copyright 2023 Gentoo Authors
+# Copyright 2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -27,7 +27,7 @@ SLOT="0"
 IUSE=""
 
 RDEPEND+="
-	<=media-libs/vapoursynth-66[${PYTHON_SINGLE_USEDEP}]
+	media-libs/vapoursynth[${PYTHON_SINGLE_USEDEP}]
 	$(python_gen_cond_dep 'dev-python/rich[${PYTHON_USEDEP}]')
 "
 DEPEND="${RDEPEND}"
