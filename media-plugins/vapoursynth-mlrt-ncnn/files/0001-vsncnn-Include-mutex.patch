@@ -1,0 +1,24 @@
+From 1cd9c8f4485a46601e31cb0adccf21b022d4c31f Mon Sep 17 00:00:00 2001
+From: TheGreatMcPain <james@thegreatmcpain.xyz>
+Date: Tue, 25 Jun 2024 02:05:12 -0500
+Subject: [PATCH] vsncnn: Include <mutex>
+
+---
+ vsncnn/vs_ncnn.cpp | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/vs_ncnn.cpp b/vs_ncnn.cpp
+index 322a7a2..4aba7c3 100644
+--- a/vs_ncnn.cpp
++++ b/vs_ncnn.cpp
+@@ -3,6 +3,7 @@
+ #include <atomic>
+ #include <cstdint>
+ #include <memory>
++#include <mutex>
+ #include <optional>
+ #include <string>
+ #include <string_view>
+-- 
+2.44.2
+
