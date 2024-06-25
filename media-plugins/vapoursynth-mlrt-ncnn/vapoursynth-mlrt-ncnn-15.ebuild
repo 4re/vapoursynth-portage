@@ -1,9 +1,9 @@
-# Copyright 2023 Gentoo Authors
+# Copyright 2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 
-inherit cmake git-r3
+inherit cmake flag-o-matic git-r3
 
 DESCRIPTION="NCNN-based GPU (Vulkan) backend for vs-mlrt"
 HOMEPAGE="https://github.com/AmusementClub/vs-mlrt#vsncnn-ncnn-based-gpu-vulkan-runtime"
@@ -27,6 +27,7 @@ RDEPEND+="
 	sci-libs/onnx
 "
 DEPEND="${RDEPEND}"
+PATCHES="${FILESDIR}/0001-vsncnn-Include-mutex.patch"
 
 S="${S}/vsncnn"
 
@@ -38,6 +39,8 @@ src_prepare() {
 }
 
 src_configure() {
+	append-flags "-DONNX_ML=1"
+	append-flags "-DONNX_NAMESPACE=onnx"
 	local GIT_DISCOVERY_ACROSS_FILESYSTEM=1
 	local mycmakeargs=(
 		-DVAPOURSYNTH_INCLUDE_DIRECTORY="/usr/include/vapoursynth"
