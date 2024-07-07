@@ -1,4 +1,4 @@
-# Copyright 1999-2023 Gentoo Authors
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -24,7 +24,7 @@ IUSE="
 	+X +alsa aqua archive bluray cdda +cli coreaudio debug +drm dvb
 	dvd +egl gamepad +iconv jack javascript jpeg lcms libcaca +libmpv
 	+lua nvenc openal opengl pipewire pulseaudio rubberband sdl selinux
-	sixel sndio test tools +uchardet vaapi vapoursynth vdpau vulkan
+	sixel sndio soc test tools +uchardet vaapi vapoursynth vdpau vulkan
 	wayland xv zimg zlib
 "
 REQUIRED_USE="
@@ -47,7 +47,7 @@ RESTRICT="!test? ( test )"
 COMMON_DEPEND="
 	media-libs/libass:=[fontconfig]
 	>=media-libs/libplacebo-6.338.2:=[opengl?,vulkan?]
-	>=media-video/ffmpeg-4.4:=[encode,threads,vaapi?,vdpau?]
+	>=media-video/ffmpeg-6.1:=[encode,soc(-)?,threads,vaapi?,vdpau?]
 	X? (
 		x11-libs/libX11
 		x11-libs/libXScrnSaver
@@ -95,7 +95,6 @@ COMMON_DEPEND="
 	sixel? ( media-libs/libsixel )
 	sndio? ( media-sound/sndio:= )
 	vaapi? ( media-libs/libva:=[X?,drm(+)?,wayland?] )
-	vapoursynth? ( media-libs/vapoursynth )
 	vdpau? ( x11-libs/libvdpau )
 	vulkan? ( media-libs/vulkan-loader[X?,wayland?] )
 	wayland? (
@@ -114,7 +113,7 @@ RDEPEND="
 DEPEND="
 	${COMMON_DEPEND}
 	X? ( x11-base/xorg-proto )
-	dvb? ( virtual/linuxtv-dvb-headers )
+	dvb? ( sys-kernel/linux-headers )
 	nvenc? ( media-libs/nv-codec-headers )
 	wayland? ( dev-libs/wayland-protocols )
 "
@@ -199,7 +198,7 @@ src_configure() {
 		$(meson_feature wayland)
 		$(meson_feature xv)
 
-		-Dgl=$(use egl || use libmpv || use opengl || use raspberry-pi &&
+		-Dgl=$(use egl || use libmpv || use opengl &&
 			echo enabled || echo disabled)
 		$(meson_feature egl)
 		$(mpv_feature_multi egl X egl-x11)
@@ -272,5 +271,6 @@ src_install() {
 pkg_postinst() {
 	xdg_pkg_postinst
 
-	optfeature "URL support with USE=lua" net-misc/yt-dlp
+	optfeature "various websites URL support$(usev !lua \
+		" (requires ${PN} with USE=lua)")" net-misc/yt-dlp
 }
