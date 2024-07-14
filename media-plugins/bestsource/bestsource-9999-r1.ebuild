@@ -13,7 +13,7 @@ EGIT_REPO_URI="https://github.com/vapoursynth/bestsource.git"
 if [[ ${PV} == *9999* ]]; then
 	KEYWORDS=""
 else
-	EGIT_COMMIT="ff911facd49bd4edca253e1fd6e3d140ba668366"
+	EGIT_COMMIT="9513bdc74b8c8c3fb921dcbad743a021239b7fa9"
 	KEYWORDS="~x86 ~amd64"
 fi
 
@@ -34,7 +34,6 @@ DEPEND="${RDEPEND}
 
 src_configure() {
 	local emesonargs=(
-		--libdir="/usr/$(get_libdir)/vapoursynth/"
 		-Db_lto=$(usex lto true false)
 	)
 	meson_src_configure
