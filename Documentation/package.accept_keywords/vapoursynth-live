@@ -1,4 +1,5 @@
 ~app-editors/vapoursynth-editor-9999 **
+~app-editors/vse-previewer-9999 **
 ~media-libs/ffmpegsource-9999 **
 ~media-libs/l-smash-9999 **
 ~media-libs/vapoursynth-9999 **
@@ -72,6 +73,7 @@
 ~media-plugins/vapoursynth-hysteria-9999 **
 ~media-plugins/vapoursynth-inpaint-9999 **
 ~media-plugins/vapoursynth-it-9999 **
+~media-plugins/vapoursynth-jincresize-9999 **
 ~media-plugins/vapoursynth-kagefunc-9999 **
 ~media-plugins/vapoursynth-knlmeanscl-9999 **
 ~media-plugins/vapoursynth-l-smash-works-9999 **
@@ -151,6 +153,7 @@
 ~media-plugins/vivtc-9999 **
 ~media-plugins/vs-aa-9999 **
 ~media-plugins/vs-ccd-9999 **
+~media-plugins/vs-dehalo-9999 **
 ~media-plugins/vs-denoise-9999 **
 ~media-plugins/vs-exprtools-9999 **
 ~media-plugins/vs-imwri-9999 **

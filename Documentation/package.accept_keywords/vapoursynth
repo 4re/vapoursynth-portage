@@ -1,4 +1,5 @@
 app-editors/vapoursynth-editor ~*
+app-editors/vse-previewer ~*
 media-libs/ffmpegsource ~*
 media-libs/l-smash ~*
 media-libs/vapoursynth ~*
@@ -72,6 +73,7 @@ media-plugins/vapoursynth-hqdn3d ~*
 media-plugins/vapoursynth-hysteria ~*
 media-plugins/vapoursynth-inpaint ~*
 media-plugins/vapoursynth-it ~*
+media-plugins/vapoursynth-jincresize ~*
 media-plugins/vapoursynth-kagefunc ~*
 media-plugins/vapoursynth-knlmeanscl ~*
 media-plugins/vapoursynth-l-smash-works ~*
@@ -151,6 +153,7 @@ media-plugins/vapoursynth-znedi3 ~*
 media-plugins/vivtc ~*
 media-plugins/vs-aa ~*
 media-plugins/vs-ccd ~*
+media-plugins/vs-dehalo ~*
 media-plugins/vs-denoise ~*
 media-plugins/vs-exprtools ~*
 media-plugins/vs-imwri ~*
