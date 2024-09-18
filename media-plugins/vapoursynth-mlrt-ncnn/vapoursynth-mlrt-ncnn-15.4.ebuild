@@ -23,8 +23,8 @@ IUSE=""
 RDEPEND+="
 	media-libs/vapoursynth
 	dev-libs/ncnn
-	dev-libs/protobuf
-	sci-libs/onnx
+	dev-libs/protobuf:=
+	sci-libs/onnx:=
 "
 DEPEND="${RDEPEND}"
 PATCHES="${FILESDIR}/0001-vsncnn-Include-mutex.patch"
