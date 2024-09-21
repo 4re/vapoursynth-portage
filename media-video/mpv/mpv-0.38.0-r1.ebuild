@@ -12,6 +12,7 @@ if [[ ${PV} == 9999 ]]; then
 	EGIT_REPO_URI="https://github.com/mpv-player/mpv.git"
 else
 	SRC_URI="https://github.com/mpv-player/mpv/archive/v${PV}.tar.gz -> ${P}.tar.gz"
+	KEYWORDS="~amd64 ~arm ~arm64 ~loong ~ppc ~ppc64 ~riscv ~x86 ~amd64-linux"
 fi
 
 DESCRIPTION="Media player for the command line"
@@ -90,7 +91,7 @@ COMMON_DEPEND="
 	pipewire? ( media-video/pipewire:= )
 	pulseaudio? ( media-libs/libpulse )
 	rubberband? ( media-libs/rubberband )
-	sdl? ( media-libs/libsdl2[sound,threads,video] )
+	sdl? ( media-libs/libsdl2[sound,threads(+),video] )
 	sixel? ( media-libs/libsixel )
 	sndio? ( media-sound/sndio:= )
 	vaapi? ( media-libs/libva:=[X?,drm(+)?,wayland?] )
@@ -114,6 +115,7 @@ DEPEND="
 	X? ( x11-base/xorg-proto )
 	dvb? ( sys-kernel/linux-headers )
 	nvenc? ( media-libs/nv-codec-headers )
+	vulkan? ( dev-util/vulkan-headers )
 	wayland? ( dev-libs/wayland-protocols )
 "
 BDEPEND="
