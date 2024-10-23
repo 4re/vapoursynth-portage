@@ -13,7 +13,7 @@ EGIT_REPO_URI="https://github.com/vapoursynth/bestsource.git"
 if [[ ${PV} == *9999* ]]; then
 	KEYWORDS=""
 else
-	EGIT_COMMIT="55fb7fd8450c7d5cb13c7104850d13d3d200b597"
+	EGIT_COMMIT="12a247ddb2f815d232c76b9de46dcff124a6729f"
 	KEYWORDS="~x86 ~amd64"
 fi
 
