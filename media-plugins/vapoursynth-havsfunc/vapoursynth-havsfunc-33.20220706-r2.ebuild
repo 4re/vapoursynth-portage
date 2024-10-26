@@ -32,6 +32,7 @@ RDEPEND+="
 	media-plugins/vapoursynth-deblock
 	fftw? ( media-plugins/vapoursynth-dfttest )
 	media-plugins/vapoursynth-eedi2
+	media-plugins/vapoursynth-eedi3
 	fftw? ( media-plugins/vapoursynth-fft3dfilter )
 	media-plugins/vapoursynth-flash3kyuu_deband
 	media-plugins/vapoursynth-fluxsmooth
