@@ -1,21 +1,20 @@
-# Copyright 2023 Gentoo Authors
+# Copyright 2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 
-LLVM_MAX_SLOT=15
+LLVM_COMPAT=( {15..18} )
 
-inherit meson llvm
+inherit git-r3 meson llvm-r1
 
 DESCRIPTION="Akarin's experimental VapourSynth plugin"
 HOMEPAGE="https://github.com/AkarinVS/vapoursynth-plugin"
+EGIT_REPO_URI="https://github.com/Jaded-Encoding-Thaumaturgy/akarin-vapoursynth-plugin.git"
 
 if ver_test ${PV} -ne 9999; then
-	SRC_URI="https://github.com/AkarinVS/vapoursynth-plugin/archive/v${PV}.tar.gz -> ${P}.tar.gz"
+	EGIT_COMMIT_DATE="${PV}"
 	KEYWORDS="~amd64 ~x86"
 else
-	inherit git-r3
-	EGIT_REPO_URI="https://github.com/AkarinVS/vapoursynth-plugin.git"
 	KEYWORDS=""
 fi
 
@@ -28,12 +27,10 @@ RDEPEND+="
 "
 DEPEND="
 	${RDEPEND}
-	sys-devel/llvm:${LLVM_MAX_SLOT}
+	$(llvm_gen_dep '
+		llvm-core/llvm:${LLVM_SLOT}=
+	')
 "
-
-if ver_test ${PV} -ne 9999; then
-	S="${WORKDIR}/vapoursynth-plugin-${PV}"
-fi
 
 src_configure() {
 	local emesonargs=(
