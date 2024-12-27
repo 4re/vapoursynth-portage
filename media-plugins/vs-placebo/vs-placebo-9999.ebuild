@@ -19,11 +19,15 @@ fi
 
 LICENSE="LGPL-2.1"
 SLOT="0"
-IUSE="lto"
+IUSE="lto dovi"
 
 RDEPEND+="
 	>=media-libs/libplacebo-4.192.1
 	media-libs/vapoursynth
+	dovi? (
+		media-libs/libdovi
+		>=media-plugins/vapoursynth-ffmpegsource-5.0
+	)
 "
 DEPEND="${RDEPEND}"
 
