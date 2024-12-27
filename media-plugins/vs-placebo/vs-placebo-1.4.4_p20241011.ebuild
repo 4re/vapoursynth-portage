@@ -1,4 +1,4 @@
-# Copyright 2022 Gentoo Authors
+# Copyright 2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -9,16 +9,20 @@ DESCRIPTION="libplacebo-based debanding, scaling and color mapping plugin for Va
 HOMEPAGE="https://github.com/Lypheo/vs-placebo"
 
 EGIT_REPO_URI="https://github.com/Lypheo/vs-placebo.git"
-EGIT_COMMIT="2a88143033584f21cc35c13f54b140de4a44621a"
+EGIT_COMMIT="14083805df08cd478539c15464a7183da2c0032e"
 KEYWORDS="~amd64 ~x86"
 
 LICENSE="LGPL-2.1"
 SLOT="0"
-IUSE="lto"
+IUSE="lto dovi"
 
 RDEPEND+="
 	>=media-libs/libplacebo-4.192.1
 	media-libs/vapoursynth
+	dovi? (
+		media-libs/libdovi
+		>=media-plugins/vapoursynth-ffmpegsource-5.0
+	)
 "
 DEPEND="${RDEPEND}"
 
