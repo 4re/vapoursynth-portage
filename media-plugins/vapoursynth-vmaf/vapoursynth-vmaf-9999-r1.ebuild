@@ -18,13 +18,13 @@ else
 	KEYWORDS="~amd64 ~x86"
 fi
 
-LICENSE=""
+LICENSE="MIT"
 SLOT="0"
 IUSE="lto"
 
 RDEPEND+="
 	media-libs/vapoursynth:0/4
-	sci-libs/vmaf
+	media-libs/libvmaf
 "
 DEPEND="${RDEPEND}
 "
