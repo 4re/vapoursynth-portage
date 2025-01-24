@@ -1,4 +1,4 @@
-# Copyright 2022 Gentoo Authors
+# Copyright 2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -32,7 +32,7 @@ DEPEND="${RDEPEND}
 
 S="${WORKDIR}/${P}/VapourSynth"
 
-DOCS=( "README" )
+DOCS=( "README.md" )
 
 
 src_configure() {
