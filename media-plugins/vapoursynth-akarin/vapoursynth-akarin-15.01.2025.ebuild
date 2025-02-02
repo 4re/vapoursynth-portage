@@ -1,20 +1,25 @@
-# Copyright 2024 Gentoo Authors
+# Copyright 2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 
-LLVM_COMPAT=( {15..18} )
+LLVM_COMPAT=( {15..19} )
 
-inherit git-r3 meson llvm-r1
+inherit meson llvm-r1
 
 DESCRIPTION="Akarin's experimental VapourSynth plugin"
 HOMEPAGE="https://github.com/AkarinVS/vapoursynth-plugin"
-EGIT_REPO_URI="https://github.com/Jaded-Encoding-Thaumaturgy/akarin-vapoursynth-plugin.git"
 
 if ver_test ${PV} -ne 9999; then
-	EGIT_COMMIT_DATE="${PV}"
+	COMMIT_HASH="62a5bae73a10ad344e6c02a228c03c5525854678"
+	SRC_URI="
+		https://github.com/Jaded-Encoding-Thaumaturgy/akarin-vapoursynth-plugin/archive/${COMMIT_HASH}.tar.gz -> ${P}.tar.gz
+	"
 	KEYWORDS="~amd64 ~x86"
+	S="${WORKDIR}/akarin-vapoursynth-plugin-${COMMIT_HASH}"
 else
+	inherit git-r3
+	EGIT_REPO_URI="https://github.com/Jaded-Encoding-Thaumaturgy/akarin-vapoursynth-plugin.git"
 	KEYWORDS=""
 fi
 
