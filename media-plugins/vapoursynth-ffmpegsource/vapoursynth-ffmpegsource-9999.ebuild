@@ -27,5 +27,5 @@ DEPEND="${RDEPEND}
 S="${WORKDIR}"
 
 src_install() {
-	dosym ${EPREFIX}/usr/$(get_libdir)/libffms2.so.5.0.0 /usr/$(get_libdir)/vapoursynth/libffms2.so || die
+	dosym ${EPREFIX}/usr/$(get_libdir)/libffms2.so /usr/$(get_libdir)/vapoursynth/libffms2.so || die
 }
