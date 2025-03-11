@@ -1,4 +1,4 @@
-# Copyright 1999-2024 Gentoo Authors
+# Copyright 1999-2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -46,7 +46,7 @@ RESTRICT="!test? ( test )"
 
 COMMON_DEPEND="
 	media-libs/libass:=[fontconfig]
-	>=media-libs/libplacebo-6.338.2:=[opengl?,vulkan?]
+	>=media-libs/libplacebo-7.349.0:=[opengl?,vulkan?]
 	>=media-video/ffmpeg-6.1:=[encode,soc(-)?,threads,vaapi?,vdpau?]
 	X? (
 		x11-libs/libX11
@@ -64,13 +64,11 @@ COMMON_DEPEND="
 		dev-libs/libcdio:=
 	)
 	drm? (
+		media-libs/libdisplay-info:=
 		x11-libs/libdrm
 		egl? ( media-libs/mesa[gbm(+)] )
 	)
-	dvd? (
-		media-libs/libdvdnav
-		media-libs/libdvdread:=
-	)
+	dvd? ( media-libs/libdvdnav )
 	egl? (
 		media-libs/libglvnd
 		media-libs/libplacebo[opengl]
@@ -99,7 +97,6 @@ COMMON_DEPEND="
 	vulkan? ( media-libs/vulkan-loader[X?,wayland?] )
 	wayland? (
 		dev-libs/wayland
-		dev-libs/wayland-protocols
 		x11-libs/libxkbcommon
 	)
 	zimg? ( media-libs/zimg )
@@ -116,7 +113,7 @@ DEPEND="
 	dvb? ( sys-kernel/linux-headers )
 	nvenc? ( media-libs/nv-codec-headers )
 	vulkan? ( dev-util/vulkan-headers )
-	wayland? ( dev-libs/wayland-protocols )
+	wayland? ( >=dev-libs/wayland-protocols-1.41 )
 "
 BDEPEND="
 	${PYTHON_DEPS}
