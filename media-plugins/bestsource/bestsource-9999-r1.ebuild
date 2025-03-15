@@ -13,7 +13,7 @@ EGIT_REPO_URI="https://github.com/vapoursynth/bestsource.git"
 if [[ ${PV} == *9999* ]]; then
 	KEYWORDS=""
 else
-	EGIT_COMMIT="9513bdc74b8c8c3fb921dcbad743a021239b7fa9"
+	EGIT_COMMIT="refs/tags/R${PV}"
 	KEYWORDS="~x86 ~amd64"
 fi
 
@@ -26,7 +26,7 @@ RDEPEND+="
 	dev-libs/jansson
 	dev-libs/xxhash
 	media-libs/vapoursynth:0/4
-	>=media-video/ffmpeg-6.1
+	>=media-video/ffmpeg-7.1
 "
 DEPEND="${RDEPEND}
 "
