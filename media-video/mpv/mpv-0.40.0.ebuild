@@ -1,4 +1,4 @@
-# Copyright 1999-2024 Gentoo Authors
+# Copyright 1999-2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -24,7 +24,7 @@ IUSE="
 	+X +alsa aqua archive bluray cdda +cli coreaudio debug +drm dvb
 	dvd +egl gamepad +iconv jack javascript jpeg lcms libcaca +libmpv
 	+lua nvenc openal opengl pipewire pulseaudio rubberband sdl selinux
-	sixel sndio soc test tools +uchardet vaapi vapoursynth vdpau vulkan
+	sixel sndio soc test tools +uchardet vaapi vapoursynth vdpau +vulkan
 	wayland xv zimg zlib
 "
 REQUIRED_USE="
@@ -46,7 +46,7 @@ RESTRICT="!test? ( test )"
 
 COMMON_DEPEND="
 	media-libs/libass:=[fontconfig]
-	>=media-libs/libplacebo-6.338.2:=[opengl?,vulkan?]
+	>=media-libs/libplacebo-7.349.0:=[opengl?,vulkan?]
 	>=media-video/ffmpeg-6.1:=[encode(+),soc(-)?,threads(+),vaapi?,vdpau?]
 	X? (
 		x11-libs/libX11
@@ -64,13 +64,11 @@ COMMON_DEPEND="
 		dev-libs/libcdio:=
 	)
 	drm? (
+		media-libs/libdisplay-info:=
 		x11-libs/libdrm
 		egl? ( media-libs/mesa[gbm(+)] )
 	)
-	dvd? (
-		media-libs/libdvdnav
-		media-libs/libdvdread:=
-	)
+	dvd? ( media-libs/libdvdnav )
 	egl? (
 		media-libs/libglvnd
 		media-libs/libplacebo[opengl]
@@ -99,7 +97,6 @@ COMMON_DEPEND="
 	vulkan? ( media-libs/vulkan-loader[X?,wayland?] )
 	wayland? (
 		dev-libs/wayland
-		dev-libs/wayland-protocols
 		x11-libs/libxkbcommon
 	)
 	zimg? ( media-libs/zimg )
@@ -116,10 +113,11 @@ DEPEND="
 	dvb? ( sys-kernel/linux-headers )
 	nvenc? ( media-libs/nv-codec-headers )
 	vulkan? ( dev-util/vulkan-headers )
-	wayland? ( dev-libs/wayland-protocols )
+	wayland? ( >=dev-libs/wayland-protocols-1.41 )
 "
 BDEPEND="
 	${PYTHON_DEPS}
+	>=dev-build/meson-1.3.0
 	virtual/pkgconfig
 	cli? ( dev-python/docutils )
 	wayland? ( dev-util/wayland-scanner )
@@ -138,14 +136,6 @@ src_configure() {
 			append-cppflags -DNDEBUG # treated specially
 		fi
 	fi
-
-	mpv_feature_multi() {
-		local use set
-		for use in ${1} ${2}; do
-			use ${use} || set=disabled
-		done
-		echo -D${3-${2}}=${set-enabled}
-	}
 
 	local emesonargs=(
 		$(meson_use cli cplayer)
@@ -202,34 +192,14 @@ src_configure() {
 		-Dgl=$(use egl || use libmpv || use opengl &&
 			echo enabled || echo disabled)
 		$(meson_feature egl)
-		$(mpv_feature_multi egl X egl-x11)
-		$(mpv_feature_multi egl drm gbm) # gbm is only used by egl-drm
-		$(mpv_feature_multi egl drm egl-drm)
-		$(mpv_feature_multi egl wayland egl-wayland)
 		$(meson_feature libmpv plain-gl)
-		$(mpv_feature_multi opengl X gl-x11)
-		$(mpv_feature_multi opengl aqua gl-cocoa)
 
 		$(meson_feature vulkan)
 
 		# hardware decoding
 		$(meson_feature nvenc cuda-hwaccel)
-		$(meson_feature nvenc cuda-interop)
-
 		$(meson_feature vaapi)
-		$(mpv_feature_multi vaapi X vaapi-x11)
-		$(mpv_feature_multi vaapi drm vaapi-drm)
-		$(mpv_feature_multi vaapi wayland vaapi-wayland)
-
 		$(meson_feature vdpau)
-		$(mpv_feature_multi vdpau opengl vdpau-gl-x11)
-
-		$(mpv_feature_multi aqua opengl videotoolbox-gl)
-
-		# notable options left to automagic
-		#dmabuf-wayland: USE="drm wayland" + plus memfd_create support
-		#vulkan-interop: USE="vulkan" + >=ffmpeg-6.1
-		# TODO?: perhaps few more similar compound options should be left auto
 	)
 
 	meson_src_configure
