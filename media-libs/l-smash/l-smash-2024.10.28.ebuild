@@ -1,19 +1,17 @@
-# Copyright 2022 Gentoo Authors
+# Copyright 2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 
 DESCRIPTION="Media library"
-HOMEPAGE="https://github.com/l-smash/l-smash"
+HOMEPAGE="https://github.com/vimeo/l-smash"
 
-if [[ ${PV} == *9999* ]]; then
-	inherit git-r3
-	EGIT_REPO_URI="https://github.com/${PN}/${PN}.git"
-	KEYWORDS=""
-else
-	SRC_URI="https://github.com/${PN}/${PN}/archive/v${PV}.tar.gz -> ${PN}-${PV}.tar.gz"
-	KEYWORDS="~amd64 ~x86"
-fi
+inherit git-r3
+
+EGIT_REPO_URI="https://github.com/vimeo/${PN}.git"
+EGIT_COMMIT="30270d0d8b551b36b6f46c43bd3ffe997f13e157"
+
+KEYWORDS="~amd64 ~x86"
 
 LICENSE="ISC"
 SLOT="0"
@@ -21,6 +19,7 @@ IUSE="-static-libs -debug"
 
 RDEPEND+="
 	media-video/ffmpeg
+	media-libs/obuparse
 "
 DEPEND="${RDEPEND}
 	virtual/pkgconfig
