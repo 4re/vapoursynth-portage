@@ -3,11 +3,13 @@
 
 EAPI=8
 
-GIT_COMMIT="918524abdc19b6582d853c03373d8e2e0b9f11ee"
+inherit git-r3
+
+EGIT_REPO_URI="https://github.com/dwbuiten/obuparse.git"
+GIT_COMMIT="d17f1d20df390784400521ba3a1eb46d568cc40d"
 
 DESCRIPTION="A simple and portable single file AV1 OBU parser."
 HOMEPAGE="https://github.com/dwbuiten/obuparse"
-SRC_URI="https://github.com/dwbuiten/obuparse/archive/${GIT_COMMIT}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="ISC"
 SLOT="0"
@@ -17,7 +19,6 @@ DEPEND=""
 RDEPEND="${DEPEND}"
 BDEPEND=""
 
-S="${WORKDIR}/${PN}-${GIT_COMMIT}"
 
 src_install() {
 	dolib.a "lib${PN}.a"
