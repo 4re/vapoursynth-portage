@@ -44,13 +44,7 @@ RDEPEND+="
 	media-plugins/vapoursynth-tdeintmod
 	media-plugins/vapoursynth-tivtc
 	media-plugins/vapoursynth-znedi3
-	media-plugins/vs-aa
-	media-plugins/vs-denoise
-	media-plugins/vs-exprtools
-	media-plugins/vs-masktools
-	media-plugins/vs-kernels
-	media-plugins/vs-placebo
-	media-plugins/vs-tools
+	media-plugins/vs-jetpack
 "
 DEPEND="${RDEPEND}"
 
