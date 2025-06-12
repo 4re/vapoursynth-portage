@@ -55,8 +55,6 @@ RDEPEND+="
 	media-plugins/vapoursynth-temporalsoften2
 	media-plugins/vapoursynth-ttempsmooth
 	media-plugins/vapoursynth-znedi3
-	media-plugins/vs-tools
-	media-plugins/vs-rgtools
-	media-plugins/vs-denoise
+	media-plugins/vs-jetpack
 "
 DEPEND="${RDEPEND}"

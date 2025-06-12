@@ -1,4 +1,4 @@
-# Copyright 2024 Gentoo Authors
+# Copyright 2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -10,7 +10,7 @@ inherit distutils-r1 pypi
 
 DESCRIPTION="Collection of stuff that's useful in general python programming."
 HOMEPAGE="
-	https://pypi.org/project/stgpytools/
+	https://pypi.org/project/jetpytools/
 "
 
 LICENSE="MIT"
