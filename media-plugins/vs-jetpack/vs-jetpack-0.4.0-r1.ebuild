@@ -24,7 +24,7 @@ fi
 
 LICENSE="MIT"
 SLOT="0"
-IUSE="cuda"
+IUSE="cuda opencl vulkan -sourcefilters"
 
 RDEPEND+="
 	!media-plugins/vs-aa
@@ -37,6 +37,13 @@ RDEPEND+="
 	!media-plugins/vs-scale
 	!media-plugins/vs-source
 	!media-plugins/vs-tools
+	sourcefilters? (
+		media-plugins/bestsource
+		media-plugins/vapoursynth-d2vsource
+		media-plugins/vapoursynth-ffmpegsource
+		media-plugins/vapoursynth-l-smash-works
+		media-plugins/vs-imwri
+	)
 	media-libs/vapoursynth[${PYTHON_SINGLE_USEDEP}]
 	media-plugins/vapoursynth-akarin
 	media-plugins/vapoursynth-resize2
@@ -53,7 +60,7 @@ RDEPEND+="
 	media-plugins/vapoursynth-bm3d
 	cuda? ( media-plugins/vapoursynth-bm3dcuda )
 	media-plugins/vapoursynth-dctfilter
-	media-plugins/vs-mlrt[${PYTHON_SINGLE_USEDEP}]
+	vulkan? ( media-plugins/vs-mlrt[${PYTHON_SINGLE_USEDEP}] )
 	media-plugins/vapoursynth-dfttest
 	media-plugins/vapoursynth-mvtools
 	|| (
@@ -62,13 +69,13 @@ RDEPEND+="
 	)
 	media-plugins/vapoursynth-bwdif
 	media-plugins/vapoursynth-fft3dfilter
-	media-plugins/vapoursynth-knlmeanscl
+	opencl? ( media-plugins/vapoursynth-knlmeanscl )
 	media-plugins/vapoursynth-descale
 	media-plugins/vs-placebo
 	media-plugins/vapoursynth-awarpsharp2
 	media-plugins/vapoursynth-tcanny
 	media-plugins/vapoursynth-tedgemask
-	media-plugins/vapoursynth-bilateralgpu
+	cuda? ( media-plugins/vapoursynth-bilateralgpu )
 	media-plugins/vapoursynth-dpid
 	$(python_gen_cond_dep 'dev-python/jetpytools[${PYTHON_USEDEP}]')
 	$(python_gen_cond_dep 'dev-python/numpy[${PYTHON_USEDEP}]')
