@@ -1,0 +1,16 @@
+diff --git a/vsmasktools/edge/_abstract.py b/vsmasktools/edge/_abstract.py
+index 1c76d80..0329df2 100644
+--- a/vsmasktools/edge/_abstract.py
++++ b/vsmasktools/edge/_abstract.py
+@@ -5,7 +5,10 @@ from enum import Enum, IntFlag, auto
+ from typing import Any, ClassVar, NoReturn, Sequence, TypeAlias, TypeVar, cast
+ 
+ from jetpytools import CustomNotImplementedError, inject_kwargs_params
+-from typing_extensions import TypeIs
++try:
++    from typing_extensions import TypeIs
++except:
++    from typing import TypeIs
+ 
+ from vsexprtools import ExprOp, ExprToken, norm_expr
+ from vstools import (
