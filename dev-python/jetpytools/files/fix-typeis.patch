@@ -1,0 +1,33 @@
+diff --git a/jetpytools/types/check.py b/jetpytools/types/check.py
+index 3c3d206..c6a72e6 100644
+--- a/jetpytools/types/check.py
++++ b/jetpytools/types/check.py
+@@ -1,6 +1,9 @@
+ from typing import Any, Sequence
+ 
+-from typing_extensions import TypeIs
++try:
++    from typing_extensions import TypeIs
++except:
++    from typing import TypeIs
+ 
+ from .builtins import SoftRange, SoftRangeN, SoftRangesN, StrictRange
+ 
+diff --git a/jetpytools/types/funcs.py b/jetpytools/types/funcs.py
+index d7ca47d..4c94c33 100644
+--- a/jetpytools/types/funcs.py
++++ b/jetpytools/types/funcs.py
+@@ -3,7 +3,12 @@ from __future__ import annotations
+ from functools import wraps
+ from typing import TYPE_CHECKING, Any, Callable, Iterable, Iterator, SupportsIndex, TypeAlias, overload
+ 
+-from typing_extensions import Self, TypeIs
++from typing_extensions import Self
++
++try:
++    from typing_extensions import TypeIs
++except:
++    from typing import TypeIs
+ 
+ from .builtins import P, T
+ from .supports import SupportsString

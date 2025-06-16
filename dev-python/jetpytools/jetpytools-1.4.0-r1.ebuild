@@ -19,4 +19,6 @@ KEYWORDS="~amd64 ~x86"
 
 RDEPEND=""
 
+PATCHES="${FILESDIR}/fix-typeis.patch"
+
 distutils_enable_tests pytest
