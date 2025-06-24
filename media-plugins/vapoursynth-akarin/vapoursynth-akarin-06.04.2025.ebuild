@@ -3,7 +3,7 @@
 
 EAPI=8
 
-LLVM_COMPAT=( {15..19} )
+LLVM_COMPAT=( {15..20} )
 
 inherit meson llvm-r1
 
@@ -11,7 +11,7 @@ DESCRIPTION="Akarin's experimental VapourSynth plugin"
 HOMEPAGE="https://github.com/AkarinVS/vapoursynth-plugin"
 
 if ver_test ${PV} -ne 9999; then
-	COMMIT_HASH="62a5bae73a10ad344e6c02a228c03c5525854678"
+	COMMIT_HASH="9b249a805b0c08efcf2a4627284d8a171273017e"
 	SRC_URI="
 		https://github.com/Jaded-Encoding-Thaumaturgy/akarin-vapoursynth-plugin/archive/${COMMIT_HASH}.tar.gz -> ${P}.tar.gz
 	"
