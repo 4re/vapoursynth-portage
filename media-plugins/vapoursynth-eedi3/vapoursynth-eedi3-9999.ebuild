@@ -20,14 +20,10 @@ fi
 
 LICENSE="GPL-2"
 SLOT="0"
-IUSE="lto opencl"
+IUSE="lto"
 
 RDEPEND+="
 	media-libs/vapoursynth
-	opencl? ( 
-		virtual/opencl
-		dev-libs/opencl-icd-loader
-	)
 "
 DEPEND="${RDEPEND}
 "
@@ -39,7 +35,6 @@ src_configure() {
 	local emesonargs=(
 		--libdir="${EPREFIX}/usr/$(get_libdir)/vapoursynth/"
 		-Db_lto=$(usex lto true false)
-		-Dopencl=$(usex opencl true false)
 	)
 	meson_src_configure
 }
