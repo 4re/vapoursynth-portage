@@ -1,16 +1,17 @@
-# Copyright 2022 Gentoo Authors
+# Copyright 1999-2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 
 DESCRIPTION="VapourSynth plugins meta package."
-HOMEPAGE="http://www.vapoursynth.com/"
+HOMEPAGE="https://www.vapoursynth.com/"
 
-LICENSE=""
+LICENSE="metapackage"
 SLOT="0"
 KEYWORDS="*"
 IUSE="
 	vapoursynth_plugins_acsuite
+	vapoursynth_plugins_adaptivegrain
 	vapoursynth_plugins_audiocutter
 	vapoursynth_plugins_bestaudiosource
 	vapoursynth_plugins_bestsource
@@ -108,6 +109,7 @@ IUSE="
 	vapoursynth_plugins_reduceflicker
 	vapoursynth_plugins_remapframes
 	vapoursynth_plugins_removedirt
+	vapoursynth_plugins_resize2
 	vapoursynth_plugins_retinex
 	vapoursynth_plugins_rgsf
 	vapoursynth_plugins_rife-ncnn-vulkan
@@ -153,31 +155,22 @@ IUSE="
 	vapoursynth_plugins_wwxd
 	vapoursynth_plugins_xaa
 	vapoursynth_plugins_yadifmod
+	vapoursynth_plugins_zip
 	vapoursynth_plugins_znedi3
 	vapoursynth_plugins_vivtc
-	vapoursynth_plugins_vs-aa
 	vapoursynth_plugins_vs-ccd
-	vapoursynth_plugins_vs-dehalo
-	vapoursynth_plugins_vs-denoise
-	vapoursynth_plugins_vs-exprtools
 	vapoursynth_plugins_vs-imwri
-	vapoursynth_plugins_vs-kernels
-	vapoursynth_plugins_vs-masktools
+	vapoursynth_plugins_vs-jetpack
 	vapoursynth_plugins_vs-mlrt
 	vapoursynth_plugins_vs-ocr
 	vapoursynth_plugins_vs-placebo
-	vapoursynth_plugins_vs-pyplugin
 	vapoursynth_plugins_vs-removegrain
-	vapoursynth_plugins_vs-rgtools
-	vapoursynth_plugins_vs-scale
-	vapoursynth_plugins_vs-source
-	vapoursynth_plugins_vs-tools
 	vapoursynth_plugins_vsutil
 "
 
-RDEPEND+=""
-DEPEND="${RDEPEND}
+RDEPEND="
 	vapoursynth_plugins_acsuite? ( media-plugins/acsuite )
+	vapoursynth_plugins_adaptivegrain? ( media-plugins/adaptivegrain )
 	vapoursynth_plugins_audiocutter? ( media-plugins/audiocutter )
 	vapoursynth_plugins_bestaudiosource? ( media-plugins/bestaudiosource )
 	vapoursynth_plugins_bestsource? ( media-plugins/bestsource )
@@ -275,6 +268,7 @@ DEPEND="${RDEPEND}
 	vapoursynth_plugins_reduceflicker? ( media-plugins/vapoursynth-reduceflicker )
 	vapoursynth_plugins_remapframes? ( media-plugins/vapoursynth-remapframes )
 	vapoursynth_plugins_removedirt? ( media-plugins/vapoursynth-removedirt )
+	vapoursynth_plugins_resize2? ( media-plugins/vapoursynth-resize2 )
 	vapoursynth_plugins_retinex? ( media-plugins/vapoursynth-retinex )
 	vapoursynth_plugins_rgsf? ( media-plugins/vapoursynth-rgsf )
 	vapoursynth_plugins_rife-ncnn-vulkan? ( media-plugins/vapoursynth-rife-ncnn-vulkan )
@@ -320,24 +314,15 @@ DEPEND="${RDEPEND}
 	vapoursynth_plugins_wwxd? ( media-plugins/vapoursynth-wwxd )
 	vapoursynth_plugins_xaa? ( media-plugins/vapoursynth-xaa )
 	vapoursynth_plugins_yadifmod? ( media-plugins/vapoursynth-yadifmod )
+	vapoursynth_plugins_zip? ( media-plugins/vapoursynth-zip )
 	vapoursynth_plugins_znedi3? ( media-plugins/vapoursynth-znedi3 )
 	vapoursynth_plugins_vivtc? ( media-plugins/vivtc )
-	vapoursynth_plugins_vs-aa? ( media-plugins/vs-aa )
 	vapoursynth_plugins_vs-ccd? ( media-plugins/vs-ccd )
-	vapoursynth_plugins_vs-dehalo? ( media-plugins/vs-dehalo )
-	vapoursynth_plugins_vs-denoise? ( media-plugins/vs-denoise )
-	vapoursynth_plugins_vs-exprtools? ( media-plugins/vs-exprtools )
 	vapoursynth_plugins_vs-imwri? ( media-plugins/vs-imwri )
-	vapoursynth_plugins_vs-kernels? ( media-plugins/vs-kernels )
-	vapoursynth_plugins_vs-masktools? ( media-plugins/vs-masktools )
+	vapoursynth_plugins_vs-jetpack? ( media-plugins/vs-jetpack )
 	vapoursynth_plugins_vs-mlrt? ( media-plugins/vs-mlrt )
 	vapoursynth_plugins_vs-ocr? ( media-plugins/vs-ocr )
 	vapoursynth_plugins_vs-placebo? ( media-plugins/vs-placebo )
-	vapoursynth_plugins_vs-pyplugin? ( media-plugins/vs-pyplugin )
 	vapoursynth_plugins_vs-removegrain? ( media-plugins/vs-removegrain )
-	vapoursynth_plugins_vs-rgtools? ( media-plugins/vs-rgtools )
-	vapoursynth_plugins_vs-scale? ( media-plugins/vs-scale )
-	vapoursynth_plugins_vs-source? ( media-plugins/vs-source )
-	vapoursynth_plugins_vs-tools? ( media-plugins/vs-tools )
 	vapoursynth_plugins_vsutil? ( media-plugins/vsutil )
 "

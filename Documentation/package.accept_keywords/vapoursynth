@@ -7,6 +7,7 @@ media-libs/vapoursynth ~*
 media-libs/waifu2x-converter-cpp ~*
 media-libs/zimg ~*
 media-plugins/acsuite ~*
+media-plugins/adaptivegrain ~*
 media-plugins/audiocutter ~*
 media-plugins/bestaudiosource ~*
 media-plugins/bestsource ~*
@@ -77,8 +78,8 @@ media-plugins/vapoursynth-it ~*
 media-plugins/vapoursynth-jincresize ~*
 media-plugins/vapoursynth-kagefunc ~*
 media-plugins/vapoursynth-knlmeanscl ~*
-media-plugins/vapoursynth-lghost ~*
 media-plugins/vapoursynth-l-smash-works ~*
+media-plugins/vapoursynth-lghost ~*
 media-plugins/vapoursynth-lvsfunc ~*
 media-plugins/vapoursynth-matchhistogram ~*
 media-plugins/vapoursynth-median ~*
@@ -94,9 +95,9 @@ media-plugins/vapoursynth-mvtools ~*
 media-plugins/vapoursynth-mvtools-sf ~*
 media-plugins/vapoursynth-neo_f3kdb ~*
 media-plugins/vapoursynth-nnedi3 ~*
-media-plugins/vapoursynth-nnedi3cl ~*
 media-plugins/vapoursynth-nnedi3_resample ~*
 media-plugins/vapoursynth-nnedi3_rpow2 ~*
+media-plugins/vapoursynth-nnedi3cl ~*
 media-plugins/vapoursynth-oyster ~*
 media-plugins/vapoursynth-plugins-meta ~*
 media-plugins/vapoursynth-plum ~*
@@ -139,8 +140,8 @@ media-plugins/vapoursynth-vfx ~*
 media-plugins/vapoursynth-videoscope ~*
 media-plugins/vapoursynth-vine ~*
 media-plugins/vapoursynth-vmaf ~*
-media-plugins/vapoursynth-vsimagereader ~*
 media-plugins/vapoursynth-vs-maskdetail ~*
+media-plugins/vapoursynth-vsimagereader ~*
 media-plugins/vapoursynth-vsrawsource ~*
 media-plugins/vapoursynth-vstaambk ~*
 media-plugins/vapoursynth-w3fdif ~*
