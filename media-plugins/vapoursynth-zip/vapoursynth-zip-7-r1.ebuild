@@ -30,3 +30,7 @@ RDEPEND="
 	media-libs/vapoursynth
 "
 DOCS=( "README.md" )
+
+src_install() {
+	zig_src_install --prefix-lib-dir "$(get_libdir)/vapoursynth"
+}
