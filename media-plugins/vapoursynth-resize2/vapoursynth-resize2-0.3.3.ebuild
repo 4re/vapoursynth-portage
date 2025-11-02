@@ -8,14 +8,14 @@ inherit meson
 DESCRIPTION="Dependency for vs-jetpack"
 HOMEPAGE="https://github.com/Jaded-Encoding-Thaumaturgy/vapoursynth-resize2"
 
-COMMIT="f665219bd1be491eac04cef3f55c950712c05e1b"
-
-SRC_URI="
-	https://github.com/Jaded-Encoding-Thaumaturgy/vapoursynth-resize2/archive/${COMMIT}.tar.gz
-		-> ${P}.tar.gz
-"
-
-KEYWORDS="~amd64 ~x86"
+if [[ ${PV} == *9999* ]]; then
+	inherit git-r3
+	EGIT_REPO_URI="https://github.com/Jaded-Encoding-Thaumaturgy/vapoursynth-resize2.git"
+	KEYWORDS=""
+else
+	SRC_URI="https://github.com/Jaded-Encoding-Thaumaturgy/vapoursynth-resize2/archive/refs/tags/${PV}.tar.gz -> ${P}.tar.gz"
+	KEYWORDS="~amd64"
+fi
 
 LICENSE="LGPL-2.1"
 SLOT="0"
@@ -26,8 +26,6 @@ RDEPEND+="
 "
 DEPEND="${RDEPEND}"
 RESTRICT="network-sandbox"
-
-S="${WORKDIR}/${PN}-${COMMIT}"
 
 src_prepare() {
 	default
