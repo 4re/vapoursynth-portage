@@ -9,7 +9,7 @@ DESCRIPTION="Optimized nnedi3 filter"
 HOMEPAGE="https://github.com/sekrit-twc/znedi3"
 
 EGIT_REPO_URI="https://github.com/sekrit-twc/znedi3.git"
-EGIT_COMMIT="bbdabfd55f8ff781384aeb3a8fbb8b9a0a13e442"
+EGIT_COMMIT="47e7698f481577ac325567bb553134520939f1ff"
 KEYWORDS="~amd64 ~x86"
 
 LICENSE="GPL-2"
