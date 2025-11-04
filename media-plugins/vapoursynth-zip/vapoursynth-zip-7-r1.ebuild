@@ -31,18 +31,6 @@ RDEPEND="
 "
 DOCS=( "README.md" )
 
-<<<<<<<< HEAD:media-plugins/vapoursynth-zip/vapoursynth-zip-10.ebuild
-src_configure() {
-	local my_zbs_args=(
-		--prefix-lib-dir ""
-	)
-	zig_src_configure
-}
-
-src_install() {
-	zig_src_install --prefix /usr/$(get_libdir)/vapoursynth
-========
 src_install() {
 	zig_src_install --prefix-lib-dir "$(get_libdir)/vapoursynth"
->>>>>>>> db725a7713e183891d10461f3c65fa5f1302417b:media-plugins/vapoursynth-zip/vapoursynth-zip-7-r1.ebuild
 }
