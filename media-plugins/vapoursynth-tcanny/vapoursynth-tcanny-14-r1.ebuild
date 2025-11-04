@@ -30,6 +30,7 @@ DEPEND="${RDEPEND}
 
 DOCS=( "README.md" )
 
+PATCHES="${FILESDIR}/vapoursynth-tcanny-14-refs_mask_packing.patch"
 
 src_configure() {
 	local emesonargs=(
