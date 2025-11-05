@@ -3,9 +3,9 @@
 
 EAPI=8
 
-PYTHON_COMPAT=( python3_{11..14} )
+PYTHON_COMPAT=( python3_{12..14} )
 
-DISTUTILS_USE_PEP517=setuptools
+DISTUTILS_USE_PEP517=hatchling
 DISTUTILS_SINGLE_IMPL=1
 
 inherit distutils-r1
@@ -25,8 +25,6 @@ fi
 LICENSE="MIT"
 SLOT="0"
 IUSE="cuda opencl vulkan -sourcefilters"
-
-PATCHES="${FILESDIR}/fix-typeis.patch"
 
 RDEPEND+="
 	!media-plugins/vs-aa
