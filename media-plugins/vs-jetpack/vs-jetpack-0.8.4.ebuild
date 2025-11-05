@@ -26,8 +26,6 @@ LICENSE="MIT"
 SLOT="0"
 IUSE="cuda opencl vulkan -sourcefilters"
 
-PATCHES="${FILESDIR}/fix-typeis.patch"
-
 RDEPEND+="
 	!media-plugins/vs-aa
 	!media-plugins/vs-dehalo
