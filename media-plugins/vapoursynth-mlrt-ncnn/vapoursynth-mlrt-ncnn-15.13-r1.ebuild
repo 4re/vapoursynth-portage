@@ -1,4 +1,4 @@
-# Copyright 2024 Gentoo Authors
+# Copyright 2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -12,7 +12,7 @@ EGIT_REPO_URI="https://github.com/AmusementClub/vs-mlrt.git"
 if ver_test -eq 9999; then
 	KEYWORDS=""
 else
-	EGIT_COMMIT="v${PV}"
+	EGIT_COMMIT="ffddebe7ce0d46ed206c792f2abbe6ac3b2b1774"
 	KEYWORDS="~amd64"
 fi
 
@@ -27,9 +27,8 @@ RDEPEND+="
 	sci-ml/onnx:=
 "
 DEPEND="${RDEPEND}"
-PATCHES="${FILESDIR}/0001-vsncnn-Include-mutex.patch"
 
-S="${S}/vsncnn"
+S="${WORKDIR}/${P}/vsncnn"
 
 src_prepare() {
 	sed -i "s|find_package(protobuf REQUIRED CONFIG)|find_package(Protobuf REQUIRED)|" \
@@ -41,7 +40,6 @@ src_prepare() {
 src_configure() {
 	append-flags "-DONNX_ML=1"
 	append-flags "-DONNX_NAMESPACE=onnx"
-	local GIT_DISCOVERY_ACROSS_FILESYSTEM=1
 	local mycmakeargs=(
 		-DVAPOURSYNTH_INCLUDE_DIRECTORY="/usr/include/vapoursynth"
 	)

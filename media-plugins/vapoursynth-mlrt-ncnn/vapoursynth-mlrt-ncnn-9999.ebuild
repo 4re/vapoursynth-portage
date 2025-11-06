@@ -1,19 +1,18 @@
-# Copyright 2024 Gentoo Authors
+# Copyright 2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 
-inherit cmake flag-o-matic
+inherit cmake flag-o-matic git-r3
 
 DESCRIPTION="NCNN-based GPU (Vulkan) backend for vs-mlrt"
 HOMEPAGE="https://github.com/AmusementClub/vs-mlrt#vsncnn-ncnn-based-gpu-vulkan-runtime"
+EGIT_REPO_URI="https://github.com/AmusementClub/vs-mlrt.git"
 
 if ver_test -eq 9999; then
-	inherit git-r3
-	EGIT_REPO_URI="https://github.com/AmusementClub/vs-mlrt.git"
 	KEYWORDS=""
 else
-	SRC_URI="https://github.com/AmusementClub/vs-mlrt/archive/v${PV}.tar.gz -> ${P}.tar.gz"
+	EGIT_COMMIT="v${PV}.ncnn"
 	KEYWORDS="~amd64"
 fi
 
@@ -28,7 +27,6 @@ RDEPEND+="
 	sci-ml/onnx:=
 "
 DEPEND="${RDEPEND}"
-PATCHES="${FILESDIR}/0001-vsncnn-Include-mutex.patch"
 
 if ver_test -eq 9999; then
 	S="${S}/vsncnn"
