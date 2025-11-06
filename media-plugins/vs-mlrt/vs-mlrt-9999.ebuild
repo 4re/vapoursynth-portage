@@ -1,9 +1,9 @@
-# Copyright 2023 Gentoo Authors
+# Copyright 2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 
-PYTHON_COMPAT=( python3_{11..14} )
+PYTHON_COMPAT=( python3_{12..14} )
 
 inherit python-single-r1 git-r3
 
@@ -20,15 +20,15 @@ fi
 
 LICENSE="MIT"
 SLOT="0"
+
 # Only the NCNN backend for now.
-#
 # ONNX, TensorRT, and OpenVINO backends may be added later.
 IUSE="+ncnn"
 
 RDEPEND+="
 	media-libs/vapoursynth[${PYTHON_SINGLE_USEDEP}]
 	ncnn? (
-		media-plugins/vapoursynth-mlrt-ncnn
+		~media-plugins/vapoursynth-mlrt-ncnn-${PV}
 	)
 "
 DEPEND="${RDEPEND}"
