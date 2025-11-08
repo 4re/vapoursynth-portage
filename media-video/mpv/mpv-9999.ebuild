@@ -23,8 +23,8 @@ SLOT="0/2" # soname
 IUSE="
 	+X +alsa aqua archive bluray cdda +cli coreaudio debug +drm dvb
 	dvd +egl gamepad +iconv jack javascript jpeg lcms libcaca +libmpv
-	+lua nvenc openal opengl pipewire pulseaudio rubberband sdl selinux
-	sixel sndio soc test tools +uchardet vaapi vapoursynth vdpau vulkan
+	+lua nvenc openal pipewire pulseaudio rubberband sdl selinux sixel
+	sndio soc test tools +uchardet vaapi vapoursynth vdpau +vulkan
 	wayland xv zimg zlib
 "
 REQUIRED_USE="
@@ -32,8 +32,7 @@ REQUIRED_USE="
 	|| ( cli libmpv )
 	egl? ( || ( X drm wayland ) )
 	lua? ( ${LUA_REQUIRED_USE} )
-	nvenc? ( || ( egl opengl vulkan ) )
-	opengl? ( || ( X aqua ) )
+	nvenc? ( || ( egl vulkan ) )
 	test? ( cli )
 	tools? ( cli )
 	uchardet? ( iconv )
@@ -46,12 +45,13 @@ RESTRICT="!test? ( test )"
 
 COMMON_DEPEND="
 	media-libs/libass:=[fontconfig]
-	>=media-libs/libplacebo-7.349.0:=[opengl?,vulkan?]
-	>=media-video/ffmpeg-7.1:=[soc(-)?,vaapi?,vdpau?]
+	>=media-libs/libplacebo-7.349.0:=[vulkan?]
+	>=media-video/ffmpeg-6.1:=[encode(+),soc(-)?,threads(+),vaapi?,vdpau?]
 	X? (
 		x11-libs/libX11
 		x11-libs/libXScrnSaver
 		x11-libs/libXext
+		x11-libs/libXfixes
 		x11-libs/libXpresent
 		x11-libs/libXrandr
 		xv? ( x11-libs/libXv )
@@ -85,7 +85,6 @@ COMMON_DEPEND="
 	libcaca? ( media-libs/libcaca )
 	lua? ( ${LUA_DEPS} )
 	openal? ( media-libs/openal )
-	opengl? ( media-libs/libglvnd[X?] )
 	pipewire? ( media-video/pipewire:= )
 	pulseaudio? ( media-libs/libpulse )
 	rubberband? ( media-libs/rubberband:= )
@@ -93,14 +92,17 @@ COMMON_DEPEND="
 	sixel? ( media-libs/libsixel )
 	sndio? ( media-sound/sndio:= )
 	vaapi? ( media-libs/libva:=[X?,drm(+)?,wayland?] )
-	vdpau? ( x11-libs/libvdpau )
+	vdpau? (
+		media-libs/libglvnd[X]
+		x11-libs/libvdpau
+	)
 	vulkan? ( media-libs/vulkan-loader[X?,wayland?] )
 	wayland? (
 		dev-libs/wayland
 		x11-libs/libxkbcommon
 	)
 	zimg? ( media-libs/zimg )
-	zlib? ( sys-libs/zlib:= )
+	zlib? ( virtual/zlib:= )
 "
 RDEPEND="
 	${COMMON_DEPEND}
@@ -153,6 +155,7 @@ src_configure() {
 		-Dbuild-date=false
 
 		# misc options
+		$(meson_feature X x11-clipboard)
 		$(meson_feature archive libarchive)
 		$(meson_feature bluray libbluray)
 		$(meson_feature cdda)
@@ -166,7 +169,6 @@ src_configure() {
 		$(meson_feature lcms lcms2)
 		-Dlua=$(usex lua "${ELUA}" disabled)
 		$(meson_feature rubberband)
-		-Dsdl2=$(use gamepad || use sdl && echo enabled || echo disabled) #857156
 		$(meson_feature uchardet)
 		$(meson_feature vapoursynth)
 		$(meson_feature zimg)
@@ -193,10 +195,11 @@ src_configure() {
 		$(meson_feature wayland)
 		$(meson_feature xv)
 
-		-Dgl=$(use egl || use libmpv || use opengl &&
+		-Dgl=$(use aqua || use egl || use libmpv || use vdpau &&
 			echo enabled || echo disabled)
 		$(meson_feature egl)
 		$(meson_feature libmpv plain-gl)
+		$(meson_feature vdpau gl-x11) # only needed for vdpau (bug #955122)
 
 		$(meson_feature vulkan)
 
@@ -212,6 +215,7 @@ src_configure() {
 }
 
 src_test() {
+	unset LANGUAGE #954214
 	# ffmpeg tests are picky and easily break without necessarily
 	# meaning that there are runtime issues (bug #921091,#924276)
 	meson_src_test --no-suite ffmpeg
