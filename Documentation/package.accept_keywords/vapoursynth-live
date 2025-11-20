@@ -21,6 +21,7 @@
 ~media-plugins/vapoursynth-asharp-9999 **
 ~media-plugins/vapoursynth-astdr-9999 **
 ~media-plugins/vapoursynth-autocrop-9999 **
+~media-plugins/vapoursynth-awarp-9999 **
 ~media-plugins/vapoursynth-awarpsharp2-9999 **
 ~media-plugins/vapoursynth-beziercurve-9999 **
 ~media-plugins/vapoursynth-bifrost-9999 **
@@ -53,6 +54,7 @@
 ~media-plugins/vapoursynth-dotkill-9999 **
 ~media-plugins/vapoursynth-dpid-9999 **
 ~media-plugins/vapoursynth-edgefixer-9999 **
+~media-plugins/vapoursynth-edgemasks-9999 **
 ~media-plugins/vapoursynth-edi_rpow2-9999 **
 ~media-plugins/vapoursynth-eedi2-9999 **
 ~media-plugins/vapoursynth-eedi3-9999 **
@@ -154,6 +156,7 @@
 ~media-plugins/vapoursynth-yadifmod-9999 **
 ~media-plugins/vapoursynth-zip-9999 **
 ~media-plugins/vapoursynth-znedi3-9999 **
+~media-plugins/vapoursynth-zsmooth-9999 **
 ~media-plugins/vivtc-9999 **
 ~media-plugins/vs-ccd-9999 **
 ~media-plugins/vs-imwri-9999 **
