@@ -165,6 +165,7 @@ media-plugins/vs-mlrt ~*
 media-plugins/vs-ocr ~*
 media-plugins/vs-placebo ~*
 media-plugins/vs-removegrain ~*
+media-plugins/vsfpng ~*
 media-plugins/vsutil ~*
 media-video/d2vwitch ~*
 media-video/getnative ~*
