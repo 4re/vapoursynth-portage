@@ -26,7 +26,6 @@ fi
 
 RDEPEND+="
 	media-libs/vapoursynth:0/4
-	media-video/ffmpeg
 	tools? ( ${PYTHON_DEPS} )
 "
 DEPEND="${RDEPEND}
