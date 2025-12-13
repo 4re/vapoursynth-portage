@@ -1,0 +1,21 @@
+From 09c9e2bb87a635cdc5377c70983f8ceb7fae5841 Mon Sep 17 00:00:00 2001
+From: Michael Cho <michael@michaelcho.dev>
+Date: Tue, 26 Aug 2025 19:45:27 -0400
+Subject: [PATCH] Fix build with FFmpeg 8.0
+
+---
+ src/image.cpp | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/src/image.cpp b/src/image.cpp
+index ad51e8a..9a17c8f 100644
+--- a/src/image.cpp
++++ b/src/image.cpp
+@@ -244,7 +244,6 @@ static void VS_CC imageFileFree(void *instanceData, VSCore *core, const VSAPI *v
+         for (auto &packet : sub.packets)
+             av_packet_free(&packet);
+ 
+-    avcodec_close(d->avctx);
+     avcodec_free_context(&d->avctx);
+ 
+     delete d;

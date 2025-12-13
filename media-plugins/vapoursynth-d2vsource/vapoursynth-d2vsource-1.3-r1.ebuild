@@ -30,6 +30,7 @@ DEPEND="${RDEPEND}
 
 DOCS=( README )
 
+PATCHES="${FILESDIR}/ffmpeg8.patch"
 
 src_prepare() {
 	default
