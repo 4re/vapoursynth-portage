@@ -26,11 +26,12 @@ RESTRICT="mirror"
 RDEPEND+="
 	media-libs/vapoursynth:0/4
 	media-libs/libass
-	media-video/ffmpeg
+	>=media-video/ffmpeg-6
 "
 DEPEND="${RDEPEND}
 "
 
+PATCHES="${FILESDIR}/ffmpeg8.patch"
 
 src_configure() {
 	local emesonargs=(
