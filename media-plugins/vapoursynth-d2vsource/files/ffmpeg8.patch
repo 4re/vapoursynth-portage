@@ -1,0 +1,44 @@
+From a6aed058dc1ffba01bfe52cb0fd935ab73d86d41 Mon Sep 17 00:00:00 2001
+From: dmo <marillat@users.noreply.github.com>
+Date: Fri, 5 Sep 2025 10:54:40 +0200
+Subject: [PATCH 1/2] Fix for ffmpeg 8
+
+---
+ src/core/decode.cpp | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/core/decode.cpp b/src/core/decode.cpp
+index fc6a510..ceb3193 100644
+--- a/src/core/decode.cpp
++++ b/src/core/decode.cpp
+@@ -135,7 +135,7 @@ decodecontext::~decodecontext()
+         fclose(files[i]);
+ 
+     if (avctx) {
+-        avcodec_close(avctx);
++        avcodec_free_context(&avctx);
+         av_freep(&avctx);
+     }
+ }
+
+From d629053f439a25a85e56c18daef17fb8ba3d5a4e Mon Sep 17 00:00:00 2001
+From: dmo <marillat@users.noreply.github.com>
+Date: Tue, 9 Sep 2025 11:35:58 +0200
+Subject: [PATCH 2/2] Update decode.cpp
+
+---
+ src/core/decode.cpp | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/src/core/decode.cpp b/src/core/decode.cpp
+index ceb3193..d4fbcf2 100644
+--- a/src/core/decode.cpp
++++ b/src/core/decode.cpp
+@@ -136,7 +136,6 @@ decodecontext::~decodecontext()
+ 
+     if (avctx) {
+         avcodec_free_context(&avctx);
+-        av_freep(&avctx);
+     }
+ }
+ 
