@@ -1,4 +1,4 @@
-# Copyright 1999-2025 Gentoo Authors
+# Copyright 1999-2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -24,8 +24,8 @@ IUSE="
 	+X +alsa aqua archive bluray cdda +cli coreaudio debug +drm dvb
 	dvd +egl gamepad +iconv jack javascript jpeg lcms libcaca +libmpv
 	+lua nvenc openal pipewire pulseaudio rubberband sdl selinux sixel
-	sndio soc subrandr test tools +uchardet vaapi vapoursynth vdpau
-	+vulkan wayland xv zimg zlib
+	sndio soc test tools +uchardet vaapi vapoursynth vdpau +vulkan
+	wayland xv zimg zlib
 "
 REQUIRED_USE="
 	${PYTHON_REQUIRED_USE}
@@ -91,7 +91,6 @@ COMMON_DEPEND="
 	sdl? ( media-libs/libsdl2[sound,threads(+),video] )
 	sixel? ( media-libs/libsixel )
 	sndio? ( media-sound/sndio:= )
-	subrandr? ( media-libs/subrandr )
 	vaapi? ( media-libs/libva:=[X?,drm(+)?,wayland?] )
 	vdpau? (
 		media-libs/libglvnd[X]
@@ -99,7 +98,7 @@ COMMON_DEPEND="
 	)
 	vulkan? ( media-libs/vulkan-loader[X?,wayland?] )
 	wayland? (
-		>=dev-libs/wayland-1.23
+		dev-libs/wayland
 		x11-libs/libxkbcommon
 	)
 	zimg? ( media-libs/zimg )
@@ -126,7 +125,7 @@ BDEPEND="
 	>=dev-build/meson-1.3.0
 	virtual/pkgconfig
 	cli? ( dev-python/docutils )
-	wayland? ( >=dev-util/wayland-scanner-1.23 )
+	wayland? ( dev-util/wayland-scanner )
 "
 
 pkg_setup() {
@@ -169,7 +168,6 @@ src_configure() {
 		$(meson_feature lcms lcms2)
 		-Dlua=$(usex lua "${ELUA}" disabled)
 		$(meson_feature rubberband)
-		$(meson_feature subrandr)
 		$(meson_feature uchardet)
 		$(meson_feature vapoursynth)
 		$(meson_feature zimg)
