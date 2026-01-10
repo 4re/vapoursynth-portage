@@ -14,7 +14,7 @@ EGIT_REPO_URI="https://github.com/AmusementClub/vs-mlrt.git"
 if ver_test -eq 9999; then
 	KEYWORDS=""
 else
-	EGIT_COMMIT="ffddebe7ce0d46ed206c792f2abbe6ac3b2b1774"
+	EGIT_COMMIT="v${PV}"
 	KEYWORDS="~amd64"
 fi
 
