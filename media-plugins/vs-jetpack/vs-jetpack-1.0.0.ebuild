@@ -3,9 +3,9 @@
 
 EAPI=8
 
-PYTHON_COMPAT=( python3_{11..14} )
+PYTHON_COMPAT=( python3_{12..14} )
 
-DISTUTILS_USE_PEP517=setuptools
+DISTUTILS_USE_PEP517=hatchling
 DISTUTILS_SINGLE_IMPL=1
 
 inherit distutils-r1
@@ -26,8 +26,9 @@ LICENSE="MIT"
 SLOT="0"
 IUSE="cuda opencl vulkan -sourcefilters"
 
-PATCHES="${FILESDIR}/fix-typeis.patch"
-
+BDEPEND="
+	$(python_gen_cond_dep 'dev-python/versioningit[${PYTHON_USEDEP}]')
+"
 RDEPEND+="
 	!media-plugins/vs-aa
 	!media-plugins/vs-dehalo
@@ -47,6 +48,7 @@ RDEPEND+="
 		media-plugins/vs-imwri
 	)
 	media-libs/vapoursynth[${PYTHON_SINGLE_USEDEP}]
+	media-plugins/adaptivegrain
 	media-plugins/vapoursynth-akarin
 	media-plugins/vapoursynth-resize2
 	media-plugins/vapoursynth-zip
@@ -75,11 +77,11 @@ RDEPEND+="
 	media-plugins/vapoursynth-descale
 	media-plugins/vs-placebo
 	media-plugins/vapoursynth-awarpsharp2
+	media-plugins/vapoursynth-deblock
 	media-plugins/vapoursynth-tcanny
 	media-plugins/vapoursynth-tedgemask
 	cuda? ( media-plugins/vapoursynth-bilateralgpu )
-	media-plugins/vapoursynth-dpid
-	$(python_gen_cond_dep 'dev-python/jetpytools[${PYTHON_USEDEP}]')
+	$(python_gen_cond_dep '>=dev-python/jetpytools-2.2.3[${PYTHON_USEDEP}]')
 	$(python_gen_cond_dep 'dev-python/numpy[${PYTHON_USEDEP}]')
 	$(python_gen_cond_dep 'dev-python/rich[${PYTHON_USEDEP}]')
 	$(python_gen_cond_dep 'dev-python/scipy[${PYTHON_USEDEP}]')
