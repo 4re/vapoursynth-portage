@@ -17,10 +17,11 @@ LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 
+BDEPEND="
+	dev-python/versioningit
+"
 RDEPEND="
 	>=dev-python/typing-extensions-4.15.0
 "
-
-#PATCHES="${FILESDIR}/fix-typeis.patch"
 
 distutils_enable_tests pytest
