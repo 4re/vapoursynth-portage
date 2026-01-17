@@ -30,20 +30,9 @@ DEPEND="${RDEPEND}"
 
 S="${WORKDIR}/${P}/vsncnn"
 
-src_prepare() {
-	sed -i "s|find_package(protobuf REQUIRED CONFIG)|find_package(Protobuf REQUIRED)|" \
-		"${S}/CMakeLists.txt" || die
-	sed -i '/find_package(ONNX REQUIRED CONFIG)/i find_package(absl REQUIRED)' \
-		"${S}/CMakeLists.txt" || die
-	sed -i '/find_package(ONNX REQUIRED CONFIG)/i find_package(utf8_range REQUIRED)' \
-		"${S}/CMakeLists.txt" || die
-
-	cmake_src_prepare
-}
-
 src_configure() {
-	append-flags "-DONNX_ML=1"
-	append-flags "-DONNX_NAMESPACE=onnx"
+	append-cppflags "-DONNX_ML=1"
+	append-cppflags "-DONNX_NAMESPACE=onnx"
 	local mycmakeargs=(
 		-DVAPOURSYNTH_INCLUDE_DIRECTORY="/usr/include/vapoursynth"
 	)
