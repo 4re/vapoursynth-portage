@@ -33,6 +33,10 @@ S="${WORKDIR}/${P}/vsncnn"
 src_prepare() {
 	sed -i "s|find_package(protobuf REQUIRED CONFIG)|find_package(Protobuf REQUIRED)|" \
 		"${S}/CMakeLists.txt" || die
+	sed -i '/find_package(ONNX REQUIRED CONFIG)/i find_package(absl REQUIRED)' \
+		"${S}/CMakeLists.txt" || die
+	sed -i '/find_package(ONNX REQUIRED CONFIG)/i find_package(utf8_range REQUIRED)' \
+		"${S}/CMakeLists.txt" || die
 
 	cmake_src_prepare
 }
