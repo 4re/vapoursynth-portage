@@ -1,4 +1,4 @@
-# Copyright 2025 Gentoo Authors
+# Copyright 2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -12,7 +12,7 @@ EGIT_REPO_URI="https://github.com/AmusementClub/vs-mlrt.git"
 if ver_test -eq 9999; then
 	KEYWORDS=""
 else
-	EGIT_COMMIT="v${PV}.ncnn"
+	EGIT_COMMIT="v${PV}"
 	KEYWORDS="~amd64"
 fi
 
@@ -28,26 +28,11 @@ RDEPEND+="
 "
 DEPEND="${RDEPEND}"
 
-if ver_test -eq 9999; then
-	S="${S}/vsncnn"
-else
-	S="${WORKDIR}/vs-mlrt-${PV}/vsncnn"
-fi
-
-src_prepare() {
-	sed -i "s|find_package(protobuf REQUIRED CONFIG)|find_package(Protobuf REQUIRED)|" \
-		"${S}/CMakeLists.txt" || die
-	sed -i '/find_package(ONNX REQUIRED CONFIG)/i find_package(absl REQUIRED)' \
-		"${S}/CMakeLists.txt" || die
-	sed -i '/find_package(ONNX REQUIRED CONFIG)/i find_package(utf8_range REQUIRED)' \
-		"${S}/CMakeLists.txt" || die
-
-	cmake_src_prepare
-}
+S="${WORKDIR}/${P}/vsncnn"
 
 src_configure() {
-	append-flags "-DONNX_ML=1"
-	append-flags "-DONNX_NAMESPACE=onnx"
+	append-cppflags "-DONNX_ML=1"
+	append-cppflags "-DONNX_NAMESPACE=onnx"
 	local mycmakeargs=(
 		-DVAPOURSYNTH_INCLUDE_DIRECTORY="/usr/include/vapoursynth"
 	)
