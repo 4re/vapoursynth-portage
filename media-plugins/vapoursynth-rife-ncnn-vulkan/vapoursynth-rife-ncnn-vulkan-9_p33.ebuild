@@ -1,4 +1,4 @@
-# Copyright 1999-2024 Gentoo Authors
+# Copyright 1999-2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -28,7 +28,7 @@ IUSE=""
 RDEPEND+="
 	|| (
 		sys-devel/gcc[openmp]
-		sys-devel/clang-runtime[openmp]
+		llvm-runtimes/clang-runtime[openmp]
 	)
 	dev-libs/ncnn
 	dev-util/glslang
@@ -41,6 +41,7 @@ DEPEND="${RDEPEND}
 "
 BDEPEND="app-alternatives/ninja"
 
+PATCHES="${FILESDIR}/ncnn-drop-use_shader_pack8.patch"
 
 src_configure() {
 	local emesonargs=(

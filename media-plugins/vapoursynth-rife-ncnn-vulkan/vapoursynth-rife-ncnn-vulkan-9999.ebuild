@@ -28,7 +28,7 @@ IUSE=""
 RDEPEND+="
 	|| (
 		sys-devel/gcc[openmp]
-		sys-devel/clang-runtime[openmp]
+		llvm-runtimes/clang-runtime[openmp]
 	)
 	dev-libs/ncnn
 	dev-util/glslang
@@ -41,6 +41,7 @@ DEPEND="${RDEPEND}
 "
 BDEPEND="app-alternatives/ninja"
 
+PATCHES="${FILESDIR}/ncnn-drop-use_shader_pack8.patch"
 
 src_configure() {
 	local emesonargs=(
