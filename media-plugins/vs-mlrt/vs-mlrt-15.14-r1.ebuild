@@ -78,9 +78,7 @@ SLOT="0"
 IUSE="+ncnn +models model-rife model-waifu2x-swin-unet"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
-BDEPEND="
-	app-arch/7zip
-"
+BDEPEND="$(unpacker_src_uri_depends)"
 RDEPEND+="
 	${PYTHON_DEPS}
 	media-libs/vapoursynth[${PYTHON_SINGLE_USEDEP}]
