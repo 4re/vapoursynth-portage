@@ -3,7 +3,7 @@
 
 EAPI=8
 
-inherit cmake
+inherit cmake cuda
 
 DESCRIPTION="Bilateral filter for VapourSynth based on the OpenCV-CUDA library"
 HOMEPAGE="https://github.com/WolframRhodium/VapourSynth-BilateralGPU"
@@ -27,11 +27,18 @@ RDEPEND+="
 "
 DEPEND="${RDEPEND}
 "
+
+src_prepare() {
+	default
+	cmake_src_prepare
+	cuda_add_sandbox
+}
+
 src_configure() {
 	local mycmakeargs=(
 		-DCMAKE_INSTALL_LIBDIR="$(get_libdir)/vapoursynth/"
 		-DVAPOURSYNTH_INCLUDE_DIRECTORY="$(pkg-config --cflags-only-I vapoursynth | sed 's/-I//')"
-		-DCMAKE_CUDA_FLAGS="--threads 0 --use_fast_math -Wno-deprecated-gpu-targets"
+		-DCMAKE_CUDA_FLAGS="--threads 0 --use_fast_math -Wno-deprecated-gpu-targets $(cuda_gccdir -f | tr -d \")"
 	)
 	cmake_src_configure
 }
