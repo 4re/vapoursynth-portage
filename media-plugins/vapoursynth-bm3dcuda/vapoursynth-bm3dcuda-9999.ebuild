@@ -3,7 +3,7 @@
 
 EAPI=8
 
-inherit cmake
+inherit cmake cuda
 
 DESCRIPTION="BM3D denoising filter for VapourSynth, implemented in CUDA"
 HOMEPAGE="https://github.com/WolframRhodium/VapourSynth-BM3DCUDA"
@@ -33,16 +33,10 @@ RDEPEND+="
 DEPEND="${RDEPEND}
 "
 
-pkg_setup() {
-	# Pulled from firefox ebuild
-	#
-	# Fixes sandbox error
-	if use cuda; then
-		nvidia_cards=$(echo -n /dev/nvidia* | sed 's/ /:/g')
-		if [[ -n "${nvidia_cards}" ]] ; then
-			addpredict "${nvidia_cards}"
-		fi
-	fi
+src_prepare() {
+	default
+	cmake_src_prepare
+	use cuda && cuda_add_sandbox
 }
 
 src_configure() {
@@ -53,5 +47,10 @@ src_configure() {
 		-DENABLE_CPU=$(usex cpu ON OFF)
 		-DENABLE_CUDA=$(usex cuda ON OFF)
 	)
+	if use cuda; then
+		mycmakeargs+=(
+			-DCMAKE_CUDA_FLAGS="$(cuda_gccdir -f | tr -d \")"
+		)
+	fi
 	cmake_src_configure
 }
