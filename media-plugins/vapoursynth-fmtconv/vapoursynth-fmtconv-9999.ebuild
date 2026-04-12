@@ -8,11 +8,11 @@ HOMEPAGE="http://forum.doom9.org/showthread.php?t=166504 https://gitlab.com/Eleo
 
 if [[ ${PV} == *9999* ]]; then
 	inherit git-r3
-	EGIT_REPO_URI="https://github.com/EleonoreMizo/fmtconv.git"
+	EGIT_REPO_URI="https://gitlab.com/EleonoreMizo/fmtconv.git"
 	KEYWORDS=""
 else
 	inherit vcs-snapshot
-	SRC_URI="https://github.com/EleonoreMizo/fmtconv/archive/r${PV}.tar.gz -> ${PN}-${PV}.tar.gz"
+	SRC_URI="https://gitlab.com/EleonoreMizo/fmtconv/-/archive/r31/fmtconv-r${PV}.tar.gz -> ${PN}-${PV}.tar.gz"
 	KEYWORDS="~amd64 ~x86"
 fi
 
