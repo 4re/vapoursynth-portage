@@ -4,8 +4,7 @@
 <use>
 	<flag name="debug">Enable compilation options required for debugging</flag>
 	<flag name="guard">Adds 32 bytes on the left and the right sides of each frame, fills them with a certain value, and checks their integrity after each filter. It can be used to detect buggy filters that write a little outside the frame</flag>
-	<flag name="static-libs">Build static libraries instead of shared ones</flag>
-	<flag name="vspipe">Enable support for piping output</flag>
+	<flag name="legacy">Installs API3 headers to be able to build old plugins</flag>
 	<flag name="lto">Enable link-time optimization</flag>
 	<flag name="cpu_flags_x86_sse2">Enable SSE2-optimized x86 assembly code (Meson: enable_x86_asm)</flag>
 </use>

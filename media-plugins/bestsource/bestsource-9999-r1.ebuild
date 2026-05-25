@@ -1,9 +1,14 @@
-# Copyright 2025 Gentoo Authors
+# Copyright 2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 
-inherit meson git-r3
+PYTHON_COMPAT=( python3_{13..15} )
+DISTUTILS_EXT=1
+DISTUTILS_SINGLE_IMPL=true
+DISTUTILS_USE_PEP517=meson-python
+
+inherit distutils-r1 git-r3
 
 DESCRIPTION="Sample/frame accurate access to audio and video source plugin for VaporSynth"
 HOMEPAGE="https://github.com/vapoursynth/bestsource"
@@ -20,21 +25,20 @@ fi
 LICENSE="MIT"
 SLOT="0"
 IUSE="lto"
-RESTRICT="mirror"
+RESTRICT="network-sandbox"
 
 RDEPEND+="
 	dev-libs/jansson
 	dev-libs/xxhash
-	media-libs/vapoursynth:0/4
+	media-libs/vapoursynth[${PYTHON_SINGLE_USEDEP}]
 	>=media-video/ffmpeg-7.1
 "
 DEPEND="${RDEPEND}
 "
 
-
 src_configure() {
-	local emesonargs=(
+	DISTUTILS_ARGS=(
 		-Db_lto=$(usex lto true false)
 	)
-	meson_src_configure
+	meson_src_configure --wrap-mode=default
 }

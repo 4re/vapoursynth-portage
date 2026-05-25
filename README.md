@@ -13,7 +13,7 @@ Usage
 -----
 The preferred way to manage vapoursynth plugins is through `VAPOURSYNTH_PLUGINS` variable in `/etc/portage/package.use/use`:
 ```
-*/*::vapoursynth VAPOURSYNTH_PLUGINS: * -addgrain -ffmpegsource -morpho -ocr
+*/*::vapoursynth VAPOURSYNTH_PLUGINS: * -ffmpegsource
 ```
 
 If you are on stable use the provided file to keyword everything:
@@ -38,8 +38,8 @@ This overlay also includes an editor and a modified mpv ebuild with vapoursynth 
 
 Troubleshooting
 ---------------
-If you want to use python-3.11 you may need to add this to your `/etc/portage/package.use/use`:
+If you want to use newer versions of python you may need to add this to your `/etc/portage/package.use/use`:
 ```
-*/*::vapoursynth PYTHON_SINGLE_TARGET: -* python3_12
+*/*::vapoursynth PYTHON_SINGLE_TARGET: -* python3_15
 ```
 Be aware that not all ebuilds may be able to satisfy all dependencies.

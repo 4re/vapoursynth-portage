@@ -1,9 +1,9 @@
-# Copyright 2022 Gentoo Authors
+# Copyright 2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 
-PYTHON_COMPAT=( python3_{11..14} )
+PYTHON_COMPAT=( python3_{13..15} )
 
 inherit python-single-r1 git-r3
 
@@ -16,7 +16,7 @@ SLOT="0"
 KEYWORDS=""
 
 RDEPEND+="
-	>=media-libs/vapoursynth-47[${PYTHON_SINGLE_USEDEP}]
+	media-libs/vapoursynth[${PYTHON_SINGLE_USEDEP}]
 "
 DEPEND="${RDEPEND}
 "

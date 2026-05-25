@@ -1,9 +1,9 @@
-# Copyright 2022 Gentoo Authors
+# Copyright 2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 
-PYTHON_COMPAT=( python3_{11..14} )
+PYTHON_COMPAT=( python3_{13..15} )
 
 inherit python-single-r1
 
@@ -20,16 +20,16 @@ else
 	KEYWORDS="~amd64 ~x86"
 fi
 
-
 LICENSE=""
+RESTRICT="mirror"
 SLOT="0"
 IUSE=""
 
 RDEPEND+="
 	media-libs/vapoursynth[${PYTHON_SINGLE_USEDEP}]
-	media-plugins/vapoursynth-descale
-	media-plugins/vapoursynth-fmtconv
-	media-plugins/vs-removegrain
+	media-plugins/vapoursynth-descale[${PYTHON_SINGLE_USEDEP}]
+	media-plugins/vapoursynth-fmtconv[${PYTHON_SINGLE_USEDEP}]
+	media-plugins/vs-removegrain[${PYTHON_SINGLE_USEDEP}]
 "
 DEPEND="${RDEPEND}
 "

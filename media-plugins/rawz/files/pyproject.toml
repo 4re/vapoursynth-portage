@@ -1,0 +1,35 @@
+[build-system]
+requires = ["meson-python"]
+build-backend = "mesonpy"
+
+[project]
+name = "vapoursynth-rawz"
+description = "A raw source filter for VapourSynth"
+readme = "README.rst"
+requires-python = ">=3.12"
+license = "WTFPL"
+license-files = ["COPYING"]
+authors = [
+    {name = "Fredrik Mellbin", email = "fredrik.mellbin@gmail.com"},
+]
+keywords = ["source", "video", "source"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Environment :: Plugins",
+    "Natural Language :: English",
+    "Operating System :: MacOS",
+    "Operating System :: Microsoft :: Windows",
+    "Operating System :: POSIX",
+    "Operating System :: Unix",
+    "Programming Language :: C++",
+    "Topic :: Multimedia :: Video",
+]
+dependencies = ["VapourSynth"]
+dynamic = ["version"]
+
+[project.urls]
+Repository = "https://github.com/sekrit-twc/rawz.git"
+Issues = "https://github.com/sekrit-twc/rawz/issues"
+
+[tool.meson-python.wheel]
+exclude = ["*/*.dll.a", "*/*.lib"]

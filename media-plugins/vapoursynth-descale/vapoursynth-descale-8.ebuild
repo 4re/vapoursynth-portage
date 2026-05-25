@@ -1,9 +1,9 @@
-# Copyright 1999-2022 Gentoo Authors
+# Copyright 2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 
-PYTHON_COMPAT=( python3_{11..14} )
+PYTHON_COMPAT=( python3_{13..15} )
 
 inherit meson python-single-r1
 
@@ -25,12 +25,20 @@ SLOT="0"
 IUSE="lto"
 
 RDEPEND+="
-	media-libs/vapoursynth:0/4
+	>=media-libs/vapoursynth-76[${PYTHON_SINGLE_USEDEP}]
 "
 DEPEND="${RDEPEND}"
 
 DOCS=( "README.md" )
 
+src_prepare() {
+	default
+	sed -i "/cc = meson.get_compiler('c')/a py = import('python').find_installation(pure: false)" meson.build || die
+	sed -i "s|install_dir: installdir$|install_dir: py.get_install_dir() / 'vapoursynth/plugins'|" meson.build || die
+
+	find . -type f \( -name "*.c" -o -name "*.cpp" -o -name "*.h" \) \
+		-exec sed -i 's|vapoursynth/VS|VS|g;s|vapoursynth/VapourSynth|VapourSynth|g' {} +
+}
 
 src_configure() {
 	local emesonargs=(
