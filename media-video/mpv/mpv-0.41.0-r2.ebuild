@@ -132,6 +132,8 @@ BDEPEND="
 
 PATCHES=(
 	"${FILESDIR}"/${PN}-0.41.0-v4l2request.patch
+	"${FILESDIR}"/${PN}-0.41.0-vapoursynth_R74.patch
+	"${FILESDIR}"/${PN}-0.41.0-vapoursynth_fixes.patch
 )
 
 pkg_setup() {
