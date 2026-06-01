@@ -1,0 +1,44 @@
+# Copyright 2026 Gentoo Authors
+# Distributed under the terms of the GNU General Public License v2
+
+EAPI=8
+
+DESCRIPTION="Media library"
+HOMEPAGE="https://github.com/vimeo/l-smash"
+
+inherit git-r3
+
+EGIT_REPO_URI="https://github.com/vimeo/l-smash.git"
+EGIT_COMMIT="04e39f1fb232c332d4b04a1043c02c7c2d282d00"
+
+KEYWORDS="~amd64 ~x86"
+
+LICENSE="ISC"
+SLOT="0"
+IUSE="-static-libs -debug"
+
+RDEPEND+="
+	media-video/ffmpeg
+	media-libs/obuparse
+"
+DEPEND="${RDEPEND}
+	virtual/pkgconfig
+"
+
+src_configure() {
+	local myconf="--enable-shared"
+
+	if ! use static-libs; then
+		myconf="${myconf} --disable-static"
+	fi
+	if use debug; then
+		myconf="${myconf} --enable-debug"
+	fi
+
+	./configure \
+		--prefix="${EPREFIX}"/usr \
+		--libdir="${EPREFIX}"/usr/$(get_libdir) \
+		--extra-cflags="${CFLAGS}" \
+		--extra-ldflags="${LDFLAGS}" \
+		${myconf}  || die
+}
