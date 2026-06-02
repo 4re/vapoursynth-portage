@@ -10,9 +10,15 @@ inherit meson python-single-r1 git-r3
 DESCRIPTION="An optimized pixelwise OpenCL implementation of the Non-local means denoising algorithm"
 HOMEPAGE="https://github.com/Khanattila/KNLMeansCL"
 
-EGIT_REPO_URI="https://github.com/Khanattila/KNLMeansCL.git"
-EGIT_COMMIT="36bb2b1bb648a8f3552c4b2b841d10b4d65ec12b"
-KEYWORDS="~x86 ~amd64"
+if [[ ${PV} == *9999* ]]; then
+	inherit git-r3
+	EGIT_REPO_URI="https://github.com/Khanattila/KNLMeansCL.git"
+	KEYWORDS=""
+else
+	inherit vcs-snapshot
+	SRC_URI="https://github.com/Khanattila/KNLMeansCL/archive/v${PV}.tar.gz -> ${PN}-${PV}.tar.gz"
+	KEYWORDS="~x86 ~amd64"
+fi
 
 LICENSE="LGPL-3"
 SLOT="0/1.1"
@@ -28,6 +34,7 @@ RDEPEND+="
 		)
 "
 DEPEND="${RDEPEND}
+	dev-util/opencl-headers
 "
 
 src_prepare() {
