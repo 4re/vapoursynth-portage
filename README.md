@@ -19,12 +19,12 @@ The preferred way to manage vapoursynth plugins is through `VAPOURSYNTH_PLUGINS`
 If you are on stable use the provided file to keyword everything:
 ```
 # cd /etc/portage/package.accept_keywords
-# ln -s /var/lib/layman/vapoursynth/Documentation/package.accept_keywords/vapoursynth .
+# ln -s /var/db/repos/vapoursynth/Documentation/package.accept_keywords/vapoursynth .
 ```
 To make use of the live ebuilds:
 ```
 # cd /etc/portage/package.accept_keywords
-# ln -s /var/lib/layman/vapoursynth/Documentation/package.accept_keywords/vapoursynth-live .
+# ln -s /var/db/repos/vapoursynth/Documentation/package.accept_keywords/vapoursynth-live .
 ```
 In case you are using the live versions, you may want to utilize ```smart-live-rebuild``` to update the ebuilds as needed:
 ```
