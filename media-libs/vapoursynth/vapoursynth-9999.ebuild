@@ -16,7 +16,7 @@ HOMEPAGE="http://www.vapoursynth.com/"
 LICENSE="LGPL-2.1 OFL-1.1"
 SLOT="0/4"
 
-IUSE="lto -debug -guard cpu_flags_x86_sse2"
+IUSE="lto +legacy -debug -guard cpu_flags_x86_sse2"
 RESTRICT="mirror"
 
 if [[ ${PV} == *9999* ]]; then
@@ -51,6 +51,11 @@ python_configure_all() {
 
 src_install() {
 	distutils-r1_src_install
+
+	if use legacy; then
+		insinto "$(python_get_sitedir)/vapoursynth/include/"
+		doins include/VSHelper.h include/VapourSynth.h
+	fi
 
 	dosym -r "$(python_get_sitedir)/vapoursynth/pkgconfig/vapoursynth.pc" \
 		"/usr/$(get_libdir)/pkgconfig/vapoursynth.pc" || die
