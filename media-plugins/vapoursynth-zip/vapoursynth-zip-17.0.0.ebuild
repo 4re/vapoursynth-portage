@@ -12,7 +12,7 @@ DESCRIPTION="VapourSynth Zig Image Process"
 HOMEPAGE="https://github.com/dnjulek/vapoursynth-zip"
 
 declare -g -r -A ZBS_DEPENDENCIES=(
-	[vapoursynth-4.0.0-jLYMQzOOAgDbCgdTQVlOlOZysud-8FD-daGymdAH5Mvc.tar.gz]='https://github.com/dnjulek/vapoursynth-zig/archive/92b85456e3c82e55c21dbc0c213c70ef50164ea4.tar.gz'
+	[vapoursynth-4.0.0-jLYMQ6DjAgDFOODh8tdhWCw0iGHMPKiR4znTJwSyvV36.tar.gz]='https://github.com/dnjulek/vapoursynth-zig/archive/b87ff61ce680fa5a4cf7d44a9cb4b605c5037432.tar.gz'
 	[zigimg-0.1.0-8_eo2sGbFwCrsBjkTTP-kinCH62m5vmYDHQnQcngFuwh.tar.gz]='https://github.com/coisos/zigimg/archive/0bbe201a5591219177f2444371c2897746b47774.tar.gz'
 )
 
