@@ -12,7 +12,7 @@ DESCRIPTION="Video smoothing functions for Vapoursynth"
 HOMEPAGE="https://github.com/adworacz/zsmooth"
 
 declare -g -r -A ZBS_DEPENDENCIES=(
-	[vapoursynth-4.0.0-jLYMQw95AgBWLJymsYybHIFxNu7d6shoYn8y8WZfH8T3.tar.gz]='https://github.com/dnjulek/vapoursynth-zig/archive/a94152c87e4242a582ec5f30f4d4e890c14e2233.tar.gz'
+	[vapoursynth-4.0.0-jLYMQ2SPAgCbH6_Kr5k8EUde77slXphbfx6P31vl3abc.tar.gz]='https://github.com/dnjulek/vapoursynth-zig/archive/344caabeae1f4168b69ea6975d6ef244583e7c63.tar.gz'
 	[fftw-3.3.11-2-EjV1I17WAgD0Lnb_BKT51TNd_56-eY4NBOPHO2IH_WHZ.tar.gz]='https://github.com/adworacz/fftw/archive/579b516e6b39a2a96200d248fc3c96d1ad7d9841.tar.gz'
 	[fftw-3.3.11.tar.gz]='https://www.fftw.org/fftw-3.3.11.tar.gz'
 )
