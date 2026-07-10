@@ -25,7 +25,7 @@ fi
 LICENSE="MIT"
 SLOT="0"
 IUSE="lto"
-RESTRICT="mirror"
+RESTRICT="network-sandbox"
 
 RDEPEND+="
 	dev-libs/jansson
@@ -40,4 +40,5 @@ src_configure() {
 	DISTUTILS_ARGS=(
 		-Db_lto=$(usex lto true false)
 	)
+	meson_src_configure --wrap-mode=default
 }
