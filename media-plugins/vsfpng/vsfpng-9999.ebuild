@@ -8,17 +8,16 @@ DISTUTILS_EXT=1
 DISTUTILS_SINGLE_IMPL=true
 DISTUTILS_USE_PEP517=meson-python
 
-inherit distutils-r1
+inherit distutils-r1 git-r3
 
 DESCRIPTION="fpng for VapourSynth"
 HOMEPAGE="https://github.com/Mikewando/vsfpng"
+EGIT_REPO_URI="https://github.com/Mikewando/vsfpng.git"
 
 if [[ ${PV} == *9999* ]]; then
-	inherit git-r3
-	EGIT_REPO_URI="https://github.com/Mikewando/vsfpng.git"
 	KEYWORDS=""
 else
-	SRC_URI="https://github.com/Mikewando/vsfpng/archive/${PV}.tar.gz -> ${PN}-${PV}.tar.gz"
+	EGIT_COMMIT="refs/tags/${PV}"
 	KEYWORDS="~x86 ~amd64"
 fi
 
@@ -28,7 +27,7 @@ IUSE="lto"
 RESTRICT="mirror"
 
 RDEPEND+="
-	>=media-libs/vapoursynth-76[${PYTHON_SINGLE_USEDEP}]
+	media-libs/vapoursynth[${PYTHON_SINGLE_USEDEP}]
 "
 DEPEND="${RDEPEND}
 "

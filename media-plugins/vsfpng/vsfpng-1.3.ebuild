@@ -12,11 +12,14 @@ inherit distutils-r1 git-r3
 
 DESCRIPTION="fpng for VapourSynth"
 HOMEPAGE="https://github.com/Mikewando/vsfpng"
-
 EGIT_REPO_URI="https://github.com/Mikewando/vsfpng.git"
-EGIT_COMMIT="50c628ef2c6ae97d398a5f88061ee38ef7552fbf"
 
-KEYWORDS="~x86 ~amd64"
+if [[ ${PV} == *9999* ]]; then
+	KEYWORDS=""
+else
+	EGIT_COMMIT="refs/tags/${PV}"
+	KEYWORDS="~x86 ~amd64"
+fi
 
 LICENSE="LGPL-2.1"
 SLOT="0"
@@ -24,7 +27,7 @@ IUSE="lto"
 RESTRICT="mirror"
 
 RDEPEND+="
-	>=media-libs/vapoursynth-76[${PYTHON_SINGLE_USEDEP}]
+	media-libs/vapoursynth[${PYTHON_SINGLE_USEDEP}]
 "
 DEPEND="${RDEPEND}
 "
