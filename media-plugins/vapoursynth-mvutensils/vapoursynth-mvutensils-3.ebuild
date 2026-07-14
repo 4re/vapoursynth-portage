@@ -19,6 +19,7 @@ if [[ ${PV} == *9999* ]]; then
 	KEYWORDS=""
 else
 	SRC_URI="https://github.com/myrsloik/mvutensils/archive/v${PV}.tar.gz -> ${P}.tar.gz"
+	S="${WORKDIR}/mvutensils-${PV}"
 	KEYWORDS="~amd64 ~x86"
 fi
 
@@ -33,8 +34,6 @@ RDEPEND+="
 "
 DEPEND="${RDEPEND}
 "
-
-S="${WORKDIR}/mvutensils-${PV}"
 
 DOCS=( "readme.md" )
 
