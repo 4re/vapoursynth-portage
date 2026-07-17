@@ -21,7 +21,7 @@ SLOT="0"
 
 RDEPEND="
 	~media-libs/ffmpegsource-${PV}
-	>=media-libs/vapoursynth-76[${PYTHON_SINGLE_USEDEP}]
+	media-libs/vapoursynth[${PYTHON_SINGLE_USEDEP}]
 "
 DEPEND="${RDEPEND}
 "
@@ -29,5 +29,5 @@ DEPEND="${RDEPEND}
 S="${WORKDIR}"
 
 src_install() {
-	dosym "${EPREFIX}/usr/$(get_libdir)/libffms2.so.5.0.0" "$(vapoursynth get-plugin-dir)/libffms2.so" || die
+	dosym "${EPREFIX}/usr/$(get_libdir)/libffms2.so" "$(vapoursynth get-plugin-dir)/libffms2.so" || die
 }
