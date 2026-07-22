@@ -29,6 +29,11 @@ RDEPEND+="
 DEPEND="${RDEPEND}
 "
 
+src_prepare() {
+    default
+    sed -i '/#include <string_view>/a #include <algorithm>' timecube/cube.cpp || die
+}
+
 src_install() {
 	insinto "$(vapoursynth get-plugin-dir)"
 	doins "vscube.so"
