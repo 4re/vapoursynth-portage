@@ -32,7 +32,7 @@ fi
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 RDEPEND="${PYTHON_DEPS}
-	>=media-libs/zimg-3.0.6
+	>media-libs/zimg-3.0.6
 "
 DEPEND="${RDEPEND}
 	$(python_gen_cond_dep 'dev-python/cython[${PYTHON_USEDEP}]')
