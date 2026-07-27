@@ -1,5 +1,7 @@
 ~app-editors/vapoursynth-editor-9999 **
 ~media-libs/ffmpegsource-9999 **
+~media-libs/l-smash-9999 **
+~media-libs/obuparse-9999 **
 ~media-libs/vapoursynth-9999 **
 ~media-libs/zimg-9999 **
 ~media-plugins/acsuite-9999 **
@@ -19,11 +21,15 @@
 ~media-plugins/vapoursynth-bifrost-9999 **
 ~media-plugins/vapoursynth-bm3d-9999 **
 ~media-plugins/vapoursynth-bwdif-9999 **
+~media-plugins/vapoursynth-cambi-9999 **
+~media-plugins/vapoursynth-cas-9999 **
+~media-plugins/vapoursynth-chickendream-9999 **
 ~media-plugins/vapoursynth-cmedian-9999 **
 ~media-plugins/vapoursynth-colorbars-9999 **
 ~media-plugins/vapoursynth-d2vsource-9999 **
 ~media-plugins/vapoursynth-dctfilter-9999 **
 ~media-plugins/vapoursynth-deblock-9999 **
+~media-plugins/vapoursynth-decross-9999 **
 ~media-plugins/vapoursynth-dedot-9999 **
 ~media-plugins/vapoursynth-descale-9999 **
 ~media-plugins/vapoursynth-dotkill-9999 **
@@ -39,10 +45,13 @@
 ~media-plugins/vapoursynth-histogram-9999 **
 ~media-plugins/vapoursynth-hysteria-9999 **
 ~media-plugins/vapoursynth-iscombed-9999 **
+~media-plugins/vapoursynth-it-9999 **
 ~media-plugins/vapoursynth-knlmeanscl-9999 **
+~media-plugins/vapoursynth-l-smash-works-9999 **
 ~media-plugins/vapoursynth-miscfilters-obsolete-9999 **
 ~media-plugins/vapoursynth-mvsfunc-9999 **
 ~media-plugins/vapoursynth-mvtools-9999 **
+~media-plugins/vapoursynth-mvutensils-9999 **
 ~media-plugins/vapoursynth-plugins-meta-9999 **
 ~media-plugins/vapoursynth-readmpls-9999 **
 ~media-plugins/vapoursynth-resize2-9999 **

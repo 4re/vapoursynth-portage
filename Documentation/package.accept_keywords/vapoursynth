@@ -1,5 +1,7 @@
 app-editors/vapoursynth-editor ~*
 media-libs/ffmpegsource ~*
+media-libs/l-smash ~*
+media-libs/obuparse ~*
 media-libs/vapoursynth ~*
 media-libs/zimg ~*
 media-plugins/acsuite ~*
@@ -19,11 +21,15 @@ media-plugins/vapoursynth-awarp ~*
 media-plugins/vapoursynth-bifrost ~*
 media-plugins/vapoursynth-bm3d ~*
 media-plugins/vapoursynth-bwdif ~*
+media-plugins/vapoursynth-cambi ~*
+media-plugins/vapoursynth-cas ~*
+media-plugins/vapoursynth-chickendream ~*
 media-plugins/vapoursynth-cmedian ~*
 media-plugins/vapoursynth-colorbars ~*
 media-plugins/vapoursynth-d2vsource ~*
 media-plugins/vapoursynth-dctfilter ~*
 media-plugins/vapoursynth-deblock ~*
+media-plugins/vapoursynth-decross ~*
 media-plugins/vapoursynth-dedot ~*
 media-plugins/vapoursynth-descale ~*
 media-plugins/vapoursynth-dotkill ~*
@@ -39,10 +45,13 @@ media-plugins/vapoursynth-fmtconv ~*
 media-plugins/vapoursynth-histogram ~*
 media-plugins/vapoursynth-hysteria ~*
 media-plugins/vapoursynth-iscombed ~*
+media-plugins/vapoursynth-it ~*
 media-plugins/vapoursynth-knlmeanscl ~*
+media-plugins/vapoursynth-l-smash-works ~*
 media-plugins/vapoursynth-miscfilters-obsolete ~*
 media-plugins/vapoursynth-mvsfunc ~*
 media-plugins/vapoursynth-mvtools ~*
+media-plugins/vapoursynth-mvutensils ~*
 media-plugins/vapoursynth-plugins-meta ~*
 media-plugins/vapoursynth-readmpls ~*
 media-plugins/vapoursynth-resize2 ~*
