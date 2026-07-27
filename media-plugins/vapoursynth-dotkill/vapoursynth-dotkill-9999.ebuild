@@ -8,7 +8,7 @@ DISTUTILS_EXT=1
 DISTUTILS_SINGLE_IMPL=true
 DISTUTILS_USE_PEP517=meson-python
 
-inherit distutils-r1 git-r3
+inherit distutils-r1
 
 DESCRIPTION="Spatial dotcrawl remover for VapourSynth"
 HOMEPAGE="https://github.com/myrsloik/DotKill"
@@ -29,7 +29,7 @@ IUSE="lto"
 RESTRICT="mirror"
 
 RDEPEND+="
-	>=media-libs/vapoursynth-76[${PYTHON_SINGLE_USEDEP}]
+	media-libs/vapoursynth[${PYTHON_SINGLE_USEDEP}]
 "
 DEPEND="${RDEPEND}
 "
