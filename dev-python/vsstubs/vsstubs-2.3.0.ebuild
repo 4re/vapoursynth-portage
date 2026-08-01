@@ -24,6 +24,7 @@ BDEPEND="
 "
 RDEPEND="
 	media-libs/vapoursynth
+	dev-python/cyclopts
 	dev-python/typer
 	dev-python/rich
 "
