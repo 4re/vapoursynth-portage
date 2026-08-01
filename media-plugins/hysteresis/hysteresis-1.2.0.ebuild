@@ -9,9 +9,9 @@ DISTUTILS_SINGLE_IMPL=true
 DISTUTILS_USE_PEP517=hatchling
 
 CRATES="
-	autocfg@1.5.0
-	bon-macros@3.9.1
-	bon@3.9.1
+	autocfg@1.5.1
+	bon-macros@3.9.3
+	bon@3.9.3
 	cfg-if@1.0.4
 	const-str@1.1.0
 	darling@0.23.0
@@ -24,16 +24,17 @@ CRATES="
 	num-derive@0.4.2
 	num-traits@0.2.19
 	prettyplease@0.2.37
-	proc-macro2@1.0.106
-	quote@1.0.45
-	rustversion@1.0.22
+	proc-macro2@1.0.107
+	quote@1.0.47
+	rustversion@1.0.23
 	seq-macro@0.3.6
 	strsim@0.11.1
 	strum@0.28.0
 	strum_macros@0.28.0
-	syn@2.0.117
-	thiserror-impl@2.0.18
-	thiserror@2.0.18
+	syn@2.0.119
+	syn@3.0.3
+	thiserror-impl@2.0.19
+	thiserror@2.0.19
 	unicode-ident@1.0.24
 	unicode-width@0.1.14
 	vapours@0.2.5
