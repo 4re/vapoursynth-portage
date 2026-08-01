@@ -36,6 +36,7 @@
 ~media-plugins/vapoursynth-edgefixer-9999 **
 ~media-plugins/vapoursynth-edgemasks-9999 **
 ~media-plugins/vapoursynth-eedi3-9999 **
+~media-plugins/vapoursynth-eedi3vk2-9999 **
 ~media-plugins/vapoursynth-ffmpegsource-9999 **
 ~media-plugins/vapoursynth-fft3dfilter-9999 **
 ~media-plugins/vapoursynth-fieldhint-9999 **
@@ -52,6 +53,7 @@
 ~media-plugins/vapoursynth-mvsfunc-9999 **
 ~media-plugins/vapoursynth-mvtools-9999 **
 ~media-plugins/vapoursynth-mvutensils-9999 **
+~media-plugins/vapoursynth-nnedi3vk-9999 **
 ~media-plugins/vapoursynth-plugins-meta-9999 **
 ~media-plugins/vapoursynth-readmpls-9999 **
 ~media-plugins/vapoursynth-resize2-9999 **
@@ -67,6 +69,7 @@
 ~media-plugins/vapoursynth-vs-maskdetail-9999 **
 ~media-plugins/vapoursynth-warpsharpsupport-9999 **
 ~media-plugins/vapoursynth-zip-9999 **
+~media-plugins/vapoursynth-zipcl-9999 **
 ~media-plugins/vapoursynth-znedi3-9999 **
 ~media-plugins/vapoursynth-zsmooth-9999 **
 ~media-plugins/vivtc-9999 **

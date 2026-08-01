@@ -36,6 +36,7 @@ media-plugins/vapoursynth-dotkill ~*
 media-plugins/vapoursynth-edgefixer ~*
 media-plugins/vapoursynth-edgemasks ~*
 media-plugins/vapoursynth-eedi3 ~*
+media-plugins/vapoursynth-eedi3vk2 ~*
 media-plugins/vapoursynth-ffmpegsource ~*
 media-plugins/vapoursynth-fft3dfilter ~*
 media-plugins/vapoursynth-fieldhint ~*
@@ -52,6 +53,7 @@ media-plugins/vapoursynth-miscfilters-obsolete ~*
 media-plugins/vapoursynth-mvsfunc ~*
 media-plugins/vapoursynth-mvtools ~*
 media-plugins/vapoursynth-mvutensils ~*
+media-plugins/vapoursynth-nnedi3vk ~*
 media-plugins/vapoursynth-plugins-meta ~*
 media-plugins/vapoursynth-readmpls ~*
 media-plugins/vapoursynth-resize2 ~*
@@ -67,6 +69,7 @@ media-plugins/vapoursynth-vmaf ~*
 media-plugins/vapoursynth-vs-maskdetail ~*
 media-plugins/vapoursynth-warpsharpsupport ~*
 media-plugins/vapoursynth-zip ~*
+media-plugins/vapoursynth-zipcl ~*
 media-plugins/vapoursynth-znedi3 ~*
 media-plugins/vapoursynth-zsmooth ~*
 media-plugins/vivtc ~*
