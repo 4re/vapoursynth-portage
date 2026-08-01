@@ -16,7 +16,7 @@ if [[ ${PV} == *9999* ]]; then
 	KEYWORDS=""
 else
 	inherit vcs-snapshot
-	SRC_URI="https://github.com/MonoS/VS-MaskDetail/archive/V${PV}.tar.gz -> ${PN}-${PV}.tar.gz"
+	SRC_URI="https://github.com/MonoS/VS-MaskDetail/archive/v${PV}.tar.gz -> ${PN}-${PV}.tar.gz"
 	KEYWORDS="~amd64 ~x86"
 fi
 
@@ -27,9 +27,7 @@ IUSE=""
 
 RDEPEND+="
 	media-libs/vapoursynth[${PYTHON_SINGLE_USEDEP}]
-	media-plugins/vapoursynth-descale[${PYTHON_SINGLE_USEDEP}]
-	media-plugins/vapoursynth-fmtconv[${PYTHON_SINGLE_USEDEP}]
-	media-plugins/vs-removegrain[${PYTHON_SINGLE_USEDEP}]
+	media-plugins/vs-jetpack[${PYTHON_SINGLE_USEDEP}]
 "
 DEPEND="${RDEPEND}
 "
