@@ -46,4 +46,5 @@ src_configure() {
 src_install() {
 	insinto "$(vapoursynth get-plugin-dir)"
 	doins "${BUILD_DIR}/cpu_source/libdfttest2_cpu.so"
+	python_domodule dfttest2.py
 }
