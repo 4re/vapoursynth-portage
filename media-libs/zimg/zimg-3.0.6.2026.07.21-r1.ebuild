@@ -6,7 +6,7 @@ EAPI=8
 inherit autotools multilib-minimal git-r3
 
 EGIT_REPO_URI="https://github.com/sekrit-twc/zimg"
-EGIT_COMMIT="1ad1895d5ff0bbe69c61243f9996aede713d1b5f"
+EGIT_COMMIT="f6cc75ad23db1bb9c53673c15523e6b6e960ffc6"
 DESCRIPTION="Scaling, colorspace conversion, and dithering library"
 HOMEPAGE="https://github.com/sekrit-twc/zimg"
 
