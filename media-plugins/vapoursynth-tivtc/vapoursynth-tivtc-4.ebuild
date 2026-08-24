@@ -4,8 +4,11 @@
 EAPI=8
 
 PYTHON_COMPAT=( python3_{13..15} )
+DISTUTILS_EXT=1
+DISTUTILS_SINGLE_IMPL=true
+DISTUTILS_USE_PEP517=meson-python
 
-inherit meson python-single-r1
+inherit distutils-r1
 
 DESCRIPTION="TFM and TDecimate functions for field matching and decimation"
 HOMEPAGE="https://github.com/dubhater/vapoursynth-tivtc"
@@ -15,7 +18,7 @@ if [[ ${PV} == *9999* ]]; then
 	EGIT_REPO_URI="https://github.com/dubhater/vapoursynth-tivtc"
 	KEYWORDS=""
 else
-	SRC_URI="https://github.com/dubhater/vapoursynth-tivtc/archive/v${PV}.tar.gz -> ${PN}-${PV}.tar.gz"
+	SRC_URI="https://github.com/dubhater/vapoursynth-tivtc/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 	KEYWORDS="~amd64"
 fi
 
@@ -25,19 +28,13 @@ SLOT="0"
 IUSE="lto"
 
 RDEPEND+="
-	>=media-libs/vapoursynth-76[${PYTHON_SINGLE_USEDEP},legacy]
+	media-libs/vapoursynth[${PYTHON_SINGLE_USEDEP}]
 "
 DEPEND="${RDEPEND}
 "
 
-src_prepare() {
-	default
-	local install_path="$(vapoursynth get-plugin-dir)"
-	sed -i "s|cpp_args: cflags,$|cpp_args: cflags,\n              install_dir : '${install_path}',|" meson.build || die
-}
-
 src_configure() {
-	local emesonargs=(
+	DISTUTILS_ARGS=(
 		-Db_lto=$(usex lto true false)
 	)
 	meson_src_configure
