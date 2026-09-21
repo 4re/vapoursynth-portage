@@ -28,7 +28,7 @@ RESTRICT="mirror"
 RDEPEND+="
 	dev-libs/xxhash
 	media-libs/l-smash
-	media-libs/vapoursynth[${PYTHON_SINGLE_USEDEP},legacy]
+	media-libs/vapoursynth[${PYTHON_SINGLE_USEDEP}]
 	media-video/ffmpeg
 "
 DEPEND="${RDEPEND}
