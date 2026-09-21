@@ -46,13 +46,11 @@ RDEPEND+="
 	media-plugins/vapoursynth-bwdif
 	media-plugins/vapoursynth-deblock
 	media-plugins/vapoursynth-descale
-	media-plugins/vapoursynth-eedi3
 	media-plugins/vapoursynth-edgemasks
 	media-plugins/vapoursynth-fmtconv
 	media-plugins/vapoursynth-mvutensils
 	media-plugins/vapoursynth-resize2
 	media-plugins/vapoursynth-sangnom
-	media-plugins/vapoursynth-sneedif
 	media-plugins/vapoursynth-zip
 	media-plugins/vapoursynth-znedi3
 	media-plugins/vapoursynth-zsmooth
@@ -63,7 +61,6 @@ RDEPEND+="
 	media-plugins/vs-placebo
 	opencl? (
 		dev-python/pyopencl
-		media-plugins/vapoursynth-knlmeanscl
 		media-plugins/vapoursynth-zipcl
 	)
 	vulkan? (
