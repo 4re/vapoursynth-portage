@@ -17,9 +17,11 @@ media-plugins/rawz ~*
 media-plugins/subtext ~*
 media-plugins/vapoursynth-adjust ~*
 media-plugins/vapoursynth-akarin ~*
+media-plugins/vapoursynth-autocrop ~*
 media-plugins/vapoursynth-awarp ~*
 media-plugins/vapoursynth-bifrost ~*
 media-plugins/vapoursynth-bm3d ~*
+media-plugins/vapoursynth-bm3dvk ~*
 media-plugins/vapoursynth-bwdif ~*
 media-plugins/vapoursynth-cambi ~*
 media-plugins/vapoursynth-cas ~*
@@ -48,6 +50,7 @@ media-plugins/vapoursynth-hysteria ~*
 media-plugins/vapoursynth-iscombed ~*
 media-plugins/vapoursynth-it ~*
 media-plugins/vapoursynth-knlmeanscl ~*
+media-plugins/vapoursynth-knlmeansvk ~*
 media-plugins/vapoursynth-l-smash-works ~*
 media-plugins/vapoursynth-miscfilters-obsolete ~*
 media-plugins/vapoursynth-mvsfunc ~*

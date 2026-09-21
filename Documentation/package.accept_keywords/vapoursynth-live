@@ -17,9 +17,11 @@
 ~media-plugins/subtext-9999 **
 ~media-plugins/vapoursynth-adjust-9999 **
 ~media-plugins/vapoursynth-akarin-9999 **
+~media-plugins/vapoursynth-autocrop-9999 **
 ~media-plugins/vapoursynth-awarp-9999 **
 ~media-plugins/vapoursynth-bifrost-9999 **
 ~media-plugins/vapoursynth-bm3d-9999 **
+~media-plugins/vapoursynth-bm3dvk-9999 **
 ~media-plugins/vapoursynth-bwdif-9999 **
 ~media-plugins/vapoursynth-cambi-9999 **
 ~media-plugins/vapoursynth-cas-9999 **
@@ -48,6 +50,7 @@
 ~media-plugins/vapoursynth-iscombed-9999 **
 ~media-plugins/vapoursynth-it-9999 **
 ~media-plugins/vapoursynth-knlmeanscl-9999 **
+~media-plugins/vapoursynth-knlmeansvk-9999 **
 ~media-plugins/vapoursynth-l-smash-works-9999 **
 ~media-plugins/vapoursynth-miscfilters-obsolete-9999 **
 ~media-plugins/vapoursynth-mvsfunc-9999 **
