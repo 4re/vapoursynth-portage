@@ -4,8 +4,11 @@
 EAPI=8
 
 PYTHON_COMPAT=( python3_{13..15} )
+DISTUTILS_EXT=1
+DISTUTILS_SINGLE_IMPL=true
+DISTUTILS_USE_PEP517=meson-python
 
-inherit meson python-single-r1
+inherit distutils-r1
 
 
 DESCRIPTION="Get m2ts clip id from a playlist and return a dict"
@@ -17,7 +20,7 @@ if [[ ${PV} == *9999* ]]; then
 	KEYWORDS=""
 else
 	inherit vcs-snapshot
-	SRC_URI="https://github.com/HomeOfVapourSynthEvolution/VapourSynth-ReadMpls/archive/r${PV}.tar.gz -> ${PN}-${PV}.tar.gz"
+	SRC_URI="https://github.com/HomeOfVapourSynthEvolution/VapourSynth-ReadMpls/archive/r${PV}.tar.gz -> ${P}.tar.gz"
 	KEYWORDS="~amd64 ~x86"
 fi
 
@@ -27,7 +30,7 @@ RESTRICT="mirror"
 IUSE="lto"
 
 RDEPEND+="
-	>=media-libs/vapoursynth-76[${PYTHON_SINGLE_USEDEP}]
+	media-libs/vapoursynth[${PYTHON_SINGLE_USEDEP}]
 	media-libs/libbluray
 "
 DEPEND="${RDEPEND}
@@ -35,16 +38,8 @@ DEPEND="${RDEPEND}
 
 DOCS=( "README.md" )
 
-src_prepare() {
-	default
-	local install_path="$(vapoursynth get-plugin-dir)"
-	sed -i "s|install_dir = vapoursynth_dep.get_variable(pkgconfig: 'libdir') / 'vapoursynth'|install_dir = '${install_path}'|" meson.build || die
-}
-
 src_configure() {
-	local emesonargs=(
-		--libdir="${EPREFIX}/usr/$(get_libdir)/vapoursynth/"
+	DISTUTILS_ARGS=(
 		-Db_lto=$(usex lto true false)
 	)
-	meson_src_configure
 }
