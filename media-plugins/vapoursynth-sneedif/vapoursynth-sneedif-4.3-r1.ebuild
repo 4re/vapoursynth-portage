@@ -29,6 +29,8 @@ IUSE=""
 RESTRICT="mirror"
 
 RDEPEND+="
+	dev-libs/boost:=
+	dev-libs/opencl-icd-loader
 	>=media-libs/vapoursynth-76[${PYTHON_SINGLE_USEDEP}]
 "
 DEPEND="${RDEPEND}
