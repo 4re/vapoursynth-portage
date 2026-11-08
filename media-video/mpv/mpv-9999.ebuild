@@ -45,8 +45,8 @@ RESTRICT="!test? ( test )"
 
 COMMON_DEPEND="
 	media-libs/libass:=[fontconfig]
-	>=media-libs/libplacebo-7.360.1:=[vulkan?]
-	>=media-video/ffmpeg-6.1:=[encode(+),soc(-)?,threads(+),vaapi?,vdpau?]
+	>=media-libs/libplacebo-7.387.0:=[vulkan?]
+	>=media-video/ffmpeg-6.1:=[encode(+),threads(+),vaapi?,vdpau?]
 	X? (
 		x11-libs/libX11
 		x11-libs/libXScrnSaver
@@ -69,7 +69,10 @@ COMMON_DEPEND="
 		x11-libs/libdrm
 		egl? ( media-libs/mesa[gbm(+)] )
 	)
-	dvd? ( media-libs/libdvdnav )
+	dvd? (
+		media-libs/libdvdnav
+		>=media-libs/libdvdread-7.1.1:=
+	)
 	egl? (
 		media-libs/libglvnd
 		media-libs/libplacebo[opengl]
@@ -169,6 +172,7 @@ src_configure() {
 		-Dcplugins=enabled
 		$(meson_feature curl libcurl)
 		$(meson_feature dvb dvbin)
+		$(meson_feature dvd dvda)
 		$(meson_feature dvd dvdnav)
 		$(meson_feature gamepad sdl2-gamepad)
 		$(meson_feature iconv)
