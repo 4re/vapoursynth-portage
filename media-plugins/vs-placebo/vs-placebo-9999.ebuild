@@ -27,7 +27,7 @@ IUSE="lto dovi"
 RESTRICT="mirror"
 
 RDEPEND+="
-	>=media-libs/libplacebo-7.360.1
+	>=media-libs/libplacebo-7.387.0
 	>=media-libs/vapoursynth-76[${PYTHON_SINGLE_USEDEP}]
 	dovi? (
 		media-libs/libdovi
